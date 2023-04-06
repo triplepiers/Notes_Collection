@@ -1,0 +1,64 @@
+site_name: SeaBee 的笔记合集
+site_url: https://triplepiers.github.io/Notes_Collection/
+copyright: Copyright © 2023 SeaBee
+repo_url: https://github.com/triplepiers/Notes_Collection
+repo_name: Notes_Collection
+theme:
+  name: material
+  palette:
+    scheme: slate
+    accent: amber
+    primary: black
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - navigation.footer
+extra_css:
+  - stylesheets/extra.css
+extra_javascript:
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+extra:
+  homepage: https://triplepiers.github.io/Notes_Collection/
+nav:
+- Home: index.md
+- Front End:
+  - Vue2:
+    - 1 HelloWorld: Nulling/Vue/Vue2/1 Intro.md
+    - 2 组件: Nulling/Vue/Vue2/2 组件.md
+    - 3 使用 Cli: Nulling/Vue/Vue2/3 使用Cli创建项目.md
+    - 4 消息传递: Nulling/Vue/Vue2/4 消息传递.md
+    - 5 网络请求: Nulling/Vue/Vue2/5 Ajax 网络请求.md
+    - 6 第三方组件库: Nulling/Vue/Vue2/6 UI 组件库.md
+  - Vue3: Nulling/Vue/Vue3.md
+  - React:
+    - 1 慢速上手: Nulling/React/慢速上手.md
+    - 2 面向组件: Nulling/React/面向组件编程.md
+    - 3 组件通信: Nulling/React/组件通信.md
+    - 4 网络请求: Nulling/React/网络请求.md
+    - 5 路由: Nulling/React/路由.md
+    - 6 UI 组件库: Nulling/React/UI 组件库.md
+  - WeChat:
+    - 1 Intro: Nulling/Wechat App/Intro.md
+    - 2 Template & Setting: Nulling/Wechat App/Template & Setting.md
+    - 3 组件: Nulling/Wechat App/自定义组件 & 全局数据共享.md
+  - Tips:
+    - 布局: Nulling/Front End/布局.md
+  - Tools:
+    - Axios: Nulling/Tool/Axios.md
+    - Mongo DB:
+      - 1 快速上手: Nulling/Tool/Mongo DB - 快速上手.md
+      - 2 慢速上头: Nulling/Tool/Mongo DB - 慢速上头.md
+- 常用工具:
+  - Git: Nulling/Tool/Git.md
+  - 常用项目创建: Nulling/Tool/常用项目创建.md
