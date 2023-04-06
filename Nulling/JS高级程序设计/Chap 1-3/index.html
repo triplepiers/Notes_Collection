@@ -1,0 +1,1270 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/JS%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/Chap%201-3/">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
+    
+    
+      
+        <title>Chap 1 3 - SeaBee 的笔记合集</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.c4a75a56.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="amber">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-js" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://triplepiers.github.io/Notes_Collection/" title="SeaBee 的笔记合集" class="md-header__button md-logo" aria-label="SeaBee 的笔记合集" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SeaBee 的笔记合集
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chap 1 3
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/triplepiers/Notes_Collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Notes_Collection
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Vue/Vue2/1%20Intro/" class="md-tabs__link">
+        Front End
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Tool/Git/" class="md-tabs__link">
+        常用工具
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://triplepiers.github.io/Notes_Collection/" title="SeaBee 的笔记合集" class="md-nav__button md-logo" aria-label="SeaBee 的笔记合集" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    SeaBee 的笔记合集
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/triplepiers/Notes_Collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Notes_Collection
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Front End
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Front End
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          Vue2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Vue2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/1%20Intro/" class="md-nav__link">
+        1 HelloWorld
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/2%20%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        2 组件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/3%20%E4%BD%BF%E7%94%A8Cli%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE/" class="md-nav__link">
+        3 使用 Cli
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/4%20%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92/" class="md-nav__link">
+        4 消息传递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/5%20Ajax%20%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" class="md-nav__link">
+        5 网络请求
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/6%20UI%20%E7%BB%84%E4%BB%B6%E5%BA%93/" class="md-nav__link">
+        6 第三方组件库
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue3/" class="md-nav__link">
+        Vue3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          React
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          React
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E6%85%A2%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+        1 慢速上手
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        2 面向组件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" class="md-nav__link">
+        3 组件通信
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" class="md-nav__link">
+        4 网络请求
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E8%B7%AF%E7%94%B1/" class="md-nav__link">
+        5 路由
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/UI%20%E7%BB%84%E4%BB%B6%E5%BA%93/" class="md-nav__link">
+        6 UI 组件库
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          WeChat
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          WeChat
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wechat%20App/Intro/" class="md-nav__link">
+        1 Intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wechat%20App/Template%20%26%20Setting/" class="md-nav__link">
+        2 Template & Setting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wechat%20App/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%20%26%20%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/" class="md-nav__link">
+        3 组件
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          Tips
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Tips
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/%E5%B8%83%E5%B1%80/" class="md-nav__link">
+        布局
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          Tools
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Tools
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/Axios/" class="md-nav__link">
+        Axios
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6_2" id="__nav_2_6_2_label" tabindex="0">
+          Mongo DB
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6_2">
+          <span class="md-nav__icon md-icon"></span>
+          Mongo DB
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/Mongo%20DB%20-%20%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+        1 快速上手
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/Mongo%20DB%20-%20%E6%85%A2%E9%80%9F%E4%B8%8A%E5%A4%B4/" class="md-nav__link">
+        2 慢速上头
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          常用工具
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          常用工具
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/Git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/%E5%B8%B8%E7%94%A8%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA/" class="md-nav__link">
+        常用项目创建
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-js" class="md-nav__link">
+    1 JS 实现
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-html-js" class="md-nav__link">
+    2 HTML 中的 JS 实现
+  </a>
+  
+    <nav class="md-nav" aria-label="2 HTML 中的 JS 实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-script" class="md-nav__link">
+    2.1 &lt;script&gt; 标签
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3 语言基础
+  </a>
+  
+    <nav class="md-nav" aria-label="3 语言基础">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3.1 特性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 变量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 数据类型
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#undefined" class="md-nav__link">
+    Undefined
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#null" class="md-nav__link">
+    Null
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boolean" class="md-nav__link">
+    Boolean
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number" class="md-nav__link">
+    Number
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string" class="md-nav__link">
+    String
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Chap 1 3</h1>
+
+<h2 id="1-js">1 JS 实现</h2>
+<p>完整的 JS 实现包含以下几个部分：
+- 核心 - <code>ECMAScript</code> 描述了语法、类型、语句、关键字、保留子、操作符、全局对象
+- 文档对象模型 - <code>DOM</code>
+- 浏览器对象模型 - <code>BOM</code> 针对浏览器窗口及其子窗口</p>
+<h2 id="2-html-js">2 HTML 中的 JS 实现</h2>
+<h3 id="21-script">2.1 <code>&lt;script&gt;</code> 标签</h3>
+<p>该标签拥有下列 8 个属性：
+- <code>async</code>
+    - 立即下载脚本，但不阻断其他页面动作（只对外部脚本有效）
+    - 不保证执行顺序
+- <code>crossorigin</code>：配置 CORS，默认不使用
+    - <code>crossorigin= "anonymous"</code> 文件请求不需要设置凭据标志
+    - <code>crossorigin="use-credentials</code> 出站请求包含凭据
+- <code>defer</code>
+    - 立刻下载，但在整个页面解析完成后执行
+    - 保证按出现顺序执行：首个 <code>defer</code> 必然在第二个 <code>defer</code> 之前执行</p>
+<ul>
+<li>
+<p>FACT</p>
+<ul>
+<li>可以通过转义字符规避行内脚本异常结束 <code>&lt;\/script&gt;</code></li>
+<li>使用 <code>src</code> 引入外部文件的 <code>&lt;script&gt;</code> 文件<strong>不应该包含行内代码</strong>
+    浏览器只会下载并执行 <code>src</code> 指向的脚本文件，并忽略行内代码</li>
+<li><code>&lt;script&gt;</code> 标签允许指向一个 <strong>跨域</strong> 的文件</li>
+<li>当不存在 <code>defer / async</code> 属性时，浏览器将按照书写顺序依次解释 <code>&lt;script&gt;</code> 
+    只有上一个解释完毕后，才会顺序解释下一个</li>
+</ul>
+</li>
+<li>
+<p>标签位置</p>
+<ul>
+<li>将所有脚本都放在 <code>&lt;head&gt;</code> 中可能会导致页面渲染明显延迟
+    因为需要下载、解析并解析完成所有 JS 脚本后，再开始渲染、</li>
+<li>现在一般放在 <code>&lt;body&gt;</code> 内页面内容之后的地方</li>
+</ul>
+</li>
+</ul>
+<h2 id="3">3 语言基础</h2>
+<h3 id="31">3.1 特性</h3>
+<ul>
+<li>区分大小写：变量、函数、操作符 均区分大小写<ul>
+<li><code>test &amp; Test</code> 是两个不同的变量</li>
+<li><code>typeof</code> 是保留词，但 <code>Typeof</code> 可以作为有效函数名</li>
+</ul>
+</li>
+<li>标识符：变量 / 函数 / 属性 / 参数 名称<ul>
+<li>首字符必须是 字母 / 下划线 / $</li>
+<li>其余字符可以是 字母 / 下划线 / $ / 数字</li>
+<li>字符可以是 ASCII 字母 / Unicode 字母</li>
+<li>一般使用小驼峰（第一个小写，后面首字母大写）</li>
+<li>保留字不能作为标识符</li>
+</ul>
+</li>
+</ul>
+<h3 id="32">3.2 变量</h3>
+<ul>
+<li><code>var</code> - 范围是「函数作用域」<ul>
+<li>定义可以保存任何类型值的变量，未初始化时为 <code>undefined</code></li>
+<li>会成为 window 对象的属性，可以通过 <code>window.name</code> 进行访问</li>
+<li>可以在随后改变 值 / 值的类型</li>
+<li>允许通过 <code>,</code> 分隔定义的多个变量，并分别进行初始化</li>
+<li>作用域<ul>
+<li>使用 <code>var message</code> <strong>在函数内</strong> 定义的变量是局部变量，将在推出函数时被销毁</li>
+<li>省略 <code>var</code> 关键词将定义一个 <strong>全局变量</strong>，可以在函数外进行访问</li>
+</ul>
+</li>
+<li>「<strong>声明提升</strong>」
+    会把所有变量声明 <strong>拉到函数作用域顶部</strong> - 允许先使用后声明
+    可以重复声明同一个变量 =&gt; 使用截止至目前的最新值</li>
+</ul>
+</li>
+<li><code>let</code> - 范围是「块作用域」=&gt; 在最近的大括号内有效<ul>
+<li><strong>不允许</strong>同一块内重复声明</li>
+<li>不会成为 window 对象的属性
+    但是声明仍是在全局作用域中发生的，响应变量将在页面生命周期中存续
+    =&gt; 最好还是不要重复声明变量</li>
+<li>下面的声明是被允许的（有不同的作用域）
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">30</span><span class="p">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span><span class="w"> </span><span class="c1">// = 30</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">if</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">26</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span><span class="w"> </span><span class="c1">// = 26 作用域不同不冲突</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+</code></pre></div></li>
+<li>混用 <code>var &amp; let</code> 使用同一变量一样会导致冲突
+    只是指出了作用域范围，声明的还是同类型的变量
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">name</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">let</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="c1">// =&gt; 冗余声明了变量 name</span>
+</code></pre></div></li>
+<li>「暂时性死区」- 在 <code>let</code> 声明前的执行瞬间
+    <code>let</code> 声明的变量在作用域中不会被提升
+  <code>js
+  console.log(age) // =&gt; ReferenceError：age 未定义
+  let age</code></li>
+<li>For 循环中的 <code>let</code> 变量
+    <code>for(let i = 0; i &lt; 5; i++)</code> =&gt; 变量 i 仅限在循环内使用
+    每一次迭代将声明一个新的迭代变量 -&gt; 每次循环都会引用不同的变量实例</li>
+</ul>
+</li>
+<li><code>const</code><ul>
+<li>必须在 <strong>声明的同时初始化变量</strong></li>
+<li>再次修改 <code>const</code> 变量将导致运行时错误
+    修改 <strong>变量内部</strong> 的属性不违反限制</li>
+<li>不允许重复声明</li>
+<li>作用域是「块」</li>
+<li>不能用于声明<strong>迭代变量</strong>，因为自增操作 = 给常量重新赋值</li>
+</ul>
+</li>
+</ul>
+<h3 id="33">3.3 数据类型</h3>
+<ul>
+<li>六种原始类型
+    <code>Undefined</code> <code>Null</code> <code>Boolean</code> <code>Number</code> <code>String</code> <code>Symbol</code></li>
+<li>复杂数据类型 <code>Object</code></li>
+<li><code>typeof</code> 操作符将返回以下几种值 - <code>typeof message</code>
+    <code>undefined</code> <code>boolean</code> <code>string</code> <code>number</code> <code>object</code> <code>function</code> <code>symbol</code></li>
+</ul>
+<h4 id="undefined">Undefined</h4>
+<ul>
+<li>当使用 <code>let / var</code> 声明变量但没有进行初始化时，相当于给变量赋 <code>undefined</code></li>
+<li>对 未声明 / 未初始化 的变量执行 <code>typeof</code> 均返回 <code>undefined</code></li>
+<li>在进行条件判断时，<code>undefined == false</code>
+    我们可以用 <code>if(name)</code> 判断变量是否定义 / 是否赋初值</li>
+</ul>
+<h4 id="null">Null</h4>
+<ul>
+<li>是一个 空的<strong>对象指针</strong>，所以 <code>typeof null = Object</code></li>
+<li><code>null == undefined 返回 true</code></li>
+<li>需要进行<strong>显式赋值</strong>来保持空<strong>对象指针</strong>的语义</li>
+<li>进行条件判断时，<code>null == false</code></li>
+</ul>
+<h4 id="boolean">Boolean</h4>
+<ul>
+<li>区分大小写，<code>false / true</code> 是有效值</li>
+<li>可以使用 <code>Boolean()</code> 将非 boolean 类型转换为 boolean<ul>
+<li><code>false</code>
+    空字符串、0、NaN、null、undefined</li>
+<li><code>true</code>
+    非空字符串、非零数值（包括无穷），任意非空 Object</li>
+</ul>
+</li>
+</ul>
+<h4 id="number">Number</h4>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">intNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">55</span><span class="w"> </span><span class="c1">// 十进制整数</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">let</span><span class="w"> </span><span class="nx">Oct_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">070</span><span class="w"> </span><span class="c1">// 0开头的八进制数</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">let</span><span class="w"> </span><span class="nx">Oct_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">07</span><span class="mf">9</span><span class="w"> </span><span class="c1">// 9无效，识别为十进制79</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kd">let</span><span class="w"> </span><span class="nx">Hex_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xA</span><span class="w"> </span><span class="c1">// 0x开头的十六进制数，前缀区分大小写</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kd">let</span><span class="w"> </span><span class="nx">float_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">.1</span><span class="w"> </span><span class="c1">// 小数点 + 小数点后一位 ｜ 小数点前可省略 0</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1">// 因为浮点值的存储空间为整数的两倍，以下形式将被转为整数</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1">// 最高精度是 17 位小数</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="kd">let</span><span class="w"> </span><span class="nx">f_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="w"> </span><span class="c1">// 小数点后没有数字，当成整数 1</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="kd">let</span><span class="w"> </span><span class="nx">f_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span><span class="w"> </span><span class="c1">// 小数点后为0，当成整数 10</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">// 支持科学计数法</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="kd">let</span><span class="w"> </span><span class="nx">floatNum_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.125e7</span><span class="w"> </span><span class="c1">// 等价于 3.125*10^7</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="kd">let</span><span class="w"> </span><span class="nx">floatNum_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3e-17</span><span class="w"> </span><span class="c1">// 等价于 3*10^-17</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1">// 支持范围 Number.MIN_VALUE ~ Number.MAX_VALUE</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1">// 超出范围的将被转换为 -infinity / infinity</span>
+</code></pre></div>
+- <code>NaN</code> 
+    - 0/0 返回 NaN，非0/0 返回 +-Infinity
+    - 任何涉及 NaN 的操作将返回 NaN，如 <code>NaN/10</code>
+    - 不等于包括自己在内的任何值 <code>NaN == NaN 返回 false</code>
+         但是可以通过 <code>isNaN()</code> 进行判断，不能转化为数值的内容均返回 <code>true</code>
+         "10" 可以转为 10，返回 <code>false</code>；"blue"不能转为数值，返回 <code>true</code>
+- 数值转换函数
+    - <code>Number()</code> 可用于任何数据类型
+        - true = 1, fasle = 0
+        - null = 0
+        - undifined = NaN
+        - 字符串
+            - 忽略前缀 0，包含小数点转为浮点，有效十六进制转十六进制
+            - 空串 = 0
+            - 包含其他字符 = NaN
+        - 对象
+            调用 <code>valueOf</code> 转换返回值，结果为 NaN 则调用 <code>toString</code> 按字符串规则转换
+    - <code>parseInt()</code>主要用于字符串，忽略前缀空格
+        - 若首个非空字符不是 +- / 数字，则立即返回 NaN（空串也返回 NaN
+        - 从首个非法字符开始忽略后续字符，包括第二个小数点及其后的所有字符
+        - 支持识别 十进制 / 八进制 / 十六进制
+        - 支持使用第二个参数指定进制，此时可以省略前缀
+    -   <code>parseFloat()</code><br />
+        - 只能用于十进制，不能指定底数
+        - 因为会忽略所有前缀 0，十六进制始终返回 0
+        - 对于整数对象会返回整数结果</p>
+<h4 id="string">String</h4>
+<p>表示 0 或 多个 Unicode 字符，可以使用 双引号 / 单引号 / 反引号 包裹
+- 一些转义字符
+    可以出现在字符串的任意位置，作为单个字符被解释（当成 len = 1 处理）
+    - <code>\b</code> 退格
+    - <code>\r</code> 回撤
+    - <code>\f</code> 换页
+    - <code>\xnn</code> 十六进制编码 nn 对应的 ASCII 字符
+    - <code>\unnnn</code> 十六进制编码 nnnn 对应的 Unicode 字符
+- 字符串<strong>不可变</strong>，修改字符串 == 销毁原始字符串并创建新值
+- 转换为字符串 <code>var.toString()</code>
+    - null / undefined 没有 <code>toString</code> 方法
+        null 返回 "null", undefined 返回 "undefined"
+    - 对数值对象进行调用的话，可以传入一个参数作为底数
+- 模版字面量
+    - 支持跨行定义字符串
+    - 保留换行符
+    - 支持通过 <code>${}</code> 实现字符串插值，所有插入值将强制使用 <code>toString</code> 转为字符串
+    - 支持在 <code>${}</code> 调用自己以插入旧值</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 SeaBee
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.footer"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      
+        <script src="../../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
