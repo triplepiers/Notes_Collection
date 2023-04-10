@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/%E4%BF%A1%E5%AE%89%E5%8E%9F%E7%90%86/0227/">
+        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/%E4%BF%A1%E5%AE%89%E5%8E%9F%E7%90%86/0410/">
       
       
       
@@ -17,7 +17,7 @@
     
     
       
-        <title>0227 - SeaBee 的笔记合集</title>
+        <title>0410 - SeaBee 的笔记合集</title>
       
     
     
@@ -108,7 +108,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#grading-policy" class="md-skip">
+        <a href="#security-issues-of-tcpip" class="md-skip">
           Skip to content
         </a>
       
@@ -141,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              0227
+              0410
             
           </span>
         </div>
@@ -941,23 +941,111 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#grading-policy" class="md-nav__link">
-    Grading Policy
+  <a href="#security-issues-of-tcpip" class="md-nav__link">
+    Security Issues of TCP/IP 续
   </a>
+  
+    <nav class="md-nav" aria-label="Security Issues of TCP/IP 续">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tcp-syn-flooding" class="md-nav__link">
+    TCP SYN Flooding
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-syn-prediction-attack" class="md-nav__link">
+    TCP SYN Prediction Attack
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcp-congestion-control" class="md-nav__link">
+    TCP Congestion Control 拥塞控制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-spoofing" class="md-nav__link">
+    DNS Spoofing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
+  <a href="#ipsec" class="md-nav__link">
+    IPSEC
+  </a>
+  
+    <nav class="md-nav" aria-label="IPSEC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ah" class="md-nav__link">
+    AH 验证头
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esp" class="md-nav__link">
+    ESP 载荷安全性封装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sa" class="md-nav__link">
+    SA 安全关联
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    一些谬论
+    操作模式
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    定义
+  <a href="#ssltls" class="md-nav__link">
+    SSL/TLS
   </a>
+  
+    <nav class="md-nav" aria-label="SSL/TLS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#protocol-stack" class="md-nav__link">
+    Protocol Stack
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssl" class="md-nav__link">
+    SSL 握手协议
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -979,49 +1067,163 @@
   
 
 
-  <h1>0227</h1>
+  <h1>0410</h1>
 
-<blockquote>
-<p>Principle of Information Security - Course Introduction</p>
-</blockquote>
-<h2 id="grading-policy">Grading Policy</h2>
-<table>
-<thead>
-<tr>
-<th align="center">类别</th>
-<th align="center">分数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">课堂发言</td>
-<td align="center">5%</td>
-</tr>
-<tr>
-<td align="center">作业</td>
-<td align="center">45%</td>
-</tr>
-<tr>
-<td align="center">考试</td>
-<td align="center">50%</td>
-</tr>
-</tbody>
-</table>
-<h2 id="_1">一些谬论</h2>
-<ol>
-<li>My home PC/Laptop is safe from attack by hackers.</li>
-<li>Our company wont get hacked - hackers don't attack companies like ours.</li>
-<li>Servers on internal networks are safe from attack.</li>
-<li>If I have a firewal, my network can't be hacked.</li>
-<li>People on my private network can't be trusted; 
-    most security breaches are from outside the company.</li>
-<li>Hackers are just geeks out to show they can break into networks.</li>
-</ol>
-<h2 id="_2">定义</h2>
+<h2 id="security-issues-of-tcpip">Security Issues of TCP/IP 续</h2>
+<h3 id="tcp-syn-flooding">TCP SYN Flooding</h3>
 <ul>
-<li>数据主权 <code>Data Sovereignty</code>
-    data are subject to the laws and governance structures within the nation it is collected</li>
+<li>漏洞
+    在三次握手中，Server 收到 Client 发送的 SYN包后就要分配资源，并且 Listen</li>
+<li>原理<ul>
+<li>攻击者是用捏造的 src addr 向服务器发送一堆 TCP Request（自己不用分配资源）</li>
+<li>服务器一直到 timeout 前都要为请求分配 thread &amp; memory</li>
+<li>服务器资源耗尽后，普通用户救无法获得服务了</li>
 </ul>
+</li>
+<li>这是一个 DOS 攻击
+    Asymmetric：攻击方和服务方付出的代价不对等</li>
+<li>防护方法<ol>
+<li>random delete：队列满了就随机删掉一个倒霉蛋</li>
+<li>SYN Cookie：
+     =&gt; 资源分配减少，计算代价增加
+     服务端不再储存 socket 的状态（除非收到用户的 ack）<ul>
+<li>服务端将 socket info（双方的 ip &amp; port + 时间周期）当作 Cookie （作为 SYN 的编号）里发给用户（作为 SYN，ACK 的初始序列号）
+    时间周期防止重放 + 返回后可以算出相同的 Cookie</li>
+<li>客户端返回 ACK</li>
+<li>服务端根据包头重新计算 Cookie 并与 ACK 的确认序号（初始序号+1）比对，
+    若相同则为正常连接，随后分配资源</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="tcp-syn-prediction-attack">TCP SYN Prediction Attack</h3>
+<ul>
+<li>TCP 协议的每一个包都有 SYN 编号，接收方会基于 SYN 编号对收到的包进行分类和辨认</li>
+<li>如果攻击者可以猜出 SYN 编号，就可以伪造来自 Server 的包</li>
+<li>基于 SYN Prediction 发起的攻击<ul>
+<li>TCP Spoofing</li>
+<li>TCP connection hijacking</li>
+<li>TCP reset</li>
+</ul>
+</li>
+<li>防护措施：选择 random 的初始 SYN 编号</li>
+</ul>
+<h3 id="tcp-congestion-control">TCP Congestion Control 拥塞控制</h3>
+<p>一旦网络出现拥塞状况，TCP 协议要求发送方：
+- 发送速度持续减半（一直到不会丢包）
+- 停止丢包后缓慢增长发送速度</p>
+<blockquote>
+<p>攻击者可以在丢包时持续发送数据，从而获得更大的发送速度</p>
+</blockquote>
+<p>解决：添加 随机的ACK，在 ACK 中返回该随机数来证明自己不是恶意流量</p>
+<h3 id="dns-spoofing">DNS Spoofing</h3>
+<p>修改 DNS Server / Local DNS Service 的 cache，将域名重定向至错误的 IP</p>
+<blockquote>
+<p>是是想 pharming phishing 的基础（域嫁接钓鱼攻击）</p>
+</blockquote>
+<p>解决方法：DNSSEC
+- 发生 DNS Poisoning 的原因
+    - DNS Request &amp; Response 都是 unauthenticated
+    - 然后 attacker 就可以狂发伪造的 DNS 信息（而且没人发现）
+- 在 DNSSEC 中
+    - 所有 Responce 都被验证
+    - 不会对传递的信息进行加密，也不能防范 DoS 攻击
+- 步骤
+    - 用户请求解析时会返回
+        - 普通的 A 记录：域名 to IP 的解析
+        - RRSIG 记录：DNS服务器对解析结果的签名
+            - key 标签 - 应该用哪个 DNSKEY 进行验证
+            - 算法类型
+            - DNS 服务器对 解析结果MAC 的签名值
+    - 用户验证
+        - 请求 DNS服务器的公钥
+        - 用 Public_DNS 解密签名，得到 V1
+        - 自己计算一遍解析结果的 MAC，得到 V2
+        - V1=V2，则结果可信</p>
+<h2 id="ipsec">IPSEC</h2>
+<blockquote>
+<p>IPSEC 用于支持所有 IP 层流量的 加密&amp;认证服务，有三个汇总给你要的组成部分：
+- Authentication Headers 验证头
+- Encapsulating Security Payloads 载荷安全性封装
+- Security Association 安全关联</p>
+</blockquote>
+<p><img src="https://download.huawei.com/mdl/image/download?uuid=9e4693369c944ae89a320a4b810f3b6f">
+- 发送方会使用 加密算法&amp;密钥 对报文内容进行加密
+- 接收方计算校验值 ICV，相同则保证报文完整且未被修改，随后解密（否则丢弃）</p>
+<ul>
+<li>IPSEC 的优势<ul>
+<li>可以在 防火墙/路由器 中实现<ul>
+<li>所有经过这个 border 的包的安全性都会增强</li>
+<li>防火墙内的 host 不用担心安全性问题</li>
+</ul>
+</li>
+<li>对于 end-user 透明<ul>
+<li>基于 IPSEC 的服务不需要用户手动调配置</li>
+<li>保密性和完整性都得到保障</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="ah">AH 验证头</h3>
+<p>在标准 IP 头后添加 AH 报文头（校验范围是整个 IP 报文）
+- 提供了 IP 包的 身份认证&amp;完整性 服务（但不进行加密）
+- 可以提供 反重放攻击 服务（可选）</p>
+<h3 id="esp">ESP 载荷安全性封装</h3>
+<p>在标准 IP 头后添加 ESP 头，在数据包后追加 ESP 尾
+- 提供了 安全性、保密性、认证服务（可选）
+- 提供了对数据的<strong>加密服务</strong>！
+- 校验范围不包括 IP 头（不保证 IP 头不被篡改）</p>
+<blockquote>
+<p>AH &amp; ESP 可以单独使用，也可以同时使用。
+同时使用时：先用 ESP 封装，再用 AH 封装</p>
+</blockquote>
+<h3 id="sa">SA 安全关联</h3>
+<ul>
+<li>为单向传输 sender-&gt; receiver 定义了一系列的 algorithm &amp; params，用于进行加密和认证
+    如果需要提供双向的认证，就需要两个 SA</li>
+<li>包含 3 个 unique 的 param：<ul>
+<li>SPI（Security Parameter Index）一个 bit string</li>
+<li>IP dest addr</li>
+<li>Security Protocol Identifier：指出 AH/ESP</li>
+</ul>
+</li>
+</ul>
+<h3 id="_1">操作模式</h3>
+<p>IPSEC 可以用于 PtoP 或 tunnel 模式
+- Transpoer Mode
+    - 只对 IP 包的 content 进行保护（不管 header）
+    - 用于 PtoP
+    - 内层ESP+外层AH（只认证不加密）
+- Tunnel Mode
+    - 验证整个 IP 包（包括头），加密除了 ESP 以外的部分
+    - 整个被打包到一个新的 IP 包中
+    - 典型使用是 VPN
+    - 内层AH外层ESP（加密且认证）</p>
+<h2 id="ssltls">SSL/TLS</h2>
+<blockquote>
+<ul>
+<li>TLS = Transport Layer Security</li>
+<li>SSL = Secure Socket Layer</li>
+</ul>
+</blockquote>
+<p>=&gt; 用于保证可靠的，端到端的 TCP 安全服务；提供保密性、完整性、身份认证 服务。</p>
+<ul>
+<li>SSL Connection
+    是一个 point-to-point 的临时连接，每个 SSL connection 都与一个 session 相关</li>
+<li>SSL Session
+    是 C/S 之间的连接，通过三次握手创建。
+    协商了 security parameter 供一组 connection 使用（不用每次都协商）</li>
+</ul>
+<h3 id="protocol-stack">Protocol Stack</h3>
+<p>SSL/TLS 介于 传输层 &amp; 应用层 之间，本身还被划成了两个子层：
+- Handshake 子层，包含三个子协议
+    - Hanshake sub protocol
+    - Change Cipher Spec sub protocol
+    - Alert sub protocol
+- Record 子层：用于接收并加密信息，然后丢给传输层</p>
+<h3 id="ssl">SSL 握手协议</h3>
 
 
 
