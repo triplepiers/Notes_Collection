@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/%E4%BF%A1%E5%AE%89%E5%8E%9F%E7%90%86/0313/">
+        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/%E4%BF%A1%E5%AE%89%E5%8E%9F%E7%90%86/0412/">
       
       
       
@@ -17,7 +17,7 @@
     
     
       
-        <title>0313 - SeaBee 的笔记合集</title>
+        <title>0412 - SeaBee 的笔记合集</title>
       
     
     
@@ -108,7 +108,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-symmetric-key-crytography" class="md-skip">
+        <a href="#ssltls" class="md-skip">
           Skip to content
         </a>
       
@@ -141,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              0313
+              0412
             
           </span>
         </div>
@@ -1101,92 +1101,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-symmetric-key-crytography" class="md-nav__link">
-    1 Symmetric Key Crytography
+  <a href="#ssltls" class="md-nav__link">
+    SSL/TLS
   </a>
   
-    <nav class="md-nav" aria-label="1 Symmetric Key Crytography">
+    <nav class="md-nav" aria-label="SSL/TLS">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-block-cipher" class="md-nav__link">
-    1.1 Block Cipher
+  <a href="#ssl-handshake-protocol" class="md-nav__link">
+    SSL Handshake Protocol
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-feistel" class="md-nav__link">
-    1.2 Feistel 密码结构
+  <a href="#ssl-record-protocol" class="md-nav__link">
+    SSL Record Protocol
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-des" class="md-nav__link">
-    1.3 DES 算法
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#14-triple-des" class="md-nav__link">
-    1.4 Triple DES
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#15" class="md-nav__link">
-    1.5 其他的对称密钥算法
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#16-aes" class="md-nav__link">
-    1.6 AES
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#17" class="md-nav__link">
-    1.7 操作模式
-  </a>
-  
-    <nav class="md-nav" aria-label="1.7 操作模式">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ecb" class="md-nav__link">
-    ECB 电子密码本
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cbc" class="md-nav__link">
-    CBC 加密链
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#18-stream-cipher" class="md-nav__link">
-    1.8 Stream Cipher
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#19" class="md-nav__link">
-    1.9 密钥分发问题
+  <a href="#ssl-record-format-payload" class="md-nav__link">
+    SSL Record Format &amp; Payload
   </a>
   
 </li>
@@ -1197,31 +1135,77 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-public-key-crytography" class="md-nav__link">
-    2 Public Key Crytography
+  <a href="#malicioius-code" class="md-nav__link">
+    Malicioius Code
   </a>
   
-    <nav class="md-nav" aria-label="2 Public Key Crytography">
+    <nav class="md-nav" aria-label="Malicioius Code">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#requirement" class="md-nav__link">
-    Requirement
+  <a href="#type-of-malicious-code" class="md-nav__link">
+    Type of Malicious Code
+  </a>
+  
+    <nav class="md-nav" aria-label="Type of Malicious Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trojans" class="md-nav__link">
+    Trojans 木马
+  </a>
+  
+    <nav class="md-nav" aria-label="Trojans 木马">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#replicating-trojan-hourse" class="md-nav__link">
+    「Replicating Trojan Hourse」
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#diffie-hellman" class="md-nav__link">
-    Diffie-Hellman 算法
+  <a href="#rootkit" class="md-nav__link">
+    Rootkit
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rsa" class="md-nav__link">
-    RSA 算法
+  <a href="#fight-back" class="md-nav__link">
+    Fight Back！
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virus" class="md-nav__link">
+    Virus 病毒
+  </a>
+  
+    <nav class="md-nav" aria-label="Virus 病毒">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#executable-infector" class="md-nav__link">
+    Executable Infector
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1248,145 +1232,148 @@
   
 
 
-  <h1>0313</h1>
-
+<h2 id="ssltls">SSL/TLS</h2>
+<h3 id="ssl-handshake-protocol">SSL Handshake Protocol</h3>
 <blockquote>
-<p>发言：在中文被汉语拼音化前，book cipher 是唯一的途径</p>
+<p>SSL 中最复杂的一部分（四次握手）</p>
 </blockquote>
-<p>计算机密码学的第一个改变 —— 基于位运算的加密算法
-- AND / OR - 改变信息量
-- NOT / XOR / 左右循环移位 —— 信息量不变</p>
-<p>银行数据库替代：相同输入并行运行1-2年，校对输出</p>
-<h2 id="1-symmetric-key-crytography">1 Symmetric Key Crytography</h2>
-<blockquote>
-<p>对称密钥 / 共享密钥 / 加密密钥 加密算法
-- 加密 / 解密 用同一个密钥 or 解密密钥可以快速从加密密钥计算得到
-- 符合 Kerckhoffs 原则</p>
-</blockquote>
-<h3 id="11-block-cipher">1.1 Block Cipher</h3>
-<ul>
-<li>输入 / 输出 长度固定
-![[截屏2023-03-13 10.19.34.png]]</li>
-</ul>
-<h3 id="12-feistel">1.2 Feistel 密码结构</h3>
-<ul>
-<li>"雪崩效应" - 对抗「频率分析」<ul>
-<li>Diffusion 「扩散」—— 密文统计特性与<strong>明文</strong>关系复杂（最好随机改50%）
-    每一轮交换左右半边的输入；右侧加密后与左侧输入直接 XOR</li>
-<li>Confusion「扰乱」 —— 密文统计特性与<strong>加密密钥</strong>关系复杂
-    每一轮有不同的子密钥（由原本的密钥生成得到）</li>
+<ol>
+<li>Hello 阶段 - 能力交换（你会啥？）<ul>
+<li>C to S: client_hello
+    我能接受哪些版本的协议，哪些格式的数据，哪种加密算法</li>
+<li>S to C: server_hello
+    我可以为你提供服务</li>
 </ul>
 </li>
-<li>不是一个算法 —— 没有定义如何生成子密钥 &amp; 加密函数 F(x)</li>
+<li>S to C: server_hello_done （服务端自证）
+     包含以下内容（均为可选）：<ul>
+<li>certificate（Server的公钥）</li>
+<li>server_key_exchange（DH算法的一些数的选择）</li>
+<li>certificate_request（要求 Client 提供公钥）</li>
 </ul>
-<h3 id="13-des">1.3 DES 算法</h3>
+</li>
+<li>C to S：client_key_certificate（用户自证）
+     以下内容可选：<ul>
+<li>certificate（Client 的公钥）</li>
+<li>certificate_verify</li>
+</ul>
+</li>
+<li>C/S 互发：（使用公钥交换 session key）<ul>
+<li>change_cipher_spec</li>
+<li>finished</li>
+</ul>
+</li>
+</ol>
+<h3 id="ssl-record-protocol">SSL Record Protocol</h3>
 <blockquote>
-<p>具备很强的雪崩效应与抗破解性
-- 基本信息
-    - 输入：64bit blocks
-    - key：56 bit
-- 子密钥生成
-    排列选择 — 左循环 1bit - 排列选择
-- 单轮加密算法
-    - 核心是 E table &amp; S-box
-    - 兼顾了替代（XOR + S-box）和位移（Permutation）
-    - 「替代」会修改频率关系
-        每一轮的子密钥不同，导致每一轮的 XOR 关系不同
-    ![[截屏2023-03-13 10.33.07 1.png]]</p>
+<p>如何加密应用层内容</p>
 </blockquote>
-<h3 id="14-triple-des">1.4 Triple DES</h3>
+<ol>
+<li>分块</li>
+<li>压缩</li>
+<li>计算 MAC（不能重放）</li>
+<li>加密（content &amp; MAC）</li>
+<li>给包添加一个 SSL Record Header</li>
+</ol>
+<h3 id="ssl-record-format-payload">SSL Record Format &amp; Payload</h3>
 <blockquote>
-<p>DES 的问题是「密钥太短」</p>
+<p>IPSec 对用户完全透明（不是用户的选择）</p>
+</blockquote>
+<h1 id="malicioius-code">Malicioius Code</h1>
+<ul>
+<li>创造违背系统安全性的资料</li>
+<li>好的恶意代码会把屁股擦干紧<ul>
+<li>隐藏可见性</li>
+<li>隐藏 echo 的信息</li>
+</ul>
+</li>
+</ul>
+<h2 id="type-of-malicious-code">Type of Malicious Code</h2>
+<h3 id="trojans">Trojans 木马</h3>
+<blockquote>
+<p>独立存在的程序（不会感染其他程序）</p>
 </blockquote>
 <ul>
-<li>过程：加密 - 解密 - 再加密 <span class="arithmatex">\(C = E_{k3}[D_{k2}[E_{k3}[P]]]\)</span></li>
+<li>有一个「显式目的 overt purpose」+ 一个「隐式目的 convert purpose」</li>
+</ul>
+<h4 id="replicating-trojan-hourse">「Replicating Trojan Hourse」</h4>
+<ul>
+<li>会自我复制的木马程序，也叫 <code>propagating Trojan Horse</code></li>
+<li>难以检测</li>
 <li>
-<p>密钥长度 = 56*3 = 168</p>
-</li>
-<li>
-<p>当 k2 = k3 / k1 = k2 时，向下兼容 DES</p>
-</li>
-<li>缺点：比较慢，block 太小</li>
-</ul>
-<h3 id="15">1.5 其他的对称密钥算法</h3>
+<p>例子：Thompson's Compiler 用编译器给可执行程序加漏洞
+    编译器找到一个像 login 的程序就自动跳过密码判断</p>
 <ul>
-<li>IDEA</li>
-<li>Blowfish</li>
-<li>RC5</li>
-</ul>
-<h3 id="16-aes">1.6 AES</h3>
-<ul>
-<li>输入：128 bit</li>
-<li>key：128 / 192/ 256 bit</li>
-<li>免疫所有已知攻击（不包括穷举）</li>
-</ul>
-<h3 id="17">1.7 操作模式</h3>
-<h4 id="ecb">ECB 电子密码本</h4>
-<ul>
-<li>方式<ul>
-<li>每一个 block 分别加密，最后串接分给接收者</li>
-<li>接收者按顺序解开做解密</li>
-</ul>
-</li>
-<li>问题<ul>
-<li>每一块的内容是独立的，可能导致局部修改（重放攻击）</li>
-<li>明文与密文一一对应</li>
+<li>再多的源代码级验证或审查也无法保护您免受使用不受信任的代码</li>
+<li>拥有源代码会有所帮助，但不能确保您的安全
+    =&gt; 仅检查自己写的 src 是不够的（可能被编译器迫害）</li>
 </ul>
 </li>
 </ul>
-<h4 id="cbc">CBC 加密链</h4>
-<p>![[截屏2023-03-13 11.02.02.png]]
-- 明文的每一次修改都会影响所有 block 的修改结果
-- 相同的输入会产生不同的输出
-- IV - 初始向量（只使用一次）</p>
-<h3 id="18-stream-cipher">1.8 Stream Cipher</h3>
+<h4 id="rootkit">Rootkit</h4>
+<ul>
+<li>目的：隐藏 Trojan </li>
+<li>途径：<ul>
+<li>替换所有的管理软件（比如任务管理器，不显示木马进程）
+     =&gt; Sample 软件告诉我 Everything is fine，但是电脑用不了哩</li>
+<li>有时候连 log 都给你改喽！</li>
+</ul>
+</li>
+</ul>
+<h4 id="fight-back">Fight Back！</h4>
+<ul>
+<li>Detect<ul>
+<li>基于 behavior / signature / difference</li>
+<li>integrity checking</li>
+<li>memory dumps</li>
+<li>alternative trusted medium</li>
+</ul>
+</li>
+<li>Remove<ul>
+<li>用安全软件杀毒（普通用户一般没有权限）</li>
+<li>重装（用已经被感染的 os 上的杀毒软件杀被认为是无效的）</li>
+</ul>
+</li>
+</ul>
+<h3 id="virus">Virus 病毒</h3>
 <blockquote>
-<p>不固定输入长度，每个 bit 都进行加密
-适用于「实时操作系统」</p>
-</blockquote>
-<h3 id="19">1.9 密钥分发问题</h3>
-<ul>
-<li>问题：难以找到“可信的第三方”</li>
-<li>解决方案：<ul>
-<li>政府提供的第三方密码分配中心</li>
-<li>采用不同的信道交换密文和密钥</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-public-key-crytography">2 Public Key Crytography</h2>
-<blockquote>
-<p><code>KU</code> - 公钥，<code>KR</code> - 私钥
-问题：如何找到一个 <strong>单向函数</strong> ？</p>
-</blockquote>
-<h3 id="requirement">Requirement</h3>
-<ul>
-<li>容易生成一对公钥和私钥</li>
-<li>加密解密容易</li>
-<li>已知公钥和密文无法推出私钥和明文</li>
-</ul>
-<h3 id="diffie-hellman">Diffie-Hellman 算法</h3>
-<blockquote>
-<p>对于 a，b，p 的选择将极大的影响算法的安全性
-p 为 300 bit 的质数，a 和 b 为 100 bit 的质数
-![[截屏2023-03-13 11.21.19 1.png]]
-1. A 方生成自己的 私钥a，需要的数 g &amp; p
-2. A 方计算自己的公钥 <span class="arithmatex">\(A = g^a\mod p\)</span>
-3. A 方把公钥 A，需要的数 g &amp; p 发给 B
-4. B 方计算自己的公钥 <span class="arithmatex">\(B = g^b \mod p\)</span>
-5. B 方把自己的公钥 B 发给 A
-6. AB 同时计算 Session Key <span class="arithmatex">\(K = B^a \mod p = A^b \mod p\)</span></p>
+<p>把自己塞进 &gt;= 1 个其他文件中，并执行一些 action</p>
 </blockquote>
 <ul>
-<li>缺陷<ul>
-<li>没有明文密文，只能用于密钥交换</li>
-<li>可能导致「中间人攻击」</li>
+<li>两个阶段<ul>
+<li>Insertion Phase：把自己塞进其他文件中</li>
+<li>Exectution Phase：干点事（也可能是 null action）<blockquote>
+<p>Insert 是一定会 insert 的，执行是不一定被执行的</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>一些分类<ul>
+<li>Boot Setor Infectors</li>
+<li>Executable Infectors</li>
+<li>Multipartite Viruses</li>
+<li>TSR Viruses</li>
+<li>Stealth Viruses</li>
+<li>Encrypted Viruses</li>
+<li>Polymorphic Viruses</li>
+<li>Macro Viruses</li>
 </ul>
 </li>
 </ul>
-<h3 id="rsa">RSA 算法</h3>
+<h4 id="executable-infector">Executable Infector</h4>
 <blockquote>
-<p>使用「质因数分解」作为单向函数</p>
+<p>感染可执行程序</p>
 </blockquote>
+<p>Put itself Anywhere 
+=&gt; header / code / data 段都有可能，可能导致程序损坏
+=&gt; 一般插到完整 header 后面</p>
+<ul>
+<li>一些插入方式<ul>
+<li>Overwriting（替换）因为源文件被损毁，所以很容易被探测</li>
+<li>@ beginning</li>
+</ul>
+</li>
+</ul>
 
 
 
