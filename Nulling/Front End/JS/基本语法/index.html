@@ -14,7 +14,7 @@
         <link rel="prev" href="../../../..">
       
       
-        <link rel="next" href="../../../Vue/Vue2/1%20Intro/">
+        <link rel="next" href="../%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%87%BD%E6%95%B0/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
@@ -582,12 +582,60 @@
     2 基本运算
   </a>
   
+    <nav class="md-nav" aria-label="2 基本运算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 运算符
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 优先级
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3 语句
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-scope" class="md-nav__link">
+    4 作用域 Scope
+  </a>
+  
 </li>
       
     </ul>
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        2 对象与函数
+      </a>
     </li>
   
 
@@ -1370,6 +1418,40 @@
     2 基本运算
   </a>
   
+    <nav class="md-nav" aria-label="2 基本运算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 运算符
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 优先级
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3 语句
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-scope" class="md-nav__link">
+    4 作用域 Scope
+  </a>
+  
 </li>
       
     </ul>
@@ -1447,7 +1529,18 @@
 <li>建议使用小驼峰命名法</li>
 </ul>
 <p>JS 底层使用 <code>Unicode</code> 编码保存标识符，理论上支持 utf-8
- 中的所有内容（比如中文）。</p>
+ 中的所有内容（比如中文）</p>
+<blockquote>
+<p>使用 <code>XXXX</code> 表示 <code>Unicode</code> 字符的十进制编号：</p>
+<ul>
+<li>
+<p>JS 中使用 <code>\uXXXX</code> 输出</p>
+</li>
+<li>
+<p>HTML 中使用 <code>&amp;#XXXX</code> 输出</p>
+</li>
+</ul>
+</blockquote>
 </details>
 <h3 id="11">1.1 基本数据类型</h3>
 <blockquote>
@@ -1671,6 +1764,291 @@
 </tbody>
 </table>
 <h2 id="2">2 基本运算</h2>
+<h3 id="21">2.1 运算符</h3>
+<ul>
+<li>
+<p>类型运算符 <code>typeof</code> </p>
+<p>将值的类型以 String 形式返回</p>
+</li>
+<li>
+<p>算数运算符（二元）</p>
+<ul>
+<li>
+<p><code>+</code>  (左结合)</p>
+<ul>
+<li>
+<p>String + 任意类型，将“任意类型值”转换为 String，随后进行 <code>concat</code> </p>
+<p>我们可以使用 <code>var + ''</code> 将任意数据类型转为 String（隐式类型转换，由浏览器自动调用 <code>toString</code> 函数）</p>
+</li>
+<li>
+<p>Number + 任意非String类型，会对非 Number 的值进行转换后运算</p>
+</li>
+<li>任何值与 <code>NaN</code> 运算均返回 <code>NaN</code><ul>
+<li><code>-</code> <code>*</code> <code>/</code> 会把两侧的数据均转换为 Number</li>
+</ul>
+</li>
+</ul>
+<p>可以使用 <code>var -0 / *1 / /1</code> 将任意数据类型专为 Number</p>
+</li>
+<li>
+<p><code>%</code> 朴素的取模</p>
+</li>
+</ul>
+</li>
+<li>
+<p>一元运算符</p>
+<ul>
+<li><code>+</code> <code>-</code> 正负号，会将非 Number 转为 Number</li>
+<li><code>++</code> <code>--</code> 自增自减<ul>
+<li><code>++a</code> 先递增再返回结果</li>
+<li><code>a++</code> 先返回结果再递增</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>逻辑运算符： 非 Boolean 类型会先进行转换</p>
+<ul>
+<li>
+<p><code>!</code> 非</p>
+<p>可以使用 <code>!!var</code> 快速将变量转为 Boolean</p>
+</li>
+<li>
+<p><code>&amp;&amp;</code> 与</p>
+<ul>
+<li>第一个条件失败后，不会执行第二个条件</li>
+<li><code>True &amp;&amp; Ture</code>，返回后面的 True 结果</li>
+<li>存在 False 时，返回首个 False 结果</li>
+</ul>
+</li>
+<li><code>||</code> 或<ul>
+<li>第一个条件成功后，不会执行第二个条件</li>
+<li><code>Ture  || ?</code>，返回首个 Ture 结果</li>
+<li><code>False || ?</code>，返回第二个结果</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>赋值运算符 <code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> <code>%=</code></p>
+</li>
+<li>
+<p>关系运算符 <code>&gt;</code> <code>&gt;=</code> <code>&lt;</code> <code>&lt;=</code></p>
+<ul>
+<li>会将非 Number 转换为 Number，返回 Boolean</li>
+<li>符号两侧均为 String 时，直接逐位比较 Unicode 编码</li>
+<li>任何值与<code>NaN</code>比较均返回 <code>false</code></li>
+</ul>
+</li>
+<li>
+<p>相等运算符</p>
+<ul>
+<li>
+<p><code>==</code> 会自动将两侧转为相同类型进行比较（大部分情况下转 Number）</p>
+<blockquote>
+<ul>
+<li>
+<p><code>undefined == null -&gt; true</code></p>
+</li>
+<li>
+<p><code>NaN == Anything -&gt; false</code> （包括 <code>NaN == NaN</code>，需要用 <code>isNaN</code> 函数判断）</p>
+</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p><code>===</code> 全等（不会做类型转换，类型不同直接 <code>false</code>）</p>
+</li>
+<li><code>!=</code> 不等，<code>!==</code> 不全等</li>
+</ul>
+</li>
+<li>
+<p>条件运算符（三元）<code>condition?case1:case2</code></p>
+<p>当 condition 的结果非 Boolean 类型时会进行转换</p>
+</li>
+</ul>
+<h3 id="22">2.2 优先级</h3>
+<blockquote>
+<p>序号越大优先级越低，平级时左结合</p>
+</blockquote>
+<ol>
+<li><code>.</code> <code>[]</code> <code>new</code></li>
+<li><code>()</code></li>
+<li><code>++</code> <code>--</code></li>
+<li><code>!</code> <code>~</code> <code>+/- 符号</code> <code>typeof</code> <code>void</code> <code>delete</code></li>
+<li><code>%</code> <code>*</code> <code>/</code></li>
+<li><code>+/- 加减法</code></li>
+<li><code>&lt;&lt;</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code></li>
+<li><code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code></li>
+<li><code>==</code> <code>!=</code> <code>===</code> <code>!==</code></li>
+<li><code>&amp;</code></li>
+<li><code>^</code></li>
+<li><code>|</code></li>
+<li><code>&amp;&amp;</code></li>
+<li><code>||</code></li>
+<li><code>?:</code></li>
+<li><code>=</code> <code>+=</code> <code>-=</code> <code>/=</code> <code>*=</code> <code>%=</code> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code> <code>&gt;&gt;&gt;=</code>  <code>&amp;=</code> <code>^=</code> <code>|=</code></li>
+</ol>
+<h2 id="3">3 语句</h2>
+<details class="info">
+<summary>获取用户输入</summary>
+<p>您可以使用 <code>prompt("提示语句")</code> 弹出弹窗以获得用户输入：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;您的输入是：&quot;</span><span class="p">,</span><span class="nx">prompt</span><span class="p">(</span><span class="s2">&quot;say sth:&quot;</span><span class="p">));</span><span class="c1">// 将会在 body 中显示您的输入</span>
+</code></pre></div></p>
+</details>
+<ul>
+<li>
+<p>IF 多分支模版
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// First Match</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">if</span><span class="p">(</span><span class="nx">condition1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nx">case1</span><span class="p">;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="nx">condition2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nx">case2</span><span class="p">;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nx">case3</span><span class="p">;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Switch 模版
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">switch</span><span class="p">(</span><span class="nx">variable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="c1">// 会对依次对 case 进行 === 比较，并将匹配位置作为 entry</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="c1">// 没有 break 就会按照书写顺序一直向下执行</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">case1</span><span class="o">:</span><span class="w"> </span><span class="c1">// case1 = 60 / score&gt;=60</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">case2</span><span class="o">:</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>While 模版
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// while 循环 -&gt; 可能一次也不执行</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">while</span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nx">sth</span><span class="p">;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">};</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1">// do-while 至少执行一轮</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nx">sth</span><span class="p">;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>For 模版</p>
+<ul>
+<li>执行顺序：初始化 -&gt; 判断条件 -&gt; 循环体 -&gt; 更新</li>
+<li>初始化/条件/更新都可以 省略 or 写在外面（要留 <code>;</code>）</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">for</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="nx">initVal</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">endVal</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nx">sth</span><span class="p">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>break &amp; continue</p>
+<ul>
+<li>break 可用于退出最近的一层 switch / 循环语句（不能用于 IF）</li>
+<li>continue 可以用于逃过当次循环的余下部分（作用于最近的循环）</li>
+</ul>
+</li>
+</ul>
+<details class="info">
+<summary>使用 <code>Label</code> 标识循环语句</summary>
+<p>我们可以通过 <code>labelName:循环语句</code> 的形式进行标识
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nx">hello</span><span class="o">:</span><span class="k">for</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="mf">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">j</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">j</span><span class="o">&lt;</span><span class="mf">5</span><span class="p">;</span><span class="w"> </span><span class="nx">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="c1">// 可以通过 break label 指定需要终止的循环</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="k">break</span><span class="w"> </span><span class="nx">hello</span><span class="p">;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">}</span>
+</code></pre></div></p>
+</details>
+<h2 id="4-scope">4 作用域 Scope</h2>
+<blockquote>
+<p>变量作用的范围</p>
+</blockquote>
+<ul>
+<li>
+<p>JS 共有两种作用域</p>
+<ul>
+<li>
+<p>全局作用域</p>
+<ul>
+<li>页面打开时创建，关闭时销毁</li>
+<li>不被函数包裹的代码均在全局作用域中</li>
+<li>
+<p>具有代表浏览器窗口的全局对象 <code>window</code> ，可以直接使用</p>
+<p>在全局作用域中创建的变量都会作为「window 的属性」保存，可以在任意位置访问
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10</span><span class="p">;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">// 直接 a = 10 也行</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span>
+</code></pre></div></p>
+<p>在全局作用域中创建的函数都会作为「window 的方法」保存
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">fun</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)};</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">window</span><span class="p">.</span><span class="nx">fun</span><span class="p">();</span><span class="w"> </span><span class="c1">// =&gt; 控制台输出 hello</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>变量的声明提前</p>
+<p>使用 <code>var</code> 声明的变量将在「所有代码执行前」被<strong>定义</strong>（但没有赋值！）</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="w"> </span><span class="c1">// 输出 undefined 但不报错</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">123</span><span class="p">;</span><span class="w">    </span><span class="c1">// 先使用后声明，此处才进行赋值</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">123</span><span class="p">;</span><span class="w">        </span><span class="c1">// 这样会报错</span>
+</code></pre></div>
+</li>
+<li>
+<p>函数的声明提前</p>
+<p>以「声明」形式创建的函数会在所有代码执行前被<strong>创造</strong>（可以在声明前调用）</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nx">f1</span><span class="p">();</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kd">function</span><span class="w"> </span><span class="nx">f1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;F1&quot;</span><span class="p">)};</span><span class="w"> </span><span class="c1">// 声明形式创建</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nx">f2</span><span class="p">();</span><span class="w"> </span><span class="c1">// 报错 -&gt; 此时 f2 = undefined</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kd">var</span><span class="w"> </span><span class="nx">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;f2&quot;</span><span class="p">)};</span><span class="w"> </span><span class="c1">// 此处才为 f2 赋值</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p>函数作用域</p>
+<ul>
+<li>调用函数时创建，执行完毕后销毁（每调用一次就会创建一个<strong>独立</strong>的作用域）</li>
+<li>可以访问全局变量，但是全局作用域不能访问函数作用域中变量（<code>var</code>定义）</li>
+<li>
+<p>局部变量与全局变量同名时，优先使用局部变量（可以用 <code>window.name</code> 强行指定）</p>
+<p>本地不存在时，逐层向上一级查找（直至全局作用域，还是没有报 <code>ReferenceError</code>）</p>
+</li>
+<li>
+<p>也存在「声明提前」
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">123</span><span class="p">;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kd">function</span><span class="w"> </span><span class="nx">f</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="w"> </span><span class="c1">// 输出 undefined -&gt; 局部声明提前</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">234</span><span class="p">;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">345</span><span class="p">;</span><span class="w"> </span><span class="c1">// 就是全局变量（没有提升），上面输出 123（全局值）</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">567</span><span class="p">;</span><span class="w"> </span><span class="c1">// 没有使用 var 关键字 =&gt; 定义了变量 b</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="nx">subF</span><span class="p">();</span><span class="w"> </span><span class="c1">// 函数声明提前，正常调用</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">subF</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;subF&quot;</span><span class="p">)};</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="p">}</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="w"> </span><span class="c1">// 若没有 var =&gt; c 就是全局变量，输出 345</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// 正常输出 567（在函数中定义了全局变量）</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="c1">// 参数列表相当于 var params;</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="kd">var</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">111</span><span class="p">;</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="kd">function</span><span class="w"> </span><span class="nx">f2</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">    </span><span class="c1">// 等同于 var e</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span><span class="w"> </span><span class="c1">// =&gt; undefined</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">222</span><span class="p">;</span><span class="w">        </span><span class="c1">// =&gt; 修改的是局部变量</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="p">}</span>
+</code></pre></div></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
 
 
@@ -1708,13 +2086,13 @@
         
         
           
-          <a href="../../../Vue/Vue2/1%20Intro/" class="md-footer__link md-footer__link--next" aria-label="Next: 1 HelloWorld" rel="next">
+          <a href="../%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%87%BD%E6%95%B0/" class="md-footer__link md-footer__link--next" aria-label="Next: 2 对象与函数" rel="next">
             <div class="md-footer__title">
               <div class="md-ellipsis">
                 <span class="md-footer__direction">
                   Next
                 </span>
-                1 HelloWorld
+                2 对象与函数
               </div>
             </div>
             <div class="md-footer__button md-icon">
