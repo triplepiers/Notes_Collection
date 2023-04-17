@@ -8,23 +8,27 @@
       
       
       
-        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/%E4%BF%A1%E5%AE%89%E5%8E%9F%E7%90%86/0410/">
+        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/Front%20End/JS/DOM/">
       
       
+        <link rel="prev" href="../%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%AD%A3%E5%88%99/">
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      
+        <link rel="next" href="../../../Vue/Vue2/1%20Intro/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
-        <title>0410 - SeaBee 的笔记合集</title>
+        <title>4 DOM - SeaBee 的笔记合集</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.c4a75a56.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.c4a75a56.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
   
@@ -81,9 +85,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -108,7 +112,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#security-issues-of-tcpip" class="md-skip">
+        <a href="#0-intro" class="md-skip">
           Skip to content
         </a>
       
@@ -141,7 +145,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              0410
+              4 DOM
             
           </span>
         </div>
@@ -216,7 +220,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../.." class="md-tabs__link">
+    <a href="../../../.." class="md-tabs__link">
       Home
     </a>
   </li>
@@ -224,6 +228,8 @@
       
         
   
+  
+    
   
 
 
@@ -236,7 +242,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../Front%20End/JS/%E5%9F%BA%E7%A1%80/" class="md-tabs__link">
+      <a href="../%E5%9F%BA%E7%A1%80/" class="md-tabs__link md-tabs__link--active">
         Front End
       </a>
     </li>
@@ -259,7 +265,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../Tool/Mongo%20DB%20-%20%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-tabs__link">
+      <a href="../../../Tool/Mongo%20DB%20-%20%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-tabs__link">
         DataBase
       </a>
     </li>
@@ -274,7 +280,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../.." class="md-tabs__link">
+    <a href="../../../.." class="md-tabs__link">
       软工必修(todo)
     </a>
   </li>
@@ -286,7 +292,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../.." class="md-tabs__link">
+    <a href="../../../.." class="md-tabs__link">
       编程语言(todo)
     </a>
   </li>
@@ -301,7 +307,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../Tool/Git/" class="md-tabs__link">
+      <a href="../../../Tool/Git/" class="md-tabs__link">
         常用工具
       </a>
     </li>
@@ -360,7 +366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -373,14 +379,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
@@ -389,7 +397,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Front End
@@ -400,14 +408,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
       
       
       
@@ -416,7 +426,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2_1">
           <span class="md-nav__icon md-icon"></span>
           Java Script
@@ -429,7 +439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Front%20End/JS/%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+      <a href="../%E5%9F%BA%E7%A1%80/" class="md-nav__link">
         1 基础
       </a>
     </li>
@@ -443,7 +453,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Front%20End/JS/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%87%BD%E6%95%B0/" class="md-nav__link">
+      <a href="../%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%87%BD%E6%95%B0/" class="md-nav__link">
         2 对象与函数
       </a>
     </li>
@@ -457,7 +467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Front%20End/JS/%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%AD%A3%E5%88%99/" class="md-nav__link">
+      <a href="../%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%AD%A3%E5%88%99/" class="md-nav__link">
         3 内置对象与正则
       </a>
     </li>
@@ -469,11 +479,122 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../Front%20End/JS/DOM/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          4 DOM
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         4 DOM
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-intro" class="md-nav__link">
+    0 Intro
+  </a>
+  
+    <nav class="md-nav" aria-label="0 Intro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node" class="md-nav__link">
+    节点 Node
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1 事件
+  </a>
+  
+    <nav class="md-nav" aria-label="1 事件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    文档加载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dom" class="md-nav__link">
+    2 DOM 查询
+  </a>
+  
+    <nav class="md-nav" aria-label="2 DOM 查询">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 获取元素节点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 获取元素属性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    练习 - 轮播图
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dom" class="md-nav__link">
+    3 DOM 增删改
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -519,7 +640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Vue/Vue2/1%20Intro/" class="md-nav__link">
+      <a href="../../../Vue/Vue2/1%20Intro/" class="md-nav__link">
         1 HelloWorld
       </a>
     </li>
@@ -533,7 +654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Vue/Vue2/2%20%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+      <a href="../../../Vue/Vue2/2%20%E7%BB%84%E4%BB%B6/" class="md-nav__link">
         2 组件
       </a>
     </li>
@@ -547,7 +668,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Vue/Vue2/3%20%E4%BD%BF%E7%94%A8Cli%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE/" class="md-nav__link">
+      <a href="../../../Vue/Vue2/3%20%E4%BD%BF%E7%94%A8Cli%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE/" class="md-nav__link">
         3 使用 Cli
       </a>
     </li>
@@ -561,7 +682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Vue/Vue2/4%20%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92/" class="md-nav__link">
+      <a href="../../../Vue/Vue2/4%20%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92/" class="md-nav__link">
         4 消息传递
       </a>
     </li>
@@ -575,7 +696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Vue/Vue2/5%20Ajax%20%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" class="md-nav__link">
+      <a href="../../../Vue/Vue2/5%20Ajax%20%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" class="md-nav__link">
         5 网络请求
       </a>
     </li>
@@ -589,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Vue/Vue2/6%20UI%20%E7%BB%84%E4%BB%B6%E5%BA%93/" class="md-nav__link">
+      <a href="../../../Vue/Vue2/6%20UI%20%E7%BB%84%E4%BB%B6%E5%BA%93/" class="md-nav__link">
         6 第三方组件库
       </a>
     </li>
@@ -610,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Vue/Vue3/" class="md-nav__link">
+      <a href="../../../Vue/Vue3/" class="md-nav__link">
         Vue3
       </a>
     </li>
@@ -651,7 +772,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../React/%E6%85%A2%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+      <a href="../../../React/%E6%85%A2%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
         1 慢速上手
       </a>
     </li>
@@ -665,7 +786,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../React/%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../React/%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/" class="md-nav__link">
         2 面向组件
       </a>
     </li>
@@ -679,7 +800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../React/%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" class="md-nav__link">
+      <a href="../../../React/%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" class="md-nav__link">
         3 组件通信
       </a>
     </li>
@@ -693,7 +814,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../React/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" class="md-nav__link">
+      <a href="../../../React/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" class="md-nav__link">
         4 网络请求
       </a>
     </li>
@@ -707,7 +828,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../React/%E8%B7%AF%E7%94%B1/" class="md-nav__link">
+      <a href="../../../React/%E8%B7%AF%E7%94%B1/" class="md-nav__link">
         5 路由
       </a>
     </li>
@@ -721,7 +842,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../React/UI%20%E7%BB%84%E4%BB%B6%E5%BA%93/" class="md-nav__link">
+      <a href="../../../React/UI%20%E7%BB%84%E4%BB%B6%E5%BA%93/" class="md-nav__link">
         6 UI 组件库
       </a>
     </li>
@@ -769,7 +890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Wechat%20App/Intro/" class="md-nav__link">
+      <a href="../../../Wechat%20App/Intro/" class="md-nav__link">
         1 Intro
       </a>
     </li>
@@ -783,7 +904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Wechat%20App/Template%20%26%20Setting/" class="md-nav__link">
+      <a href="../../../Wechat%20App/Template%20%26%20Setting/" class="md-nav__link">
         2 Template & Setting
       </a>
     </li>
@@ -797,7 +918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Wechat%20App/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%20%26%20%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/" class="md-nav__link">
+      <a href="../../../Wechat%20App/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%20%26%20%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/" class="md-nav__link">
         3 组件
       </a>
     </li>
@@ -845,7 +966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Front%20End/%E5%B8%83%E5%B1%80/" class="md-nav__link">
+      <a href="../../%E5%B8%83%E5%B1%80/" class="md-nav__link">
         布局
       </a>
     </li>
@@ -893,7 +1014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Tool/Axios/" class="md-nav__link">
+      <a href="../../../Tool/Axios/" class="md-nav__link">
         Axios
       </a>
     </li>
@@ -907,7 +1028,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Front%20End/Promise/" class="md-nav__link">
+      <a href="../../Promise/" class="md-nav__link">
         Promise
       </a>
     </li>
@@ -990,7 +1111,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Tool/Mongo%20DB%20-%20%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+      <a href="../../../Tool/Mongo%20DB%20-%20%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
         1 快速上手
       </a>
     </li>
@@ -1004,7 +1125,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Tool/Mongo%20DB%20-%20%E6%85%A2%E9%80%9F%E4%B8%8A%E5%A4%B4/" class="md-nav__link">
+      <a href="../../../Tool/Mongo%20DB%20-%20%E6%85%A2%E9%80%9F%E4%B8%8A%E5%A4%B4/" class="md-nav__link">
         2 慢速上头
       </a>
     </li>
@@ -1033,7 +1154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         软工必修(todo)
       </a>
     </li>
@@ -1048,7 +1169,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         编程语言(todo)
       </a>
     </li>
@@ -1090,7 +1211,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Tool/Git/" class="md-nav__link">
+      <a href="../../../Tool/Git/" class="md-nav__link">
         Git
       </a>
     </li>
@@ -1104,7 +1225,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Tool/%E5%B8%B8%E7%94%A8%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA/" class="md-nav__link">
+      <a href="../../../Tool/%E5%B8%B8%E7%94%A8%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA/" class="md-nav__link">
         常用项目创建
       </a>
     </li>
@@ -1143,37 +1264,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#security-issues-of-tcpip" class="md-nav__link">
-    Security Issues of TCP/IP 续
+  <a href="#0-intro" class="md-nav__link">
+    0 Intro
   </a>
   
-    <nav class="md-nav" aria-label="Security Issues of TCP/IP 续">
+    <nav class="md-nav" aria-label="0 Intro">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#tcp-syn-flooding" class="md-nav__link">
-    TCP SYN Flooding
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tcp-syn-prediction-attack" class="md-nav__link">
-    TCP SYN Prediction Attack
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tcp-congestion-control" class="md-nav__link">
-    TCP Congestion Control 拥塞控制
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dns-spoofing" class="md-nav__link">
-    DNS Spoofing
+  <a href="#node" class="md-nav__link">
+    节点 Node
   </a>
   
 </li>
@@ -1184,37 +1284,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ipsec" class="md-nav__link">
-    IPSEC
+  <a href="#1" class="md-nav__link">
+    1 事件
   </a>
   
-    <nav class="md-nav" aria-label="IPSEC">
+    <nav class="md-nav" aria-label="1 事件">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ah" class="md-nav__link">
-    AH 验证头
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#esp" class="md-nav__link">
-    ESP 载荷安全性封装
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sa" class="md-nav__link">
-    SA 安全关联
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    操作模式
+    文档加载
   </a>
   
 </li>
@@ -1225,22 +1304,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ssltls" class="md-nav__link">
-    SSL/TLS
+  <a href="#2-dom" class="md-nav__link">
+    2 DOM 查询
   </a>
   
-    <nav class="md-nav" aria-label="SSL/TLS">
+    <nav class="md-nav" aria-label="2 DOM 查询">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#protocol-stack" class="md-nav__link">
-    Protocol Stack
+  <a href="#21" class="md-nav__link">
+    2.1 获取元素节点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 获取元素属性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    练习 - 轮播图
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dom" class="md-nav__link">
+    3 DOM 增删改
+  </a>
   
 </li>
       
@@ -1262,162 +1362,203 @@
   
 
 
-  <h1>0410</h1>
+  <h1>4 DOM</h1>
 
-<h2 id="security-issues-of-tcpip">Security Issues of TCP/IP 续</h2>
-<h3 id="tcp-syn-flooding">TCP SYN Flooding</h3>
+<h2 id="0-intro">0 Intro</h2>
+<p>全称是 Document Object Model，JS 使用 DOM 对 HTML 进行操作：</p>
 <ul>
-<li>漏洞
-    在三次握手中，Server 收到 Client 发送的 SYN包后就要分配资源，并且 Listen</li>
-<li>原理<ul>
-<li>攻击者是用捏造的 src addr 向服务器发送一堆 TCP Request（自己不用分配资源）</li>
-<li>服务器一直到 timeout 前都要为请求分配 thread &amp; memory</li>
-<li>服务器资源耗尽后，普通用户救无法获得服务了</li>
+<li>Document - 整个 HTML 网页文档</li>
+<li>Object - 网页中的每一个部分都被转换为一个对象</li>
+<li>Model - 使用模型（DOM Tree）表示对象之间的关系，便于获取对象</li>
 </ul>
+<h3 id="node">节点 Node</h3>
+<ul>
+<li>节点是构成 HTML 文档的最基本单元，不同节点具有不尽相同的属性和方法</li>
+<li>
+<p>一般分为以下四类</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;pId&quot;</span><span class="p">&gt;</span>This is a paragraph<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>- 整个是一个“元素节点”
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>- id=&quot;pId&quot; 是一个”属性节点‘
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>- This is a paragraph 是一个”文本节点“
+</code></pre></div>
+<ol>
+<li>
+<p>文档节点：整个 HTML 文档</p>
+<p>浏览器提供了作为 window 属性的“文档节点” <code>document</code>，可以直接使用</p>
 </li>
-<li>这是一个 DOS 攻击
-    Asymmetric：攻击方和服务方付出的代价不对等</li>
-<li>防护方法<ol>
-<li>random delete：队列满了就随机删掉一个倒霉蛋</li>
-<li>SYN Cookie：
-     =&gt; 资源分配减少，计算代价增加
-     服务端不再储存 socket 的状态（除非收到用户的 ack）<ul>
-<li>服务端将 socket info（双方的 ip &amp; port + 时间周期）当作 Cookie （作为 SYN 的编号）里发给用户（作为 SYN，ACK 的初始序列号）
-    时间周期防止重放 + 返回后可以算出相同的 Cookie</li>
-<li>客户端返回 ACK</li>
-<li>服务端根据包头重新计算 Cookie 并与 ACK 的确认序号（初始序号+1）比对，
-    若相同则为正常连接，随后分配资源</li>
+<li>
+<p>元素节点：各种 HTML 标签</p>
+</li>
+<li>属性节点：元素具有的属性</li>
+<li>文本节点：HTML 标签中的文本内容</li>
+</ol>
+</li>
+<li>
+<p>节点属性</p>
+<table>
+<thead>
+<tr>
+<th align="center">节点类型</th>
+<th align="center">nodeName</th>
+<th align="center">nodeType</th>
+<th>nodeValue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">文档节点</td>
+<td align="center"><code>#documente</code></td>
+<td align="center">9</td>
+<td>null</td>
+</tr>
+<tr>
+<td align="center">元素节点</td>
+<td align="center">标签名</td>
+<td align="center">1</td>
+<td>null</td>
+</tr>
+<tr>
+<td align="center">属性节点</td>
+<td align="center">属性名</td>
+<td align="center">2</td>
+<td>属性值</td>
+</tr>
+<tr>
+<td align="center">文本节点</td>
+<td align="center"><code>#text</code></td>
+<td align="center">3</td>
+<td>文本内容</td>
+</tr>
+</tbody>
+</table>
+</li>
 </ul>
+<h2 id="1">1 事件</h2>
+<ul>
+<li>事件是 文档/浏览器窗口 中发生特定交互的瞬间，JS 与 HTML 之间的交互是通过事件实现的</li>
+<li>我们可以为事件绑定回调，这些代码将在事件触发时被执行</li>
+</ul>
+<p>以单击事件处理为例：</p>
+<ol>
+<li>
+<p>在标签中编写处理代码（高耦合）
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="s">&quot;alert(&#39;click&#39;);&quot;</span><span class="p">&gt;</span>btn<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>在标签中绑定函数 + 在 script 中实现
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="o">=</span><span class="s">&quot;handleClick()&quot;</span><span class="p">&gt;</span>btn<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">handleClick</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>在 script 中绑定并编写代码
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">btn</span><span class="p">.</span><span class="nx">onclick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">);</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h3 id="_1">文档加载</h3>
+<p>问题：把 script 写到 body 之前会导致获取不到元素（还没加载出来）</p>
+<p>解决：把所有东西丢到 <code>window.onload</code> 绑定的函数中 =&gt; 页面加载完成后再执行代码 </p>
+<h2 id="2-dom">2 DOM 查询</h2>
+<h3 id="21">2.1 获取元素节点</h3>
+<ul>
+<li>
+<p>通过 <code>document</code> 调用</p>
+<ol>
+<li><code>getElementById</code> 「一个」元素</li>
+<li><code>getElementsByTagName</code> 「一组」元素，返回类数组对象</li>
+<li><code>getElementsByName</code> 「一组」元素，返回类数组对象</li>
+<li><code>getElementsByClassName</code> 「一组」元素，返回类数组对象（IE9以上）</li>
+<li>
+<p><code>document.querySelector('css选择器')</code> 「一个」元素（存在多个时返回首个）</p>
+<p><code>document.querySelectAll('css选择器')</code>「一组」元素，返回类数组对象</p>
 </li>
 </ol>
 </li>
+<li>
+<p>获取子节点 - 通过具体节点调用 </p>
+<ol>
+<li>
+<p><code>getElementsByTagName()</code> 返回当前节点的「指定标签名」后代节点</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// 获取 #city 下的所有 li 节点</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">);</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">var</span><span class="w"> </span><span class="nx">lis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">city</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">);</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1">// 另一种方法</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="kd">var</span><span class="w"> </span><span class="nx">lis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;#city &gt; li&#39;</span><span class="p">);</span>
+</code></pre></div>
+</li>
+<li>
+<p><code>childNodes</code> 当前节点的「所有」子节点</p>
+<p>包括文本节点，标签间的空白也会当成文本节点（IE8以下不计入空白文本）</p>
+<p>=&gt; <code>children</code> 可以返回不包含文本节点的所有子元素</p>
+</li>
+<li>
+<p><code>firstChlid</code> 当前节点的第一个子节点（包括空白文本节点）</p>
+<p><code>firstElementChild</code> 可以获取第一个子元素（IE8以上）</p>
+</li>
+<li>
+<p><code>lastChlid</code> 当前节点的最后一个子节点</p>
+</li>
+</ol>
+</li>
+<li>
+<p>获取 父节点/兄弟节点 - 通过具体节点调用</p>
+<ol>
+<li><code>parentNode</code> 当前节点的父节点</li>
+<li>
+<p><code>previousSibling</code> 前一个兄弟节点（可能有空白文本节点）</p>
+<p><code>previousElementSibling</code> 不包含空白文本（IE8以上）</p>
+</li>
+<li>
+<p><code>nextSibling</code> 后一个兄弟节点</p>
+</li>
+</ol>
+</li>
+<li>
+<p>获取 <code>&lt;body&gt;</code> - <code>document.body</code></p>
+</li>
+<li>获取 <code>&lt;html</code> - <code>document.documentElement</code></li>
+<li>获取所有所有元素 - <code>document.all</code> / <code>getElementsByTagName('*')</code></li>
 </ul>
-<h3 id="tcp-syn-prediction-attack">TCP SYN Prediction Attack</h3>
+<h3 id="22">2.2 获取元素属性</h3>
 <ul>
-<li>TCP 协议的每一个包都有 SYN 编号，接收方会基于 SYN 编号对收到的包进行分类和辨认</li>
-<li>如果攻击者可以猜出 SYN 编号，就可以伪造来自 Server 的包</li>
-<li>基于 SYN Prediction 发起的攻击<ul>
-<li>TCP Spoofing</li>
-<li>TCP connection hijacking</li>
-<li>TCP reset</li>
+<li>元素文字内容<ul>
+<li><code>tag.innerHTML</code> （对自结束标签不起作用）</li>
+<li><code>tag.innerText</code> （自动去除 HTML 标签）</li>
 </ul>
 </li>
-<li>防护措施：选择 random 的初始 SYN 编号</li>
-</ul>
-<h3 id="tcp-congestion-control">TCP Congestion Control 拥塞控制</h3>
-<p>一旦网络出现拥塞状况，TCP 协议要求发送方：
-- 发送速度持续减半（一直到不会丢包）
-- 停止丢包后缓慢增长发送速度</p>
-<blockquote>
-<p>攻击者可以在丢包时持续发送数据，从而获得更大的发送速度</p>
-</blockquote>
-<p>解决：添加 随机的ACK，在 ACK 中返回该随机数来证明自己不是恶意流量</p>
-<h3 id="dns-spoofing">DNS Spoofing</h3>
-<p>修改 DNS Server / Local DNS Service 的 cache，将域名重定向至错误的 IP</p>
-<blockquote>
-<p>是是想 pharming phishing 的基础（域嫁接钓鱼攻击）</p>
-</blockquote>
-<p>解决方法：DNSSEC
-- 发生 DNS Poisoning 的原因
-    - DNS Request &amp; Response 都是 unauthenticated
-    - 然后 attacker 就可以狂发伪造的 DNS 信息（而且没人发现）
-- 在 DNSSEC 中
-    - 所有 Responce 都被验证
-    - 不会对传递的信息进行加密，也不能防范 DoS 攻击
-- 步骤
-    - 用户请求解析时会返回
-        - 普通的 A 记录：域名 to IP 的解析
-        - RRSIG 记录：DNS服务器对解析结果的签名
-            - key 标签 - 应该用哪个 DNSKEY 进行验证
-            - 算法类型
-            - DNS 服务器对 解析结果MAC 的签名值
-    - 用户验证
-        - 请求 DNS服务器的公钥
-        - 用 Public_DNS 解密签名，得到 V1
-        - 自己计算一遍解析结果的 MAC，得到 V2
-        - V1=V2，则结果可信</p>
-<h2 id="ipsec">IPSEC</h2>
-<blockquote>
-<p>IPSEC 用于支持所有 IP 层流量的 加密&amp;认证服务，有三个汇总给你要的组成部分：
-- Authentication Headers 验证头
-- Encapsulating Security Payloads 载荷安全性封装
-- Security Association 安全关联</p>
-</blockquote>
-<p><img src="https://download.huawei.com/mdl/image/download?uuid=9e4693369c944ae89a320a4b810f3b6f">
-- 发送方会使用 加密算法&amp;密钥 对报文内容进行加密
-- 接收方计算校验值 ICV，相同则保证报文完整且未被修改，随后解密（否则丢弃）</p>
-<ul>
-<li>IPSEC 的优势<ul>
-<li>可以在 防火墙/路由器 中实现<ul>
-<li>所有经过这个 border 的包的安全性都会增强</li>
-<li>防火墙内的 host 不用担心安全性问题</li>
-</ul>
+<li>
+<p>元素 class 属性 <code>tag.className</code></p>
+<p>有多个 class 会返回一个 String（ <code>classList</code> 会返回数组）</p>
 </li>
-<li>对于 end-user 透明<ul>
-<li>基于 IPSEC 的服务不需要用户手动调配置</li>
-<li>保密性和完整性都得到保障</li>
-</ul>
+<li>
+<p>其他元素属性 <code>tag.keyName</code>，如 <code>tag.id / tag.value</code></p>
 </li>
 </ul>
-</li>
-</ul>
-<h3 id="ah">AH 验证头</h3>
-<p>在标准 IP 头后添加 AH 报文头（校验范围是整个 IP 报文）
-- 提供了 IP 包的 身份认证&amp;完整性 服务（但不进行加密）
-- 可以提供 反重放攻击 服务（可选）</p>
-<h3 id="esp">ESP 载荷安全性封装</h3>
-<p>在标准 IP 头后添加 ESP 头，在数据包后追加 ESP 尾
-- 提供了 安全性、保密性、认证服务（可选）
-- 提供了对数据的<strong>加密服务</strong>！
-- 校验范围不包括 IP 头（不保证 IP 头不被篡改）</p>
+<h3 id="-">练习 - 轮播图</h3>
 <blockquote>
-<p>AH &amp; ESP 可以单独使用，也可以同时使用。
-同时使用时：先用 ESP 封装，再用 AH 封装</p>
+<p>通过修改当前图片 src 实现</p>
 </blockquote>
-<h3 id="sa">SA 安全关联</h3>
-<ul>
-<li>为单向传输 sender-&gt; receiver 定义了一系列的 algorithm &amp; params，用于进行加密和认证
-    如果需要提供双向的认证，就需要两个 SA</li>
-<li>包含 3 个 unique 的 param：<ul>
-<li>SPI（Security Parameter Index）一个 bit string</li>
-<li>IP dest addr</li>
-<li>Security Protocol Identifier：指出 AH/ESP</li>
-</ul>
-</li>
-</ul>
-<h3 id="_1">操作模式</h3>
-<p>IPSEC 可以用于 PtoP 或 tunnel 模式
-- Transpoer Mode
-    - 只对 IP 包的 content 进行保护（不管 header）
-    - 用于 PtoP
-    - 内层ESP+外层AH（只认证不加密）
-- Tunnel Mode
-    - 验证整个 IP 包（包括头），加密除了 ESP 以外的部分
-    - 整个被打包到一个新的 IP 包中
-    - 典型使用是 VPN
-    - 内层AH外层ESP（加密且认证）</p>
-<h2 id="ssltls">SSL/TLS</h2>
-<blockquote>
-<ul>
-<li>TLS = Transport Layer Security</li>
-<li>SSL = Secure Socket Layer</li>
-</ul>
-</blockquote>
-<p>=&gt; 用于保证可靠的，端到端的 TCP 安全服务；提供保密性、完整性、身份认证 服务。</p>
-<ul>
-<li>SSL Connection
-    是一个 point-to-point 的临时连接，每个 SSL connection 都与一个 session 相关</li>
-<li>SSL Session
-    是 C/S 之间的连接，通过三次握手创建。
-    协商了 security parameter 供一组 connection 使用（不用每次都协商）</li>
-</ul>
-<h3 id="protocol-stack">Protocol Stack</h3>
-<p>SSL/TLS 介于 传输层 &amp; 应用层 之间，本身还被划成了两个子层：
-- Handshake 子层，包含三个子协议
-    - Hanshake sub protocol
-    - Change Cipher Spec sub protocol
-    - Alert sub protocol
-- Record 子层：用于接收并加密信息，然后丢给传输层</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">imgArr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;1.jpg&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2.jpg&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;3.jpg&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;4.jpg&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5.jpg&#39;</span><span class="p">];</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nx">prev</span><span class="p">.</span><span class="nx">onclick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="c1">// 假设一共有 5 张图片</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="o">--</span><span class="nx">idx</span><span class="p">;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nx">idx</span><span class="o">&lt;</span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="nx">idx</span><span class="o">=</span><span class="nx">imgArr</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mf">1</span><span class="p">;</span><span class="c1">// 循环</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nx">img</span><span class="p">.</span><span class="nx">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">imgArr</span><span class="p">[</span><span class="nx">idx</span><span class="p">];</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">}</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="nx">next</span><span class="p">.</span><span class="nx">onclick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="o">++</span><span class="nx">idx</span><span class="p">;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nx">idx</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">imgArr</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span><span class="w"> </span><span class="nx">idx</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="nx">img</span><span class="p">.</span><span class="nx">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">imgArr</span><span class="p">[</span><span class="o">++</span><span class="nx">idx</span><span class="p">]</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="3-dom">3 DOM 增删改</h2>
 
 
 
@@ -1434,6 +1575,42 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%AD%A3%E5%88%99/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3 内置对象与正则" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Previous
+                </span>
+                3 内置对象与正则
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../Vue/Vue2/1%20Intro/" class="md-footer__link md-footer__link--next" aria-label="Next: 1 HelloWorld" rel="next">
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Next
+                </span>
+                1 HelloWorld
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -1461,12 +1638,12 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.footer"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.footer"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.efa0ade1.min.js"></script>
       
-        <script src="../../../javascripts/config.js"></script>
+        <script src="../../../../javascripts/config.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       

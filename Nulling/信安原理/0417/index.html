@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/%E4%BF%A1%E5%AE%89%E5%8E%9F%E7%90%86/0410/">
+        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/%E4%BF%A1%E5%AE%89%E5%8E%9F%E7%90%86/0417/">
       
       
       
@@ -17,7 +17,7 @@
     
     
       
-        <title>0410 - SeaBee 的笔记合集</title>
+        <title>0417 - SeaBee 的笔记合集</title>
       
     
     
@@ -108,7 +108,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#security-issues-of-tcpip" class="md-skip">
+        <a href="#executable-infectors" class="md-skip">
           Skip to content
         </a>
       
@@ -141,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              0410
+              0417
             
           </span>
         </div>
@@ -1143,98 +1143,93 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#security-issues-of-tcpip" class="md-nav__link">
-    Security Issues of TCP/IP 续
+  <a href="#executable-infectors" class="md-nav__link">
+    Executable Infectors
   </a>
-  
-    <nav class="md-nav" aria-label="Security Issues of TCP/IP 续">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tcp-syn-flooding" class="md-nav__link">
-    TCP SYN Flooding
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tcp-syn-prediction-attack" class="md-nav__link">
-    TCP SYN Prediction Attack
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tcp-congestion-control" class="md-nav__link">
-    TCP Congestion Control 拥塞控制
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dns-spoofing" class="md-nav__link">
-    DNS Spoofing
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#ipsec" class="md-nav__link">
-    IPSEC
+  <a href="#multipartite-viruses" class="md-nav__link">
+    Multipartite Viruses
   </a>
-  
-    <nav class="md-nav" aria-label="IPSEC">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ah" class="md-nav__link">
-    AH 验证头
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#esp" class="md-nav__link">
-    ESP 载荷安全性封装
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sa" class="md-nav__link">
-    SA 安全关联
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    操作模式
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#ssltls" class="md-nav__link">
-    SSL/TLS
+  <a href="#tsr-viruses" class="md-nav__link">
+    TSR Viruses
   </a>
   
-    <nav class="md-nav" aria-label="SSL/TLS">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stealth-viruses" class="md-nav__link">
+    Stealth Viruses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encrypted-viruses" class="md-nav__link">
+    Encrypted Viruses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virus-emulation" class="md-nav__link">
+    Virus Emulation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#polymorphic-viruses" class="md-nav__link">
+    Polymorphic Viruses 多态
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macro-viruses" class="md-nav__link">
+    Macro Viruses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worm" class="md-nav__link">
+    Worm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defenses-of-malicious-code" class="md-nav__link">
+    Defenses of Malicious Code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#botnet" class="md-nav__link">
+    Botnet 僵尸网络
+  </a>
+  
+    <nav class="md-nav" aria-label="Botnet 僵尸网络">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#protocol-stack" class="md-nav__link">
-    Protocol Stack
+  <a href="#dos" class="md-nav__link">
+    DoS 基于不对称性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddos" class="md-nav__link">
+    DDoS 不可防御
   </a>
   
 </li>
@@ -1262,162 +1257,123 @@
   
 
 
-  <h1>0410</h1>
+  <h1>0417</h1>
 
-<h2 id="security-issues-of-tcpip">Security Issues of TCP/IP 续</h2>
-<h3 id="tcp-syn-flooding">TCP SYN Flooding</h3>
+<h3 id="executable-infectors">Executable Infectors</h3>
 <ul>
-<li>漏洞
-    在三次握手中，Server 收到 Client 发送的 SYN包后就要分配资源，并且 Listen</li>
-<li>原理<ul>
-<li>攻击者是用捏造的 src addr 向服务器发送一堆 TCP Request（自己不用分配资源）</li>
-<li>服务器一直到 timeout 前都要为请求分配 thread &amp; memory</li>
-<li>服务器资源耗尽后，普通用户救无法获得服务了</li>
-</ul>
+<li>可执行程序和文本文件都有一个 header，但是 exe 有二进制的程序，读完 header 后会跳到入口处开始执行</li>
+<li>
+<p>病毒会插到原本程序开始的地方（读完 header 开始执行病毒）</p>
 </li>
-<li>这是一个 DOS 攻击
-    Asymmetric：攻击方和服务方付出的代价不对等</li>
-<li>防护方法<ol>
-<li>random delete：队列满了就随机删掉一个倒霉蛋</li>
-<li>SYN Cookie：
-     =&gt; 资源分配减少，计算代价增加
-     服务端不再储存 socket 的状态（除非收到用户的 ack）<ul>
-<li>服务端将 socket info（双方的 ip &amp; port + 时间周期）当作 Cookie （作为 SYN 的编号）里发给用户（作为 SYN，ACK 的初始序列号）
-    时间周期防止重放 + 返回后可以算出相同的 Cookie</li>
-<li>客户端返回 ACK</li>
-<li>服务端根据包头重新计算 Cookie 并与 ACK 的确认序号（初始序号+1）比对，
-    若相同则为正常连接，随后分配资源</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="tcp-syn-prediction-attack">TCP SYN Prediction Attack</h3>
+<li>
+<p>杀毒软件基于“病毒库”进行杀毒，逐个扫描可执行文件中是否包含病毒库中的代码来认定当前程序是否存在病毒（可以单独把病毒代码摘下来）</p>
 <ul>
-<li>TCP 协议的每一个包都有 SYN 编号，接收方会基于 SYN 编号对收到的包进行分类和辨认</li>
-<li>如果攻击者可以猜出 SYN 编号，就可以伪造来自 Server 的包</li>
-<li>基于 SYN Prediction 发起的攻击<ul>
-<li>TCP Spoofing</li>
-<li>TCP connection hijacking</li>
-<li>TCP reset</li>
+<li>因为是二进制代码，所以是 memcompare（但一般会搞一个 DFA 出来）</li>
+<li>前提「非运行时检查」—— 基于 signature 杀毒<ul>
+<li>我有病毒库</li>
+<li>保证病毒插入在文件的 前N个字节（全文扫描代价太大了）</li>
 </ul>
 </li>
-<li>防护措施：选择 random 的初始 SYN 编号</li>
 </ul>
-<h3 id="tcp-congestion-control">TCP Congestion Control 拥塞控制</h3>
-<p>一旦网络出现拥塞状况，TCP 协议要求发送方：
-- 发送速度持续减半（一直到不会丢包）
-- 停止丢包后缓慢增长发送速度</p>
+</li>
+<li>
+<p>几种插入方式</p>
+<ul>
+<li>overwriting =&gt; 覆写，破坏原本的程序（不能用了）</li>
+<li>
+<p>接在开头</p>
 <blockquote>
-<p>攻击者可以在丢包时持续发送数据，从而获得更大的发送速度</p>
+<div class="highlight"><pre><span></span><code>前两个在开头，容易被检测
+</code></pre></div>
 </blockquote>
-<p>解决：添加 随机的ACK，在 ACK 中返回该随机数来证明自己不是恶意流量</p>
-<h3 id="dns-spoofing">DNS Spoofing</h3>
-<p>修改 DNS Server / Local DNS Service 的 cache，将域名重定向至错误的 IP</p>
-<blockquote>
-<p>是是想 pharming phishing 的基础（域嫁接钓鱼攻击）</p>
-</blockquote>
-<p>解决方法：DNSSEC
-- 发生 DNS Poisoning 的原因
-    - DNS Request &amp; Response 都是 unauthenticated
-    - 然后 attacker 就可以狂发伪造的 DNS 信息（而且没人发现）
-- 在 DNSSEC 中
-    - 所有 Responce 都被验证
-    - 不会对传递的信息进行加密，也不能防范 DoS 攻击
-- 步骤
-    - 用户请求解析时会返回
-        - 普通的 A 记录：域名 to IP 的解析
-        - RRSIG 记录：DNS服务器对解析结果的签名
-            - key 标签 - 应该用哪个 DNSKEY 进行验证
-            - 算法类型
-            - DNS 服务器对 解析结果MAC 的签名值
-    - 用户验证
-        - 请求 DNS服务器的公钥
-        - 用 Public_DNS 解密签名，得到 V1
-        - 自己计算一遍解析结果的 MAC，得到 V2
-        - V1=V2，则结果可信</p>
-<h2 id="ipsec">IPSEC</h2>
-<blockquote>
-<p>IPSEC 用于支持所有 IP 层流量的 加密&amp;认证服务，有三个汇总给你要的组成部分：
-- Authentication Headers 验证头
-- Encapsulating Security Payloads 载荷安全性封装
-- Security Association 安全关联</p>
-</blockquote>
-<p><img src="https://download.huawei.com/mdl/image/download?uuid=9e4693369c944ae89a320a4b810f3b6f">
-- 发送方会使用 加密算法&amp;密钥 对报文内容进行加密
-- 接收方计算校验值 ICV，相同则保证报文完整且未被修改，随后解密（否则丢弃）</p>
-<ul>
-<li>IPSEC 的优势<ul>
-<li>可以在 防火墙/路由器 中实现<ul>
-<li>所有经过这个 border 的包的安全性都会增强</li>
-<li>防火墙内的 host 不用担心安全性问题</li>
-</ul>
 </li>
-<li>对于 end-user 透明<ul>
-<li>基于 IPSEC 的服务不需要用户手动调配置</li>
-<li>保密性和完整性都得到保障</li>
+<li>
+<p>拆成两端 beginning &amp; end（加 jump）=&gt; 躲避检测</p>
+</li>
+<li>intersperse（分块，开头jump to begin，中间 jump 到下一段）</li>
+<li>companions（在 exe 中调用病毒）</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h3 id="ah">AH 验证头</h3>
-<p>在标准 IP 头后添加 AH 报文头（校验范围是整个 IP 报文）
-- 提供了 IP 包的 身份认证&amp;完整性 服务（但不进行加密）
-- 可以提供 反重放攻击 服务（可选）</p>
-<h3 id="esp">ESP 载荷安全性封装</h3>
-<p>在标准 IP 头后添加 ESP 头，在数据包后追加 ESP 尾
-- 提供了 安全性、保密性、认证服务（可选）
-- 提供了对数据的<strong>加密服务</strong>！
-- 校验范围不包括 IP 头（不保证 IP 头不被篡改）</p>
+<h3 id="multipartite-viruses">Multipartite Viruses</h3>
+<p>有两部分：
+1. 感染 boot sector infector
+2. 感染 exe files</p>
+<p>即便杀死了所有 exe 中的病毒，下一次启动还是会从启动区带入病毒</p>
+<h3 id="tsr-viruses">TSR Viruses</h3>
+<p>驻留内存的病毒（感染操作病毒的核心进程区域）
+=&gt; 在 exe 中找不出来</p>
+<h3 id="stealth-viruses">Stealth Viruses</h3>
 <blockquote>
-<p>AH &amp; ESP 可以单独使用，也可以同时使用。
-同时使用时：先用 ESP 封装，再用 AH 封装</p>
+<p>隐身病毒 -&gt; 隐藏自己的感染信息（有“木马”特征）</p>
 </blockquote>
-<h3 id="sa">SA 安全关联</h3>
 <ul>
-<li>为单向传输 sender-&gt; receiver 定义了一系列的 algorithm &amp; params，用于进行加密和认证
-    如果需要提供双向的认证，就需要两个 SA</li>
-<li>包含 3 个 unique 的 param：<ul>
-<li>SPI（Security Parameter Index）一个 bit string</li>
-<li>IP dest addr</li>
-<li>Security Protocol Identifier：指出 AH/ESP</li>
+<li>检查 length -&gt; 返回未感染时的长度</li>
+<li>open file -&gt; 把自己干掉，关掉的时候再次感染</li>
+<li>load file 去执行 -&gt; 给出被感染的文件</li>
 </ul>
-</li>
-</ul>
-<h3 id="_1">操作模式</h3>
-<p>IPSEC 可以用于 PtoP 或 tunnel 模式
-- Transpoer Mode
-    - 只对 IP 包的 content 进行保护（不管 header）
-    - 用于 PtoP
-    - 内层ESP+外层AH（只认证不加密）
-- Tunnel Mode
-    - 验证整个 IP 包（包括头），加密除了 ESP 以外的部分
-    - 整个被打包到一个新的 IP 包中
-    - 典型使用是 VPN
-    - 内层AH外层ESP（加密且认证）</p>
-<h2 id="ssltls">SSL/TLS</h2>
 <blockquote>
-<ul>
-<li>TLS = Transport Layer Security</li>
-<li>SSL = Secure Socket Layer</li>
-</ul>
+<p>杀毒软件应该用一个非常底层的API去检查文件系统</p>
 </blockquote>
-<p>=&gt; 用于保证可靠的，端到端的 TCP 安全服务；提供保密性、完整性、身份认证 服务。</p>
+<h3 id="encrypted-viruses">Encrypted Viruses</h3>
+<blockquote>
+<p>更难根据 signature 检查出来</p>
+</blockquote>
+<p>除了密钥、解密程序之外的部分加密
+我们在感染不同程序时使用不同 key -&gt; 静态情况下每一个都不一样
+=&gt; 只能查解密段代码</p>
+<h3 id="virus-emulation">Virus Emulation</h3>
+<p>通过 random 产生 key &amp; 解密算法不断变种</p>
+<h3 id="polymorphic-viruses">Polymorphic Viruses 多态</h3>
+<p>随机不用一些代码 / 用不同的 algorithm 产生相同的运行结果</p>
+<h3 id="macro-viruses">Macro Viruses</h3>
+<p>可以感染 exe / data file</p>
+<h2 id="worm">Worm</h2>
 <ul>
-<li>SSL Connection
-    是一个 point-to-point 的临时连接，每个 SSL connection 都与一个 session 相关</li>
-<li>SSL Session
-    是 C/S 之间的连接，通过三次握手创建。
-    协商了 security parameter 供一组 connection 使用（不用每次都协商）</li>
+<li>独立的可执行程序</li>
+<li>会疯狂 copy 自己（传播本身就是恶意行为 -&gt; 可能把 BW 耗尽）</li>
 </ul>
-<h3 id="protocol-stack">Protocol Stack</h3>
-<p>SSL/TLS 介于 传输层 &amp; 应用层 之间，本身还被划成了两个子层：
-- Handshake 子层，包含三个子协议
-    - Hanshake sub protocol
-    - Change Cipher Spec sub protocol
-    - Alert sub protocol
-- Record 子层：用于接收并加密信息，然后丢给传输层</p>
+<h2 id="defenses-of-malicious-code">Defenses of Malicious Code</h2>
+<p>There is NO algorithm to detect ALL possible malicious code</p>
+<p>虽然没有完美的解决方案，但是
+- Signature-based antivirus
+    - Look for known patterns in malicious code
+    - Always battle with attacker
+    - Greate Business Model！
+- Virus Analysis
+    - by human export
+    - aotomated by Immune System（每个人上报，统一进行分析）
+- 防止 Signature Extraction @ VAC
+    - 区分 data &amp; instruction（严格禁止修改自己的code）
+    - 限制对进程对文件的访问
+        - Watchdog / Sandbox
+    - 禁止 sharing
+    - 探测 altering of file
+    - 探测 action beyond specification
+        对每一个 seq 计算一个 checksum，加密结果并存储
+        执行前重新计算 checksum 并比较 -&gt; 不同则不予执行
+    - 分析 statistical characteristics</p>
+<h2 id="botnet">Botnet 僵尸网络</h2>
+<p>Network of autonomous programs capable of acting on instructions</p>
+<p>用于进行以下攻击：
+- DDoS
+- Spam &amp; Click Fraud
+- 新 exploits / worm 的跳板</p>
+<p>一般利用漏洞在僵尸机器上执行一个 short program
+=&gt; 随后，这个 program 会下载并安装真正的 bot 软件</p>
+<p>bot 软件将使得防火墙和杀毒软件失效，并让机器加入聊天频道
+Master 将在频道中发布指令操纵整个僵尸网络发起攻击</p>
+<h3 id="dos">DoS 基于不对称性</h3>
+<ul>
+<li>ICMP - Smurf</li>
+<li>Ping Flood</li>
+<li>SYN Flood</li>
+<li>UDP Flood</li>
+</ul>
+<h3 id="ddos">DDoS 不可防御</h3>
+<p>首先有一个僵尸网络
+- 不能被软件防御
+- 不需要 IP Spoofing =&gt; 反正是 bot 发不是本人发</p>
 
 
 
