@@ -14,7 +14,7 @@
         <link rel="prev" href="../../Tool/Mongo%20DB%20-%20%E6%85%A2%E9%80%9F%E4%B8%8A%E5%A4%B4/">
       
       
-        <link rel="next" href="../../..">
+        <link rel="next" href="../6%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
@@ -1193,6 +1193,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#12-attribute-grammar" class="md-nav__link">
+    1.2 属性文法 Attribute Grammar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    1.3 计算顺序
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 计算顺序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependency-graph" class="md-nav__link">
+    依赖图 Dependency Graph
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s-s-sdd" class="md-nav__link">
+    S 属性定义 S-SDD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l-l-sdd" class="md-nav__link">
+    L 属性定义 L-SDD
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1203,12 +1244,115 @@
     2 语法制导翻译方案 SDT
   </a>
   
+    <nav class="md-nav" aria-label="2 语法制导翻译方案 SDT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-s-sdd-sdt" class="md-nav__link">
+    2.1 S-SDD → SDT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-l-sdd-sdt" class="md-nav__link">
+    2.2 L-SDD → SDT
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 L-SDD → SDT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    2.2.1 「非递归」分析翻译
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    2.2.2 「递归」预测分析翻译
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-l-" class="md-nav__link">
+    2.2.3 L-属性 的自底向上翻译
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="md-nav__link">
+        6 中间代码生成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7%20%E8%BF%90%E8%A1%8C%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/" class="md-nav__link">
+        7 运行存储分配
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        8 代码优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="md-nav__link">
+        9 代码生成
+      </a>
     </li>
   
 
@@ -1371,6 +1515,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#12-attribute-grammar" class="md-nav__link">
+    1.2 属性文法 Attribute Grammar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    1.3 计算顺序
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 计算顺序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependency-graph" class="md-nav__link">
+    依赖图 Dependency Graph
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s-s-sdd" class="md-nav__link">
+    S 属性定义 S-SDD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l-l-sdd" class="md-nav__link">
+    L 属性定义 L-SDD
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1380,6 +1565,53 @@
   <a href="#2-sdt" class="md-nav__link">
     2 语法制导翻译方案 SDT
   </a>
+  
+    <nav class="md-nav" aria-label="2 语法制导翻译方案 SDT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-s-sdd-sdt" class="md-nav__link">
+    2.1 S-SDD → SDT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-l-sdd-sdt" class="md-nav__link">
+    2.2 L-SDD → SDT
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 L-SDD → SDT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    2.2.1 「非递归」分析翻译
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    2.2.2 「递归」预测分析翻译
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-l-" class="md-nav__link">
+    2.2.3 L-属性 的自底向上翻译
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1455,7 +1687,11 @@
 <p>感觉像是一个 Object 带了一堆的属性</p>
 </blockquote>
 <ul>
-<li>将每个 Production 与 用于计算产生式中各文法符号属性值的 <em>一组</em> 语义规则相关联</li>
+<li>将每个 Production 与 用于计算产生式中各文法符号属性值的 <em>一组</em> 语义规则相关联<ul>
+<li>出于计算属性值的考量，语义规则一般被写成<u>表达式</u>的形式</li>
+<li>但当语义规则只是用于产生一个 Side Effect 时，可能会被写成<u>过程调用</u>的形式，比如 <span class="arithmatex">\(print(E.val)\)</span></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -1489,6 +1725,64 @@
 </blockquote>
 <p><img src="https://cdn.nlark.com/yuque/0/2021/png/641515/1621787392141-15b70be2-18a7-4cb9-9e46-a26cb5152457.png"></p>
 <p>以文法 <span class="arithmatex">\(D \rightarrow T \ L\)</span> 为例，对应的语义规则为 <span class="arithmatex">\(L.inh = T.type\)</span> =&gt; 值是自左向右传递的（兄弟间传递）</p>
+<h3 id="12-attribute-grammar">1.2 属性文法 Attribute Grammar</h3>
+<ul>
+<li>一个没有 Side Effect 的 SDD 有时也被称为“属性文法”</li>
+<li>“属性文法”的规则仅通过 其他属性值+常量 来计算一个属性值</li>
+</ul>
+<h3 id="13">1.3 计算顺序</h3>
+<ul>
+<li>语义规则建立了 <em>属性之间的依赖关系</em>。在对一个属性进行求值前，我们首先需要计算其所有依赖项的值。</li>
+</ul>
+<h4 id="dependency-graph">依赖图 Dependency Graph</h4>
+<ul>
+<li>我们使用有向表示分析树各节点属性之间的依赖关系<ul>
+<li>依赖图节点 与 语法分析树中的节点属性 一一对应</li>
+<li>出度 = 前置条件，入度 = 存在依赖</li>
+</ul>
+</li>
+<li>因此，我们的任务就变成了找出有向图中的「拓扑顺序」</li>
+</ul>
+<hr />
+<p>以字符串 <code>float x, y</code> 为例，其依赖图如下：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/641515/1621786141348-f750b429-7b46-4a24-8577-3dd806b8c549.png"></p>
+<ul>
+<li>实线表示「依赖传递」关系</li>
+<li>虚线只是为了保留语法树的相关结构</li>
+<li>我们一般将“继承属性”放在节点左侧，“综合属性”放在节点右侧</li>
+</ul>
+<hr />
+<ul>
+<li>对于「只存在综合属性」的 SSD（无环图至少存在一条拓扑顺序），我们可以通过“任意”自底向上的顺序 <em>一次性</em> 完成所有属性的计算</li>
+<li>对于同时具有 综合属性&amp;继承属性 的 SSD（可能出现“环”），我们 <em>可能需要</em> 多次遍历才能完成计算</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">我们很难确定 SDD 的属性之间是否存在循环依赖关系（有环），存在更有效的方法吗</p>
+</div>
+<p>以下的两个 SDD 子类能够保证每棵语法分析树都存在一个求值顺序（不允许产生环）：</p>
+<h4 id="s-s-sdd">S 属性定义 S-SDD</h4>
+<blockquote>
+<p>S-Attributed Definition </p>
+</blockquote>
+<ul>
+<li>只存在「综合属性」，可以通过 <em>任意Bottom-Up</em> 的方法一次性完成计算</li>
+<li>每个 S-SDD <em>都是</em> L-SDD（只有综合属性）</li>
+</ul>
+<h4 id="l-l-sdd">L 属性定义 L-SDD</h4>
+<blockquote>
+<p>L-Attributed Definition</p>
+</blockquote>
+<ul>
+<li>
+<p>依赖只能「自左向右」，对于 <span class="arithmatex">\(A \rightarrow X_1X_2X_3...X_n\)</span>，<span class="arithmatex">\(X_n\)</span> 的 <em>继承属性</em> 只能依赖于：</p>
+<ul>
+<li><span class="arithmatex">\(A\)</span> 的继承属性（综合属性可能导致循环依赖）</li>
+<li>其左侧兄弟 <span class="arithmatex">\(X_1X_2...X_{n-1}\)</span> 的属性</li>
+<li><span class="arithmatex">\(X_n\)</span> 本身的属性（但其本身的全部属性不能形成环）</li>
+</ul>
+<p>对 <em>综合属性</em> 不做限制</p>
+</li>
+</ul>
 <h2 id="2-sdt">2 语法制导翻译方案 SDT</h2>
 <blockquote>
 <p>Syntax-Directed Translation Scheme</p>
@@ -1507,6 +1801,223 @@
 $$</li>
 <li>“语义动作”在产生式中的 <em>位置</em>  决定了该动作的 <em>执行时间</em></li>
 </ul>
+<h3 id="21-s-sdd-sdt">2.1 S-SDD → SDT</h3>
+<div class="admonition info">
+<p class="admonition-title">把 语法规则 拼接 Production 末尾即可（搞定所有 child 后执行）</p>
+</div>
+<ul>
+<li>
+<p>如果一个 S-SDD 文法是 LR 的，那么其翻译就可以在 LR 分析过程中实现</p>
+<p>=&gt; reduce 时执行 语法规则：</p>
+<ol>
+<li>当前记录出栈</li>
+<li>返回上一状态（上一行的 status）并替换 token</li>
+<li>根据新的 token 转换至下一状态</li>
+</ol>
+</li>
+<li>
+<p>为此，我们需要：</p>
+<ol>
+<li>
+<p>对 LR 分析栈进行扩充 =&gt; 添加用于存放 <em>综合属性</em> 的域（可能涉及多个属性）</p>
+<ul>
+<li>原本的格式大概是：<code>状态编号 | 当前token</code></li>
+<li>现在搞成：<code>状态编号 | 当前token ｜ 属性值</code></li>
+</ul>
+</li>
+<li>
+<p>将语法规则的抽象定义式改写为可执行的栈操作，下面是一个例子：</p>
+<ul>
+<li>栈中依次存放了 Z -&gt; Y -&gt; X（左侧为栈顶）</li>
+<li>
+<p>语法规则为 <code>A.a = f(X.x, Y.y, Z.z)</code></p>
+<p>显然我们需要将 X，Y，Z 出栈进行计算，并将结果 A 入栈保存</p>
+</li>
+<li>
+<p>改写结果如下：
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 1. 结果 A 覆盖 X 的位置</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="mi">-2</span><span class="p">].</span><span class="n">symb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">// 2. 计算 A 的值并保存</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="mi">-2</span><span class="p">].</span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="mi">-2</span><span class="p">].</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="mi">-1</span><span class="p">].</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">val</span><span class="p">);</span><span class="w"> </span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1">// 3. 将 X，Y，Z 出栈（X本身已经被覆盖了）</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">top</span><span class="mi">-2</span><span class="p">;</span><span class="w"> </span>
+</code></pre></div></p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="22-l-sdd-sdt">2.2 L-SDD → SDT</h3>
+<ul>
+<li>将计算 Non-Terminal <em>继承属性</em> 的动作插入到该 token 位置之前</li>
+<li>将计算左侧符号的 <em>综合属性</em> 的动作放到 Production 末尾</li>
+</ul>
+<p>如果一个 L-SSD 文法是 LL 的，那么其翻译就可以在 LL/LR 分析过程中实现</p>
+<details class="question">
+<summary>快速判断 LL 文法</summary>
+<p>具有「相同左部」的 SELECT 集互不相交（FIRST 中有 <span class="arithmatex">\(\varepsilon\)</span> 时考虑 FOLLOW）</p>
+</details>
+<hr />
+<p>以 <span class="arithmatex">\(T \rightarrow F\ T'\)</span> 为例，对应了两个语义规则：</p>
+<ol>
+<li><span class="arithmatex">\(T'.inh = F.val\)</span> =&gt; 计算了 T‘ 的 <em>继承属性</em>（从兄弟继承），放到 T' 前</li>
+<li><span class="arithmatex">\(T.val = T'.syn\)</span> =&gt; 计算了左侧 T 的 <em>综合属性</em>，放到末尾</li>
+</ol>
+<p>=&gt; 改写结果为 <span class="arithmatex">\(T \rightarrow F \ \{T'.inh = F.val\} \ T' \  \{T.val = T'.syn \}\)</span></p>
+<h4 id="221">2.2.1 「非递归」分析翻译</h4>
+<ol>
+<li>
+<p>扩展语法分析栈</p>
+<p>不同的属性具有不同的计算时机：</p>
+<ul>
+<li>继承属性：在即将出现（前）计算</li>
+<li>综合属性：在所有子节点完成后计算</li>
+</ul>
+<p>在新的栈中包含三种记录类型：</p>
+<ol>
+<li><code>action</code> 指向将被执行的动作代码</li>
+<li><code>A</code> 非终结符 A 的「继承属性」</li>
+<li><code>Asyn</code> 非终结符 A 的「综合属性」<blockquote>
+<p>同时存在 A &amp; Asyn 时，Asyn 先入栈（后计算）</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li>
+<p>为了方便记录，对于代码片段进行编号 <span class="arithmatex">\(a_1 \ ...\ a_n\)</span> </p>
+</li>
+<li>自定向下分析（从 Start Symbol 入栈开始）<ul>
+<li>Non-Terminal 入栈时，如果存在需要记录的综合属性，就以 Tsyn + T 的顺序连续进栈</li>
+<li>Non-Terminal 出栈时，根据下一个 token 选择 Production<ul>
+<li>若 syn 还没计算可以单独保留</li>
+<li>若 syn 计算完毕（出栈），需要拷贝到对应的 Action 中</li>
+<li>其余 Non-Terminal &amp; Action 逆序进站（FILO）</li>
+</ul>
+</li>
+<li>栈顶为 Terminal 时，将匹配的综合属性拷贝给 Action，出栈。</li>
+<li>栈顶为 Action 时，执行栈操作，出栈。</li>
+<li>栈顶为 Asyn 时，备份到需要使用该值的 Action 中，出栈。</li>
+</ul>
+</li>
+</ol>
+<h4 id="222">2.2.2 「递归」预测分析翻译</h4>
+<ul>
+<li>构建入口函数（给 Start Symbol 对应的函数再套一次皮）
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Desent</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nl">D</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">.</span><span class="n">val</span><span class="p">;</span><span class="w"> </span><span class="c1">// Start Symbol = &#39;T&#39;，最终结果就是 T 的综合属性 val</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">GetNext</span><span class="p">(</span><span class="n">token</span><span class="p">);</span><span class="w">   </span><span class="c1">// 读取第一个 token</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">T</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">token</span><span class="p">);</span><span class="w"> </span><span class="c1">// 调用 Start Symbol 对应的 func，开始处理</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="c1">// 如果还有剩余的 token，一定有错误</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">token</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;$&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Error</span><span class="p">;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
+</code></pre></div></li>
+<li>我们为每个 Non-Terminal 构造一个函数<ul>
+<li>每个 <em>继承属性</em> 都作为函数的 <em>形参</em></li>
+<li><em>综合属性</em> 作为函数的 <em>返回值</em></li>
+<li>等式右侧 token 的 <em>每一个属性</em> 都设置一个 <em>局部变量</em></li>
+</ul>
+</li>
+<li>对于每一个 Production<ul>
+<li>从左到右考虑右侧的 Terminal / Non-Terminal / Action<ul>
+<li>对于具有综合属性的 Non-Terminal，调用对应的 function（参数是该 Non-Terminal 的所有继承属性），并将返回值赋给存储对应 <em>综合属性</em> 的 <em>局部变量</em></li>
+<li>对于带有综合属性 <span class="arithmatex">\(x\)</span> 的词法单元 <span class="arithmatex">\(X\)</span>，将其保存在局部变量 <span class="arithmatex">\(X.x\)</span> 中，随后产生一个匹配 <span class="arithmatex">\(X\)</span> 的调用，继续输入</li>
+<li>对于 Action，直接复制其代码</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>对于语法规则：</p>
+<div class="arithmatex">\[
+T' \rightarrow
+\left\{
+\begin{align}
+&amp;* F \ \{T_1'.inh = T'.inh * F.val\}\ T_1' \ \{T'.syn=T_1'.syn\} \\\\
+&amp;\varepsilon \ \{T'.syn=T'.inh\}
+\end{align}
+\right.
+\]</div>
+<p>我们将其改造为以下函数：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">T</span><span class="err">&#39;</span><span class="p">.</span><span class="n">syn</span><span class="w"> </span><span class="n">T</span><span class="err">&#39;</span><span class="p">(</span><span class="n">token</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="err">&#39;</span><span class="p">.</span><span class="n">inh</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="c1">// 为右侧 token 设置局部变量</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nl">D</span><span class="p">:</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">T1</span><span class="err">&#39;</span><span class="p">.</span><span class="n">inh</span><span class="p">,</span><span class="w"> </span><span class="n">T1</span><span class="err">&#39;</span><span class="p">.</span><span class="n">syn</span><span class="p">;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="c1">// 根据当前输入 token 决定具体使用那个 Production</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;*&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="c1">// 第一条规则</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="n">GetNext</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="n">F</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">(</span><span class="n">token</span><span class="p">);</span><span class="w"> </span><span class="c1">// 调用 func，赋给对应综合属性局部变量</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="n">T1</span><span class="err">&#39;</span><span class="p">.</span><span class="n">inh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="err">&#39;</span><span class="p">.</span><span class="n">inh</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">val</span><span class="p">;</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="n">GetNext</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="n">T1</span><span class="err">&#39;</span><span class="p">.</span><span class="n">syn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T1</span><span class="err">&#39;</span><span class="p">(</span><span class="n">token</span><span class="p">,</span><span class="w"> </span><span class="n">T1</span><span class="err">&#39;</span><span class="p">.</span><span class="n">inh</span><span class="p">);</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="n">T</span><span class="err">&#39;</span><span class="p">.</span><span class="n">syn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T1</span><span class="err">&#39;</span><span class="p">.</span><span class="n">syn</span><span class="p">;</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">T</span><span class="err">&#39;</span><span class="p">.</span><span class="n">syn</span><span class="p">;</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;$&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="c1">// 第二条规则</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">        </span><span class="n">T</span><span class="err">&#39;</span><span class="p">.</span><span class="n">syn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="err">&#39;</span><span class="p">.</span><span class="n">inh</span><span class="p">;</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">T</span><span class="err">&#39;</span><span class="p">.</span><span class="n">syn</span><span class="p">;</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Error</span><span class="p">;</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="p">}</span>
+</code></pre></div></p>
+<h4 id="223-l-">2.2.3 L-属性 的自底向上翻译</h4>
+<p>给定一个 LL 的 L-SSD 文法，我们可以通过一定修改使之在 LR 上成立：</p>
+<ul>
+<li>我们首先对 SDT 进行构造，在每个 Non-Terminal 前设置一个 Action 用于计算其 <em>继承属性</em>，在 Production 设置 Action 用于计算 <em>综合属性</em></li>
+<li>对于 <em>内嵌语义动作</em>，我们引入「标记非终结符」进行替换（Unique），具有一个 Empty Production<ul>
+<li>我们将原 Action 中的需要的、位于该 Action 左侧 token（包括左值）的所有属性作为「非标记终结符」的 <em>继承属性</em> 进行复制</li>
+<li>按照原 Action 中的方法计算，并将结果作为「非标记终结符」的 <em>综合属性</em></li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>以下文法由于规则 1&amp;2 中的首个 Action 导致不能直接进行 Bottom-Up 翻译：</p>
+<div class="arithmatex">\[
+\begin{align}
+&amp;T \rightarrow F \{T'.inh = F.val\} T'\{T.val=T'.syn\}\\\\
+&amp;T\ \rightarrow * F\{T_1'.inh = T'.inh * F.val\}T_1'\{T'.syn = T_1'.syn\}\\\\
+&amp;T' \rightarrow \varepsilon \{T'.syn = T'.inh\}\\\\
+&amp;F \rightarrow digit \{F.val=digit.lexval\}
+\end{align}
+\]</div>
+<p>我们使用「标记非终结符 Marker Nonterminal」 <span class="arithmatex">\(M, N\)</span> 对这两个 Action 进行替换，有：</p>
+<div class="arithmatex">\[
+\begin{align}
+&amp;T \rightarrow F M T'\{T.val=T'.syn\}\\\\
+&amp;M \rightarrow \varepsilon \{T'.inh = F.val; M.s=M.i\}\\\\
+&amp;T \rightarrow * F N T_1'\{T'.syn = T_1'.syn\}\\\\
+&amp;N \rightarrow \varepsilon \{N.i_1=T'.inh;N.i_2=F.val;N.s=N.i_1*N.i_2\}\\\\
+&amp;T' \rightarrow \varepsilon \{T'.syn = T'.inh\}\\\\
+&amp;F \rightarrow digit \{F.val=digit.lexval\}
+\end{align}
+\]</div>
+<ul>
+<li>添加的非标记终结符 <span class="arithmatex">\(M,N\)</span> 都只有一个 Empty Production，用于执行被替换的语义动作<ul>
+<li>虽然 <span class="arithmatex">\(M,N\)</span> 看似使用了“非法的属性”（<span class="arithmatex">\(T',F\)</span> 并未在 Production 中出现），但由于采用 LR Parsing，此时这两个数据已经存在栈中</li>
+</ul>
+</li>
+<li>修改完成后，所有的语义动作均位于 Production 的末尾 =&gt; 可以直接 Bottom-Up 了</li>
+<li>根据后一个 token 进行 reduce -&gt; 弹出栈顶与 Production 右侧吻合的几个 token，压入左式（根据末尾的 Action 计算），并回到前一个 token 所在的状态开始迁移</li>
+</ul>
+<p>我们可以将改写 SDT 中的 Action 编写代码：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>1.  // T.val = 最右token.syn（栈顶），且顶替 F 进行存储
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    T -&gt; FMT&#39;{stack[top-2].val = stack[top].syn; top -= 2;}
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    // M 入栈（存储 T&#39;.inh），依赖 F.val 此时正在栈顶
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    M -&gt; NULL {stack[top+1].T&#39;inh = stack[top].val; top += 1;}
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>2.  // T&#39;.syn = 最右token.syn，顶替 * 进行存储
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    T&#39; -&gt; *FNT1&#39; {stack[top-3].syn = stack[top].syn; top -= 3;}
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    // N 入栈（存储 T1&#39;.inh）
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    N -&gt; NULL {stack[top+1].T1&#39;inh = stack[top-2].T&#39;inh * stack[top].val; top += 1;}
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>3.  // T&#39; 入栈
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    T&#39; -&gt; NULL {stack[top+1] = stack[top].T&#39;inh; top += 1;}
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>4.  // F 替换 digit 存储
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    F -&gt; digit {stack[top].val = stacktop.lexval;}
+</code></pre></div>
 
 
 
@@ -1544,13 +2055,13 @@ $$</li>
         
         
           
-          <a href="../../.." class="md-footer__link md-footer__link--next" aria-label="Next: 编程语言(todo)" rel="next">
+          <a href="../6%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="md-footer__link md-footer__link--next" aria-label="Next: 6 中间代码生成" rel="next">
             <div class="md-footer__title">
               <div class="md-ellipsis">
                 <span class="md-footer__direction">
                   Next
                 </span>
-                编程语言(todo)
+                6 中间代码生成
               </div>
             </div>
             <div class="md-footer__button md-icon">
