@@ -1,23 +1,22 @@
-# Welcome to MkDocs
+# Home
 
-Obisidian 和 mkdocs 的渲染结果不一样，烦内
+欢迎大家来和我一起阴暗的爬行！
 
-不支持 JSX 代码高亮，超烦内！
+这个站点目前：
 
-试试数学公式 $E = MC^2$
+- 继承了学习前端框架的笔记
+- 勉强消除了 Obsidian 和 Mkdocs 渲染结果不一致的问题
+- 尝试搞了代码高亮（不支持 JS 代码高亮，烦内）
+- 支持 MathJax，试一下： $E = MC^2$
+- 尝试了一些新的高亮块（从 Promise 开始）
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+之后会把语雀上的内容搬过来orz
 
-## Commands
+!!! Info "广告位招租 -> 试图成为指针数组"
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+## 软工劝退指南
 
-## Project layout
+等这个学期结束就可以写哩
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+??? question "您有见过期中考 PTSD 患者吗"
+    30 min 极限往返港泉但一场考试都没赶上的噩梦是真实存在的吗？

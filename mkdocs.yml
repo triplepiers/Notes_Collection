@@ -11,6 +11,20 @@ theme:
     primary: black
   icon:
     repo: fontawesome/brands/github
+  # icon reop: https://primer.style/design/foundations/icons?ref=techmoon
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/light-bulb-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
   features:
     - navigation.tabs
     - navigation.footer
@@ -28,11 +42,20 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.arithmatex:
       generic: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
 extra:
   homepage: https://triplepiers.github.io/Notes_Collection/
 nav:
 - Home: index.md
 - Front End:
+  - Java Script:
+    - 1 基础: Nulling/Front End/JS/基础.md
+    - 2 对象与函数: Nulling/Front End/JS/对象与函数.md
+    - 3 内置对象与正则: Nulling/Front End/JS/内置对象与正则.md
+    - 4 DOM: Nulling/Front End/JS/DOM.md
+    - 5 BOM: Nulling/Front End/JS/BOM.md
   - Vue2:
     - 1 HelloWorld: Nulling/Vue/Vue2/1 Intro.md
     - 2 组件: Nulling/Vue/Vue2/2 组件.md
@@ -56,9 +79,21 @@ nav:
     - 布局: Nulling/Front End/布局.md
   - Tools:
     - Axios: Nulling/Tool/Axios.md
-    - Mongo DB:
+    - Promise: Nulling/Front End/Promise.md
+- DataBase:
+  - Mongo DB:
       - 1 快速上手: Nulling/Tool/Mongo DB - 快速上手.md
       - 2 慢速上头: Nulling/Tool/Mongo DB - 慢速上头.md
+- 软工相关:
+  - 编译原理(施工中):
+    - 5 语法制导翻译: Nulling/编译原理/5 语法制导翻译.md
+    - 6 中间代码生成: Nulling/编译原理/6 中间代码生成.md
+    - 7 运行存储分配: Nulling/编译原理/7 运行存储分配.md
+    - 8 代码优化: Nulling/编译原理/8 代码优化.md
+    - 9 代码生成: Nulling/编译原理/9 代码生成.md
+- 编程语言:
+  - Python:
+    - 1 Basic: Nulling/Python/1 Basic.md
 - 常用工具:
   - Git: Nulling/Tool/Git.md
   - 常用项目创建: Nulling/Tool/常用项目创建.md

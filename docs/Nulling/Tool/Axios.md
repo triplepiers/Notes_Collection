@@ -98,6 +98,21 @@ axios.post(
 	}
 ).then(res=>{})
 ```
+#### axios.all 并发发送请求
+```js
+function getUserAccount() {  
+  return axios.get('/user/12345');  
+}  
+  
+function getUserPermissions() {  
+  return axios.get('/user/12345/permissions');  
+}  
+  
+axios.all([getUserAccount(), getUserPermissions()])  
+  .then(axios.spread(function (acct, perms) {  
+    // 将在数组中的所有请求完成后统一执行回调
+  }));
+```
 
 ### 4 响应结构
 - `config`  配置对象
