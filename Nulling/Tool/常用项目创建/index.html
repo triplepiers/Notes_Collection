@@ -1423,6 +1423,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#jupyter-notebook" class="md-nav__link">
+    Jupyter Notebook
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1486,6 +1493,13 @@
         <li class="md-nav__item">
   <a href="#vant" class="md-nav__link">
     引入 Vant 组件库
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jupyter-notebook" class="md-nav__link">
+    Jupyter Notebook
   </a>
   
 </li>
@@ -1565,6 +1579,27 @@
 </ol>
 </li>
 <li>在代码中直接引入需要的 Vant 组件 <code>import {name} from 'vant'</code>，随后进行 <code>use</code></li>
+</ol>
+<h2 id="jupyter-notebook">Jupyter Notebook</h2>
+<ol>
+<li>安装 <code>pip3 install jupyter</code></li>
+<li>解决 <code>command not found</code><ol>
+<li>查看安装路径 <code>pipe show jupyter</code></li>
+<li>添加 PATH
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vi<span class="w"> </span>~/.zshrc
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># 添加以下内容（取到 Python 版本号为止的路径）</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/Users/shen/Library/Python/3.9/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 重载命令</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nb">source</span><span class="w"> </span>~/.zshrc
+</code></pre></div></li>
+</ol>
+</li>
+<li>启动服务 
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 默认端口（8888）</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>jupyter<span class="w"> </span>notebook
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 指定端口</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>jupyter<span class="w"> </span>notebook<span class="w"> </span>--port<span class="w"> </span><span class="m">8080</span>
+</code></pre></div></li>
 </ol>
 
 
