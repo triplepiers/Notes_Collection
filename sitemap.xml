@@ -6,11 +6,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://triplepiers.github.io/Notes_Collection/Nulling/Blender/</loc>
-         <lastmod>2023-07-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://triplepiers.github.io/Notes_Collection/Nulling/CV/Standford%20CS131/Pixels%20%26%20Filters/</loc>
          <lastmod>2023-07-11</lastmod>
          <changefreq>daily</changefreq>
@@ -66,7 +61,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://triplepiers.github.io/Notes_Collection/Nulling/ICS/Chap%201-2/</loc>
+         <loc>https://triplepiers.github.io/Notes_Collection/Nulling/ICS/Chap%202%20Bit%2C%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97/</loc>
+         <lastmod>2023-07-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://triplepiers.github.io/Notes_Collection/Nulling/ICS/Chap%203%20%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91/</loc>
          <lastmod>2023-07-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
