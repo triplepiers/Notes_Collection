@@ -13,6 +13,7 @@
 - [IView UI](https://www.iviewui.com)
 
 ## 基础使用
+> Vue3 版本需要安装 `element-plus`
 
 1. 安装 `npm i element-ui`
 2. 引入

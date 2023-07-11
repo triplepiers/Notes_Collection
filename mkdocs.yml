@@ -85,15 +85,24 @@ nav:
       - 1 快速上手: Nulling/Tool/Mongo DB - 快速上手.md
       - 2 慢速上头: Nulling/Tool/Mongo DB - 慢速上头.md
 - 软工相关:
-  - 编译原理(施工中):
+  - 编译原理(旷工中):
     - 5 语法制导翻译: Nulling/编译原理/5 语法制导翻译.md
     - 6 中间代码生成: Nulling/编译原理/6 中间代码生成.md
     - 7 运行存储分配: Nulling/编译原理/7 运行存储分配.md
     - 8 代码优化: Nulling/编译原理/8 代码优化.md
     - 9 代码生成: Nulling/编译原理/9 代码生成.md
+  - 计算机系统概论:
+    - Chap 2 Bit, 数据类型与运算: Nulling/ICS/Chap 2 Bit, 数据类型与运算.md
+    - Chap 3 数字逻辑: Nulling/ICS/Chap 3 数字逻辑.md
 - 编程语言:
   - Python:
     - 1 Basic: Nulling/Python/1 Basic.md
+    - 2-1 Project: Nulling/Python/2-1 Project.md
+    - 2-2 Project: Nulling/Python/2-2 Project.md
+  - Go:
+    - 1 Basic: Nulling/Go/1 Basic.md
+    - 2 面向对象: Nulling/Go/2 OOP.md
 - 常用工具:
   - Git: Nulling/Tool/Git.md
   - 常用项目创建: Nulling/Tool/常用项目创建.md
+  - IgemUploads 使用文档: Nulling/Tool/igem-uploads.md
