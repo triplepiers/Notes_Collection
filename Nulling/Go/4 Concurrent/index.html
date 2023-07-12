@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/6%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/">
+        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/Go/4%20Concurrent/">
       
       
-        <link rel="prev" href="../5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/">
+        <link rel="prev" href="../3%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
       
       
-        <link rel="next" href="../7%20%E8%BF%90%E8%A1%8C%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/">
+        <link rel="next" href="../../Tool/Git/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
     
     
       
-        <title>6 中间代码生成 - SeaBee 的笔记合集</title>
+        <title>4 并发处理 - SeaBee 的笔记合集</title>
       
     
     
@@ -112,7 +112,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1" class="md-skip">
+        <a href="#1-goroutine" class="md-skip">
           Skip to content
         </a>
       
@@ -145,7 +145,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6 中间代码生成
+              4 并发处理
             
           </span>
         </div>
@@ -275,8 +275,6 @@
         
   
   
-    
-  
 
 
   
@@ -288,7 +286,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/" class="md-tabs__link">
         软工相关
       </a>
     </li>
@@ -300,6 +298,8 @@
         
   
   
+    
+  
 
 
   
@@ -311,7 +311,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../Python/1%20Basic/" class="md-tabs__link">
+      <a href="../../Python/1%20Basic/" class="md-tabs__link md-tabs__link--active">
         编程语言
       </a>
     </li>
@@ -1073,16 +1073,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
       
       
       
@@ -1091,7 +1089,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           软工相关
@@ -1102,16 +1100,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
       
       
       
@@ -1120,7 +1116,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4_1">
           <span class="md-nav__icon md-icon"></span>
           编译原理(旷工中)
@@ -1133,7 +1129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/" class="md-nav__link">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/" class="md-nav__link">
         5 语法制导翻译
       </a>
     </li>
@@ -1145,143 +1141,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          6 中间代码生成
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/6%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="md-nav__link">
         6 中间代码生成
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    1 基本翻译方法
-  </a>
-  
-    <nav class="md-nav" aria-label="1 基本翻译方法">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11" class="md-nav__link">
-    1.1 声明语句
-  </a>
-  
-    <nav class="md-nav" aria-label="1.1 声明语句">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#111-type-expression" class="md-nav__link">
-    1.1.1 类型表达式 Type Expression
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#112" class="md-nav__link">
-    1.1.2 局部变量的存储分配
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12" class="md-nav__link">
-    1.2 简单赋值语句
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gen" class="md-nav__link">
-    此时的 gen() 函数不仅需要构造出新的三地址指令，还要负责将其追加到已生成的指令序列之后
-  </a>
-  
-    <nav class="md-nav" aria-label="此时的 gen() 函数不仅需要构造出新的三地址指令，还要负责将其追加到已生成的指令序列之后">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#13" class="md-nav__link">
-    1.3 数组引用
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#14-switch" class="md-nav__link">
-    1.4 Switch 语句
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#15" class="md-nav__link">
-    1.5 过程调用语句
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-sdt" class="md-nav__link">
-    2 控制流语句 SDT
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-sdt" class="md-nav__link">
-    3 布尔表达式 SDT
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-backpatching" class="md-nav__link">
-    4 回填 Backpatching
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1293,7 +1157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../7%20%E8%BF%90%E8%A1%8C%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/" class="md-nav__link">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/7%20%E8%BF%90%E8%A1%8C%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/" class="md-nav__link">
         7 运行存储分配
       </a>
     </li>
@@ -1307,7 +1171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../8%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" class="md-nav__link">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/8%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" class="md-nav__link">
         8 代码优化
       </a>
     </li>
@@ -1321,7 +1185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../9%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="md-nav__link">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/9%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="md-nav__link">
         9 代码生成
       </a>
     </li>
@@ -1438,14 +1302,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
       
       
       
@@ -1454,7 +1320,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           编程语言
@@ -1541,14 +1407,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
       
       
       
@@ -1557,7 +1425,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_5_2">
           <span class="md-nav__icon md-icon"></span>
           Go
@@ -1570,7 +1438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Go/1%20Basic/" class="md-nav__link">
+      <a href="../1%20Basic/" class="md-nav__link">
         1 Basic
       </a>
     </li>
@@ -1584,7 +1452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Go/2%20OOP/" class="md-nav__link">
+      <a href="../2%20OOP/" class="md-nav__link">
         2 面向对象
       </a>
     </li>
@@ -1598,7 +1466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Go/3%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="md-nav__link">
+      <a href="../3%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="md-nav__link">
         3 数据处理
       </a>
     </li>
@@ -1610,11 +1478,102 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../Go/4%20Concurrent/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          4 并发处理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         4 并发处理
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-goroutine" class="md-nav__link">
+    1 GoRoutine
+  </a>
+  
+    <nav class="md-nav" aria-label="1 GoRoutine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 创建
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-runtime" class="md-nav__link">
+    1.2 Runtime
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Runtime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-gosched" class="md-nav__link">
+    1.2.1 Gosched
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-goexit" class="md-nav__link">
+    1.2.2 Goexit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-gomaxprocs" class="md-nav__link">
+    1.2.3 GoMAXPROCS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-channel" class="md-nav__link">
+    2 Channel
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1735,31 +1694,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    1 基本翻译方法
+  <a href="#1-goroutine" class="md-nav__link">
+    1 GoRoutine
   </a>
   
-    <nav class="md-nav" aria-label="1 基本翻译方法">
+    <nav class="md-nav" aria-label="1 GoRoutine">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#11" class="md-nav__link">
-    1.1 声明语句
+    1.1 创建
   </a>
   
-    <nav class="md-nav" aria-label="1.1 声明语句">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-runtime" class="md-nav__link">
+    1.2 Runtime
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Runtime">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#111-type-expression" class="md-nav__link">
-    1.1.1 类型表达式 Type Expression
+  <a href="#121-gosched" class="md-nav__link">
+    1.2.1 Gosched
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#112" class="md-nav__link">
-    1.1.2 局部变量的存储分配
+  <a href="#122-goexit" class="md-nav__link">
+    1.2.2 Goexit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-gomaxprocs" class="md-nav__link">
+    1.2.3 GoMAXPROCS
   </a>
   
 </li>
@@ -1769,69 +1742,14 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#12" class="md-nav__link">
-    1.2 简单赋值语句
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#gen" class="md-nav__link">
-    此时的 gen() 函数不仅需要构造出新的三地址指令，还要负责将其追加到已生成的指令序列之后
-  </a>
-  
-    <nav class="md-nav" aria-label="此时的 gen() 函数不仅需要构造出新的三地址指令，还要负责将其追加到已生成的指令序列之后">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#13" class="md-nav__link">
-    1.3 数组引用
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#14-switch" class="md-nav__link">
-    1.4 Switch 语句
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#15" class="md-nav__link">
-    1.5 过程调用语句
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-sdt" class="md-nav__link">
-    2 控制流语句 SDT
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-sdt" class="md-nav__link">
-    3 布尔表达式 SDT
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-backpatching" class="md-nav__link">
-    4 回填 Backpatching
+  <a href="#2-channel" class="md-nav__link">
+    2 Channel
   </a>
   
 </li>
@@ -1854,231 +1772,122 @@
   
 
 
-  <h1>6 中间代码生成</h1>
+  <h1>4 并发处理</h1>
 
-<h2 id="1">1 基本翻译方法</h2>
-<h3 id="11">1.1 声明语句</h3>
-<blockquote>
-<p>收集类型信息，并为 identifier 分配地址</p>
-</blockquote>
-<h4 id="111-type-expression">1.1.1 类型表达式 Type Expression</h4>
-<blockquote>
-<p>用于表达“类型的结构”</p>
-</blockquote>
-<p>包含以下几种：</p>
+<details class="info">
+<summary>并行 &amp; 并发</summary>
 <ul>
-<li>基本类型：<code>integer</code>, <code>real</code>, <code>char</code>, <code>boolean</code>, <code>type_error</code>, <code>void</code></li>
-<li>类型名（为类型表达式命名）</li>
-<li>数组构造符（<code>type constructor</code>） + 类型表达式 产生的新类型表达式，如：<ul>
-<li>使用数组构造符 array 产生的 <code>array(int lenth, Type)</code><ul>
-<li>一维数组 <code>int[3] = array(3, int)</code></li>
-<li>二维数组 <code>int[2][3] = array(2, array(3, int))</code></li>
+<li>并行 Parallel：同一时刻有<strong>多条指令</strong>在多个处理器上同时执行</li>
+<li>并发 Concurrent：<strong>多个进程</strong>快速轮换执行（宏观上，多个进程同时活跃）</li>
 </ul>
-</li>
-<li>使用指针构造符 pointer 产生的 <code>pointer(Type)</code>（表达的是指针类型）</li>
-<li>使用笛卡尔积构造符 × 产生的 <code>Exp1 × Exp2</code></li>
-<li>使用函数构造符 → 产生的 <code>Exp1 × Exp2 × Exp3 × ExpN → R</code></li>
-<li>使用记录构造符 record 产生的 <code>record((Exp1 × Type1) × (ExpN × TypeN))</code></li>
-</ul>
-</li>
-</ul>
-<hr />
-<p>以下面的 C 程序为例：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">stype</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kt">char</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">};</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">stype</span><span class="p">[</span><span class="mi">50</span><span class="p">]</span><span class="w"> </span><span class="n">table</span><span class="p">;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">stype</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">;</span>
-</code></pre></div>
-<ul>
-<li><code>stype</code> 绑定的类型表达式为：
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">record</span><span class="p">((</span><span class="n">name</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">array</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">))</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="p">(</span><span class="n">score</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="kt">int</span><span class="p">))</span>
-</code></pre></div></li>
-<li><code>table</code> 绑定的类型表达式为：
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">array</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">stype</span><span class="p">)</span>
-</code></pre></div></li>
-<li><code>p</code> 绑定的类型表达式为：
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">pointer</span><span class="p">(</span><span class="n">stype</span><span class="p">)</span>
-</code></pre></div></li>
-</ul>
-<h4 id="112">1.1.2 局部变量的存储分配</h4>
-<ul>
-<li>对于声明语句，语义分析的主要任务就是收集 identifier 的类型等属性信息，并为每一个标识符分配一个 <em>相对地址</em></li>
-<li>我们可以从类型表达式中计算得出类型在运行时刻所需的存储单元数量，称之为「类型的宽度 width」。在运行时刻，我们可以以此为依据进行地址分配</li>
-</ul>
+</details>
+<h2 id="1-goroutine">1 GoRoutine</h2>
 <blockquote>
-<p>identifier 的 类型 &amp; 相对地址信息 均保存在 <em>符号表</em> 的对应记录中</p>
+<p>普通 PC 跑 10+ <code>thread</code> 就差不多寄了，但是跑 1w+ <code>goroutine</code> 轻轻松松</p>
 </blockquote>
 <ul>
-<li>为此我们需要添加一些属性和方法<ul>
-<li>全局变量<ul>
-<li><code>offset</code>：当前可用地址的偏移量</li>
-<li><code>t</code>：当前定义变量的类型</li>
-<li><code>w</code>：当前定义变量的基本长度</li>
+<li>GoRoutine 是一个 “协程”（比 <code>thread</code> 粒度更小）</li>
+<li>Go 本身支持 goroutine 之间进行 <strong>内存共享</strong>，因此只需要极少的栈内存</li>
 </ul>
-</li>
-<li>节点属性<ul>
-<li><code>type</code>：当前节点的数据类型</li>
-<li><code>width</code>：当前节点数据所占的总长</li>
-</ul>
-</li>
-<li>
-<p>函数 <code>enter(id, type, offset)</code> </p>
-<p>用于向符号表中插入关于变量 id 的记录：类型为 type，起始地址为 offset</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="12">1.2 简单赋值语句</h3>
-<ul>
-<li>对于赋值语句，语义分析的主要任务就是生成对表达式求值的 <em>三地址码</em> （ id = val ）</li>
-<li>为此我们需要添加一些属性和方法<ul>
-<li>节点属性<ul>
-<li><code>code</code>：三地址码</li>
-<li><code>addr</code>：当前 token 值的存放地址</li>
-</ul>
-</li>
-<li>函数<ul>
-<li><code>lookup(name)</code> 查询符号表中关于 name 的记录</li>
-<li><code>gen(code)</code> 用于产生三地址指令 code</li>
-<li><code>newtemp()</code> 产生一个新的临时变量，返回其地址</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>增量翻译 Incremenatl Translation<ul>
-<li>在原始的方法中，我们不断 concat 表达式的 code 属性 =&gt; 极大的存储开销</li>
-<li>
-<p>通过直接在已经生成的三地址指令后进行追加的方式，就可以把 code concat 的操作去除了</p>
-<h2 id="gen">此时的 <code>gen()</code> 函数不仅需要构造出新的三地址指令，还要负责将其追加到已生成的指令序列之后</h2>
-<p>下面以 <code>x = (a+b)*c</code> 为例展示三地址码的产生过程：</p>
-</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">;</span>
-</code></pre></div>
-<h3 id="13">1.3 数组引用</h3>
-<p>对于数组引用语句（ <code>a[idx]</code>），我们需要进行数组元素的寻址（确定特定数组元素的存放地址），随后进行三地址码的翻译。</p>
-<ul>
-<li>对于「一维数组」的情况，我们假设每个数组元素的宽度为 <span class="arithmatex">\(w\)</span>，则 <code>a[i].addr = baseAddr + i * w</code></li>
-<li>对于「二维数组」的情况，我们假设行宽为 <span class="arithmatex">\(w_1\)</span> ，单个数组元素的宽度为 <span class="arithmatex">\(w_2\)</span> ，则 <code>a[i1][i2].addr = baseAddr + i1 * w1 + i2 * w2</code></li>
-<li>我们不难将其推广至「K 维数组」的情况，<code>a[i1][i2]...[ik] = baseAddr + i1*w1 + i2*w2 + ... + ik*wk</code>，其中 <span class="arithmatex">\(w_i = \prod_{j=i+1}^{k} w_j * w_{unit}\)</span></li>
-</ul>
-<p>这次我们只用为节点添加两个属性：</p>
-<ul>
-<li><code>type</code>： 当前节点数组元素的类型（包了几层了，每层多少个）</li>
-<li><code>offset</code>：截至目前的总偏移量，用于累加 <code>ik * wk</code></li>
-<li><code>array</code>：数组名在符号表中的入口地址</li>
-</ul>
-<h3 id="14-switch">1.4 Switch 语句</h3>
-<ul>
-<li>我们认为 Switch 的代码是由 条件代码 <span class="arithmatex">\(E\)</span> &amp; 各分支情况代码 <span class="arithmatex">\(S_i\)</span> 构成的，然后<ul>
-<li>在每个屁股后面插入 <em>条件跳转指令</em>（效率比较低）</li>
-<li>把所有条件测试语句都塞到 <code>test</code> 标签下，并在 <span class="arithmatex">\(E\)</span> 后面插入 <code>goto test</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="15">1.5 过程调用语句</h3>
-<ul>
-<li>典型的过程调用语句形如 <code>call id (eList)</code> ，其中 id 为函数名</li>
-<li>为方便起见，我们使用队列 q 存放所有参数（参数表达式计算结果）的 addr</li>
-</ul>
-<h2 id="2-sdt">2 控制流语句 SDT</h2>
-<ul>
-<li>程序设计语言的流程一般分为 顺序、分支、循环 三种</li>
-<li>
-<p>以分支语句 <span class="arithmatex">\(S \rightarrow if \ B\ then \ S_1 \ else S_2\)</span> 为例：</p>
+<h3 id="11">1.1 创建</h3>
 <ul>
 <li>
-<p>我们认为它的代码部分由三部分构成：布尔表达式 <span class="arithmatex">\(B\)</span>，两个分支结构体 <span class="arithmatex">\(S_1, S_2\)</span></p>
-<p>其中布尔表达式 <span class="arithmatex">\(B\)</span> 被翻译成由 <em>跳转指令</em> 构成的跳转代码（选择下一个执行点）</p>
+<p>我们使用 <code>go</code> 关键字定义并发执行单元 goroutine，调度器会自动将其安排至合适的 <code>thread</code> 上执行</p>
 </li>
 <li>
-<p>为此，我们需要添加以下属性和方法</p>
-<ul>
-<li>属性<ul>
-<li><code>S.next</code>：保存了 <span class="arithmatex">\(S\)</span> 代码的后继指令序号（不算分支体，<span class="arithmatex">\(S_1,S_2\)</span> 的 next 属性指向同一标号）</li>
-<li><code>B.true</code>：保存当 <code>B == true</code> 时控制流专项指令的标号</li>
-<li><code>B.false</code>：保存当 <code>B == false</code> 时控制流专项指令的标号</li>
-</ul>
-</li>
-<li>方法<ul>
-<li><code>newLabel()</code>：生成用于存放标号的临时变量，返回地址</li>
-<li><code>label(token.next)</code>：将吓一跳三地址指令的标号赋给传入的参数（这里只是为了向 <span class="arithmatex">\(S,S_1,S_2\)</span> 传递共同后继指令的标号）</li>
-</ul>
+<p>主函数 <code>main()</code> 运行在单独的 goroutine（ main goroutine ）中</p>
 </li>
 </ul>
-</li>
-<li>而对于 <code>while-do</code> 循环，我们还需要保存结构体起始指令的地址 <code>S.begin</code></li>
-</ul>
-</li>
-</ul>
-<div class="admonition info">
-<p class="admonition-title">任何 SDT 都可以通过自左向右的深度优先遍历实现</p>
+<div class="admonition warning">
+<p class="admonition-title">主协程结束会强制结束所有子协程</p>
 </div>
-<h2 id="3-sdt">3 布尔表达式 SDT</h2>
-<p>布尔表达式的基本文法如下：</p>
-<div class="arithmatex">\[
-\begin{align}
-B \rightarrow &amp;B \ or \ B \ |\  B\ and \ B \ |\ not \ B\\\\
-&amp;|\ (B) \ |\ E \ relop \ E \\\\
-&amp;|\ true \ |\ false
-\end{align}
-\]</div>
-<ul>
-<li>其中 <span class="arithmatex">\(relop\)</span> 是 <em>关系运算符</em>，包含 <code>&lt; &lt;= &gt; &gt;= == !=</code>，<span class="arithmatex">\(E \ relop \ E\)</span> 构成的 <em>关系表达式</em> 也是<em>布尔表达式</em></li>
-<li>几个基本操作的优先级为：<code>not &gt; and &gt; or</code></li>
-</ul>
-<hr />
-<ul>
-<li>在 <em>跳转代码</em> 中，逻辑运算符 <code>&amp;&amp; || !</code> 被翻译成 <em>跳转指令</em>，运算符本身并不会出现在代码中。</li>
-<li>我们以 <code>if( x&lt;100 || x&gt;200 &amp;&amp; x!=y) x=0;</code> 为例，生成的三地址代码如下：
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="o">&lt;</span><span class="mi">100</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">L2</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">goto</span><span class="w"> </span><span class="n">L3</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nl">L3</span><span class="p">:</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="o">&gt;</span><span class="mi">200</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">L4</span><span class="p">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="k">goto</span><span class="w"> </span><span class="n">L1</span><span class="p">;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nl">L4</span><span class="p">:</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="o">!=</span><span class="n">y</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">L2</span><span class="p">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="k">goto</span><span class="w"> </span><span class="n">L1</span><span class="p">;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nl">L2</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nl">L1</span><span class="p">:</span><span class="w"> </span><span class="n">next</span><span class="p">();</span>
-</code></pre></div></li>
-</ul>
-<h2 id="4-backpatching">4 回填 Backpatching</h2>
-<ul>
-<li>
-<p>在为 布尔表达式/控制流语句 生成中间代码时，关键的问题是：确定跳转指令的目标标号（下一条指令应该跳到哪里</p>
-</li>
-<li>
-<p>由于在 <em>生成跳转指令</em> 时，目标标号尚且不能确定</p>
-<ul>
-<li>在上面的例子中，我们将目标标号作为 <em>继承属性</em> 进行传递，但这样需要将标号与具体的地址绑定</li>
-<li>在 <em>回填</em> 这一方法中，我们将由 <em>跳转指令</em> 组成的列表 以 <em>综合属性</em> 的形式进行传递<ul>
-<li>在「生成」跳转指令时，我们并不指定目标标号，而是将其放入由跳转指令组成的列表中</li>
-<li>同一个列表中的所有跳转指令都具有「相同的目标标号」</li>
-<li>直到能够确认标号时，再「统一」对列表中的跳转指令进行填充</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>在「回填」方法中，我们需要为非终结符 <span class="arithmatex">\(B\)</span> 添加以下的 <em>综合属性</em> 和 函数<ul>
-<li>综合属性<ul>
-<li><code>B.trueList</code>：指向列表，其中所有跳转指令需要获取 <code>B == true</code> 时的目标标号</li>
-<li><code>B.falseList</code>：（略）</li>
-</ul>
-</li>
-<li>函数<ul>
-<li><code>makeList(i)</code>：创造仅包含 i 的列表（ i 为 <em>跳转指令</em> 标号），返回列表指针</li>
-<li><code>merge(p1, p2)</code>：合并 p1 &amp; p2 指向的列表，返回结果指针</li>
-<li><code>backpatch(p, i)</code>：将列表 p 中的所有目标标号置为 i</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">func</span><span class="w"> </span><span class="nx">task</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;in task&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">task</span><span class="p">()</span><span class="w">                   </span><span class="c1">// 为 task() 单独创建 gouroutine</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span><span class="w">                       </span><span class="c1">// 在 main routine 中持续执行</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">        </span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;in main&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w"> </span><span class="c1">// 没有 “让出” 时间片，只是在磨洋工</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">condition</span><span class="w"> </span><span class="k">return</span><span class="w">     </span><span class="c1">// 满足条件时结束 main routine</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="c1">// 如果将 go task() 放在此处，会因为 unreachable 而没有动静捏</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">主协程直接退出会导致子协程来不及调用</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">            </span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;in task&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">            </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="p">}()</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="c1">// 不会有任何输出：还没 go 起来 main() 就已经结束了</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="c1">// 所以记得在 main() 里丢一个 dead loop</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="12-runtime">1.2 Runtime</h3>
+<blockquote>
+<p>来自 <code>runtime</code> 包的方法</p>
+</blockquote>
+<h4 id="121-gosched">1.2.1 Gosched</h4>
+<p>强制让出当前 routine 的时间片，下次从断点恢复执行</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// 一个错误案例</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="o">:=</span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="p">&lt;</span><span class="mi">3</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">            </span><span class="nx">Print</span><span class="p">(</span><span class="s">&quot;task&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">}()</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="c1">// 事实上输出俩 main 就结束了 -&gt; 主协程没有让出时间片，自己跑完溜了</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="o">:=</span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="p">&lt;</span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="c1">// runtime.Gosched() // 正确做法：先让子协程跑 -&gt; task*3 + main*2</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="nx">Print</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="122-goexit">1.2.2 Goexit</h4>
+<p>立即结束当前 routine（当然，先要执行本 routine 中的所有 <code>defer</code> ）</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">func</span><span class="w"> </span><span class="nx">task</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">Print</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">t</span><span class="o">-</span><span class="mi">1</span><span class="err">&#39;</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="k">return</span><span class="w">            </span><span class="c1">// 直接结束 task() -&gt; 输出 f-1, t-1, f-2</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nx">runtime</span><span class="p">.</span><span class="nx">Goexit</span><span class="p">()</span><span class="w">  </span><span class="c1">// 结束 routine   -&gt; 输出 f-1, t-1（跑路了）</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nx">Print</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">t</span><span class="o">-</span><span class="mi">2</span><span class="err">&#39;</span><span class="p">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="nx">Print</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">f</span><span class="o">-</span><span class="mi">1</span><span class="err">&#39;</span><span class="p">)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="nx">task</span><span class="p">()</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="nx">Print</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">f</span><span class="o">-</span><span class="mi">2</span><span class="err">&#39;</span><span class="p">)</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="p">}()</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">// 照顾 sub routine 的 dead loop</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="123-gomaxprocs">1.2.3 GoMAXPROCS</h4>
+<p>设置可用于并行计算的最大 CPU 核数，并返回 <strong>之前的值</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nx">runtime</span><span class="p">.</span><span class="nx">GoMAXPROCS</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// 单核</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">Println</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">     </span><span class="c1">// 狂开子协程（但没什么用）</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="nx">Println</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="2-channel">2 Channel</h2>
 
 
 
@@ -2100,7 +1909,7 @@ B \rightarrow &amp;B \ or \ B \ |\  B\ and \ B \ |\ not \ B\\\\
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5 语法制导翻译" rel="prev">
+          <a href="../3%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3 数据处理" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -2109,20 +1918,20 @@ B \rightarrow &amp;B \ or \ B \ |\  B\ and \ B \ |\ not \ B\\\\
                 <span class="md-footer__direction">
                   Previous
                 </span>
-                5 语法制导翻译
+                3 数据处理
               </div>
             </div>
           </a>
         
         
           
-          <a href="../7%20%E8%BF%90%E8%A1%8C%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/" class="md-footer__link md-footer__link--next" aria-label="Next: 7 运行存储分配" rel="next">
+          <a href="../../Tool/Git/" class="md-footer__link md-footer__link--next" aria-label="Next: Git" rel="next">
             <div class="md-footer__title">
               <div class="md-ellipsis">
                 <span class="md-footer__direction">
                   Next
                 </span>
-                7 运行存储分配
+                Git
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -112,7 +112,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#0" class="md-skip">
+        <a href="#0-intro" class="md-skip">
           Skip to content
         </a>
       
@@ -1267,9 +1267,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0" class="md-nav__link">
-    0 从问题描述到电子运转
+  <a href="#0-intro" class="md-nav__link">
+    0 Intro
   </a>
+  
+    <nav class="md-nav" aria-label="0 Intro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    从问题描述到电子运转
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1398,6 +1411,34 @@
     <li class="md-nav__item">
       <a href="../Chap%203%20%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91/" class="md-nav__link">
         Chap 3 数字逻辑
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%204%20%E5%86%AF%20%C2%B7%20%E8%AF%BA%E4%BC%8A%E6%9B%BC/" class="md-nav__link">
+        Chap 4 冯 · 诺伊曼
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%205%20LC-3%20%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        Chap 5 LC-3 结构
       </a>
     </li>
   
@@ -1577,6 +1618,34 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Go/3%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="md-nav__link">
+        3 数据处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Go/4%20Concurrent/" class="md-nav__link">
+        4 并发处理
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1692,9 +1761,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0" class="md-nav__link">
-    0 从问题描述到电子运转
+  <a href="#0-intro" class="md-nav__link">
+    0 Intro
   </a>
+  
+    <nav class="md-nav" aria-label="0 Intro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    从问题描述到电子运转
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1829,7 +1911,17 @@
 <div class="admonition comment">
 <p class="admonition-title">上完专业课回来有一种融会贯通的错觉（并不）</p>
 </div>
-<h2 id="0">0 从问题描述到电子运转</h2>
+<h2 id="0-intro">0 Intro</h2>
+<ul>
+<li>
+<p>执行速度</p>
+<p>CPU &gt;&gt; Memory &gt;&gt; I/O</p>
+</li>
+<li>
+<p>只要 内存 &amp; 时间 给够，所有计算机能解决的问题是一样的（便宜的干不了的，贵的也干不了）</p>
+</li>
+</ul>
+<h3 id="_1">从问题描述到电子运转</h3>
 <table>
 <thead>
 <tr>
@@ -1873,14 +1965,22 @@
 <p>汇编语言通常与 ISA 具有 1to1 关系，但前者有时支持更加复杂的操作（如结构化编程块）</p>
 <ul>
 <li>
-<p>汇编语言是 ISA 操作码、逻辑和指令的抽象集合，是指令的<strong>文本形式</strong>（不涉及指令编码）</p>
+<p>汇编语言： <code>ADDI r1, r2 , 1</code></p>
+<p>ISA 操作码、逻辑和指令的抽象集合，是指令的<strong>文本形式</strong>（不涉及指令编码）</p>
 </li>
 <li>
-<p>ISA 更像是指定了指令及其<strong>二进制编码</strong>的标准文档</p>
+<p>ISA：<code>1111 01000111 ...</code></p>
+<p>更像是指定了指令及其<strong>二进制编码</strong>的标准文档，定义了一台计算机可执行的指令集合、寻址模式、数据类型</p>
 </li>
 </ul>
 </details>
 <ul>
+<li>
+<p>高级语言和低级语言具有相同的计算能力（最后都会被翻译成机器语言）</p>
+</li>
+<li>
+<p>程序的三个特征：<code>definiteness</code>, <code>effective computablity</code>, <code>finiteness</code></p>
+</li>
 <li>
 <p>步骤 3-4 理论上就是编译原理覆盖的内容（高级语言至 ISA）</p>
 <ul>
@@ -1901,8 +2001,12 @@
 <li>定位操作数的方法（寻址模式 <code>addressing mode</code>）</li>
 </ul>
 </li>
+<li>
+<p>一种微结构只能实现一种 ISA，一种 ISA 可能被无数种微结构实现</p>
+</li>
 </ul>
 <h2 id="1-bit">1 Bit &amp; 数据类型</h2>
+<p>只有当指令集中存在操作该 dataType 的指令时，才配叫做一个 "dataType"</p>
 <h3 id="11-bit">1.1 Bit</h3>
 <div class="arithmatex">\[
     bit = 0 \ or\ 1
