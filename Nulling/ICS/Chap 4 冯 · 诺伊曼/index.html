@@ -1392,6 +1392,48 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%206%20%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        Chap 6 编程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%207%20%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="md-nav__link">
+        Chap 7 汇编语言
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%208%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        Chap 8 数据结构
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1982,28 +2024,35 @@
 <p>指令周期的每一步称为 <code>phase</code>，一个指令周期通常包括 6 个 <code>phase</code>：</p>
 <ol>
 <li>
-<p>取指令 Fetch</p>
+<p>取指令 Fetch（ <code>n+2 T</code> ）</p>
 <p>从<strong>内存</strong>中读取<strong>下一条待执行指令</strong>，将其存入 IR：</p>
 <blockquote>
 <p><code>T</code> 表示一个时钟周期</p>
 </blockquote>
 <ol>
-<li>（ <code>1 T</code> ）将 PC 寄存器的内容 load 至 MAR；修改 PC 寄存器，使其指向下一条指令</li>
-<li>（ <code>n T</code> ）取出该单元格内容 <code>M[MAR]</code>（下一条指令）存到 MDR</li>
-<li>（ <code>1 T</code>）控制单元将 MDR 中的内容转存至 IR</li>
+<li>
+<p>（ <code>1 T</code> ）<code>MAR = PC; PC++;</code></p>
+<blockquote>
+<p>此处直接让 PC 自增，控制指令的修改发生在后续阶段</p>
+</blockquote>
+</li>
+<li>
+<p>（ <code>n T</code> ）<code>MDR = M[MAR]</code>  从内存中读取当前指令</p>
+</li>
+<li>（ <code>1 T</code>）<code>IR = MDR</code>   存储 <strong>当前指令</strong> 至 IR</li>
 </ol>
 </li>
 <li>
-<p>译码 Decode</p>
-<p>分析 <code>opcode</code>、检查指令类型并确定微结构操作细节</p>
-<p>决定怎么解释其余 12 bit 的指令信息</p>
+<p>译码 Decode（ <code>1 T</code>）</p>
+<p>分析 IR 中存储指令的  <code>opcode</code>、检查指令类型并确定微结构操作细节，产生一系列控制信号</p>
+<p>决定怎么解释其余 12 bit 的指令信息及具体寻址模式</p>
 </li>
 <li>
-<p>地址计算 Evaluate Address</p>
+<p>地址计算 Evaluate Address（ <code>1 T</code>）</p>
 <p>（如果需要）按照寻址模式计算具体操作的地址</p>
 </li>
 <li>
-<p>取操作数 Fetch Operand</p>
+<p>取操作数 Fetch Operand（ <code>n T</code> ）</p>
 <ol>
 <li>将上一步中求得的地址装入 MAR</li>
 <li>从 MDR 获取已<strong>自内存读取的操作数</strong></li>
@@ -2011,10 +2060,13 @@
 </li>
 <li>
 <p>执行 Execute</p>
+<blockquote>
+<p>部分指令不需要该周期</p>
+</blockquote>
 </li>
 <li>
 <p>存储结果 Store Result</p>
-<p>（如果需要）将执行结果写入指定寄存器</p>
+<p>（如果需要）<code>reg[dst] = res</code> 将执行结果写入指定寄存器 </p>
 </li>
 </ol>
 <h2 id="5">5 停机操作</h2>

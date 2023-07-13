@@ -1445,6 +1445,48 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%206%20%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        Chap 6 编程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%207%20%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="md-nav__link">
+        Chap 7 汇编语言
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%208%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        Chap 8 数据结构
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1920,6 +1962,9 @@
 <li>
 <p>只要 内存 &amp; 时间 给够，所有计算机能解决的问题是一样的（便宜的干不了的，贵的也干不了）</p>
 </li>
+<li>
+<p>所有可计算的问题都可以被图灵机模拟</p>
+</li>
 </ul>
 <h3 id="_1">从问题描述到电子运转</h3>
 <table>
@@ -1948,15 +1993,15 @@
 </tr>
 <tr>
 <td align="center">5</td>
-<td align="center">微结构</td>
+<td align="center">微结构 Microarchitecture</td>
 </tr>
 <tr>
 <td align="center">6</td>
-<td align="center">电路</td>
+<td align="center">电路 Circuits</td>
 </tr>
 <tr>
 <td align="center">7</td>
-<td align="center">器件</td>
+<td align="center">器件 Devices</td>
 </tr>
 </tbody>
 </table>
@@ -2049,7 +2094,7 @@
 <p>将正数的所有 bit（包括符号位） 直接取反，即可得到其相反数的二进制编码</p>
 </li>
 <li>
-<p>范围为 <code>[+0, (2^k-1)] + [-(2^k-1), -0]</code> </p>
+<p>范围为 <code>[+0, (2^k-1)] + [-(2^k-1), -0]</code>  —— 有两个 <code>0</code></p>
 </li>
 </ul>
 <blockquote>
@@ -2138,23 +2183,27 @@
 <tr>
 <td>1-8 (8 bit)</td>
 <td>指数 Exponent</td>
-<td>正则化（ normalized ）结果，实际的为尾数部分为 <code>1(23-bit of Frac)</code></td>
+<td>仅使用了 <code>00000001 ~ 11111110</code> 共计 254 个数字</td>
 </tr>
 <tr>
 <td>9-31 (23 bit)</td>
 <td>尾数 Fraction</td>
-<td>仅使用了 <code>00000001 ~ 11111110</code> 共计 254 个数字</td>
+<td>正则化（ normalized ）结果，实际的为尾数部分为 <code>1(23-bit of Frac)</code></td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>这里保证了Exponent &gt; 0，方便比较大小</p>
+</blockquote>
 <div class="arithmatex">\[
     N = (-1)^{Sign} * (1.Frac) * 2^ {Exp - 127}, \ 1 \leq Exp \leq 254
 \]</div>
 <ul>
-<li>Exp 全 0 表示：
+<li>Exp 全 <code>1</code> 表示无穷大，全 <code>0</code> 表示：
 $$
     N = (-1)^{Sign} * (0.Frac) * 2^{-126}
 $$</li>
+<li>全 32 bit 为 <code>0</code> 表示 0</li>
 </ul>
 <h4 id="samples">Samples</h4>
 <ul>

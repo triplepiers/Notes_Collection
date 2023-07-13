@@ -1,0 +1,2507 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/ICS/Chap%208%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+      
+      
+        <link rel="prev" href="../Chap%207%20%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+      
+      
+        <link rel="next" href="../../Python/1%20Basic/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
+    
+    
+      
+        <title>Chap 8 数据结构 - SeaBee 的笔记合集</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.c4a75a56.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.488 3.488 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.036 5.036 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.677 1.677 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06Zm.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.172.172 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173Z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Zm4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0Z"/></svg>');}</style>
+
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="amber">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-stack" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://triplepiers.github.io/Notes_Collection/" title="SeaBee 的笔记合集" class="md-header__button md-logo" aria-label="SeaBee 的笔记合集" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SeaBee 的笔记合集
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chap 8 数据结构
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/triplepiers/Notes_Collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Notes_Collection
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Front%20End/JS/%E5%9F%BA%E7%A1%80/" class="md-tabs__link">
+        Front End
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Tool/Mongo%20DB%20-%20%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-tabs__link">
+        DataBase
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/" class="md-tabs__link md-tabs__link--active">
+        软工相关
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Python/1%20Basic/" class="md-tabs__link">
+        编程语言
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Tool/Git/" class="md-tabs__link">
+        常用工具
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://triplepiers.github.io/Notes_Collection/" title="SeaBee 的笔记合集" class="md-nav__button md-logo" aria-label="SeaBee 的笔记合集" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    SeaBee 的笔记合集
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/triplepiers/Notes_Collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Notes_Collection
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Front End
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Front End
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          Java Script
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Java Script
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/JS/%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        1 基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/JS/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        2 对象与函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/JS/%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%AD%A3%E5%88%99/" class="md-nav__link">
+        3 内置对象与正则
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/JS/DOM/" class="md-nav__link">
+        4 DOM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/JS/BOM/" class="md-nav__link">
+        5 BOM
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Vue2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Vue2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/1%20Intro/" class="md-nav__link">
+        1 HelloWorld
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/2%20%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        2 组件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/3%20%E4%BD%BF%E7%94%A8Cli%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE/" class="md-nav__link">
+        3 使用 Cli
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/4%20%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92/" class="md-nav__link">
+        4 消息传递
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/5%20Ajax%20%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" class="md-nav__link">
+        5 网络请求
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/6%20UI%20%E7%BB%84%E4%BB%B6%E5%BA%93/" class="md-nav__link">
+        6 第三方组件库
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue3/" class="md-nav__link">
+        Vue3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          React
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          React
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E6%85%A2%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+        1 慢速上手
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        2 面向组件
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" class="md-nav__link">
+        3 组件通信
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" class="md-nav__link">
+        4 网络请求
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E8%B7%AF%E7%94%B1/" class="md-nav__link">
+        5 路由
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/UI%20%E7%BB%84%E4%BB%B6%E5%BA%93/" class="md-nav__link">
+        6 UI 组件库
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          WeChat
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          WeChat
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wechat%20App/Intro/" class="md-nav__link">
+        1 Intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wechat%20App/Template%20%26%20Setting/" class="md-nav__link">
+        2 Template & Setting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wechat%20App/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%20%26%20%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/" class="md-nav__link">
+        3 组件
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+          Tips
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Tips
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/%E5%B8%83%E5%B1%80/" class="md-nav__link">
+        布局
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+          Tools
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Tools
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/Axios/" class="md-nav__link">
+        Axios
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/Promise/" class="md-nav__link">
+        Promise
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          DataBase
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          DataBase
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+          Mongo DB
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Mongo DB
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/Mongo%20DB%20-%20%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+        1 快速上手
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/Mongo%20DB%20-%20%E6%85%A2%E9%80%9F%E4%B8%8A%E5%A4%B4/" class="md-nav__link">
+        2 慢速上头
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          软工相关
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          软工相关
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+          编译原理(旷工中)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          编译原理(旷工中)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/" class="md-nav__link">
+        5 语法制导翻译
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/6%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="md-nav__link">
+        6 中间代码生成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/7%20%E8%BF%90%E8%A1%8C%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/" class="md-nav__link">
+        7 运行存储分配
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/8%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        8 代码优化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/9%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="md-nav__link">
+        9 代码生成
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          计算机系统概论
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          计算机系统概论
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%202%20Bit%2C%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97/" class="md-nav__link">
+        Chap 2 Bit, 数据类型与运算
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%203%20%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91/" class="md-nav__link">
+        Chap 3 数字逻辑
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%204%20%E5%86%AF%20%C2%B7%20%E8%AF%BA%E4%BC%8A%E6%9B%BC/" class="md-nav__link">
+        Chap 4 冯 · 诺伊曼
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%205%20LC-3%20%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        Chap 5 LC-3 结构
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%206%20%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        Chap 6 编程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%207%20%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="md-nav__link">
+        Chap 7 汇编语言
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Chap 8 数据结构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Chap 8 数据结构
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-stack" class="md-nav__link">
+    1 Stack
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 子程序调用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    1.3 栈（本体）
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 栈（本体）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    1.3.1 内存中的栈实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-array" class="md-nav__link">
+    2 Array
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Array">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 数组声明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 下标访问
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 参数传递
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-string" class="md-nav__link">
+    2.4 String 的数组实现
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 String 的数组实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-struct" class="md-nav__link">
+    2.4.1 降低 Struct 的大小
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-lc-3" class="md-nav__link">
+    2.4.2 LC-3 判断字符串相等
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-char" class="md-nav__link">
+    2.4.3 使用 char 数组表示整数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    2.5 高维数组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-c" class="md-nav__link">
+    2.6 C 语言数组的不足
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-linked-list" class="md-nav__link">
+    3 Linked List
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Linked List">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-insert" class="md-nav__link">
+    3.1 Insert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-delete" class="md-nav__link">
+    3.2 Delete
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          编程语言
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          编程语言
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+          Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/1%20Basic/" class="md-nav__link">
+        1 Basic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/2-1%20Project/" class="md-nav__link">
+        2-1 Project
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/2-2%20Project/" class="md-nav__link">
+        2-2 Project
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+          Go
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Go
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Go/1%20Basic/" class="md-nav__link">
+        1 Basic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Go/2%20OOP/" class="md-nav__link">
+        2 面向对象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Go/3%20%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="md-nav__link">
+        3 数据处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Go/4%20Concurrent/" class="md-nav__link">
+        4 并发处理
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          常用工具
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          常用工具
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/Git/" class="md-nav__link">
+        Git
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/%E5%B8%B8%E7%94%A8%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA/" class="md-nav__link">
+        常用项目创建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/igem-uploads/" class="md-nav__link">
+        IgemUploads 使用文档
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-stack" class="md-nav__link">
+    1 Stack
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 子程序调用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    1.3 栈（本体）
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 栈（本体）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    1.3.1 内存中的栈实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-array" class="md-nav__link">
+    2 Array
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Array">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 数组声明
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 下标访问
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 参数传递
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-string" class="md-nav__link">
+    2.4 String 的数组实现
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 String 的数组实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-struct" class="md-nav__link">
+    2.4.1 降低 Struct 的大小
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-lc-3" class="md-nav__link">
+    2.4.2 LC-3 判断字符串相等
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-char" class="md-nav__link">
+    2.4.3 使用 char 数组表示整数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    2.5 高维数组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-c" class="md-nav__link">
+    2.6 C 语言数组的不足
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-linked-list" class="md-nav__link">
+    3 Linked List
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Linked List">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-insert" class="md-nav__link">
+    3.1 Insert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-delete" class="md-nav__link">
+    3.2 Delete
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Chap 8 数据结构</h1>
+
+<h2 id="1-stack">1 Stack</h2>
+<blockquote>
+<p>因为 Call-Return Mechanism 是用 Stack 实现的，所以 Patt 这里拿来当 intro 了</p>
+</blockquote>
+<h3 id="11">1.1 子程序调用</h3>
+<ul>
+<li>
+<p>子程序 Subroutine</p>
+<p>由 库 Library 提供的程序片段（函数）被称为 “子程序”</p>
+<p>我们可以通过调用子程序来减少代码段的大量重复</p>
+</li>
+<li>
+<p>调用/返回机制 Call/Return Mechanism</p>
+<ul>
+<li>
+<p>调用过程</p>
+<ul>
+<li><code>reg[7] = PC+1</code> 记录返回地址（从函数调用的下一条指令开始执行）</li>
+<li>
+<p><code>PC = addr(funcName)</code>  下一个周期开始执行调用的函数</p>
+</li>
+<li>
+<p>在 LC-3 中对应 <code>JSR(R) (0100)</code> 指令：</p>
+<table>
+<thead>
+<tr>
+<th align="center">opcode</th>
+<th align="center">mode</th>
+<th align="center">offset</th>
+<th align="left">desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0100</td>
+<td align="center">1</td>
+<td align="center">11 bit offset</td>
+<td align="left">addr = PC + offset</td>
+</tr>
+<tr>
+<td align="center">0100</td>
+<td align="center">0</td>
+<td align="center">00 xxx 000000</td>
+<td align="left">addr = Reg[base]</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>返回过程</p>
+<p><code>PC = reg[7]</code> 从特定寄存器中获取之前保存的返回地址</p>
+<p>在 LC-3 中就是一条 <code>JMP R7</code> 的无条件跳转指令（相当于 <code>return</code>）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>保存/恢复 寄存器 Save/Restore</p>
+<p>当后续指令会覆盖寄存器中的值，但还需要使用该值时（一些 <code>out-active</code>），我们需要保存寄存器中的数据至 Memory</p>
+<blockquote>
+<p>Callee-Saved Registers</p>
+</blockquote>
+<p>这一情形在子程序调用中尤为常见：</p>
+<ul>
+<li>我们会在<strong>子函数开始前</strong>将这些值保存到 Mem</li>
+<li>在<strong>返回前</strong>将其从 Mem 恢复至原来的 Reg 中（在 Caller 看来好像没有变化）</li>
+</ul>
+<blockquote>
+<p>此外，寄存器 <code>reg[7]</code> 是 Caller-Saved 的（因为调用时会被返回地址覆盖）</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="13">1.3 栈（本体）</h3>
+<p>Stack 是一种抽象数据类型（只要实现了 FILO 就行），它描述了存储机制而非具体的实现方法</p>
+<ul>
+<li>Stack 有两个必要的方法：Push（向栈顶压入元素），Pop（从栈顶弹出元素）</li>
+<li>我们总是访问栈顶的元素，该元素一般被标识为 Top</li>
+</ul>
+<h4 id="131">1.3.1 内存中的栈实现</h4>
+<p>内存中的栈通常由一段 <strong>连续</strong> 的内存空间 + 栈顶指针 <code>sp</code> 构成：</p>
+<blockquote>
+<p>由 Stack 占用的内存空间不能通过其他机制访问（即便该位置暂时空闲）</p>
+</blockquote>
+<ul>
+<li>
+<p><code>sp</code> 是一个寄存器，始终指向栈顶元素（在 Push / Pop 时均被更新）</p>
+<blockquote>
+<p>在 LC-3 中，通常使用 <code>r[6]</code> 作为 sp 寄存器，起始值 == <code>-EMPTY</code></p>
+</blockquote>
+</li>
+<li>
+<p>栈中的剩余数据在 Push / Pop 时不需要移动（只要修改 <code>sp</code> ）</p>
+</li>
+<li>
+<p>下溢出 Underflow：对空栈执行 Pop</p>
+</li>
+<li>
+<p>上溢出 Overflow：对满栈执行 Push</p>
+</li>
+<li>
+<p>跳转至单独的溢出处理函数 <code>UNDERFLOW / OVERFLOW</code> 并不是一个理想的操作，不如记录执行 成功/失败 后直接返回 Caller：</p>
+<p>我们将执行信息存储到 <code>R5</code> 中（ <code>0 = success; 1 - fail</code>），通过读取 <code>R5</code> 即可知道 Pop 是否执行成功</p>
+</li>
+</ul>
+<div class="highlight"><span class="filename">栈操作的 LC-3 实现</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c"># Stack 由 高地址 -&gt; 低地址 增长</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c"># 入栈</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nf">PUSH:</span><span class="w">      </span><span class="nb">;</span><span class="w">                  </span>Callee-Save
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">           </span>ST<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>Save2<span class="nb">;</span><span class="w">      </span>M[Save2]<span class="w"> </span><span class="nb">=</span><span class="w"> </span>R2
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">           </span>ST<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>Save1<span class="nb">;</span><span class="w">      </span>M[Save1]<span class="w"> </span><span class="nb">=</span><span class="w"> </span>R1
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">           </span><span class="nb">;</span><span class="w">                  </span>上溢检查
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">           </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>MAX<span class="nb">;</span><span class="w">        </span>R1<span class="w"> </span><span class="nb">=</span><span class="w"> </span>MAX<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-addr(stack_full)
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">           </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R1<span class="nb">;</span><span class="w">    </span>R2<span class="w"> </span><span class="nb">=</span><span class="w"> </span>sp<span class="w"> </span>+<span class="w"> </span>MAX<span class="nb">,</span><span class="w"> </span><span class="nb">==</span><span class="w"> </span><span class="kc">0</span><span class="w"> </span>时为满栈
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">           </span>BRz<span class="w"> </span>Failure<span class="nb">;</span><span class="w">       </span>R2<span class="w"> </span><span class="nb">==</span><span class="w"> </span><span class="kc">0</span>，产生<span class="w"> </span>overflow
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">           </span><span class="nb">;</span><span class="w">                  </span>栈未满，压入程序
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">           </span>ADD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#-1;   sp（R6） 向低地址增长</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">           </span>STR<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#0;    R0 入栈（sp 指向的位置）</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">           </span>BRnzp<span class="w"> </span>Success<span class="nb">;</span><span class="w">     </span>成功返回片段
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="nf">MAX:</span><span class="w">       </span>.FILL<span class="w"> </span>xC005<span class="nb">;</span><span class="w">       </span>MAX<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-addr(stack_full)<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-x3FFB<span class="w"> </span><span class="nb">=</span><span class="w"> </span>xC005
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="c"># 出栈</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="nf">POP:</span><span class="w">       </span><span class="nb">;</span><span class="w">                  </span>Callee-Save
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">           </span>ST<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>Save2<span class="nb">;</span><span class="w">      </span>M[Save2]<span class="w"> </span><span class="nb">=</span><span class="w"> </span>R2
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">           </span>ST<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>Save1<span class="nb">;</span><span class="w">      </span>M[Save1]<span class="w"> </span><span class="nb">=</span><span class="w"> </span>R1
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">           </span><span class="nb">;</span><span class="w">                  </span>下溢检查
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">           </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>EMPTY<span class="nb">;</span><span class="w">      </span>R1<span class="w"> </span><span class="nb">=</span><span class="w"> </span>EMPTY<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-addr(stack_bottom)
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">           </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R1<span class="nb">;</span><span class="w">    </span>R2<span class="w"> </span><span class="nb">=</span><span class="w"> </span>sp<span class="w"> </span>+<span class="w"> </span>EMPTY，<span class="nb">==</span><span class="w"> </span><span class="kc">0</span><span class="w"> </span>时为空栈
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">           </span>BRz<span class="w"> </span>Failure<span class="nb">;</span><span class="w">       </span>R2<span class="w"> </span><span class="nb">==</span><span class="w"> </span><span class="kc">0</span>，产生<span class="w"> </span>underflow
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">           </span><span class="nb">;</span><span class="w">                  </span>栈非空，弹出程序
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">           </span>LDR<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#0;    将栈顶元素弹出至 R0</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">           </span>ADD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#1;    sp（R6） 向高地址收缩 </span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">           </span>BRnzp<span class="w"> </span>Success<span class="nb">;</span><span class="w">     </span>成功返回片段
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="nf">EMPTY:</span><span class="w">     </span>.FILL<span class="w"> </span>xC00<span class="nb">;</span><span class="w">        </span>EMPTY<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-addr(stack_bottom)<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-x4000<span class="w"> </span><span class="nb">=</span><span class="w"> </span>xC000
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="c"># 统一的失败返回片段</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="nf">Failure:</span><span class="w">   </span>AND<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;    初始化，令 R5 = 0</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">           </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#1;    R5 = 1，表示执行失败</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">           </span>RET<span class="nb">;</span><span class="w">               </span>直接返回<span class="w"> </span>Caller
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="c"># 统一的成功返回片段</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="nf">Success:</span><span class="w">   </span><span class="nb">;</span><span class="w">                  </span>Callee-Restore
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">           </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>Save1<span class="nb">;</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">           </span>LD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>Save2<span class="nb">;</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="w">           </span>AND<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;    R5 = 0，表示执行成功</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">           </span>RET<span class="nb">;</span><span class="w">               </span>返回<span class="w"> </span>Caller
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="c"># 初始化内存空间</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="nf">Save1:</span><span class="w">     </span>.FILL<span class="w"> </span>x0000<span class="nb">;</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="nf">Save2:</span><span class="w">     </span>.FILL<span class="w"> </span>x0000<span class="nb">;</span>
+</code></pre></div>
+<blockquote>
+<p>上述片段使用了 R1，R2，R5：</p>
+<ul>
+<li>Callee-Saved：R1，R2 在子程序结束后不再使用 —— 由子程序恢复</li>
+<li>Caller-Saved：R5 在结束后先用于判断是否成功，再恢复原值 —— 由调用者自行恢复</li>
+</ul>
+</blockquote>
+<p>下面是 Patt 的版本（其实差不多？）：</p>
+<p><img alt="Stack" src="https://img1.imgtp.com/2023/07/13/Q5CgwgYn.png" /></p>
+<h2 id="2-array">2 Array</h2>
+<blockquote>
+<p>这一节突发引入了 C 语言？</p>
+</blockquote>
+<p>数组是一串 <strong>连续的内存空间</strong>，支持通过 <strong>下标访问</strong> 特定位置的元素</p>
+<h3 id="21">2.1 数组声明</h3>
+<p>在 C 语言中，我们按照如下语法声明一个数组：</p>
+<div class="highlight"><span class="filename">Array 由 低地址 -> 高地址 分布</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">arr1</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span><span class="w">  </span><span class="c1">// type arrName[Size]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">// 数组长度不能是变量（以下操作非法）</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="p">;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kt">int</span><span class="w"> </span><span class="n">arr2</span><span class="p">[</span><span class="n">len</span><span class="p">];</span><span class="w"> </span><span class="c1">// 编译时无法确定分配多大的空间</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">// 但可以是一个宏（以下操作合法）</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="cp">#define LEN 10</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="kt">int</span><span class="w"> </span><span class="n">arr3</span><span class="p">[</span><span class="n">LEN</span><span class="p">];</span><span class="w"> </span><span class="c1">// 本质是 CONST</span>
+</code></pre></div>
+<blockquote>
+<p>当 <code>arr[]</code> 作为 <strong>局部变量</strong> 时，该空间会从 <code>run-time stack</code> 中分配</p>
+</blockquote>
+<h3 id="22">2.2 下标访问</h3>
+<p>因为数组空间是连续的，因此可以快速通过下标计算指定元素的地址：</p>
+<div class="arithmatex">\[
+    \&amp;arr[index] = base + index * width
+\]</div>
+<p>那么对于 C 语言片段：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">arr</span><span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</code></pre></div>
+<p>我们可以通过如下的 LC-3 汇编实现：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c"># size(arr) = 10，且 R5 = &amp;a[9]     -&gt; 最高地址</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c"># 假设 int x 被存储在 a[0] 的前一个位置 -&gt; &amp;x = &amp;a[9] - 10 = R5 - 10</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>LDR<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#-10; R0 = x</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#-9;  R1 = &amp;a[0]</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R1<span class="nb">;</span><span class="w">   </span>R1<span class="w"> </span><span class="nb">=</span><span class="w"> </span>&amp;a[x]
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>LDR<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span><span class="c">#0;   R2 = a[x]</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span><span class="c">#2;   R2 = a[x] + 2</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>LDR<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#-10; R0 = x（感觉有点重复？）</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>ADD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#1;   R0 = x+1</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#-9;  R1 = &amp;a[0]</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R1<span class="nb">;</span><span class="w">   </span>R1<span class="w"> </span><span class="nb">=</span><span class="w"> </span>&amp;a[x+<span class="kc">1</span>]
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>STR<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span><span class="c">#0;   a[x+1] = a[x] + 2</span>
+</code></pre></div>
+<h3 id="23">2.3 参数传递</h3>
+<p>C 语言中的数组参数 <strong>默认传址</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// 参数声明</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kt">int</span><span class="w"> </span><span class="nf">Average</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[]);</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1">// 参数传递</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">Average</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span><span class="w">   </span><span class="c1">// 传数组名就可以了</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1">// 值得注意的是，我们可以认为 arr 是 int* 类型</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">;</span><span class="w"> </span><span class="c1">// 合法</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="c1">// 但 arr 作为标识符不可被更改</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="kt">int</span><span class="w"> </span><span class="n">arr1</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr1</span><span class="p">;</span><span class="w">    </span><span class="c1">// 非法</span>
+</code></pre></div>
+<h3 id="24-string">2.4 String 的数组实现</h3>
+<p>鉴于 C 本身并不支持 <code>string</code> 类型，我们可以用 <code>char[]</code> 进行模拟：</p>
+<blockquote>
+<p>本质是存储了 <strong>零扩展</strong> ASCII 的 <code>int[]</code></p>
+</blockquote>
+<ul>
+<li>
+<p>实际定义的数组长度应为 <code>len(str) + 1</code> ，并手动令 <code>ch[size] = '\0'</code></p>
+<p>否则在 <code>printf("%s", ch)</code>  时可能因为无法检测到结束符而输出错误结果</p>
+</li>
+</ul>
+<h4 id="241-struct">2.4.1 降低 Struct 的大小</h4>
+<blockquote>
+<p>同时也支持不定长度的 <code>string</code> 字段存储</p>
+</blockquote>
+<div class="highlight"><span class="filename">with Array</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">person</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">firstName</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">lastName</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">salary</span><span class="p">;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">}</span><span class="n">Person</span><span class="p">;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1">// 在上述情况下，每个人的名字不超过 9 个字符（显然不太妙）</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">with Pointer</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">person</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">firstName</span><span class="p">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">lastName</span><span class="p">;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">salary</span><span class="p">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span><span class="n">Person</span><span class="p">;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1">// 支持任意长度的姓名</span>
+</code></pre></div>
+<h4 id="242-lc-3">2.4.2 LC-3 判断字符串相等</h4>
+<div class="highlight"><span class="filename">Success: R5 = 0</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nf">STRCMP:</span><span class="w">    </span><span class="nb">;</span><span class="w">                   </span>Callee-Save
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">           </span>ST<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>SaveR0<span class="nb">;</span><span class="w">      </span>R0<span class="w"> </span><span class="nb">=</span><span class="w"> </span>&amp;str1[<span class="kc">0</span>]
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">           </span>ST<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>SaveR1<span class="nb">;</span><span class="w">      </span>R1<span class="w"> </span><span class="nb">=</span><span class="w"> </span>&amp;str2[<span class="kc">0</span>]
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">           </span>ST<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>SaveR2<span class="nb">;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">           </span>ST<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>SaveR3<span class="nb">;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">           </span><span class="nb">;</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">           </span>AND<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;     R5 = 0，默认 Equal</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="nf">NEXTCHAR:</span><span class="w">  </span>LDR<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#0;     R2 = *R0 = str1[idx]</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">           </span>LDR<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span><span class="c">#0;     R3 = *R1 = str2[idx]</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">           </span>BRnp<span class="w"> </span>COMPARE<span class="nb">;</span><span class="w">       </span>str[<span class="kc">2</span>]<span class="w"> </span>还没结束（不是&#39;\<span class="kc">0</span>&#39;），继续比较
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">           </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span><span class="c">#0;     R2 = R2 + 0</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">           </span>BRz<span class="w"> </span>RESTORE<span class="nb">;</span><span class="w">        </span>R2<span class="w"> </span><span class="nb">=</span><span class="w"> </span><span class="kc">0</span><span class="w"> </span>&amp;<span class="w"> </span>R3<span class="w"> </span><span class="nb">=</span><span class="w"> </span><span class="kc">0</span>，两个字符串均结束
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="nf">COMPARE:</span><span class="w">   </span>NOT<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">;</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">           </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span><span class="c">#1;     R2 = !R2 + 1 = -str1[idx]</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">           </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R3<span class="nb">;</span><span class="w">     </span>R2<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-str1[idx]<span class="w"> </span>+<span class="w"> </span>str2[idx]
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">           </span>BRnp<span class="w"> </span>NEQ<span class="nb">;</span><span class="w">           </span>R2<span class="w"> </span>!<span class="nb">=</span><span class="w"> </span><span class="kc">0</span>，当前字符不等
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">           </span>ADD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#1;     R0 = &amp;str1[idx+1]</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">           </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span><span class="c">#1;     R1 = &amp;str2[idx+1]</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">           </span>BRnzp<span class="w"> </span>NEXTCHAR<span class="nb">;</span><span class="w">     </span>检查下一个<span class="w"> </span>char
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="nf">NEQ:</span><span class="w">       </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#1;     R5 = 1，Not Equal</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="nf">RESTORE:</span><span class="w">   </span>LD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>SaveR0<span class="nb">;</span><span class="w">      </span>Callee-Restore
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">           </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>SaveR1<span class="nb">;</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">           </span>LD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>SaveR2<span class="nb">;</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">           </span>LD<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>SaveR3<span class="nb">;</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">           </span>RET<span class="nb">;</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="nf">SaveR0:</span><span class="w">    </span>.BLKW<span class="w"> </span><span class="kc">1</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="nf">SaveR1:</span><span class="w">    </span>.BLKW<span class="w"> </span><span class="kc">1</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="nf">SaveR2:</span><span class="w">    </span>.BLKW<span class="w"> </span><span class="kc">1</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="nf">SaveR3:</span><span class="w">    </span>.BLKW<span class="w"> </span><span class="kc">1</span>
+</code></pre></div>
+<h4 id="243-char">2.4.3 使用 char 数组表示整数</h4>
+<blockquote>
+<p>一般用于大数运算</p>
+</blockquote>
+<p>下面是一个用于检测 <code>char[]</code> 内容是否为 <code>int</code> 的函数：</p>
+<blockquote>
+<p>依次检查 <code>x30 &lt;= ch[idx] &lt;= x39</code></p>
+</blockquote>
+<div class="highlight"><span class="filename">Success: R5 = 0</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c"># Input: R0 = &amp;ch[0] 初始值为 ch[] 的起始位置</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nf">TEST_INT:</span><span class="w">   </span><span class="nb">;</span><span class="w">                </span>Callee-Store
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">            </span>ST<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>SaveR1
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">            </span>ST<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>SaveR2
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">            </span>ST<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>SaveR3
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">            </span>ST<span class="w"> </span>R4<span class="nb">,</span><span class="w"> </span>SaveR4
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">            </span>AND<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;  R5 = 0，默认符合</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">            </span>LD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>ASCII_0<span class="nb">;</span><span class="w">  </span>R2<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-asc(<span class="kc">0</span>)
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">            </span>LD<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>ASCII_9<span class="nb">;</span><span class="w">  </span>R3<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-asc(<span class="kc">9</span>)
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="nf">NEXT_CHAR:</span><span class="w">  </span>LDR<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#0;  R1 = ch[idx]</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">            </span>BRz<span class="w"> </span>SUCESS<span class="nb">;</span><span class="w">      </span>完成比较（检查到<span class="w"> </span>`\<span class="kc">0</span>`）
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">            </span>ADD<span class="w"> </span>R4<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R2<span class="nb">;</span><span class="w">  </span>R4<span class="w"> </span><span class="nb">=</span><span class="w"> </span>asc(ch[i])<span class="w"> </span>-<span class="w"> </span>asc(<span class="kc">0</span>)
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">            </span>BRn<span class="w"> </span>BAD<span class="nb">;</span><span class="w">         </span>asc(ch[i])<span class="w"> </span>&lt;<span class="w"> </span>asc(<span class="kc">0</span>)
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">            </span>ADD<span class="w"> </span>R4<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R3<span class="nb">;</span><span class="w">  </span>R4<span class="w"> </span><span class="nb">=</span><span class="w"> </span>asc(ch[i])<span class="w"> </span>-<span class="w"> </span>asc(<span class="kc">9</span>)
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">            </span>BRp<span class="w"> </span>BAD<span class="nb">;</span><span class="w">         </span>asc(ch[i])<span class="w"> </span>&gt;<span class="w"> </span>asc(<span class="kc">9</span>)
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">            </span>ADD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#1;  R0 = &amp;ch[idx++]</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">            </span>BR<span class="w">  </span>NEXT_CHAR<span class="nb">;</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="nf">FAIL:</span><span class="w">       </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#1;  R5 = 1, 不符合</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="nf">SUCESS:</span><span class="w">     </span><span class="nb">;</span><span class="w">                </span>Callee-Restore
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="w">            </span>LD<span class="w"> </span>R4.SaveR4<span class="nb">;</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="w">            </span>LD<span class="w"> </span>R3.SaveR3<span class="nb">;</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="w">            </span>LD<span class="w"> </span>R2.SaveR2<span class="nb">;</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="w">            </span>LD<span class="w"> </span>R1.SaveR1<span class="nb">;</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">            </span>RET<span class="nb">;</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="nf">ASCII_0:</span><span class="w">    </span>.FILL<span class="w"> </span>xFFD0<span class="nb">;</span><span class="w">    </span>-asc(<span class="kc">0</span>)
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="nf">ASCII_9:</span><span class="w">    </span>.FILL<span class="w"> </span>xFFC7<span class="nb">;</span><span class="w">    </span>-asc(<span class="kc">9</span>)
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="nf">SaveR1:</span><span class="w">     </span>.BLKW<span class="w"> </span><span class="kc">1</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="nf">SaveR2:</span><span class="w">     </span>.BLKW<span class="w"> </span><span class="kc">1</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="nf">SaveR3:</span><span class="w">     </span>.BLKW<span class="w"> </span><span class="kc">1</span>
+<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a><span class="nf">SaveR4:</span><span class="w">     </span>.BLKW<span class="w"> </span><span class="kc">1</span>
+</code></pre></div>
+<h3 id="25">2.5 高维数组</h3>
+<p>以二维数组为例，我们可以很简单的声明：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">arr2d</span><span class="p">[</span><span class="mi">1080</span><span class="p">][</span><span class="mi">1902</span><span class="p">];</span><span class="w">  </span><span class="c1">// 总大小为 1080*1902</span>
+</code></pre></div>
+<p>在内存中的分布如下：</p>
+<p><img alt="2Darray" src="https://img1.imgtp.com/2023/07/13/xDtEEuEG.png" /></p>
+<div class="highlight"><span class="filename">三维数组</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">40</span><span class="p">][</span><span class="mi">50</span><span class="p">][</span><span class="mi">60</span><span class="p">];</span><span class="w"> </span><span class="c1">// data[0][0][59] 的相邻元素是 data[0][1][0]</span>
+</code></pre></div>
+<h3 id="26-c">2.6 C 语言数组的不足</h3>
+<ol>
+<li>
+<p>未提供下标越界保护</p>
+<p>当使用 <code>arr[idx]</code> 访问数组元素时，C <strong>并不会检查</strong> <code>idx</code> 是否超出上下界</p>
+<p>=&gt; 不报错，但是会取到一些怪玩意儿</p>
+<p>=&gt; 因为不检查，C 也拥有了 <strong>更快的执行速度</strong></p>
+</li>
+<li>
+<p>固定的数组长度</p>
+<p>因为 C 要求在编译时确定数组大小，所以不支持用变量声明数组长度</p>
+<p>常见的解决方法有：估计并申请足够大的空间 / 动态内存分配</p>
+</li>
+</ol>
+<h2 id="3-linked-list">3 Linked List</h2>
+<p>不同于数组，链表的每个元素在内存空间中 <strong>可能是不连续的</strong>，因此 <strong>不允许随机访问</strong>：</p>
+<ul>
+<li>
+<p>我们称链表中的每一个元素为 Node，存储了一个 Unit 的数据（一般是由 <code>struct</code> 定义的结构体）</p>
+</li>
+<li>
+<p>相邻节点通过 <strong>指针 <code>node* next</code></strong> 相连，只能 <strong>顺序访问</strong> -&gt; 查找需要 O(N)</p>
+<p>好处是 INSERT / DELETE 只需要 O(1)</p>
+</li>
+<li>
+<p>我们用 <code>head pointer</code> 指向链表的 <strong>首个节点</strong>，并且令 <code>tail</code> 节点的 <code>next = NULL</code></p>
+</li>
+</ul>
+<h3 id="31-insert">3.1 Insert</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">// 保证按照 ID 升序排列</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kt">int</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">node</span><span class="o">*</span><span class="w"> </span><span class="n">neo</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="o">**</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="n">node</span><span class="o">*</span><span class="w"> </span><span class="n">pre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="n">node</span><span class="o">*</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">list</span><span class="p">;</span><span class="w">           </span><span class="c1">// 指向首节点</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">cmp</span><span class="p">;</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">         </span><span class="c1">// 还未到达末尾</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">        </span><span class="n">cmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strcmp</span><span class="p">(</span><span class="n">neo</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">);</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmp</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w">           </span><span class="c1">// 已存在</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmp</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">     </span><span class="c1">// 插入当前位置</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">            </span><span class="n">neo</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pre</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">                </span><span class="o">*</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">neo</span><span class="p">;</span><span class="w">     </span><span class="c1">// Add at head</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">                </span><span class="n">pre</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span><span class="w"> </span><span class="c1">// Add at middle</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">            </span><span class="c1">// 成功插入</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">            </span><span class="n">pre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="w">    </span><span class="n">neo</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pre</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="w">        </span><span class="o">*</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">neo</span><span class="p">;</span><span class="w">             </span><span class="c1">// empty list</span>
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="w">        </span><span class="n">pre</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">neo</span><span class="p">;</span><span class="w">         </span><span class="c1">// Add at tail</span>
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="32-delete">3.2 Delete</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">Delete</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="o">**</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="n">node</span><span class="o">*</span><span class="w"> </span><span class="n">pre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="n">node</span><span class="o">*</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">list</span><span class="p">;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">cmp</span><span class="p">;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">        </span><span class="n">cmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strcmp</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">);</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmp</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pre</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">                </span><span class="o">*</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span><span class="w">      </span><span class="c1">// Drop @ head</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">                </span><span class="n">pre</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span><span class="w">  </span><span class="c1">// Drop @ middle/tail</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">            </span><span class="n">free</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmp</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w">                  </span><span class="c1">// Don&#39;t Exist</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">            </span><span class="n">pre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w">                          </span><span class="c1">// Don&#39;t Exist</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Chap%207%20%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Chap 7 汇编语言" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Previous
+                </span>
+                Chap 7 汇编语言
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../Python/1%20Basic/" class="md-footer__link md-footer__link--next" aria-label="Next: 1 Basic" rel="next">
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Next
+                </span>
+                1 Basic
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 SeaBee
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.footer"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.efa0ade1.min.js"></script>
+      
+        <script src="../../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
