@@ -1487,6 +1487,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#6-polling" class="md-nav__link">
+    6 考虑中断的 Polling
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1944,6 +1951,13 @@
         <li class="md-nav__item">
   <a href="#5-io" class="md-nav__link">
     5 更完备的 IO 实现
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-polling" class="md-nav__link">
+    6 考虑中断的 Polling
   </a>
   
 </li>
@@ -2414,6 +2428,94 @@
 </ol>
 </li>
 </ul>
+<h2 id="6-polling">6 考虑中断的 Polling</h2>
+<p>在本章中，我们通过如下的循环结构不断对 <code>ready bit</code> 进行判断：</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="nf">Loop:</span><span class="w">   </span>LDI<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>DSR
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">        </span><span class="c"># 中断可能发生在这个位置</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">        </span>BRzp<span class="w"> </span>Loop
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">        </span>STI<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>DDR
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>
+<p>中断可能发生在 LDI 与 BRzp 之间，而在中断处理过程中，DDR 的就绪状态可能已经发生了变化：</p>
+<p>若 DDR 由 可用 -&gt; 不可用，就会因 BR 判断信息之后导致不能成功写入信息（少写）</p>
+</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">一个 naive 的解决方案是<strong>在轮询时禁用所有中断</strong>（这在需要长时间轮训的情形下极不理想）</p>
+</div>
+<ul>
+<li>
+<p>更好的解决方案是在每次执行指令序列 <code>LDI -&gt; BRzp -&gt; STI</code> 时禁用中断，随后再次被启用</p>
+<p>在这种情况下，中断不会干扰序列  <code>LDI -&gt; BRzp -&gt; STI</code> ，同时也无需等待整个轮询过程完成</p>
+</li>
+</ul>
+<blockquote>
+<p>类似于 加锁/解锁 语句应该<strong>紧贴</strong>互斥操作的思想</p>
+</blockquote>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Better Solution</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span>
+<span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span>
+<span class="normal"><a href="#__codelineno-5-25">25</a></span>
+<span class="normal"><a href="#__codelineno-5-26">26</a></span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span>
+<span class="normal"><a href="#__codelineno-5-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="w">        </span><span class="c"># 禁用中断可以通过 PSR[14] = 0 实现</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">       </span>.ORIG<span class="w">   </span>x0420
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">        </span><span class="c"># R1, R2, R3 压入 R6 指向的 Stack</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">        </span>ADD<span class="w">    </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w">    </span><span class="c">#-1</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">        </span>STR<span class="w">    </span>R1<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w">    </span><span class="c">#0</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">        </span>ADD<span class="w">    </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w">    </span><span class="c">#-1</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">        </span>STR<span class="w">    </span>R2<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w">    </span><span class="c">#0 </span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">        </span>ADD<span class="w">    </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w">    </span><span class="c">#-1</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">        </span>STR<span class="w">    </span>R3<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w">    </span><span class="c">#0 </span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">        </span><span class="c"># 计算禁用中断的 PSR 值</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">        </span>LDI<span class="w">    </span>R1<span class="nb">,</span><span class="w"> </span>PSR<span class="w">    </span><span class="c"># R1 = old(PSR)</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">        </span>LD<span class="w">     </span>R2<span class="nb">,</span><span class="w"> </span>Mask
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">        </span>AND<span class="w">    </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R1<span class="w"> </span><span class="c"># R2 = PSR[14]-&gt;0</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="nf">POLL:</span><span class="w">   </span>STI<span class="w">    </span>R1<span class="nb">,</span><span class="w"> </span>PSR<span class="w">    </span><span class="c"># enable(for loop)</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">        </span>STI<span class="w">    </span>R2<span class="nb">,</span><span class="w"> </span>PSR<span class="w">    </span><span class="c"># disable</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">        </span>LDI<span class="w">    </span>R3<span class="nb">,</span><span class="w"> </span>DSR
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="w">        </span>BRzp<span class="w">   </span>POLL
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="w">        </span>STI<span class="w">    </span>R0<span class="nb">,</span><span class="w"> </span>DDR
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="nf">EXIT:</span><span class="w">   </span>STI<span class="w">    </span>R1<span class="nb">,</span><span class="w"> </span>PSR<span class="w">    </span><span class="c"># enable(for after-loop)</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">        </span>LDR<span class="w">    </span>R3<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#0</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="w">        </span>ADD<span class="w">    </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#1</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="w">        </span>LDR<span class="w">    </span>R2<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#0</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24"></a><span class="w">        </span>ADD<span class="w">    </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#1</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="w">        </span>LDR<span class="w">    </span>R1<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#0</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26"></a><span class="w">        </span>ADD<span class="w">    </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#1</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27"></a><span class="w">        </span>RTI
+<a id="__codelineno-5-28" name="__codelineno-5-28"></a>
+<a id="__codelineno-5-29" name="__codelineno-5-29"></a><span class="nf">Mask:</span><span class="w">  </span>.FILL<span class="w"> </span>xBFFF<span class="w">       </span><span class="c"># 1011 1111 1111 1111</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30"></a><span class="w">       </span>.END
+</code></pre></div></td></tr></table></div>
 
 
 

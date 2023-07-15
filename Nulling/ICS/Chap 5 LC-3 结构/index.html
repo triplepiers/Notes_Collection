@@ -1391,6 +1391,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    1.6 整数乘法
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1921,6 +1928,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    1.6 整数乘法
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2035,7 +2049,7 @@
 <ul>
 <li>LC-3 的 ISA 中只定义了 15 条指令（ 操作码 <code>1101</code> 被预留）</li>
 </ul>
-<p><img alt="ISA" src="https://img1.imgtp.com/2023/07/12/NPDMQfrR.png" /></p>
+<p><img alt="ISA" src="https://img1.imgtp.com/2023/07/15/YgKrOz7H.png" /></p>
 <h4 id="131-operate">1.3.1 操作指令 Operate</h4>
 <blockquote>
 <p>一般包括运算操作（加减乘除）和逻辑操作（与或非）</p>
@@ -2142,6 +2156,29 @@
 </table>
 </li>
 </ul>
+<hr />
+<ul>
+<li>
+<p>LEA</p>
+<p><code>r[dst] = PC + offset</code>（事实上没有 operate data）</p>
+<table>
+<thead>
+<tr>
+<th align="center">opcode</th>
+<th align="center">dstReg</th>
+<th align="center">offset (9 bit)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1110</td>
+<td align="center">xxx</td>
+<td align="center">x xxxx xxxx</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
 <h4 id="132-data-movement">1.3.2 数据移动指令 Data Movement</h4>
 <ul>
 <li>
@@ -2200,8 +2237,8 @@
 <p>LC-3 共支持 5 种控制指令：条件跳转、无条件跳转、子程序（函数）调用、TRAP、中断返回</p>
 <ul>
 <li>
-<p>条件跳转（0000）</p>
-<p>在 EXECUTE 阶段检查 condition code ，符合条件则重新计算 <code>PC = PC + offset</code>（覆盖原来的 PC++ 结果）</p>
+<p>BR 条件跳转至 offset 地址（0000）</p>
+<p>在 EXECUTE 阶段检查 condition code（条件之间是 OR 关系），符合条件则重新计算 <code>PC = PC + offset</code>（覆盖原来的 PC++ 结果）</p>
 <ul>
 <li>if N bit == 1，检查 ? Reg[N] == 1，重置 PC</li>
 <li>if Z bit == 1，检查 ? Reg[Z] == 1，重置 PC</li>
@@ -2233,8 +2270,8 @@
 </ul>
 </li>
 <li>
-<p>JMP（1100）</p>
-<p><code>PC = reg[src]</code>，令 PC = 制定寄存器内容</p>
+<p>JMP 无条件跳转至 Reg 记录地址（1100）</p>
+<p><code>PC = reg[src]</code>，令 PC = 指定寄存器内容</p>
 <blockquote>
 <p>“条件跳转” 受 <code>offset</code> 限制，只能在 <code>[-255, +256]</code> 范围内偏移；而 JMP 指令可以跳转至 <strong>内存空间中的任意地址</strong>（因为寄存器有 16 bit）</p>
 </blockquote>
@@ -2391,6 +2428,68 @@
 </ul>
 </li>
 </ul>
+<div class="admonition info">
+<p class="admonition-title">鉴于 Condition Code 随时可能变化，我们应该在计算条件后<strong>立刻</strong>进行 BR 跳转判断</p>
+</div>
+<h3 id="16">1.6 整数乘法</h3>
+<p>鉴于 LC-3 只提供了加法，我们只能通过循环实现乘法。对于 <code>res = A x B</code>，有：</p>
+<ul>
+<li>
+<p>三个涉及的寄存器</p>
+<table>
+<thead>
+<tr>
+<th align="center">R0</th>
+<th align="center">R1</th>
+<th align="center">R2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Result</td>
+<td align="center">A</td>
+<td align="center">B</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>一些个伪代码</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">可能不太对</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nf">INIT:</span><span class="w">    </span>AND<span class="w">  </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#0   # R0 = 0</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">         </span>LDI<span class="w">  </span>R1<span class="nb">,</span><span class="w"> </span><span class="c">#A       # R1 = A</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">         </span>LDI<span class="w">  </span>R2<span class="nb">,</span><span class="w"> </span><span class="c">#B       # R2 = B</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">         </span><span class="nb">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="nf">LOOP:</span><span class="w">    </span>ADD<span class="w">  </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R1<span class="w">   </span><span class="c"># R0 += R1</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">         </span>ADDI<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span><span class="c">#-1  # R2--</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">         </span>BRnp<span class="w"> </span>LOOP<span class="w">         </span><span class="c"># if(R2 == 0) break  </span>
+</code></pre></div></td></tr></table></div>
+</li>
+</ul>
+<hr />
+<p>显然，在 <code>A, B &gt; 0</code> 的情况下这个程序是正确的；</p>
+<p>实际上，在 <code>A &gt; 0 &amp;&amp; N &lt; 0</code> 的情况下同样能够正常运行（只是会多循环很多次）：</p>
+<ul>
+<li>
+<p>考虑 16 bit Register 的情况，A = 3，B = -8</p>
+</li>
+<li>
+<p>若要满足 <code>B == 0</code> 的退出条件，实际需要循环 2<sup>16</sup> - 8 次 =&gt; 此时的 res 值如下：</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+res &amp;= 3 * (2^{16} - 8) \\
+&amp;= 3 * 2^{16} + 3 * (-8) \\ 
+&amp;= (11 \ 0000 \ 0000 \ 0000 \ 0000)_B + (3 * (-8))_D \\
+&amp;= 3 * -8 \ (前者被溢出)
+\end{align*}
+\]</div>
 <h2 id="2-data-path">2 数据通路 Data Path</h2>
 <p><img alt="dataPath for LC-3" src="https://img1.imgtp.com/2023/07/13/dCDlPJHH.png" /></p>
 <blockquote>
