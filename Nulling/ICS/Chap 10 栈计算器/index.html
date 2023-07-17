@@ -1428,9 +1428,98 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21" class="md-nav__link">
-    2.1 三地址指令 &amp; 二地址指令
+  <a href="#21-three-two-address" class="md-nav__link">
+    2.1 Three / Two - Address
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-zero-address" class="md-nav__link">
+    2.2 Zero-Address
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 运算操作实现
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 运算操作实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-add" class="md-nav__link">
+    2.3.1 ADD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-mul" class="md-nav__link">
+    2.3.2 MUL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-sub" class="md-nav__link">
+    2.3.3 SUB
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 本体
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 本体">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241" class="md-nav__link">
+    2.4.1 主函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-operand" class="md-nav__link">
+    2.4.2 Operand 处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-pop-push" class="md-nav__link">
+    2.4.3 Pop &amp; Push
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#245-display" class="md-nav__link">
+    2.4.5 Display
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#246-clear" class="md-nav__link">
+    2.4.6 Clear
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1799,9 +1888,98 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21" class="md-nav__link">
-    2.1 三地址指令 &amp; 二地址指令
+  <a href="#21-three-two-address" class="md-nav__link">
+    2.1 Three / Two - Address
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-zero-address" class="md-nav__link">
+    2.2 Zero-Address
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 运算操作实现
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 运算操作实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-add" class="md-nav__link">
+    2.3.1 ADD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-mul" class="md-nav__link">
+    2.3.2 MUL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-sub" class="md-nav__link">
+    2.3.3 SUB
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 本体
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 本体">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241" class="md-nav__link">
+    2.4.1 主函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-operand" class="md-nav__link">
+    2.4.2 Operand 处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-pop-push" class="md-nav__link">
+    2.4.3 Pop &amp; Push
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#245-display" class="md-nav__link">
+    2.4.5 Display
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#246-clear" class="md-nav__link">
+    2.4.6 Clear
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2084,7 +2262,7 @@
 <a id="__codelineno-2-44" name="__codelineno-2-44"></a><span class="w">            </span>RET
 </code></pre></div></td></tr></table></div>
 <h2 id="2">2 栈计算器实现</h2>
-<h3 id="21">2.1 三地址指令 &amp; 二地址指令</h3>
+<h3 id="21-three-two-address">2.1 Three / Two - Address</h3>
 <ul>
 <li>
 <p>LC-3 是一种 three-address 指令集，因为它的指令长成下面这样：</p>
@@ -2103,6 +2281,548 @@
 <div class="arithmatex">\[
     ADD\ EAX,\ EBX \Rightarrow EAX += EBX
 \]</div>
+<h3 id="22-zero-address">2.2 Zero-Address</h3>
+<p>除上述两种情况外，也存在完全不使用通用寄存器存储中间计算结果结果的架构：</p>
+<ul>
+<li>
+<p>每次计算弹出 Stack 顶部的两个元素进行运算，再将结果压回栈中</p>
+</li>
+<li>
+<p>在上述情况下，我们没有必要指定 <code>operands</code> 的地址（反正从栈里 Pop 就行）</p>
+<p>=&gt; 指令可以简化为 <code>ADD</code>，我们可以认为这是一种 zero-address 架构</p>
+</li>
+</ul>
+<h3 id="23">2.3 运算操作实现</h3>
+<p>由于使用 Stack 存储数据，我们不能简单的通过 <code>ADD</code> 指令实现运算了。我们需要：</p>
+<ul>
+<li>在 Pop 前检查是否存在 underflow</li>
+<li>在运算后检查是否超过范围，再将结果 Push 回去</li>
+<li>使用 Loop-ADD 实现 <code>MUL</code></li>
+</ul>
+<h4 id="231-add">2.3.1 ADD</h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span>
+<span class="normal"><a href="#__codelineno-3-24">24</a></span>
+<span class="normal"><a href="#__codelineno-3-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c"># sp 从 高地址 -&gt; 低地址 增长</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="nf">OpAdd:</span><span class="w">      </span><span class="nb">;</span><span class="w"> </span>Callee-Save
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">            </span>JSR<span class="w"> </span>POP<span class="nb">;</span><span class="w">         </span>call<span class="w"> </span>R5<span class="w"> </span><span class="nb">=</span><span class="w"> </span>Pop().status<span class="nb">,</span><span class="w"> </span>R0<span class="w"> </span><span class="nb">=</span><span class="w"> </span>Pop().res
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;  R5 = 1 -&gt; fail</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">            </span>BRp<span class="w"> </span>Exit<span class="nb">;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">            </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#0;  R1 = R0 = num1</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">            </span>JSR<span class="w"> </span>POP<span class="nb">;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">            </span>BRp<span class="w"> </span>Restore1<span class="nb">;</span><span class="w">    </span>失败了要把<span class="w"> </span>num1<span class="w"> </span>塞回去
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">            </span>ADD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R1<span class="nb">;</span><span class="w">  </span>R0<span class="w"> </span><span class="nb">=</span><span class="w"> </span>num1<span class="w"> </span>+<span class="w"> </span>num2
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">            </span>JSR<span class="w"> </span>RangeCheck<span class="nb">;</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">            </span>BRp<span class="w"> </span>Restore2<span class="nb">;</span><span class="w">    </span>结果超出范围，把<span class="w"> </span>num1<span class="w"> </span>&amp;<span class="w"> </span>num2<span class="w"> </span>都塞回去
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">            </span>JSR<span class="w"> </span>PUSH<span class="nb">;</span><span class="w">        </span>成功，Push(res)
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">            </span>BRnzp<span class="w"> </span>Exit<span class="nb">;</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="c"># 因为数据还在原地，只要移动 sp 就可以实现 restore</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="nf">Restore2:</span><span class="w">   </span>ADD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#-1; sp--</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="nf">Restore1:</span><span class="w">   </span>ADD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#-1; sp--</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="nf">Exit:</span><span class="w">       </span><span class="nb">;</span><span class="w"> </span>Callee-Restore
+<a id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="w">            </span>RET
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">RangeCheck()</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c"># 检查数字属于 [-999, +999]，成功时 R5 = 0，否则 R5 = 1</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="nf">RangeCheck:</span><span class="w"> </span>LD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>Neg999<span class="nb">;</span><span class="w">   </span>R5<span class="w"> </span><span class="nb">=</span><span class="w"> </span><span class="c">#-999</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R5<span class="nb">;</span><span class="w">  </span>R5<span class="w"> </span><span class="nb">=</span><span class="w"> </span>num<span class="w"> </span>-<span class="w"> </span><span class="kc">999</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">            </span>BRp<span class="w"> </span>BadRange<span class="nb">;</span><span class="w">    </span>num<span class="w"> </span>&gt;<span class="w"> </span>+<span class="kc">999</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">            </span>LD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>Pos999<span class="nb">;</span><span class="w">   </span>R5<span class="w"> </span><span class="nb">=</span><span class="w"> </span><span class="c">#999</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R5<span class="nb">;</span><span class="w">  </span>R5<span class="w"> </span><span class="nb">=</span><span class="w"> </span>num<span class="w"> </span>+<span class="w"> </span><span class="kc">999</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">            </span>BRn<span class="w"> </span>BadRange<span class="nb">;</span><span class="w">    </span>num<span class="w"> </span>&lt;<span class="w"> </span><span class="kc">-999</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">            </span>AND<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;  return 0 (Success)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="nf">BadRange:</span><span class="w">   </span>ST<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>Save0<span class="nb">;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">            </span>LEA<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>ErrorMsg<span class="nb">;</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">            </span>TRAP<span class="w"> </span>x22<span class="nb">;</span><span class="w">        </span>print(ErrorMsg)
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">            </span>AND<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#1;  return 1 (Fail)</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">            </span>LD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>Save0<span class="nb">;</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">            </span>RET<span class="nb">;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="232-mul">2.3.2 MUL</h4>
+<p>通过循环执行 <code>ADD</code> 实现乘法</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span>
+<span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span>
+<span class="normal"><a href="#__codelineno-5-25">25</a></span>
+<span class="normal"><a href="#__codelineno-5-26">26</a></span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span>
+<span class="normal"><a href="#__codelineno-5-30">30</a></span>
+<span class="normal"><a href="#__codelineno-5-31">31</a></span>
+<span class="normal"><a href="#__codelineno-5-32">32</a></span>
+<span class="normal"><a href="#__codelineno-5-33">33</a></span>
+<span class="normal"><a href="#__codelineno-5-34">34</a></span>
+<span class="normal"><a href="#__codelineno-5-35">35</a></span>
+<span class="normal"><a href="#__codelineno-5-36">36</a></span>
+<span class="normal"><a href="#__codelineno-5-37">37</a></span>
+<span class="normal"><a href="#__codelineno-5-38">38</a></span>
+<span class="normal"><a href="#__codelineno-5-39">39</a></span>
+<span class="normal"><a href="#__codelineno-5-40">40</a></span>
+<span class="normal"><a href="#__codelineno-5-41">41</a></span>
+<span class="normal"><a href="#__codelineno-5-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nf">OpMul:</span><span class="w">      </span><span class="nb">;</span><span class="w"> </span>ST<span class="w"> </span>R0~R7<span class="w"> </span>...
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">            </span>AND<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span><span class="c">#0;  flag = R3 = 0</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">            </span><span class="nb">;</span><span class="w"> </span>num1<span class="w"> </span><span class="nb">=</span><span class="w"> </span>stack.Pop()
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">            </span>JSR<span class="w"> </span>POP<span class="nb">;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">            </span>BRp<span class="w"> </span>Exit<span class="nb">;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">            </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#0;  R1 = num1</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">            </span><span class="nb">;</span><span class="w"> </span>num2<span class="w"> </span><span class="nb">=</span><span class="w"> </span>stack.Pop()
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">            </span>JSR<span class="w"> </span>POP<span class="nb">;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">            </span>BRp<span class="w"> </span>Store1<span class="nb">;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">            </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#0;  R2 = num2</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">            </span>BRzp<span class="w"> </span>PosMul<span class="nb">;</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">            </span><span class="nb">;</span><span class="w"> </span>A<span class="w"> </span>*<span class="w"> </span>负数<span class="w"> </span>的情况
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">            </span>ADD<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span><span class="c">#1;  flag = 1</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">            </span>NOT<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">;</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">            </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span><span class="c">#1;  num2 = abs(num2)</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="nf">PosMul:</span><span class="w">     </span>AND<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#0;  res = 0</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="w">            </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">            </span>BRz<span class="w"> </span>PushMul<span class="nb">;</span><span class="w">     </span>while(num2<span class="w"> </span>&gt;<span class="w"> </span><span class="kc">0</span>)
+<a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="nf">MulLoop:</span><span class="w">    </span>ADD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R1<span class="nb">;</span><span class="w">  </span>res<span class="w"> </span>+<span class="nb">=</span><span class="w"> </span>num1
+<a id="__codelineno-5-24" name="__codelineno-5-24"></a><span class="w">            </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span><span class="c">#-1; num2--</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="w">            </span>BRp<span class="w"> </span>MulLoop<span class="nb">;</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26"></a><span class="w">            </span><span class="nb">;</span><span class="w"> </span>fin
+<a id="__codelineno-5-27" name="__codelineno-5-27"></a><span class="w">            </span>JSR<span class="w"> </span>RangeCheck<span class="nb">;</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29"></a><span class="w">            </span>BRp<span class="w"> </span>Restore2<span class="nb">;</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31"></a><span class="w">            </span>ADD<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32"></a><span class="w">            </span>BRz<span class="w"> </span>PushMul<span class="nb">;</span><span class="w">     </span>正数<span class="w"> </span>*<span class="w"> </span>正数，直接<span class="w"> </span>Push
+<a id="__codelineno-5-33" name="__codelineno-5-33"></a><span class="w">            </span>NOT<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">;</span>
+<a id="__codelineno-5-34" name="__codelineno-5-34"></a><span class="w">            </span>ADD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#1;  正数 * 负数 -&gt; res = -res</span>
+<a id="__codelineno-5-35" name="__codelineno-5-35"></a><span class="nf">PushMul:</span><span class="w">    </span>JSR<span class="w"> </span>PUSH<span class="nb">;</span>
+<a id="__codelineno-5-36" name="__codelineno-5-36"></a><span class="w">            </span>BRnzp<span class="w"> </span>Exit<span class="nb">;</span>
+<a id="__codelineno-5-37" name="__codelineno-5-37"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-5-38" name="__codelineno-5-38"></a><span class="nf">Restore2:</span><span class="w">   </span>ADD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#-1;</span>
+<a id="__codelineno-5-39" name="__codelineno-5-39"></a><span class="nf">Restore1:</span><span class="w">   </span>ADD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#-1;</span>
+<a id="__codelineno-5-40" name="__codelineno-5-40"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-5-41" name="__codelineno-5-41"></a><span class="nf">Exit:</span><span class="w">       </span><span class="nb">;</span><span class="w"> </span>LD<span class="w"> </span>R0~R7<span class="w"> </span>...
+<a id="__codelineno-5-42" name="__codelineno-5-42"></a><span class="w">            </span>RET<span class="nb">;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="233-sub">2.3.3 SUB</h4>
+<ul>
+<li>
+<p>注意顺序：<code>res = num2 - num1</code></p>
+</li>
+<li>
+<p>SUB 操作可以由两步完成：<code>1. neg(num1) 2. add(num1, num2)</code></p>
+</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">只是 Neg 操作</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="nf">OpNeg:</span><span class="w">  </span><span class="nb">;</span><span class="w"> </span>ST<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R7<span class="w"> </span>...
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">        </span>JSR<span class="w"> </span>POP<span class="nb">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">        </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">        </span>BRp<span class="w"> </span>Exit<span class="nb">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">        </span><span class="nb">;</span><span class="w"> </span>num1<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-num1
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">        </span>NOT<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">        </span>ADD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#1;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">        </span>JSR<span class="w"> </span>PUSH<span class="nb">;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="nf">Exit:</span><span class="w">   </span><span class="nb">;</span><span class="w"> </span>LD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R7<span class="w"> </span>...
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">        </span>RET<span class="nb">;</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="24">2.4 本体</h3>
+<p>功能概述：</p>
+<ul>
+<li>输入：<code>[-999, +999]</code> 间的任意整数（输出也属于这个范围）</li>
+<li>运算：ADD，SUB，MUL</li>
+<li>输出：用户输入 <code>D</code> 后，显示当前运算结果的十进制字符串</li>
+<li>退出：用户输入 <code>X</code> 后，退出运算器函数</li>
+<li>清空：用户输入 <code>C</code> 后，清空当前 Stack</li>
+</ul>
+<blockquote>
+<p>输入应当是一个 <strong>后缀表达式</strong>，例如对于表达式 <code>51 - 49</code>，我们应当输入 <code>51, 49, -</code></p>
+</blockquote>
+<p>对于运算样例：</p>
+<div class="arithmatex">\[
+    (51-49)*(172+205)-(17*2)
+\]</div>
+<p>理想输入顺序如下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>5,1,\n, 4,9,\n, -,+      // 本质上先执行了 -49, 再执行了 51 + (-49)
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>1,7,2,\n, 2,0,5,\n, +,
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>*,
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>1,7,\n, 2,\n, *,
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>-,+,                    // 先算了 -(17*2)，再执行 pre + (-17*2)
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>D                       // print(res)
+</code></pre></div>
+<h4 id="241">2.4.1 主函数</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">mainLoop</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span>
+<span class="normal"><a href="#__codelineno-8-29">29</a></span>
+<span class="normal"><a href="#__codelineno-8-30">30</a></span>
+<span class="normal"><a href="#__codelineno-8-31">31</a></span>
+<span class="normal"><a href="#__codelineno-8-32">32</a></span>
+<span class="normal"><a href="#__codelineno-8-33">33</a></span>
+<span class="normal"><a href="#__codelineno-8-34">34</a></span>
+<span class="normal"><a href="#__codelineno-8-35">35</a></span>
+<span class="normal"><a href="#__codelineno-8-36">36</a></span>
+<span class="normal"><a href="#__codelineno-8-37">37</a></span>
+<span class="normal"><a href="#__codelineno-8-38">38</a></span>
+<span class="normal"><a href="#__codelineno-8-39">39</a></span>
+<span class="normal"><a href="#__codelineno-8-40">40</a></span>
+<span class="normal"><a href="#__codelineno-8-41">41</a></span>
+<span class="normal"><a href="#__codelineno-8-42">42</a></span>
+<span class="normal"><a href="#__codelineno-8-43">43</a></span>
+<span class="normal"><a href="#__codelineno-8-44">44</a></span>
+<span class="normal"><a href="#__codelineno-8-45">45</a></span>
+<span class="normal"><a href="#__codelineno-8-46">46</a></span>
+<span class="normal"><a href="#__codelineno-8-47">47</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c"># 主函数用于循环检测用户输入，同时决定具体事务：读数字 / 运算 / 显示 / 退出 / Clear</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">                </span>LEA<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>StackBase<span class="nb">;</span><span class="w">  </span>StackBase<span class="w"> </span>其实是<span class="w"> </span>&amp;stack[<span class="kc">0</span>]<span class="w"> </span>-<span class="w"> </span><span class="kc">1</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">                </span>ADD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#1;     R6 = sp -&gt; empty stack</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">                </span><span class="nb">;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="nf">NewCommand:</span><span class="w">     </span>LEA<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>PromptMsg<span class="nb">;</span><span class="w">  </span>R0<span class="w"> </span><span class="nb">=</span><span class="w"> </span>&amp;promptStr
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">                </span>PUTS<span class="nb">;</span><span class="w">               </span>print(promptStr)
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">                </span>GETC<span class="nb">;</span><span class="w">               </span>scanf(inputChar)
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">                </span>OUT<span class="nb">;</span><span class="w">                </span>echo(intpuChar)
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">                </span><span class="nb">;</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="c"># 实际上是一系列的 if-elseif 分支</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="nf">TestX:</span><span class="w">          </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>NegX<span class="nb">;</span><span class="w">       </span>R1<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-asc(&#39;X&#39;)
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">                </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R0<span class="nb">;</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">                </span>BTnp<span class="w"> </span>TestC<span class="nb">;</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">                </span>HALT<span class="nb">;</span><span class="w">              </span>输入<span class="w"> </span>X，退出函数（其实是<span class="w"> </span>HALT）
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="nf">TestC:</span><span class="w">          </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>NegC<span class="nb">;</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">                </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R0<span class="nb">;</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="w">                </span>BRnp<span class="w"> </span>TestAdd<span class="nb">;</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="w">                </span>JSR<span class="w"> </span>OpClear<span class="nb">;</span><span class="w">       </span>输入<span class="w"> </span>C，清空栈
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="w">                </span>BRnzp<span class="w"> </span>NewCommand<span class="nb">;</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="nf">TestAdd:</span><span class="w">        </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>NegPlus<span class="nb">;</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="w">                </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R0<span class="nb">;</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="w">                </span>BRnp<span class="w"> </span>TestMul<span class="nb">;</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="w">                </span>JSR<span class="w"> </span>OpAdd<span class="nb">;</span><span class="w">         </span>输入<span class="w"> </span>+，执行加法
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a><span class="w">                </span>BRnzp<span class="w"> </span>NewCommand<span class="nb">;</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="nf">TestMul:</span><span class="w">        </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>NegMul<span class="nb">;</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a><span class="w">                </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R0<span class="nb">;</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28"></a><span class="w">                </span>BRnp<span class="w"> </span>TestNeg<span class="nb">;</span><span class="w">        </span>
+<a id="__codelineno-8-29" name="__codelineno-8-29"></a><span class="w">                </span>JSR<span class="w"> </span>OpMul<span class="nb">;</span><span class="w">         </span>输入<span class="w"> </span>*，执行乘法
+<a id="__codelineno-8-30" name="__codelineno-8-30"></a><span class="w">                </span>BRnzp<span class="w"> </span>NewCommand<span class="nb">;</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31"></a><span class="nf">TestNeg:</span><span class="w">        </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>NegMinus<span class="nb">;</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32"></a><span class="w">                </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R0<span class="nb">;</span>
+<a id="__codelineno-8-33" name="__codelineno-8-33"></a><span class="w">                </span>BRnp<span class="w"> </span>TestD<span class="nb">;</span>
+<a id="__codelineno-8-34" name="__codelineno-8-34"></a><span class="w">                </span>JSR<span class="w"> </span>OpNeg<span class="nb">;</span><span class="w">         </span>输入<span class="w"> </span>-，取负数
+<a id="__codelineno-8-35" name="__codelineno-8-35"></a><span class="w">                </span>BRnzp<span class="w"> </span>NewCommand<span class="nb">;</span>
+<a id="__codelineno-8-36" name="__codelineno-8-36"></a><span class="nf">TestD:</span><span class="w">          </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>NegD<span class="nb">;</span>
+<a id="__codelineno-8-37" name="__codelineno-8-37"></a><span class="w">                </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R0<span class="nb">;</span>
+<a id="__codelineno-8-38" name="__codelineno-8-38"></a><span class="w">                </span>BRnp<span class="w"> </span>EnterNum<span class="nb">;</span>
+<a id="__codelineno-8-39" name="__codelineno-8-39"></a><span class="w">                </span>JSR<span class="w"> </span>OpDisplay<span class="nb">;</span><span class="w">     </span>输入<span class="w"> </span>D，显示结果
+<a id="__codelineno-8-40" name="__codelineno-8-40"></a><span class="nf">EnterNum:</span><span class="w">       </span>JSR<span class="w"> </span>PushVal<span class="nb">;</span><span class="w">       </span>输入数字，更新顶部元素
+<a id="__codelineno-8-41" name="__codelineno-8-41"></a><span class="w">                </span>BRnzp<span class="w"> </span>NewCommand<span class="nb">;</span>
+<a id="__codelineno-8-42" name="__codelineno-8-42"></a>
+<a id="__codelineno-8-43" name="__codelineno-8-43"></a><span class="c"># 全局变量</span>
+<a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="nf">StackMax:</span><span class="w">       </span>.BLKW<span class="w"> </span><span class="c">#9</span>
+<a id="__codelineno-8-45" name="__codelineno-8-45"></a><span class="nf">StackBase:</span><span class="w">      </span>.BLKW<span class="w"> </span><span class="c">#1</span>
+<a id="__codelineno-8-46" name="__codelineno-8-46"></a><span class="nf">ASCIIBUFF:</span><span class="w">      </span>.BLKW<span class="w"> </span><span class="c">#4</span>
+<a id="__codelineno-8-47" name="__codelineno-8-47"></a><span class="w">                </span>.FILL<span class="w"> </span>x0000<span class="nb">;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="242-operand">2.4.2 Operand 处理</h4>
+<p>当输入不是指定的字母时，我们认为它可能是一个以 <code>\n</code> 结尾的数字，并尝试通过 <code>PushVal()</code> 进行处理</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">PushVal()</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span>
+<span class="normal"><a href="#__codelineno-9-22">22</a></span>
+<span class="normal"><a href="#__codelineno-9-23">23</a></span>
+<span class="normal"><a href="#__codelineno-9-24">24</a></span>
+<span class="normal"><a href="#__codelineno-9-25">25</a></span>
+<span class="normal"><a href="#__codelineno-9-26">26</a></span>
+<span class="normal"><a href="#__codelineno-9-27">27</a></span>
+<span class="normal"><a href="#__codelineno-9-28">28</a></span>
+<span class="normal"><a href="#__codelineno-9-29">29</a></span>
+<span class="normal"><a href="#__codelineno-9-30">30</a></span>
+<span class="normal"><a href="#__codelineno-9-31">31</a></span>
+<span class="normal"><a href="#__codelineno-9-32">32</a></span>
+<span class="normal"><a href="#__codelineno-9-33">33</a></span>
+<span class="normal"><a href="#__codelineno-9-34">34</a></span>
+<span class="normal"><a href="#__codelineno-9-35">35</a></span>
+<span class="normal"><a href="#__codelineno-9-36">36</a></span>
+<span class="normal"><a href="#__codelineno-9-37">37</a></span>
+<span class="normal"><a href="#__codelineno-9-38">38</a></span>
+<span class="normal"><a href="#__codelineno-9-39">39</a></span>
+<span class="normal"><a href="#__codelineno-9-40">40</a></span>
+<span class="normal"><a href="#__codelineno-9-41">41</a></span>
+<span class="normal"><a href="#__codelineno-9-42">42</a></span>
+<span class="normal"><a href="#__codelineno-9-43">43</a></span>
+<span class="normal"><a href="#__codelineno-9-44">44</a></span>
+<span class="normal"><a href="#__codelineno-9-45">45</a></span>
+<span class="normal"><a href="#__codelineno-9-46">46</a></span>
+<span class="normal"><a href="#__codelineno-9-47">47</a></span>
+<span class="normal"><a href="#__codelineno-9-48">48</a></span>
+<span class="normal"><a href="#__codelineno-9-49">49</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c"># 处理可能的数字串</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="nf">PushVal:</span><span class="w">    </span><span class="nb">;</span><span class="w"> </span>ST<span class="w"> </span>R0~R7<span class="w"> </span>...
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">            </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>ASCIIBUFF<span class="nb">;</span><span class="w">  </span>R1<span class="w"> </span><span class="nb">=</span><span class="w"> </span>&amp;str
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">            </span>LD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>MAXdigit<span class="nb">;</span><span class="w">   </span>R2<span class="w"> </span><span class="nb">=</span><span class="w"> </span><span class="kc">3</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">            </span>；
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="nf">Loop:</span><span class="w">       </span>ADD<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>x<span class="kc">-0</span>A<span class="nb">;</span><span class="w">  </span>R3<span class="w"> </span><span class="nb">=</span><span class="w"> </span>R0<span class="w"> </span>-<span class="w"> </span>asc(\n)
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">            </span>BRz<span class="w"> </span>GoodInput<span class="nb">;</span><span class="w">     </span>当前输入为<span class="w"> </span>\n<span class="w"> </span><span class="nb">=&gt;</span><span class="w"> </span>把前几个<span class="w"> </span>char<span class="w"> </span>转<span class="w"> </span>int
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">            </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">            </span>BRz<span class="w"> </span>TooLargeInput<span class="nb">;</span><span class="w"> </span>if(R2<span class="w"> </span><span class="nb">==</span><span class="w"> </span><span class="kc">0</span>)<span class="w"> </span>连续输入过多数字
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">            </span><span class="nb">;</span><span class="w"> </span>?<span class="w"> </span>is<span class="w"> </span>num<span class="w"> </span>digit?
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">            </span>LD<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>Neg_ASC_0<span class="nb">;</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="w">            </span>ADD<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R3<span class="nb">;</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="w">            </span>BRn<span class="w"> </span>NotInt<span class="nb">;</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="w">            </span>LD<span class="w"> </span>R3<span class="nb">,</span><span class="w"> </span>NEg_ASC_9<span class="nb">;</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="w">            </span>ADD<span class="w"> </span>R<span class="c">#, R0, R3;</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="w">            </span>BRp<span class="w"> </span>NotInt<span class="nb">;</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="w">            </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span><span class="c">#-1;  restLen--</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="w">            </span>STR<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span><span class="c">#0;   *R1 = str[i] = curInput</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="w">            </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span><span class="c">#1;   R1 = &amp;str[i+1]</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22"></a><span class="w">            </span>GETC<span class="nb">;</span><span class="w">             </span>scanf(inputChar)
+<a id="__codelineno-9-23" name="__codelineno-9-23"></a><span class="w">            </span>OUT<span class="nb">;</span><span class="w">              </span>echo
+<a id="__codelineno-9-24" name="__codelineno-9-24"></a><span class="w">            </span>BRnzp<span class="w"> </span>Loop<span class="nb">;</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26"></a><span class="nf">GoodInput:</span><span class="w">  </span>LD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>ASCIIBUFF<span class="nb">;</span><span class="w"> </span>R2<span class="w"> </span><span class="nb">=</span><span class="w"> </span>&amp;str
+<a id="__codelineno-9-27" name="__codelineno-9-27"></a><span class="w">            </span>NOT<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">;</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28"></a><span class="w">            </span>ADD<span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span>R2<span class="nb">,</span><span class="w"> </span><span class="c">#1;   R2 = -(&amp;str)</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29"></a><span class="w">            </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R2<span class="nb">;</span><span class="w">   </span>R1<span class="w"> </span><span class="nb">=</span><span class="w"> </span>&amp;str_tail
+<a id="__codelineno-9-30" name="__codelineno-9-30"></a><span class="w">            </span>BRz<span class="w"> </span>NoDigit<span class="nb">;</span><span class="w">      </span>if(R1<span class="w"> </span><span class="nb">==</span><span class="w"> </span>R2)<span class="w"> </span>-&gt;<span class="w"> </span>没有输入数字
+<a id="__codelineno-9-31" name="__codelineno-9-31"></a><span class="w">            </span>JSR<span class="w"> </span>StrtoBin<span class="nb">;</span><span class="w">     </span>当前字符串转数字
+<a id="__codelineno-9-32" name="__codelineno-9-32"></a><span class="w">            </span>JSR<span class="w"> </span>PUSH<span class="nb">;</span><span class="w">         </span>Push(operand)
+<a id="__codelineno-9-33" name="__codelineno-9-33"></a><span class="w">            </span>BRnzp<span class="w"> </span>Done<span class="nb">;</span>
+<a id="__codelineno-9-34" name="__codelineno-9-34"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35"></a><span class="c"># 下面是一些报错函数</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36"></a><span class="nf">NoDigit:</span><span class="w">    </span>LEA<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>Msg_NoDigit<span class="nb">;</span>
+<a id="__codelineno-9-37" name="__codelineno-9-37"></a><span class="w">            </span>PUTS<span class="nb">;</span>
+<a id="__codelineno-9-38" name="__codelineno-9-38"></a><span class="w">            </span>BRnzp<span class="w"> </span>Done<span class="nb">;</span>
+<a id="__codelineno-9-39" name="__codelineno-9-39"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-9-40" name="__codelineno-9-40"></a><span class="nf">NotInt:</span><span class="w">     </span>LEA<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>Msg_NoInt<span class="nb">;</span>
+<a id="__codelineno-9-41" name="__codelineno-9-41"></a><span class="w">            </span>PUTS<span class="nb">;</span>
+<a id="__codelineno-9-42" name="__codelineno-9-42"></a><span class="w">            </span>BRnzp<span class="w"> </span>Done<span class="nb">;</span>
+<a id="__codelineno-9-43" name="__codelineno-9-43"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-9-44" name="__codelineno-9-44"></a><span class="nf">TooLarge:</span><span class="w">   </span>LEA<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>Msg_TooLarge<span class="nb">;</span>
+<a id="__codelineno-9-45" name="__codelineno-9-45"></a><span class="w">            </span>PUTS<span class="nb">;</span>
+<a id="__codelineno-9-46" name="__codelineno-9-46"></a><span class="w">            </span>BRnzp<span class="w"> </span>Done<span class="nb">;</span>
+<a id="__codelineno-9-47" name="__codelineno-9-47"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-9-48" name="__codelineno-9-48"></a><span class="nf">Done:</span><span class="w">       </span><span class="nb">;</span><span class="w"> </span>LD<span class="w"> </span>R0~R7<span class="w"> </span>...
+<a id="__codelineno-9-49" name="__codelineno-9-49"></a><span class="w">            </span>RET<span class="nb">;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="243-pop-push">2.4.3 Pop &amp; Push</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Pop()</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c"># 返回值为 R5: 0-success, 1-fail</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="nf">POP:</span><span class="w">        </span>LD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>StackBase<span class="nb">;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">            </span>NOT<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">;</span><span class="w">       </span>R0<span class="w"> </span><span class="nb">=</span><span class="w"> </span>-(addr(stackBase)<span class="w"> </span>+<span class="w"> </span><span class="kc">1</span>)
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">            </span>ADD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R6<span class="nb">;</span><span class="w">   </span>R6<span class="w"> </span><span class="nb">=</span><span class="w"> </span>sp
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">            </span>BRz<span class="w"> </span>Underflow<span class="nb">;</span><span class="w">    </span>sp<span class="w"> </span><span class="nb">==</span><span class="w"> </span>-(base+<span class="kc">1</span>)<span class="w"> </span><span class="nb">=&gt;</span><span class="w"> </span>empty!
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">            </span>LDR<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#0;   R0 = stack.top()</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">            </span>ADD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#1;   sp++ (缩小栈)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">            </span>AND<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;   return 0</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">            </span>RET<span class="nb">;</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="nf">Underflow:</span><span class="w">  </span>LEA<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>Msg_Underflow<span class="nb">;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">            </span>PUTS<span class="nb">;</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">            </span>AND<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#1;</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">            </span>RET<span class="nb">;</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Push()</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span>
+<span class="normal"><a href="#__codelineno-11-12">12</a></span>
+<span class="normal"><a href="#__codelineno-11-13">13</a></span>
+<span class="normal"><a href="#__codelineno-11-14">14</a></span>
+<span class="normal"><a href="#__codelineno-11-15">15</a></span>
+<span class="normal"><a href="#__codelineno-11-16">16</a></span>
+<span class="normal"><a href="#__codelineno-11-17">17</a></span>
+<span class="normal"><a href="#__codelineno-11-18">18</a></span>
+<span class="normal"><a href="#__codelineno-11-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="c"># 返回值为 R5: 0-success, 1-fail</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="nf">PUSH:</span><span class="w">       </span><span class="nb">;</span><span class="w"> </span>ST<span class="w"> </span>R1<span class="w"> </span>...
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">            </span>LD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>StackMax<span class="nb">;</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">            </span>NOT<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">;</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">            </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span><span class="c">#1;    R1 = -addr(stackMax)</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">            </span>ADD<span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R1<span class="nb">,</span><span class="w"> </span>R6<span class="nb">;</span><span class="w">    </span>R6<span class="w"> </span><span class="nb">=</span><span class="w"> </span>sp
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">            </span>BRz<span class="w"> </span>Overflow<span class="nb">;</span><span class="w">      </span>sp<span class="w"> </span><span class="nb">==</span><span class="w"> </span>stackMax<span class="w"> </span><span class="nb">=&gt;</span><span class="w"> </span>full!
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">            </span>ADD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#-1;   sp-- (扩大栈)</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">            </span>STR<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#0;    *sp = R0</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">            </span><span class="nb">;</span><span class="w"> </span>LD<span class="w"> </span>R1<span class="w"> </span>...
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">            </span>AND<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;    return 0</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">            </span>RET<span class="nb">;</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="nf">Overflow:</span><span class="w">   </span>LEA<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>Msg_Overflow<span class="nb">;</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">            </span>PUTS<span class="nb">;</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">            </span><span class="nb">;</span><span class="w"> </span>LD<span class="w"> </span>R1<span class="w"> </span>...
+<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">            </span>AND<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#1;    return 1</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="w">            </span>RET<span class="nb">;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="245-display">2.4.5 Display</h4>
+<p>将 <strong>栈顶元素</strong> 从 2's complement 转为 string 并显示</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">OpDisplay()</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nf">OpDisplay:</span><span class="w">  </span><span class="nb">;</span><span class="w"> </span>ST<span class="w"> </span>R0<span class="nb">,</span>R5<span class="nb">,</span>R7<span class="w"> </span>...
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">            </span>JSR<span class="w"> </span>POP<span class="nb">;</span><span class="w">          </span>弹出栈顶元素
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">            </span>ADD<span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span>R5<span class="nb">,</span><span class="w"> </span><span class="c">#0;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">            </span>BRp<span class="w"> </span>Done<span class="nb">;</span><span class="w">         </span>空栈<span class="w"> </span>-<span class="w"> </span>fail
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">            </span>JSR<span class="w"> </span>BintoStr<span class="nb">;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">            </span>LD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>Newline<span class="nb">;</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">            </span>OUT<span class="nb">;</span><span class="w">              </span>print(\n)
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">            </span>LD<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>ASCIIBUFF<span class="nb">;</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">            </span>PUTS<span class="nb">;</span><span class="w">             </span>print(resStr)
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">            </span>ADD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#-1;  把显示的数字压回栈中</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">            </span><span class="nb">;</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="nf">Done:</span><span class="w">       </span><span class="nb">;</span><span class="w"> </span>LD<span class="w"> </span>R0<span class="nb">,</span>R5<span class="nb">,</span>R7<span class="w"> </span>...
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">            </span>RET<span class="nb">;</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="246-clear">2.4.6 Clear</h4>
+<p>只要把 R6 <code>sp</code> 复位到 <code>stackBase + 1</code> 就好了</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">OpClear()</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="nf">OpClear:</span><span class="w">    </span>LD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>StackBase<span class="nb">;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">            </span>ADD<span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span>R6<span class="nb">,</span><span class="w"> </span><span class="c">#1;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">            </span>RET<span class="nb">;</span>
+</code></pre></div></td></tr></table></div>
 
 
 
