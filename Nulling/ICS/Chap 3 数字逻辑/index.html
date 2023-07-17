@@ -1440,8 +1440,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52" class="md-nav__link">
-    5.2 寻址能力
+  <a href="#52-addressability" class="md-nav__link">
+    5.2 寻址能力 Addressability
   </a>
   
 </li>
@@ -1586,6 +1586,20 @@
     <li class="md-nav__item">
       <a href="../Chap%209.2%20%E9%99%B7%E5%85%A5%20%26%20%E4%B8%AD%E6%96%AD/" class="md-nav__link">
         Chap 9.2 陷入 & 中断
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chap%2010%20%E6%A0%88%E8%AE%A1%E7%AE%97%E5%99%A8/" class="md-nav__link">
+        Chap 10 栈计算器
       </a>
     </li>
   
@@ -2067,8 +2081,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52" class="md-nav__link">
-    5.2 寻址能力
+  <a href="#52-addressability" class="md-nav__link">
+    5.2 寻址能力 Addressability
   </a>
   
 </li>
@@ -2349,9 +2363,10 @@
     内存 = N(address) * k(bit)
 \]</div>
 <ul>
-<li>
-<p>拥有 16 MB 内存的机器 = 16M 个 address + 每个地址存储 1B 信息</p>
-</li>
+<li>拥有 16 MB 内存的机器 = 16M 个 address + 每个地址存储 1B 信息</li>
+</ul>
+<p><img alt="" src="https://img1.imgtp.com/2023/07/15/gkKs21YD.png" /></p>
+<ul>
 <li>
 <p>2<sup>2</sup> * 3 内存 = 4 个地址 + 每个地址存 3 bit</p>
 <ul>
@@ -2380,7 +2395,7 @@
 <li>内存中可独立识别的位置总数：16MB 内存 = 有 16M 个内存位置</li>
 <li>对于用 n bit 表示的地址，一般有 2<sup>n</sup> 个独立地址</li>
 </ul>
-<h3 id="52">5.2 寻址能力</h3>
+<h3 id="52-addressability">5.2 寻址能力 Addressability</h3>
 <ul>
 <li>
 <p>每个位置中存储信息的 bit 数目：16 MB 内存 = 每个位置存 1 B = 8 bit 信息</p>
@@ -2391,6 +2406,19 @@
 <p>用于科学计算的机器可能采用 64 bit 寻址 -&gt; 因为一个浮点数占 64 bit</p>
 </li>
 </ul>
+<details class="question">
+<summary>Assume a memory's addressability is 64 bits. What does that tell you about the size of the MAR and MDR? </summary>
+<ul>
+<li>
+<p>The addressability of a memory is the number of bits in each location.</p>
+<p>So if a memory's addressability is 64 bits, then each location is 64 bits long. </p>
+<p>The MDR has the same size as the memory locations, so the MDR is 64 bits long.  </p>
+</li>
+<li>
+<p>The size of the MAR is determined by the number of locations, which is not mentioned here, so we cannot determine the size of the MAR."</p>
+</li>
+</ul>
+</details>
 <h2 id="6-sequential-logic-circuit">6 时序逻辑电路 Sequential Logic Circuit</h2>
 <p><img alt="SLC" src="https://img1.imgtp.com/2023/07/14/chtbvxk1.png" /></p>
 <ul>
