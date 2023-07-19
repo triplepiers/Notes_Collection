@@ -2,6 +2,10 @@
 [data-md-color-scheme="seabee"] {
     --md-primary-fg-color:        #000;
 }
+/* bold color */
+strong {
+    color: var(--md-accent-fg-color);
+}
 /* for download */
 .card {
     position: relative;
