@@ -1746,6 +1746,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Go/5%20Web/" class="md-nav__link">
+        5 网络编程
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2030,7 +2044,7 @@
 <li>
 <p>PSR 程序状态寄存器</p>
 <blockquote>
-<p>Processor Status Register</p>
+<p>Processor Status Register，被映射到 <code>xFFFC</code></p>
 </blockquote>
 <p>PSR 记录了 <strong>当前程序</strong> 的 Privilege &amp; Priority 信息</p>
 <table>
@@ -2096,7 +2110,7 @@
 <p>通过指令访问 IO 设备寄存器时，必须 <strong>指定目标寄存器</strong>。这通常有两种实现方式：</p>
 <ol>
 <li>
-<p>（少数）使用 special IO 指令</p>
+<p>（少数）使用 special IO 指令：为读写设备寄存器单独分配 opcode</p>
 </li>
 <li>
 <p>（多数）使用和操作 memory 相同的 data movement 指令，也被称为 “内存映射” Memory Mapped</p>
@@ -2117,7 +2131,10 @@
 <p>与 CPU 的运算速度相比，IO 设备的速度是非常缓慢的。</p>
 <ul>
 <li>
-<p>这一矛盾可以通过硬件设计解决：</p>
+<p>这一矛盾可以通过硬件设计解决 Synchronous</p>
+<blockquote>
+<p><strong>Fix rate</strong> with CPU clock</p>
+</blockquote>
 <ul>
 <li>
 <p>让硬件以一个 <strong>固定的低速率</strong> 读取用户输入</p>
@@ -2129,7 +2146,10 @@
 </ul>
 </li>
 <li>
-<p>异步操作</p>
+<p>异步操作 Asynchronous</p>
+<blockquote>
+<p>Varying rate with CPU clock</p>
+</blockquote>
 <p>问题的主要矛盾在于用户输入与处理器工作速度不一致，是异步的。</p>
 <p>=&gt; 我们需要通过 protocol / handshake mechanism 来控制信息的发送与接收。</p>
 <ul>
