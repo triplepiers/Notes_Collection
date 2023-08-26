@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/CV/Standford%20CS131/Pixels%20%26%20Filters/">
       
       
+        <link rel="prev" href="../../../Front%20End/Promise/">
+      
+      
+        <link rel="next" href="../../../Tool/Mongo%20DB%20-%20%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.3">
@@ -108,7 +112,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-color" class="md-skip">
+        <a href="#1-color-space" class="md-skip">
           跳转至
         </a>
       
@@ -235,6 +239,31 @@
         Front End
       </a>
     </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        Vision
+      </a>
+    </li>
+  
+
   
 
       
@@ -977,6 +1006,239 @@
 
   
   
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Vision
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Vision
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+          CS131
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          CS131
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Pixels & Filters
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Pixels & Filters
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-color-space" class="md-nav__link">
+    1 Color Space
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Color Space">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-linear-color-space" class="md-nav__link">
+    1.1 Linear Color Space
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-nonlinear-color-space" class="md-nav__link">
+    1.2 Nonlinear Color Space
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-sampling-quantization" class="md-nav__link">
+    2 Sampling &amp; Quantization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-image-histogram" class="md-nav__link">
+    3 Image Histogram
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-image-as-functions" class="md-nav__link">
+    4 Image as Functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-linear-system-filter" class="md-nav__link">
+    5 Linear System (Filter)
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Linear System (Filter)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-moving-average" class="md-nav__link">
+    5.1 Moving Average
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-image-segmentation" class="md-nav__link">
+    5.2 Image Segmentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-property-of-system" class="md-nav__link">
+    5.3 Property of System
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-2d-impulse-function" class="md-nav__link">
+    5.4 2D Impulse Function
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-convolution-correlation" class="md-nav__link">
+    6 Convolution &amp; Correlation
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Convolution &amp; Correlation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-2d-convolution" class="md-nav__link">
+    6.1 2D Convolution 卷积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-cross-correlation" class="md-nav__link">
+    6.2 Cross Correlation 交叉相关
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
   
     
     <li class="md-nav__item md-nav__item--nested">
@@ -984,17 +1246,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
       
       
       
-        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
           DataBase
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_3">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           DataBase
         </label>
@@ -1011,17 +1273,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
       
       
       
-        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
           Mongo DB
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_3_1">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1">
           <span class="md-nav__icon md-icon"></span>
           Mongo DB
         </label>
@@ -1081,17 +1343,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
       
       
       
-        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
           软工相关
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           软工相关
         </label>
@@ -1108,17 +1370,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
       
       
       
-        <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
           编译原理(旷工中)
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4_1">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_1">
           <span class="md-nav__icon md-icon"></span>
           编译原理(旷工中)
         </label>
@@ -1212,17 +1474,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
       
       
       
-        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
           计算机系统概论
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_4_2">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2">
           <span class="md-nav__icon md-icon"></span>
           计算机系统概论
         </label>
@@ -1408,17 +1670,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
       
       
       
-        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
           编程语言
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_5">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           编程语言
         </label>
@@ -1435,17 +1697,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
       
       
       
-        <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
           Python
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_5_1">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_1">
           <span class="md-nav__icon md-icon"></span>
           Python
         </label>
@@ -1511,17 +1773,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
       
       
       
-        <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
           Go
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_5_2">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_2">
           <span class="md-nav__icon md-icon"></span>
           Go
         </label>
@@ -1623,17 +1885,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
       
       
       
-        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
           常用工具
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_6">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
           常用工具
         </label>
@@ -1712,16 +1974,23 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-color" class="md-nav__link">
-    1 Color
+  <a href="#1-color-space" class="md-nav__link">
+    1 Color Space
   </a>
   
-    <nav class="md-nav" aria-label="1 Color">
+    <nav class="md-nav" aria-label="1 Color Space">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-color-space" class="md-nav__link">
-    1.1 Color Space 色域
+  <a href="#11-linear-color-space" class="md-nav__link">
+    1.1 Linear Color Space
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-nonlinear-color-space" class="md-nav__link">
+    1.2 Nonlinear Color Space
   </a>
   
 </li>
@@ -1739,23 +2008,84 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-image-as-functions" class="md-nav__link">
-    3 Image as Functions
+  <a href="#3-image-histogram" class="md-nav__link">
+    3 Image Histogram
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-linear-system-filter" class="md-nav__link">
-    4 Linear System (filter)
+  <a href="#4-image-as-functions" class="md-nav__link">
+    4 Image as Functions
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-convolution-correlation" class="md-nav__link">
-    5 Convolution &amp; Correlation
+  <a href="#5-linear-system-filter" class="md-nav__link">
+    5 Linear System (Filter)
   </a>
+  
+    <nav class="md-nav" aria-label="5 Linear System (Filter)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-moving-average" class="md-nav__link">
+    5.1 Moving Average
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-image-segmentation" class="md-nav__link">
+    5.2 Image Segmentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-property-of-system" class="md-nav__link">
+    5.3 Property of System
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-2d-impulse-function" class="md-nav__link">
+    5.4 2D Impulse Function
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-convolution-correlation" class="md-nav__link">
+    6 Convolution &amp; Correlation
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Convolution &amp; Correlation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-2d-convolution" class="md-nav__link">
+    6.1 2D Convolution 卷积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-cross-correlation" class="md-nav__link">
+    6.2 Cross Correlation 交叉相关
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1779,35 +2109,367 @@
 
   <h1>Pixels & Filters</h1>
 
-<h2 id="1-color">1 Color</h2>
-<h3 id="11-color-space">1.1 Color Space 色域</h3>
+<h2 id="1-color-space">1 Color Space</h2>
+<h3 id="11-linear-color-space">1.1 Linear Color Space</h3>
 <ul>
-<li>Linear Color Space<ul>
-<li>色彩由三原色的权重决定<ul>
-<li>两种颜色混合的结果在其连线上</li>
-<li>三种颜色混合的结果在其围成的三角形内</li>
-</ul>
+<li>
+<p>色彩由三原色的权重决定，典例是 <code>RGB Space</code></p>
+<ul>
+<li>
+<p>两种颜色混合的结果在其连线上</p>
 </li>
-<li>例子：RGB Space - 三种单色光的线性组合表示颜色</li>
-</ul>
-</li>
-<li>Nonlinear Color Space<ul>
-<li>例子：HSV（ RGB是其在100%明度下的特例），使用三个维度描述元素<ul>
-<li>Hue 色相
-      0-360 转一圈就是 RGB 色域（从红色开始）</li>
-<li>Saturation 饱和度
-      从中心的白色过渡到最骚的颜色（光谱色）</li>
-<li>Value 明度
-      为 0 时全黑</li>
-</ul>
+<li>
+<p>三种颜色混合的结果在其围成的三角形内</p>
 </li>
 </ul>
 </li>
 </ul>
+<h3 id="12-nonlinear-color-space">1.2 Nonlinear Color Space</h3>
+<p>典例是 <code>HSV</code>（ RGB是其在100%明度下的特例），使用三个维度描述元素</p>
+<p><img alt="HSV" src="https://img1.imgtp.com/2023/08/26/u6VDsihI.png" /></p>
+<table>
+<thead>
+<tr>
+<th align="center">Demension</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>Hue</code> 色相</td>
+<td align="left">0-360 转一圈就是 RGB 色域（从红色开始）</td>
+</tr>
+<tr>
+<td align="center"><code>Saturation</code> 饱和度</td>
+<td align="left">从中心的白色过渡到最骚的颜色（光谱色）</td>
+</tr>
+<tr>
+<td align="center"><code>Value</code> 明度</td>
+<td align="left">为 0 时全黑</td>
+</tr>
+</tbody>
+</table>
 <h2 id="2-sampling-quantization">2 Sampling &amp; Quantization</h2>
-<h2 id="3-image-as-functions">3 Image as Functions</h2>
-<h2 id="4-linear-system-filter">4 Linear System (filter)</h2>
-<h2 id="5-convolution-correlation">5 Convolution &amp; Correlation</h2>
+<ul>
+<li>
+<p>我们可以根据色彩将图片分为三类：</p>
+<ul>
+<li>
+<p><code>Binary</code>：只有黑白两色，可以用 <code>[0,1]</code> 矩阵表示</p>
+</li>
+<li>
+<p><code>Gray Scale</code>：由不同的灰度构成，每个像素点用一个 <code>int</code> 描述</p>
+</li>
+<li>
+<p><code>Color</code>：彩图，每个 <code>channel</code> 用一个 <code>int</code> 描述，一般有 RGB 三通道</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>DPI</code> 描述了每 <code>inch</code> 中像素点的数量，用于描述采样精度</p>
+</li>
+</ul>
+<h2 id="3-image-histogram">3 Image Histogram</h2>
+<p><code>Image Histogram</code> 直观呈现了该图像中不同颜色像素点的分布状况</p>
+<ul>
+<li>
+<p>对于如左下所示的灰度图片，我们可以得到如右图所示的 Histogram</p>
+<p><img alt="Histogram" src="https://img1.imgtp.com/2023/08/26/gMl0UlCG.png" /></p>
+</li>
+<li>
+<p>我们可以用颜色直方图进行图像分类：</p>
+<p>健康与染病的肺部医学图像可能呈现出不同的颜色特征，可以通过颜色直方图尝试进行区分</p>
+</li>
+</ul>
+<h2 id="4-image-as-functions">4 Image as Functions</h2>
+<div class="admonition warning">
+<p class="admonition-title">我不理解</p>
+</div>
+<ul>
+<li>
+<p>我们常用由 <code>int</code> 构成的矩阵来描述图片，然后用 <code>(x,y)</code> 来表示任何一个像素点的坐标</p>
+</li>
+<li>
+<p>在这一基础上，我们可以将图像看作一个将 <em>二维坐标</em> 映射到 <em>颜色值</em> 的函数</p>
+<ul>
+<li>对于灰度图片:</li>
+</ul>
+<div class="arithmatex">\[
+    f(x,y) \in [0,255]
+\]</div>
+<ul>
+<li>对于彩色图片，其实是三个独立函数的叠加：</li>
+</ul>
+<div class="arithmatex">\[
+    f(x,y) = 
+    \left[
+        \begin{align*}
+        r(x,y) \\
+        g(x,y) \\
+        b(x,y)
+        \end{align*}
+    \right]
+\]</div>
+</li>
+<li>
+<p><code>Histogram</code> 也可以被认为是一种 Image Function</p>
+</li>
+</ul>
+<h2 id="5-linear-system-filter">5 Linear System (Filter)</h2>
+<ul>
+<li>
+<p><code>Filter</code> 是一个基于原始图像像素值生成新图像的过程</p>
+<p>其目的在于提取图像中的有效信息，或修改/增强原始图像中的某些性质</p>
+<ul>
+<li>
+<p>特征提取： 边缘 edges，角落 corners，团块 blobs ...</p>
+</li>
+<li>
+<p>清晰度增强 super-resolution，绘画修复 in-paiting，降噪 de-nosing</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>System</code></p>
+<div class="arithmatex">\[
+    f(x,y) \xrightarrow{System\ S} g(x,y)
+\]</div>
+<p>我们认为 System 是一个将输入函数 <code>f(x,y)</code> 转变为输出函数 <code>g(x,y)</code> 的元件</p>
+<blockquote>
+<p>对于图像来说 <code>(x,y)</code> 表示像素点坐标</p>
+</blockquote>
+</li>
+<li>
+<p><code>Linear System</code></p>
+<p>将整个矩阵 加上/乘以 一个 <code>constant</code> 并不会改变图像的 <strong>语义</strong>，但可以揭露一些有趣的 <code>pattern</code></p>
+<p>比如设定阈值将灰度图片转变为 <code>binary</code> 可以得到以下效果：</p>
+<p><img alt="Linear System" src="https://img1.imgtp.com/2023/08/26/5jxgAWWC.png" /></p>
+<blockquote>
+<p>我们可以将神经网络和一些特定的卷积神经网络（CNN）看作包含 <strong>多个独立<code>sub linear system</code></strong> 的 <code>non-linear system</code></p>
+</blockquote>
+<ul>
+<li>
+<p>我们认为 <code>Linear Filtering</code> 生成的新像素是原始数据的 <code>weighted sum</code>，且对每个像素应用的 <code>weight</code> 都是 <em>相同的</em></p>
+</li>
+<li>
+<p>只有当 System 满足 <code>Superposition Property</code> 时，我们认为这是一个 <em>Linear</em> System：</p>
+<div class="arithmatex">\[
+    S[\alpha f_1(x,y) + \beta f_2(x,y)] = \alpha S[f_1(x,y)] + \beta S[f_2(x,y)]
+\]</div>
+</li>
+</ul>
+</li>
+<li>
+<p><code>Linear Shift Invariant System</code></p>
+<blockquote>
+<p>线性平移不变</p>
+</blockquote>
+<p>不仅需要满足 <code>Superposition Property</code>，还需要满足 <code>Shift Invariance</code>：</p>
+<div class="arithmatex">\[
+    f(x-a, y-b) \rightarrow g(x-a, y-b)
+\]</div>
+</li>
+</ul>
+<h3 id="51-moving-average">5.1 Moving Average</h3>
+<blockquote>
+<p>是一个 Linear Shift Invariant System</p>
+</blockquote>
+<p><img alt="Smooth" src="https://img1.imgtp.com/2023/08/26/X5ETEtjy.png" /></p>
+<ul>
+<li>
+<p>本滤波器是一个 3*3 的矩阵，本质上是取周围 9 个像素点的平均值</p>
+<p>这一操作实现了平滑效果（移除了 <code>sharp feature</code> ）</p>
+<div class="arithmatex">\[
+    \frac{1}{9}\left[
+        \begin{align*}
+        1,1,1\\
+        1,1,1\\
+        1,1,1
+        \end{align*}
+    \right]
+\]</div>
+</li>
+<li>
+<p>对于整张图像，有：</p>
+<div class="arithmatex">\[
+    g(x,y) = \frac{1}{9}\sum_{k=x-1}^{x+1}\sum_{l=y-1}^{y+1} f(k,l) = \frac{1}{9}\sum_{k=-1}^1\sum_{l=-1}^1f(x-k,y-l)
+\]</div>
+</li>
+</ul>
+<p><img alt="Smooth Process" src="https://img1.imgtp.com/2023/08/26/VuKpQIeG.png" /></p>
+<h3 id="52-image-segmentation">5.2 Image Segmentation</h3>
+<p>本质是使用 <code>threshold</code> 将灰度图转换为二值图像：</p>
+<div class="arithmatex">\[
+    g(x,y) = 
+    \left\{
+        \begin{align*}
+        &amp;255, f(x,y) \gt 100\\
+        &amp;0, f(x,y) \leq 100
+        \end{align*}
+    \right.
+\]</div>
+<h3 id="53-property-of-system">5.3 Property of System</h3>
+<ul>
+<li>
+<p>Amplitude Property</p>
+<blockquote>
+<p>有点类似于运算法则</p>
+</blockquote>
+<div class="arithmatex">\[
+    \begin{align}
+    &amp; S[f_1(x,y) + f_2(x,y)] = S[f_1(x,y)] + S[f_2(x,y)] \\
+    &amp; S[\alpha f(x,y)] = \alpha S[f(x,y)] \\
+    &amp; S[\alpha f_1(x,y) + \beta f_2(x,y)] = \alpha S[f_1(x,y)] + \beta S[f_2(x,y)] \\
+    &amp; \left|f(x,y) \right| \leq k \Rightarrow \left|g(x,y)\right| \leq ck \\
+    &amp; S^{-1}[S[f(x,y)]] = f(x,y)
+    \end{align}
+\]</div>
+</li>
+<li>
+<p>Spatial Property</p>
+<div class="arithmatex">\[
+    \begin{align}
+    &amp; f(x,y) = 0 \Rightarrow g(x,y) = 0 \tag{Casuality}\\
+    &amp; f(x-a, y-b) \rightarrow g(x-a, y-b) \tag{Shift Invariance}
+    \end{align}
+\]</div>
+</li>
+</ul>
+<h3 id="54-2d-impulse-function">5.4 2D Impulse Function</h3>
+<blockquote>
+<p>Why <em>Linear Shift Invariant</em> matters?</p>
+</blockquote>
+<ul>
+<li>
+<p><code>2D Impulse Function</code> 定义如下：</p>
+<blockquote>
+<p>这里我们认为 <code>(0,0)</code> 在图像的 <em>中心</em> 而非左上角</p>
+</blockquote>
+<div class="arithmatex">\[
+    \delta_2 =  f(x,y) =
+    \left\{
+        \begin{align*}
+        &amp; 0,\ x=0 \ and \ y = 0 \\
+        &amp; 1,\ otherwise
+        \end{align*}
+    \right.
+\]</div>
+</li>
+<li>
+<p>当 3*3 的 <code>Moving Average Filter</code> 作用于该函数时，结果如下：</p>
+<p><img alt="" src="https://img1.imgtp.com/2023/08/26/9zh7771A.png" /></p>
+<p><code>Impluse Function</code> 经由 Filter 处理的结果称为 <code>Impulse Response</code> -&gt; 就是正中 3*3 的 <code>1/9</code> 方阵</p>
+</li>
+<li>
+<p>对于任意的 Linear Shift Invariant System</p>
+<ul>
+<li>如果我们不知道一个 Linear System 具体在干嘛，可以输入 <code>Impulse Function</code>，得到的结果即为该系统的实际 <code>Filter</code></li>
+</ul>
+<div class="arithmatex">\[
+    \left\{
+        \begin{align*}
+        &amp; \delta_2 \xrightarrow{S} h(x,y) \\
+        &amp; f(x,y) \xrightarrow{S} g(x,y) = f(x,y) \cdot h(x,y)
+        \end{align*}
+    \right.
+\]</div>
+</li>
+</ul>
+<h2 id="6-convolution-correlation">6 Convolution &amp; Correlation</h2>
+<h3 id="61-2d-convolution">6.1 2D Convolution 卷积</h3>
+<ul>
+<li>
+<p>假设原始图像 Image 为 <code>f(x,y)</code>，卷积核 Kernel 为 <code>h(x,y)</code></p>
+<p><img alt="截屏2023-08-26 17.21.04.png" src="https://img1.imgtp.com/2023/08/26/BRZ6rrdW.png" />    </p>
+</li>
+<li>
+<p>那么卷积操作 Convolution 即可定义为：</p>
+<div class="arithmatex">\[
+    f(x,y) * h(x,y) = \sum_{k=-\infin}^{\infin}\sum_{l=-\infin}^{\infin}f(k,l)*h(-k,-l)
+\]</div>
+<p><img alt="截屏2023-08-26 17.37.57.png" src="https://img1.imgtp.com/2023/08/26/NIA4BQAG.png" /></p>
+<p><img alt="截屏2023-08-26 17.21.20.png" src="https://img1.imgtp.com/2023/08/26/caOwxRq6.png" /></p>
+</li>
+<li>
+<p>一些比较特殊的 3*3 卷积核</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>0,0,0
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>0,1,0        图像不变
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>0,0,0
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>0,0,0
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>0,0,1        整体向右平移一个像素
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>0,0,0
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>1,1,1
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>1,1,1 * 1/9  平滑
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>1,1,1
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>0,0,0   1,1,1       
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>0,2,0 - 1,1,1 * 1/9  强调局部平均值差异的锐化
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>0,0,0   1,1,1
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        0,0,0   0,0,0   1,1,1
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>      = 0,1,0 + 0,1,0 - 1,1,1 * 1/9  锐化 = 原图 + 细节
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        0,0,0   0,0,0   1,1,1
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>          |       |_______|
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>          |           |
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>      Original     Detail
+</code></pre></div>
+</li>
+<li>
+<p>图像支持（image support）是指图像中<em>有效信息</em>存在的区域。</p>
+<p>通常，图像支持是<em>有限的</em>，并且由图像的尺寸和边界限定。定义了图像处理算法和操作的有效范围。</p>
+</li>
+<li>
+<p>边缘效应（edge effect）是指在对图像进行处理时，由于处理算法的局限性或边界条件的影响，导致<em>图像边缘区域的结果与其他区域有所不同</em>。</p>
+<p>边缘效应可能会引入伪影、失真或不连续性，影响图像处理的准确性和质量。</p>
+<p><img alt="截屏2023-08-26 17.34.03.png" src="https://img1.imgtp.com/2023/08/26/PA9TN6nH.png" /></p>
+</li>
+</ul>
+<h3 id="62-cross-correlation">6.2 Cross Correlation 交叉相关</h3>
+<ul>
+<li>
+<p>用符号 <code>**</code> 表示，等价于 <em>没有 <code>flip</code></em> 操作的卷积；通常用于描述 <code>f &amp; h</code> 之间的 Similarity</p>
+</li>
+<li>
+<p>Properties</p>
+<div class="arithmatex">\[
+    \left\{
+        \begin{align*}
+            &amp; (f ** h_1) ** h_2 = f ** (h_1 ** h_2) \\
+            &amp; f ** (h_1 + h_2) = (f ** h_1) + (f ** h_2) \\
+            &amp; h_1 ** h_2 = h_2 ** h_1 \\
+            &amp; f(x,y) ** \delta_2(x-a,y-b) = f(x-a,y-b) \\
+            &amp; g(x,y) = f(x,y) ** h(x,y) \\
+            &amp; \ \ \ \ \ \ \ \ \ \ \ = f(x-a_1,y-b_1) ** h(x-a_2,y-b_2) \\
+            &amp; \ \ \ \ \ \ \ \ \ \ \ = g(x-a_1-a_2, y-b_1-b_2)
+        \end{align*}
+    \right.
+\]</div>
+</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Convolution vs. (Cross) Correlation</p>
+<ul>
+<li>
+<p><strong>卷积</strong> 是一种积分，用于表达一个函数在另一个函数上平移时的重叠程度。</p>
+<ul>
+<li>是一种滤波操作</li>
+</ul>
+</li>
+<li>
+<p><strong>相关性</strong> 比较两组数据的相似性。</p>
+<ul>
+<li>
+<p>计算两个输入信号在彼此平移时的相似度，在两个信号最匹配时达到最大值。</p>
+</li>
+<li>
+<p>是衡量两个信号相关性的指标。</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 
 
 
@@ -1824,6 +2486,42 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../../../Front%20End/Promise/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Promise" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  上一页
+                </span>
+                Promise
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../Tool/Mongo%20DB%20-%20%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-footer__link md-footer__link--next" aria-label="下一页: 1 快速上手" rel="next">
+            <div class="md-footer__title">
+              <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  下一页
+                </span>
+                1 快速上手
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
