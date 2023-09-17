@@ -76,12 +76,16 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CMono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=LXGW+WenKai+Screen:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"LXGW WenKai Screen";--md-code-font:"JetBrains Mono"}</style>
       
     
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css">
+    
+      <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -252,7 +256,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../CV/Standford%20CS131/Pixels%20%26%20Filters/" class="md-tabs__link">
+      <a href="../../CV/Standford%20CS131/Intro/" class="md-tabs__link">
         Vision
       </a>
     </li>
@@ -1056,6 +1060,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../CV/Standford%20CS131/Intro/" class="md-nav__link">
+        Intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../CV/Standford%20CS131/Pixels%20%26%20Filters/" class="md-nav__link">
         Pixels & Filters
       </a>
@@ -1824,6 +1842,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#2-promise" class="md-nav__link">
+    2 Promise
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1854,6 +1879,97 @@
 <li>也可以作为独立文件，通过 <code>&lt;img&gt;</code> 标签引入</li>
 <li>还能转成 base64 引入页面</li>
 </ul>
+</li>
+</ul>
+<h2 id="2-promise">2 Promise</h2>
+<ol>
+<li>判断下列代码的输出</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">()</span><span class="w"> </span><span class="c1">// pr1</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// p0</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="mf">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// p4</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="p">})</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// p4 回调</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">})</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">()</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">1</span><span class="p">))</span><span class="w"> </span><span class="c1">// p1</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">2</span><span class="p">))</span><span class="w"> </span><span class="c1">// p2</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">3</span><span class="p">))</span><span class="w"> </span><span class="c1">// p3</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">5</span><span class="p">))</span><span class="w"> </span><span class="c1">// p5</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">consolg</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">6</span><span class="p">))</span><span class="w"> </span><span class="c1">// p6</span>
+</code></pre></div>
+<ul>
+<li><code>resolve() / rejected()</code> 括号中指定了该 Promise 对象携带的数据<ul>
+<li>缺省时携带 <code>undefined</code></li>
+<li>该数据将作为 <code>onfulfilled / onrejected</code> 的参数</li>
+</ul>
+</li>
+<li>
+<p><code>then()</code> 方法将产生一个 <em>新的 Promise</em> 对象</p>
+</li>
+<li>
+<p>同步执行过程：</p>
+<ol>
+<li>Pr1 为完成状态对象 </li>
+<li>调用 <code>Pr1.then()</code> 产生 Pending 状态的 P0<ul>
+<li>调用 <em>完成状态对象</em> 的 <code>then()</code> 会导致回调进入微队列</li>
+<li>此时微队列为 <code>[P0 对应回调]</code></li>
+</ul>
+</li>
+<li>调用 <code>P0.then()</code> 产生 Pending 状态的 P4</li>
+<li>Pr2 为完成状态对象</li>
+<li>调用 <code>Pr2.then()</code> 产生 Pending 状态的 P1<ul>
+<li>新的回调进入微队列</li>
+<li>此时微队列为 <code>[P0 对应回调, P1 对应回调]</code></li>
+</ul>
+</li>
+<li>剩下的 P2 ～ P6 均为 Pending 状态</li>
+</ol>
+</li>
+<li>异步执行过程（微队列）：<ol>
+<li>执行 <code>P0对应回调</code><ul>
+<li>输出为 <code>0</code></li>
+<li>由于 <code>then()</code> 返回 Promise 对象，因此 P1 的 <code>then()</code> 调用将被放入微队列(P0 将在 P4 回调中被完成)</li>
+<li>此时微队列为 <code>[P1 对应回调，P1.then()]</code></li>
+</ul>
+</li>
+<li>执行 <code>P1 对应回调</code><ul>
+<li>输出为 <code>0, 1</code></li>
+<li>P1 变为完成状态 -&gt; 其回调（P2）进入微队列</li>
+<li>此时微队列为 <code>[P4.then(() =&gt; resolve(P0))，P2 对应回调]</code></li>
+</ul>
+</li>
+<li>执行 <code>P1.then()</code><ul>
+<li>P4 对应回调 <code>() =&gt; resolve(P0)</code> 进入微队列</li>
+<li>此时微队列为 <code>[P2 对应回调，() =&gt; resolve(P0)]</code></li>
+</ul>
+</li>
+<li>执行 <code>P2 对应回调</code><ul>
+<li>输出为 <code>0, 1, 2</code></li>
+<li>P2 变为完成状态 -&gt; 其回调 P3 进入微队列</li>
+<li>此时微队列为 `[() =&gt; resolve(P0)，P3 对应回调]</li>
+</ul>
+</li>
+<li>执行 <code>() =&gt; resolve(P0)</code><ul>
+<li>P0 变为完成状态 -&gt; 其回调进入微队列</li>
+<li>此时微队列为 <code>[P3 对应回调，log(res)]</code></li>
+</ul>
+</li>
+<li>执行 <code>P3 对应回调</code><ul>
+<li>输出为 <code>0, 1, 2, 3</code></li>
+<li>P3 变为完成状态 -&gt; 其回调进入微队列</li>
+<li>此时微队列为 <code>[log(res)，P5 对应回调]</code></li>
+</ul>
+</li>
+<li>执行 <code>log(res)</code><ul>
+<li>由于 P0 &amp; P4 数据和状态一致，此时输出 P4 携带的 4 =&gt; <code>0, 1, 2, 3, 4</code></li>
+</ul>
+</li>
+<li>输出其后的 <code>5, 6</code></li>
+</ol>
 </li>
 </ul>
 
