@@ -1088,6 +1088,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Standford%20CS131/Edge%20Detection/" class="md-nav__link">
+        Edge Detection
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1965,17 +1979,11 @@
 
 <h2 id="1-lc-3">1 基本结构的 LC-3 实现</h2>
 <p>结构化编程 Structured  Programming 由三种基本结构构成：</p>
-<ul>
-<li>
-<p>顺序 Sequential：LC-3 本来就是顺序执行的，不用刻意实现（除非手搓中断处理函数）</p>
-</li>
-<li>
-<p>条件 Conditional：此处特指只有 T/F 的双分支结构</p>
-</li>
-<li>
-<p>循环 Iterative</p>
-</li>
-</ul>
+<ol>
+<li>顺序 Sequential：LC-3 本来就是顺序执行的，不用刻意实现（默认 <code>PC++</code>）</li>
+<li>条件 Conditional：此处特指只有 <code>True / False</code> 的双分支结构</li>
+<li>循环 Iterative</li>
+</ol>
 <h3 id="11">1.1 条件（二分支）结构</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>                |        ...        |
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                |                   |
@@ -2017,7 +2025,7 @@
 </div>
 <ol>
 <li>
-<p>对 <code>M[addr]</code> 或 <code>reg[x]</code> 赋值</p>
+<p>对 <code>M[addr]</code> 或 <code>Reg[x]</code> 赋值</p>
 <p>如果我们知道了上一个 block 的作用是在特定的 Mem / Reg 产生输出，就可以直接赋值</p>
 <p>=&gt; 然后从下一个 block 开始测试</p>
 </li>

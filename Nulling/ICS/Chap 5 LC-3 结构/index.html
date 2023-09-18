@@ -1088,6 +1088,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Standford%20CS131/Edge%20Detection/" class="md-nav__link">
+        Edge Detection
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2695,9 +2709,6 @@ res &amp;= 3 * (2^{16} - 8) \\
 </ul>
 <h3 id="22-memory">2.2 内存 Memory</h3>
 <p>存储了 <strong>指令</strong> 和 <strong>数据</strong>，访问内存的过程如下：</p>
-<ol>
-<li><code>MAR = addr</code></li>
-</ol>
 <table>
 <thead>
 <tr>
@@ -2707,6 +2718,11 @@ res &amp;= 3 * (2^{16} - 8) \\
 </tr>
 </thead>
 <tbody>
+<tr>
+<td align="center">1</td>
+<td align="center"><code>MAR = addr</code></td>
+<td align="center"></td>
+</tr>
 <tr>
 <td align="center">2</td>
 <td align="center">向内存传递 RD（读信号）</td>
@@ -2725,17 +2741,17 @@ res &amp;= 3 * (2^{16} - 8) \\
 </tbody>
 </table>
 <h3 id="23-alu">2.3 ALU</h3>
-<p>ALU 用于处理信息</p>
+<p><code>ALU</code> 用于处理信息（进行计算）</p>
 <ul>
 <li>
-<p>两个输入分别为：Reg，Reg / Const</p>
+<p>两个输入分别为：<code>SR1(Reg)</code>，<code>SR2(Reg) / number(立即数)</code></p>
 <p>第二个参数类型由开关 MUX 决定，其控制信号来自 Control 模块（实际上就是指令的 <code>bit[5]</code>）</p>
 </li>
 <li>
 <p>输出</p>
 <ul>
 <li>
-<p>产生的 16 bit 结果存放在通用寄存器中，具体写入寄存器由 "寄存器选择信号" DR（3 bit）控制</p>
+<p>产生的 16-bit 结果存放在通用寄存器中，具体写入寄存器由 "寄存器选择信号" <code>DR(3-bit)</code> 控制</p>
 </li>
 <li>
 <p>输出还会被传送至 LOGIC 模块，根据值的正负情况修改表示 Condition Code 的三个 1 bit 寄存器</p>
@@ -2746,14 +2762,14 @@ res &amp;= 3 * (2^{16} - 8) \\
 <h3 id="24-pc-pcmux">2.4 PC &amp; PCMUX</h3>
 <ul>
 <li>
-<p>PC 寄存器通过总线向 MAR 提供 <code>address</code>，表示下一个周期需要执行的指令地址</p>
+<p>PC 寄存器通过总线向 MAR 提供 <code>address</code>，表示下一个周期需要执行的指令（内存）地址</p>
 </li>
 <li>
-<p>PC 的输入由 3选1 PCMUX 提供，用于选择和切换正在执行的指令</p>
+<p>PC 的输入由 <em>3选1 PCMUX</em> 提供，用于选择和切换正在执行的指令</p>
 <ul>
 <li>
-<p>PCMUX 的三个输入为：<code>PC++</code>，<code>PC + offset</code> ，来自总线的值</p>
-<p>当执行 “控制指令” （如条件跳转 ）时，PC 将装入 <code>PC + offset</code> （而非自增量）</p>
+<p>PCMUX 的三个输入为：<code>PC + 1</code>，<code>PC + offset</code> ，来自总线的值（ALU 输出的 <code>Base + offset</code>）</p>
+<p>当执行 “控制指令” （如条件跳转 ）时，PC 将装入 <code>PC + offset</code> / <code>Base + offset</code>（而非进行默认的自增）</p>
 <blockquote>
 <p><code>PC + offset</code> 由专用加法器而非 ALU 完成</p>
 </blockquote>
@@ -2766,14 +2782,17 @@ res &amp;= 3 * (2^{16} - 8) \\
 <ol>
 <li>
 <p>用于 <code>load / store</code> ，根据 <code>opcode</code> 的不同有多种计算方式</p>
-<p><code>(PC++ | reg[Base]) + (IR[m:n] | 0)</code></p>
+<p><code>(PC+1 | reg[Base]) + (IR[m:n] | 0)</code></p>
 <ul>
 <li>ADDR1MUX：负责在 <code>PC++</code> 与 <code>reg[BASE]</code> 间做出选择</li>
 <li>ADDR2MUX：负责在另外 4 个数值间选择（ 0 与 5/8/10 bit 的 <strong>符号扩展</strong>）</li>
 </ul>
 </li>
 <li>
-<p>用于 <code>TRAP</code>：是 <code>trapvector</code> 的 <strong>零扩展</strong>（无论如何，前面补 <code>0</code>）</p>
+<p>用于 <code>TRAP</code>：是 <code>trapvector</code> 的 <strong>零扩展</strong></p>
+<blockquote>
+<p>对应的 TRAP 程序段的 <code>function pointer</code> 存放在内存地址 <code>0x00[Vector]</code> 处</p>
+</blockquote>
 </li>
 </ol>
 

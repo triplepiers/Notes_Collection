@@ -1088,6 +1088,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CV/Standford%20CS131/Edge%20Detection/" class="md-nav__link">
+        Edge Detection
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1492,26 +1506,6 @@
   <a href="#4" class="md-nav__link">
     4 相关知识
   </a>
-  
-    <nav class="md-nav" aria-label="4 相关知识">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41" class="md-nav__link">
-    4.1 可执行映像
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42" class="md-nav__link">
-    4.2 链接
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1949,26 +1943,6 @@
     4 相关知识
   </a>
   
-    <nav class="md-nav" aria-label="4 相关知识">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41" class="md-nav__link">
-    4.1 可执行映像
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42" class="md-nav__link">
-    4.2 链接
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -1997,32 +1971,32 @@
 </blockquote>
 <ul>
 <li>
-<p>我们不再需要记忆 opcode，只用记如 NOT 的 “助记符” Mnemonic</p>
+<p>我们不再需要记忆 <code>opcode</code>，只用记如 <code>NOT</code> 的 <em>助记符 Mnemonic</em></p>
 </li>
 <li>
-<p>我们不再需要记忆二进制的内存地址，只用记如 After-Loop 的 “符号地址” Symbolic Address</p>
+<p>我们不再需要记忆二进制的内存地址，只用记如 <code>After-Loop</code> 的 <em>符号地址 Symbolic Address</em>（一些个 Label ）</p>
 </li>
 </ul>
 <h2 id="1">1 指令</h2>
-<p>不同于 16 bit 的机器指令，汇编指令通常具有如下的格式：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[LABEL] OPCODE OPERANDS; [COMMENT]
+<p>不同于 16-bit 的机器指令，汇编指令通常具有如下的格式：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[LABEL] OPCODE OPERANDS; [COMMENT] =&gt; 括号中为可选项
 </code></pre></div>
 <ol>
 <li>
 <p>标号 LABEL（可选）</p>
-<p>其实就是给一个 16 bit 地址起了个标识符</p>
+<p>其实就是给一个 16-bit 地址起了个别名</p>
 <ul>
 <li>
-<p>标识符可包含大小写，但必须以字母开头；长度为 <code>[1,20]</code></p>
+<p>标识符可包含大小写，但必须以字母开头；长度为 <code>[1, 20]</code></p>
 </li>
 <li>
-<p>可以作为  <code>jump/load/save</code> 的目标地址</p>
+<p>可以作为  <code>JUMP/LOAD/SAVE</code> 操作的目标地址</p>
 </li>
 </ul>
 </li>
 <li>
 <p>操作码 Opcode</p>
-<p>一个字符串（比如 <code>JMP</code> ），对应了 LC-3 中的一个 4 bit <code>opcode</code></p>
+<p>一个字符串（比如 <code>JMP</code> ），对应了 LC-3 中的一个 4-bit <code>opcode</code></p>
 </li>
 <li>
 <p>操作数 Operands</p>
@@ -2034,7 +2008,7 @@
 <li>
 <p>常数：<code>#NNN(Dec)</code>，<code>bNNN(Bin)</code>，<code>xNNN(Hec)</code></p>
 <blockquote>
-<p>虽然不写 base 也 <strong>可能没有歧义</strong>（比如部分 Hec），但最好还是写一下</p>
+<p>虽然不写 base 也 *可能没有歧义（比如部分 Hec），但最好还是写一下</p>
 </blockquote>
 </li>
 </ul>
@@ -2051,7 +2025,10 @@
 <p>这些指令实际上没有对应的机器码（在执行过程中会被丢弃），只是让程序员向汇编器传递信息</p>
 <ol>
 <li>
-<p><code>.ORIG addr</code> 让汇编器将该程序放在 <code>M[addr]</code> （也是程序开始）</p>
+<p><code>.ORIG addr</code> 让汇编器将该程序放在 <code>M[addr]</code>  处</p>
+<blockquote>
+<p><code>addr</code> 即为该程序段的起始地址</p>
+</blockquote>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>.ORIG<span class="w"> </span>x3000<span class="w">          </span><span class="c"># 由于伪指令不会被实际执行</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>AND<span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span>R0<span class="nb">,</span><span class="w"> </span><span class="c">#0;      # 所以实际存在 x3000 的是这一行</span>
 </code></pre></div>
@@ -2059,7 +2036,7 @@
 <li>
 <p><code>.FILL operand</code> 令 <code>M[x] = operand</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c"># 用于向内存中填充比较大的值</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span>ADDR<span class="w"> </span>.FILL<span class="w"> </span>x4000<span class="w">     </span><span class="c"># 用 LD R2, ADDR 即可另 R2 = x4000</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ADDR<span class="w"> </span>.FILL<span class="w"> </span>x4000<span class="w">     </span><span class="c"># 用 LD R2, ADDR 即可另 R2 = M[ADDR] = x4000</span>
 </code></pre></div>
 </li>
 <li>
@@ -2083,7 +2060,7 @@
 <li>
 <p><code>.END</code> 声明程序文本结束，其后字符被忽略（不会停止程序执行）</p>
 <ul>
-<li>我们认为一对 <code>&lt;.ORIG&gt; - &lt;.END&gt;</code> 包裹了一个完整的程序片段</li>
+<li>我们认为一对 <code>&lt;.ORIG&gt; ... &lt;.END&gt;</code> 包裹了一个完整的程序片段</li>
 <li>大多数程序都是完整的一大段，但也存在多个代码段拼装的情形（各段被独立汇编）</li>
 </ul>
 </li>
@@ -2094,29 +2071,43 @@
 <p>汇编程序必须被汇编器翻译为机器语言代码后才能执行（毕竟计算机只认识 <code>0 &amp; 1</code>），并会丢掉注释和伪指令</p>
 </li>
 <li>
-<p>由于 LABEL 可能是<strong>先使用后定义</strong>的，无法在第一次扫描时确定 LABEL-Address 的映射关系，所以 <strong>不能在一次扫描中解决问题</strong></p>
+<p>由于 Label 可能是<strong>先使用后定义</strong>的，无法在第一次扫描时立刻确定 <code>Label-&gt;Address</code> 的映射关系</p>
+<p>所以 <strong>不能在一次扫描中解决问题</strong></p>
+</li>
+<li>
+<p>解决方案：两遍扫描</p>
 <ol>
 <li>
 <p>创建符号表</p>
-<p>记录所有的 <code>Label -&gt; 16 bit Address</code> 映射关系</p>
+<p>记录所有的 <code>Label -&gt; 16-bit Address</code> 映射关系</p>
 </li>
 <li>
 <p>生成机器语言程序</p>
-<p>根据 ISA 规范替换 <code>opcode &amp; operands</code>，根据符号表替换 <code>Label</code></p>
+<p>根据 ISA 规范替换 <code>opcode &amp; operands</code>，根据 Symbol Table替换 <code>Label</code></p>
 </li>
 </ol>
 </li>
 </ul>
 <h2 id="4">4 相关知识</h2>
-<h3 id="41">4.1 可执行映像</h3>
-<p>程序的执行实体 Entity 又被称为 “可执行映像” Executable Image（可以认为是 Win 下的 <code>.exe</code>）</p>
+<ul>
+<li>
+<p>可执行映像</p>
+<p>程序的执行实体 Entity 又被称为 “可执行映像” Executable Image（可以认为是 Win 下的 <code>.exe</code> 文件）</p>
 <p>这些映像通常是由不同人员编写的多个独立模块 <strong>链接</strong> 形成的多目标文件（多个 <code>.o</code> 链接）</p>
-<h3 id="42">4.2 链接</h3>
+</li>
+<li>
+<p>链接</p>
 <p>当我们使用 库函数 / 另一个模块中的函数 时，可能导致出现 “未知符号”（未在本文件中定义）</p>
 <p>在 LC-3 中，我们可以通过 <strong>伪指令</strong>  <code>.EXTERNAL NAME</code> 声明外部标识符：</p>
 <ul>
-<li>在编译过程中不会报 <code>undefined</code> 错误</li>
-<li><strong>链接器</strong> Linker 将根据对应模块信息对其进行替换</li>
+<li>
+<p>在编译过程中不会报 <code>undefined</code> 错误（即使在当前文件中找不到）</p>
+</li>
+<li>
+<p><strong>链接器</strong> Linker 将根据对应模块信息对其进行替换</p>
+</li>
+</ul>
+</li>
 </ul>
 
 
