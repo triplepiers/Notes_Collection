@@ -2418,10 +2418,10 @@
 <ul>
 <li>
 <p>事实上，C 语言的 <strong>所有函数参数都是 pass by VALUE</strong>，传递的指针本身也是一个值拷贝 </p>
-<p>=&gt; 但我们可以通过这个拷贝提供的地址找到并修改其所指向的原始数据副本（Caller 栈帧 / 全局变量）</p>
+<p>=&gt; 但我们可以通过这个拷贝提供的地址找到并修改其所指向的原始数据副本（Caller's Active Record / Global Variable）</p>
 </li>
 <li>
-<p>在调用函数时，C 编译器将每个参数作为 Expression 进行计算，并将其压入 Runtime Stack（子函数栈帧）</p>
+<p>在调用函数时，C 编译器将每个参数作为 expression 进行计算，并将其压入 Runtime Stack 的 Callee 栈帧中</p>
 </li>
 </ul>
 <p>下图是在 <code>main()</code> 中调用函数 <code>swap(3,4)</code> 时的 Runtime Stack 状态：</p>
@@ -2461,7 +2461,7 @@
 </ol>
 <h3 id="02-struct">0.2 Struct</h3>
 <blockquote>
-<p><code>struct</code> 的各成员变量在 Runtime Stack 中占据一串 <strong>连续的</strong> 内存空间</p>
+<p><code>struct</code> 的各成员变量在 Runtime Stack 中占据一串 <em>连续的内存空间</em></p>
 </blockquote>
 <ol>
 <li>
@@ -2472,28 +2472,30 @@
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">heading</span><span class="p">;</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">speed</span><span class="p">;</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">};</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1">// 我们也可以在定义结构体的同时实例化</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="o">*</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">}</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1">// 我们也可以在定义结构体的同时实例化</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="o">*</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">}</span><span class="w"> </span><span class="n">node</span><span class="p">;</span><span class="w"> </span><span class="c1">// -&gt; 实例化了一个 node</span>
 </code></pre></div>
 </li>
 <li>
 <p>实例化</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// 类名是 struct + sName</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">struct</span><span class="w"> </span><span class="nc">Flight</span><span class="w"> </span><span class="n">plane</span><span class="p">;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1">// 使用成员操作符访问成员变量</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">plane</span><span class="p">.</span><span class="n">Speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">800.00</span><span class="p">;</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">plane</span><span class="p">.</span><span class="n">altitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">struct</span><span class="w"> </span><span class="nc">Flight</span><span class="w"> </span><span class="n">plane</span><span class="p">;</span><span class="w">    </span><span class="c1">// 这里实例化得到的是 plane</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1">// 使用成员操作符访问成员变量</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">plane</span><span class="p">.</span><span class="n">Speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">800.00</span><span class="p">;</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">plane</span><span class="p">.</span><span class="n">altitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
 </code></pre></div>
 </li>
 <li>
 <p><code>typedef type name</code></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// 每次都带着 struct 一起用多少有点累，起个别名吧</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">node</span><span class="w"> </span><span class="n">Node</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1">// 然后我们就可以使用 Node 作为新的变量类型了</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">Node</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">Node</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="c1">// 可以使用 Node 作为变量类型声明了!</span>
 </code></pre></div>
 </li>
 </ol>
@@ -2527,18 +2529,21 @@
 <div class="highlight"><span class="filename">数组长度取决于输入 numAircraft</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">numAircraft</span><span class="p">;</span><span class="w"> </span><span class="n">Flight</span><span class="o">*</span><span class="w"> </span><span class="n">planes</span><span class="p">;</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">numAircraft</span><span class="p">);</span><span class="w"> </span><span class="c1">// 获取输入</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1">// malloc() 的返回类型为 void*，需要进行强制类型转化，sizeof() 返回了单个 Flight 结构体需要的 Byte 数量</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">planes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Flight</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Flight</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">numAircraft</span><span class="p">);</span><span class="w"> </span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1">// 若当前 Heap 中的剩余空间不足以满足需求，malloc() 将返回 NULL</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">planes</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Fail to allocate space.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">}</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="c1">// void* realloc(void* ptr, int size) 可以让我们动态调整 ptr 指向的动态空间大小，当 size == 0 时，与 free 等价（返回 NULL）</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">planes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Filght</span><span class="o">*</span><span class="p">)</span><span class="n">realloc</span><span class="p">(</span><span class="n">planes</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">);</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1">// 不要忘了手动 free</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">free</span><span class="p">(</span><span class="n">planes</span><span class="p">);</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1">// malloc() 的返回类型为 void*，需要进行强制类型转化</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1">// sizeof() 返回了单个 Flight 结构体需要的 Byte 数量</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">planes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Flight</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Flight</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">numAircraft</span><span class="p">);</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1">// 若当前 Heap 中的剩余空间不足以满足需求，malloc() 将返回 NULL</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">planes</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Fail to allocate space.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="p">}</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1">// void* realloc(void* ptr, int size) 支持动态调整 ptr 指向的空间大小</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1">// 当 size == 0 时，与 free 等价（返回 NULL）</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="n">planes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Filght</span><span class="o">*</span><span class="p">)</span><span class="n">realloc</span><span class="p">(</span><span class="n">planes</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">);</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="c1">// 不要忘了手动 free</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="n">free</span><span class="p">(</span><span class="n">planes</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li>
@@ -2554,7 +2559,7 @@
 <ul>
 <li>
 <p>子程序 Subroutine</p>
-<p>由 库 Library 提供的程序片段（函数）被称为 “子程序”</p>
+<p>由 <em>库 Library</em> 提供的程序片段被称为 “子程序”（也可以叫 “函数”）</p>
 <p>我们可以通过调用子程序来减少代码段的大量重复</p>
 </li>
 <li>
@@ -2563,8 +2568,9 @@
 <li>
 <p>调用过程</p>
 <ul>
-<li><code>reg[7] = PC+1</code> 记录返回地址（从函数调用的下一条指令开始执行）</li>
-<li><code>PC = addr(funcName)</code>  下一个周期开始执行调用的函数</li>
+<li>Caller 向 Runtime Stack 中压入实参</li>
+<li><code>R7 = PC+1</code> 记录返回地址（函数调用的下一条指令）</li>
+<li><code>PC = funcAddr</code>  PC 指向子程序起始位置</li>
 <li>
 <p>在 LC-3 中对应 <code>JSR(R) (0100)</code> 指令：</p>
 <table>
@@ -2596,7 +2602,7 @@
 </li>
 <li>
 <p>返回过程</p>
-<p><code>PC = reg[7]</code> 从特定寄存器中获取之前保存的返回地址</p>
+<p><code>PC = R7</code> PC 指向返回地址</p>
 <p>在 LC-3 中就是一条 <code>JMP R7</code> 的无条件跳转指令（相当于 <code>return</code>）</p>
 </li>
 </ul>
@@ -2613,25 +2619,25 @@
 <li>在<strong>返回前</strong>将其从 Mem 恢复至原来的 Reg 中（在 Caller 看来好像没有变化）</li>
 </ul>
 <blockquote>
-<p>此外，寄存器 <code>reg[7]</code> 是 Caller-Saved 的（因为调用时会被返回地址覆盖）</p>
+<p>此外，寄存器 <code>R7</code> 是 Caller-Saved 的（因为调用时会被返回地址覆盖）</p>
 </blockquote>
 </li>
 </ul>
 <h4 id="runtime-stack">Runtime Stack</h4>
 <blockquote>
-<p>在 LC-3 中，我们使用 <code>R6(sp)</code> 指向栈顶，<code>R5(fp)</code> 指向当前使用的活动记录</p>
+<p>在 LC-3 中，我们使用 <code>R6(sp)</code> 指向栈顶，<code>R5(fp)</code> 指向当前活跃函数的栈帧</p>
 </blockquote>
 <ul>
 <li>
-<p>At Assembly-Level，函数只是：</p>
+<p>@ Assembly-Level，函数只是：</p>
 <ul>
 <li>一连串可以通过 <code>JSR</code> 调用执行的指令序列</li>
-<li>以 <code>RET</code> 收尾，并使得控制流返回 Caller</li>
+<li>以 <code>RET</code> 收尾，使得控制流返回 Caller</li>
 </ul>
 </li>
 <li>
-<p>Stack Frame / Activation Record 栈帧/活动记录</p>
-<p>每当我们调用函数，就在 Runtime Stack 中为该函数实例创建一个活动记录，用于储存其参数、局部变量、Bookkeeping Info（Caller's fp, Return Value &amp; Return Address）</p>
+<p>Stack Frame / Activation Record 栈帧 / 活动记录</p>
+<p>每当我们调用函数，就在 Runtime Stack 中为该函数实例创建一个活动记录，用于储存其参数、局部变量、Bookkeeping Info（Caller's <code>fp</code>, Return Value &amp; Return Address）</p>
 <p>当函数调用结束时，我们就将该活动记录从 Runtime Stack 中弹出</p>
 </li>
 </ul>
@@ -2734,7 +2740,7 @@
 </li>
 </ol>
 <h3 id="13">1.3 栈（本体）</h3>
-<p>Stack 是一种抽象数据类型（只要实现了 FILO 就行），它描述了存储机制而非具体的实现方法</p>
+<p>Stack 是一种<em>抽象数据类型</em>（只要实现了 FILO 就行），它描述了存储机制而非具体的实现方法</p>
 <ul>
 <li>Stack 有两个必要的方法：Push（向栈顶压入元素），Pop（从栈顶弹出元素）</li>
 <li>我们总是访问栈顶的元素，该元素一般被标识为 Top</li>
@@ -2742,24 +2748,24 @@
 <h4 id="_3">内存中的栈实现</h4>
 <p>内存中的栈通常由一段 <strong>连续</strong> 的内存空间 + 栈顶指针 <code>sp</code> 构成：</p>
 <blockquote>
-<p>由 Stack 占用的内存空间不能通过其他机制访问（即便该位置暂时空闲）</p>
+<p>由 Stack 占用的内存空间<em>不允许通过其他机制访问</em>（即便该位置暂时空闲）</p>
 </blockquote>
 <ul>
-<li><code>sp</code> 是一个寄存器，始终指向栈顶元素（</li>
 <li>
-<p>在 Push / Pop 时均被更新）</p>
+<p><code>sp</code> 是一个寄存器，始终指向栈顶元素 且 在 Push / Pop 时均被更新</p>
 <blockquote>
-<p>在 LC-3 中，通常使用 <code>r[6]</code> 作为 sp 寄存器，起始值 == <code>-EMPTY</code></p>
+<p>在 LC-3 中，通常使用 <code>R6</code> 作为 sp 寄存器，起始值 == <code>-EMPTY</code></p>
 </blockquote>
 </li>
 <li>
-<p>栈中的剩余数据在 Push / Pop 时不需要移动（只要修改 <code>sp</code> ）</p>
+<p>栈中的剩余<em>数据</em>在 Push / Pop 时<em>不需要移动</em>（只要修改 <code>sp</code> ）</p>
 </li>
 <li>
-<p>下溢出 Underflow：对空栈执行 Pop</p>
-</li>
-<li>
-<p>上溢出 Overflow：对满栈执行 Push</p>
+<p>两种溢出</p>
+<ul>
+<li>下溢 Underflow：对空栈执行 Pop</li>
+<li>上溢 Overflow：对满栈执行 Push</li>
+</ul>
 </li>
 <li>
 <p>跳转至单独的溢出处理函数 <code>UNDERFLOW / OVERFLOW</code> 并不是一个理想的操作，不如记录执行 成功/失败 后直接返回 Caller：</p>
@@ -2822,9 +2828,6 @@
 <p>下面是 Patt 的版本（其实差不多？）：</p>
 <p><img alt="Stack" src="https://img1.imgtp.com/2023/07/13/Q5CgwgYn.png" /></p>
 <h2 id="2-array">2 Array</h2>
-<blockquote>
-<p>这一节突发引入了 C 语言？</p>
-</blockquote>
 <p>数组是一串 <strong>连续的内存空间</strong>，支持通过 <strong>下标访问</strong> 特定位置的元素</p>
 <h3 id="21">2.1 数组声明</h3>
 <p>在 C 语言中，我们按照如下语法声明一个数组：</p>
@@ -2839,7 +2842,7 @@
 <a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="kt">int</span><span class="w"> </span><span class="n">arr3</span><span class="p">[</span><span class="n">LEN</span><span class="p">];</span><span class="w"> </span><span class="c1">// 本质是 CONST</span>
 </code></pre></div>
 <blockquote>
-<p>当 <code>arr[]</code> 作为 <strong>局部变量</strong> 时，该空间会从 <code>run-time stack</code> 中分配</p>
+<p>当 <code>arr[]</code> 作为 <strong>局部变量</strong> 时，该空间会从 <code>Runtime stack</code> 中分配</p>
 </blockquote>
 <h3 id="22">2.2 下标访问</h3>
 <p>因为数组空间是连续的，因此可以快速通过下标计算指定元素的地址：</p>

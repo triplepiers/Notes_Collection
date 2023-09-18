@@ -2171,17 +2171,27 @@
 
 <h2 id="1-intro">1 Intro</h2>
 <blockquote>
-<p>Privilege 和 Priority 的概念是正交的（完全不相关）</p>
+<p>Privilege 和 Priority 的概念是正交的，<strong>两者完全不相关！</strong></p>
 </blockquote>
 <ul>
 <li>
 <p>Privilege 权限</p>
-<p>不是所有程序都有权限执行 <strong>所有类型的指令</strong>，我们将所有程序划分为 privileged / unprivileged 两类，前者运行在 Supervisor Mode，后者运行在 User Mode</p>
+<p>不是所有程序都有权限执行 <strong>所有类型的指令</strong>，我们将所有程序划分为 Privileged / UNprivileged 两类，前者运行在 Supervisor Mode，后者运行在 User Mode</p>
 <p>只有运行在 Supervisor Mode 的程序可以运行 <strong>所有类型指令</strong>，并访问 <strong>任意内存空间</strong></p>
+<p>在 LC-3 中可能导致的 Exception 有：</p>
+<ul>
+<li>
+<p>Privilege Mode Exception：越权执行指令，比如在用户态执行 RTI</p>
+</li>
+<li>
+<p>Access Control Violation Exception：越权访问内存地址，比如在用户态尝试访问 System Space 或 I/O Page</p>
+</li>
+</ul>
 </li>
 <li>
 <p>Priority 优先级</p>
 <p>每个程序都被赋予了 Priority，这是时间片分配的依据</p>
+<p>LC-3 共支持 8 个优先级，其中 Level 7 最高，Level 0 最低</p>
 <blockquote>
 <p>一些策略允许高优先级程序抢占低优先级程序的时间片</p>
 </blockquote>
