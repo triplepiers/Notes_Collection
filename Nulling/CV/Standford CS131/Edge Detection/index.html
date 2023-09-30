@@ -1180,6 +1180,19 @@
     2.1 Simple Sample
   </a>
   
+    <nav class="md-nav" aria-label="2.1 Simple Sample">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smooth-filter" class="md-nav__link">
+    Smooth Filter
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1194,6 +1207,33 @@
     2.3 Canny Detector
   </a>
   
+    <nav class="md-nav" aria-label="2.3 Canny Detector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#non-maximum-suppression" class="md-nav__link">
+    Non-Maximum Suppression 非极大值抑制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hysteresis-thresholding" class="md-nav__link">
+    Hysteresis Thresholding
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gaussian-kernel-size" class="md-nav__link">
+    Gaussian Kernel Size
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -1205,6 +1245,26 @@
   <a href="#3-hough-transform" class="md-nav__link">
     3 Hough Transform
   </a>
+  
+    <nav class="md-nav" aria-label="3 Hough Transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algorithm" class="md-nav__link">
+    Algorithm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remarks" class="md-nav__link">
+    Remarks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2023,6 +2083,19 @@
     2.1 Simple Sample
   </a>
   
+    <nav class="md-nav" aria-label="2.1 Simple Sample">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smooth-filter" class="md-nav__link">
+    Smooth Filter
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2037,6 +2110,33 @@
     2.3 Canny Detector
   </a>
   
+    <nav class="md-nav" aria-label="2.3 Canny Detector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#non-maximum-suppression" class="md-nav__link">
+    Non-Maximum Suppression 非极大值抑制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hysteresis-thresholding" class="md-nav__link">
+    Hysteresis Thresholding
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gaussian-kernel-size" class="md-nav__link">
+    Gaussian Kernel Size
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -2048,6 +2148,26 @@
   <a href="#3-hough-transform" class="md-nav__link">
     3 Hough Transform
   </a>
+  
+    <nav class="md-nav" aria-label="3 Hough Transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algorithm" class="md-nav__link">
+    Algorithm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remarks" class="md-nav__link">
+    Remarks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2123,11 +2243,269 @@ $$
 \theta = \arctan(\frac{\partial f}{\partial y} / \frac{\partial f}{\partial x})
 \]</div>
 <h4 id="2d-discrete-derivative-filter">2D discrete derivative filter</h4>
+<ul>
+<li>计算 X 方向的导数（左右两侧的差值取平均）</li>
+</ul>
+<div class="arithmatex">\[
+\frac{1}{3}
+\left[ 
+    \begin{array}{3}
+        1 &amp; 0 &amp; -1\\
+        1 &amp; 0 &amp; -1\\
+        1 &amp; 0 &amp;-1
+    \end{array}
+\right]
+\]</div>
+<ul>
+<li>计算 Y 向的导数</li>
+</ul>
+<div class="arithmatex">\[
+\frac{1}{3}
+\left[ 
+    \begin{array}{3}
+        1 &amp; 1 &amp; 1\\
+        0 &amp; 0 &amp; 0\\
+        -1 &amp; -1 &amp;-1
+    \end{array}
+\right]
+\]</div>
 <h2 id="2-edge-detector">2 Edge Detector</h2>
 <h3 id="21-simple-sample">2.1 Simple Sample</h3>
+<ul>
+<li>
+<p>Characterizing Edges</p>
+<p>边缘就是 image intensity function 发生快速变化的地方（左右边缘各突变一次）</p>
+</li>
+<li>
+<p>Image Gradient</p>
+<div class="arithmatex">\[
+\nabla f = \left[ \frac{\partial f}{\partial x}, \frac{\partial f}{ \partial y} \right]
+\]</div>
+<ul>
+<li>
+<p>下面是不同梯度向量表示的边缘案例（向量指向变化最快的方向）</p>
+<p>具体角度  <span class="arithmatex">\(\theta\)</span>  可以用反三角函数计算，变化强度可以通过向量模长判断</p>
+<p><img alt="图片 1.png" src="https://img1.imgtp.com/2023/09/27/ultCvitp.png" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Noise</p>
+<ul>
+<li>
+<p>Finite Difference Filters 对噪声非常敏感</p>
+</li>
+<li>
+<p>对图片进行 smooth 或许能有所帮助</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="smooth-filter">Smooth Filter</h4>
+<blockquote>
+<ul>
+<li>
+<p>Smoothed derivative removes noise, but <em>blurs</em> edge.</p>
+</li>
+<li>
+<p>Larger kernels will blur the image more.</p>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>
+<p>Mean Smoothing</p>
+<p>就是对相邻三个点取平均 <span class="arithmatex">\([ 1,1,1]\)</span></p>
+</li>
+<li>
+<p>Gaussian Smoothing</p>
+<p>加大了中间像素点的权重 <span class="arithmatex">\([1,2,1]\)</span></p>
+<ul>
+<li>事实上 2D-Gaussian * <span class="arithmatex">\([1, 0, -1]\)</span> 就是 X - derivative 的状态</li>
+</ul>
+</li>
+<li>
+<p>致边缘的丢失 —— 在 <span class="arithmatex">\(\frac{d}{dx}(f*g)\)</span> 中寻找峰值：</p>
+<p>平滑的本质是将图片矩阵与filter 矩阵相乘（可以看作两个函数相乘）</p>
+<p><img alt="图片 2.png" src="https://img1.imgtp.com/2023/09/27/tMsAiffc.png" /></p>
+<p>此外，我们也可以通过以下公式略去求 <span class="arithmatex">\(f*g\)</span> 的部分</p>
+<div class="arithmatex">\[
+\frac{d}{dx}(f*g) = f * \frac{d}{dx}g
+\]</div>
 <h3 id="22-sobel-detector">2.2 Sobel Detector</h3>
+</li>
+</ul>
+<p>使用两个 3 x 3 的卷积核（ X &amp; Y 方向 ）对图片进行处理</p>
+<div class="arithmatex">\[
+G_x = \left[
+    \begin{array}{3}
+    +1 &amp; 0 &amp; -1\\
+    +2 &amp; 0 &amp; -2\\
+    +1 &amp; 0 &amp; -1
+    \end{array}
+\right],
+G_y = \left[
+    \begin{array}{3}
+    +1 &amp; +2 &amp; +1\\
+    0 &amp; 0 &amp; 0\\
+    -1 &amp; -2 &amp; -1
+    \end{array}
+\right]
+\]</div>
+<p>—— 这两个卷积核实际上就是 Gaussian Smooth <span class="arithmatex">\([1,2,1]\)</span> 和 Differentiation <span class="arithmatex">\([1,0,-1]\)</span> 相乘得到的</p>
+<ul>
+<li>
+<p>Magnitude <span class="arithmatex">\(G = \sqrt{G_x^2 + G_y^2}\)</span>，梯度方向 <span class="arithmatex">\(\Theta = arctan(\frac{G_x}{G_y})\)</span></p>
+</li>
+<li>
+<p>边缘提取：我们可以对处理结果设置一个 threshold，高于阈值的像素点即为最终所得的边缘</p>
+</li>
+<li>
+<p>Problems：</p>
+<ol>
+<li>Poor location：trigger 可能在相邻的多个像素点内被触发</li>
+<li>阈值对特定方向的支持度高于其他方向：可能忽略倾斜的线条，或者产生 False Negative</li>
+</ol>
 <h3 id="23-canny-detector">2.3 Canny Detector</h3>
+</li>
+<li>
+<p>理论支持</p>
+<ul>
+<li>
+<p>Step-edges（跳变边缘）被 additive Gaussian noise 所破坏。</p>
+</li>
+<li>
+<p>高斯函数的一阶导数与优化信噪比 &amp; 定位精度乘积的操作符非常接近。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Canny 算子可以</p>
+<ul>
+<li>
+<p>抑制 noise 的影响，计算梯度的模长 &amp; 方向</p>
+</li>
+<li>
+<p>使用 hysteresis（滞后现象）&amp; connectivity 来检测边缘</p>
+</li>
+<li>
+<p>实现 Non-Maximum Suppression</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="non-maximum-suppression">Non-Maximum Suppression 非极大值抑制</h4>
+<blockquote>
+<p>Background：</p>
+<p>区别于 “图像分类”（仅有一个输出），“目标检测“ 的输出数量是不确定的。</p>
+<p>模型往往会给出 <em>远高于实际数量的边界框</em>（往往互相堆叠），而我们需要从中选取 <em>最好</em> 的一个</p>
+<p>=&gt; Non-Maximum Suppression 通过筛选 <em>局部极大值</em> 得到最优解</p>
+</blockquote>
+<ul>
+<li>
+<p>边缘 == 梯度达到 Maximum</p>
+<p>=&gt; 我们可以将 Non-Maximum 的梯度数据进行压缩（即便已经超过了阈值）</p>
+</li>
+<li>
+<p>只有 8 中可能的方向</p>
+<ul>
+<li>
+<p>在非局部最大的变化方向上对所有像素点进行压缩</p>
+</li>
+<li>
+<p>在所有被标出的像素点邻近区域运用该算法</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="hysteresis-thresholding">Hysteresis Thresholding</h4>
+<blockquote>
+<p>Thresholding &amp; Linking</p>
+</blockquote>
+<ul>
+<li>
+<p>避免在靠近阈值的像素附近出现条纹</p>
+</li>
+<li>
+<p>定义了 <strong>Low &amp; High 两个阈值</strong></p>
+<ul>
+<li>
+<p>低于 Low 的将被认为 <em>不是边缘</em></p>
+</li>
+<li>
+<p>高于 High 的是 <em>strong edge</em></p>
+</li>
+<li>
+<p>介于两者之间的是 <em>weak edge</em></p>
+</li>
+</ul>
+</li>
+<li>
+<p>如果符合以下两种条件之一就认为是 <em>edge pixel</em></p>
+<blockquote>
+<p>使用 High Threshold 来 <em>start</em> 边缘，使用 Low Threshold 来 <em>continue</em></p>
+</blockquote>
+<ol>
+<li>与 <em>strong edge pixel</em> 直接相连</li>
+<li>通过其他介于两个阈值之间的像素与 <em>strong edge pixel</em> 相连</li>
+</ol>
+</li>
+</ul>
+<h4 id="gaussian-kernel-size">Gaussian Kernel Size</h4>
+<p>我们记 Gaussian 卷积核的大小为 <span class="arithmatex">\(\sigma\)</span> ：</p>
+<ul>
+<li>大的 <span class="arithmatex">\(\sigma\)</span> 可以探测更大范围的边缘（忽略排线，保留轮廓）</li>
+<li>小的 <span class="arithmatex">\(\sigma\)</span> 可以探测更多的细节特征</li>
+</ul>
 <h2 id="3-hough-transform">3 Hough Transform</h2>
+<blockquote>
+<p>通过使用其他的 Edge Detection 算法 + 使用 Threshold 处理计算的得到的梯度，我们可以得到一些 <em>partially describe</em> 物体实际边界的像素点</p>
+</blockquote>
+<ul>
+<li>只能用于探测 <strong>参数方程已知</strong> 的几何图形（直线，圆，双曲线等）</li>
+<li>在 存在噪声 / 部分遮挡 的情况下仍能给出较为稳健的结果</li>
+</ul>
+<h3 id="algorithm">Algorithm</h3>
+<ul>
+<li>
+<p>我们把参数空间 <span class="arithmatex">\(a-b\)</span> 划分为 <em>cells</em> 以方便对齐进行量化 =&gt; 一般被称为 <code>accumulator cells</code></p>
+</li>
+<li>
+<p>计算 lines ( 考虑直线方程 <span class="arithmatex">\(y_i = a*x_i + b\)</span> ) 在特定 cell 中相交的次数：</p>
+<p>=&gt; 我们认为获得 vote 数超过一定阈值的 cell 确定了一条有效的直线</p>
+<ul>
+<li>
+<p>对于给定的任意 <em>两个点</em> 我们都可以确定一条直线 =&gt; 一组固定的 <span class="arithmatex">\((a_i,b_i)\)</span> 取值</p>
+</li>
+<li>
+<p>对每个处于 <span class="arithmatex">\(([a_{min},a_{max}], [b_{min},b_{max}])\)</span> 之间的 cell 进行累加</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>除此之外也可以考虑 <span class="arithmatex">\(\rho = x * cos \theta + y * sin\theta\)</span> 的形式</p>
+<h3 id="remarks">Remarks</h3>
+<ul>
+<li>
+<p>Advantage</p>
+<ol>
+<li>理论比较简单</li>
+<li>比较容易实现</li>
+<li>可以优雅的处理像素点缺失 / 被遮挡的情况</li>
+<li>支持处理多种形式的参数方程（不仅仅是直线）</li>
+</ol>
+</li>
+<li>
+<p>Disadvantage</p>
+<ol>
+<li>曲线参数较多时计算复杂</li>
+<li>一轮处理只能检测同一种类型的曲线（不能同时检测直线和圆）</li>
+<li>Can be fooled by apparent lines</li>
+<li>直线的起止位置 <em>不能被确定</em></li>
+<li>Co-linear line segments cannot be separated.</li>
+</ol>
+</li>
+</ul>
 
 
 
