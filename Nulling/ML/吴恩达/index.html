@@ -1316,11 +1316,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#113-practical-tips" class="md-nav__link">
-    1.1.3 Practical Tips
+  <a href="#practical-tips" class="md-nav__link">
+    Practical Tips
   </a>
   
-    <nav class="md-nav" aria-label="1.1.3 Practical Tips">
+    <nav class="md-nav" aria-label="Practical Tips">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1419,6 +1419,60 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regularization" class="md-nav__link">
+    Regularization 正则化
+  </a>
+  
+    <nav class="md-nav" aria-label="Regularization 正则化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cost-function_2" class="md-nav__link">
+    Cost Function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linear-regression" class="md-nav__link">
+    Linear Regression
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logistic-regression" class="md-nav__link">
+    Logistic Regression
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-neural-networks" class="md-nav__link">
+    3 Neural Networks 神经网络
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Neural Networks 神经网络">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sample-with-4-layers" class="md-nav__link">
+    Sample with 4 layers
+  </a>
   
 </li>
         
@@ -2349,11 +2403,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#113-practical-tips" class="md-nav__link">
-    1.1.3 Practical Tips
+  <a href="#practical-tips" class="md-nav__link">
+    Practical Tips
   </a>
   
-    <nav class="md-nav" aria-label="1.1.3 Practical Tips">
+    <nav class="md-nav" aria-label="Practical Tips">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2455,6 +2509,60 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#regularization" class="md-nav__link">
+    Regularization 正则化
+  </a>
+  
+    <nav class="md-nav" aria-label="Regularization 正则化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cost-function_2" class="md-nav__link">
+    Cost Function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linear-regression" class="md-nav__link">
+    Linear Regression
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logistic-regression" class="md-nav__link">
+    Logistic Regression
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-neural-networks" class="md-nav__link">
+    3 Neural Networks 神经网络
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Neural Networks 神经网络">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sample-with-4-layers" class="md-nav__link">
+    Sample with 4 layers
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2516,6 +2624,19 @@
 <p>Dimensionality Reduction 降维: <u>Compress</u> data using fewer numbers.</p>
 </li>
 </ol>
+</li>
+</ol>
+<p>更加先进的机器学习算法包括：</p>
+<ol>
+<li>
+<p>Neural Networks 神经网络</p>
+<ul>
+<li>您可以直接使用他人训练好的神经网络模型进行 <em>推理 inference / prediction</em></li>
+<li>也可以自行 <em>训练 traning</em></li>
+</ul>
+</li>
+<li>
+<p>Decision Trees 决策树</p>
 </li>
 </ol>
 <h3 id="terminology">Terminology 术语表</h3>
@@ -2694,7 +2815,7 @@ f_{\overline{w},b}(\overline{x}) = \overline{w} \cdot \overline{x} + b \tag{2}
 \end{align*}
 \right.
 \]</div>
-<h4 id="113-practical-tips">1.1.3 Practical Tips</h4>
+<h4 id="practical-tips">Practical Tips</h4>
 <h5 id="feature-scaling">Feature Scaling</h5>
 <p>考虑特征 <span class="arithmatex">\((x_1,x_2)\)</span>，若 <span class="arithmatex">\(x_1 \in [0,10^{10}],\ x_2 \in [0, 10]\)</span></p>
 <p>=&gt; 此时 <span class="arithmatex">\(w_1\)</span> 往往较小，而 <span class="arithmatex">\(w_2\)</span> 往往较大（梯度下降时会在 MIN 值左右横跳）</p>
@@ -2868,8 +2989,8 @@ L\left(
     \end{align*}
 \right.
 \]</div>
-<p>考虑实际单用例实际类别 <span class="arithmatex">\(y^i = 1\)</span> 的情形：</p>
-<p>由于 <span class="arithmatex">\(f_{\vec{w},b}(\vec{x}^i) \in (0,1)\)</span>，故 <span class="arithmatex">\(-\log{(f_{\vec{w},b}(\vec{x}^i))} \in [0, +\infty)\)</span> 且当 <span class="arithmatex">\(f_{\vec{w},b}(\vec{x}^i) = 1\)</span> 时取最小值 0</p>
+<p>考虑实际单用例实际类别 <span class="arithmatex">\(y^i = 1\)</span> 的情形：
+由于 <span class="arithmatex">\(f_{\vec{w},b}(\vec{x}^i) \in (0,1)\)</span>，故 <span class="arithmatex">\(-\log{(f_{\vec{w},b}(\vec{x}^i))} \in [0, +\infty)\)</span> 且当 <span class="arithmatex">\(f_{\vec{w},b}(\vec{x}^i) = 1\)</span> 时取最小值 0</p>
 <p>=&gt; 预测该用例 100% 为 <span class="arithmatex">\(1\)</span> 时误差为 0</p>
 <hr />
 <p>由于仅存在 <span class="arithmatex">\(0, 1\)</span> 两种类别，我们可以将 Loss Function 简写为以下形式：</p>
@@ -2896,6 +3017,136 @@ L\left(
 </li>
 </ul>
 <h5 id="gradient-descent_2">Gradient Descent</h5>
+<p>同样的，我们使用 <span class="arithmatex">\(w' = w - \alpha \cdot \frac{\partial}{\partial w}f(x)\)</span> 来迭代参数：</p>
+<div class="arithmatex">\[
+\left\{
+\begin{align*}
+&amp;w_j = w_j - \alpha \cdot \frac{1}{m}\sum_{i=1}^m(f_{\vec{w},b}(\vec{x}^i) - y^i)x_j^i \\
+&amp;b = b - \alpha \cdot \frac{1}{m}\sum_{i=1}^m(f_{\vec{w},b}(\vec{x}^i) - y^i)
+\end{align*}
+\right.
+\]</div>
+<blockquote>
+<p>你会发现这个迭代式和 <em>线性回归</em> 的迭代式一模一样，但由于两者对 <span class="arithmatex">\(f_{\vec{w},b}\)</span> 的定义不同，这实际上是两个不同的表达式</p>
+</blockquote>
+<h3 id="regularization">Regularization 正则化</h3>
+<blockquote>
+<p>解决 <em>过拟合 Overfitting</em> 的有效手段</p>
+</blockquote>
+<p>其他解决过拟合的手段：</p>
+<ul>
+<li>收集更多的训练数据</li>
+<li>选择 更多 / 更少 的特征进行训练</li>
+</ul>
+<p>不同于直接 exclude 某些特征，正则化通过<u>缩小 <span class="arithmatex">\(w_j\)</span> 的值（不一定严格等于 0）</u>以避免某一特征产生过大的影响，从而避免 overfitting</p>
+<h5 id="cost-function_2">Cost Function</h5>
+<div class="admonition tip">
+<p class="admonition-title">smaller <span class="arithmatex">\((\vec{w},b)\)</span> =&gt; simpler model =&gt; less likely to overfit !</p>
+</div>
+<p>由于我们难以确定 <em>哪几个</em> 特征需要被正则化，一般的思路是 <strong>正则化所有</strong> 特征</p>
+<p>=&gt; 为此，我们需要为 Cost Function 添加一个正则化项：</p>
+<div class="arithmatex">\[
+J(\vec{w},b) = \frac{1}{2m} \sum_{i=1}^m(f_{\vec{w},b}(\vec{x}^i)-y^i)^2 +
+\frac{\lambda}{2m} \sum_{j=1}^n w_j^2
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\lambda\)</span> 被称为 正则化参数 Regularization Parameter</li>
+<li>正则化项中的 <span class="arithmatex">\(\frac{1}{2m}\)</span> 是为了与前一项同步缩放，使 <span class="arithmatex">\(\lambda\)</span> 的取值变得容易</li>
+<li>我们一般 <strong>不对参数 <span class="arithmatex">\(b\)</span> 进行正则化</strong>，您可以追加正则化项 <span class="arithmatex">\(\frac{\lambda}{2m}b^2\)</span>。</li>
+</ul>
+<hr />
+<p>新的 Cost Function 将在以下两个目标之间进行权衡：</p>
+<ol>
+<li>最小化均方误差（前一项）</li>
+<li>使参数 <span class="arithmatex">\(w_j\)</span> 尽可能小（后一项）</li>
+</ol>
+<p>两者之间的相对重要性将通过您指定的 <span class="arithmatex">\(\lambda\)</span> 进行平衡：</p>
+<ul>
+<li><span class="arithmatex">\(\lambda = 0\)</span> ：弃用正则化项，可能产生较复杂曲线（过拟合）</li>
+<li><span class="arithmatex">\(\lambda \rightarrow \infty\)</span> ：所用 <span class="arithmatex">\(w_j \rightarrow 0\)</span>，拟合水平直线 <span class="arithmatex">\(f(x) = b\)</span>（欠拟合）</li>
+</ul>
+<h5 id="linear-regression">Linear Regression</h5>
+<p>在上一小节中我们更改了 Cost Function（添加了正则化项）</p>
+<p>=&gt; 这会导致梯度下降中的参数迭代表达式发生一些小小的变化（<span class="arithmatex">\(w_j\)</span> 的偏导需要追加正则化项的影响结果）：</p>
+<div class="arithmatex">\[
+\left\{
+\begin{align*}
+&amp;w_j = w_j - \alpha \cdot \frac{1}{m}\left[
+\sum_{i=1}^m(f_{\vec{w},b}(\vec{x}^i) - y^i)x_j^i + \lambda \cdot w_j
+\right] \\
+&amp;b = b - \alpha \cdot \frac{1}{m}\sum_{i=1}^m(f_{\vec{w},b}(\vec{x}^i) - y^i)
+\end{align*}
+\right.
+\]</div>
+<p>事实上，我们可以将 <span class="arithmatex">\(w_j\)</span> 的迭代式改写为以下形式：</p>
+<p>$$
+w_j = (1-\alpha\frac{\lambda}{m})w_j - \alpha \cdot \frac{1}{m}
+\sum_{i=1}^m(f_{\vec{w},b}(\vec{x}^i) - y^i)x_j^i
+$$
+从中不难看出：</p>
+<div class="admonition tip">
+<p class="admonition-title">正则化在每一轮迭代中的作用</p>
+<p>将 <span class="arithmatex">\(w_j\)</span> 乘以一个略小于 1 的数字，从而不断缩减 <span class="arithmatex">\(w_j\)</span> 的大小</p>
+</div>
+<h5 id="logistic-regression">Logistic Regression</h5>
+<p>类似的，我们向逻辑回归 Cost Function 的末尾追加一个正则化项：</p>
+<div class="arithmatex">\[
+J(\vec{w},b) = -\frac{1}{m} \sum_{i=1}^m \left[
+            y^i \cdot \log{(f_{\vec{w},b}(\vec{x}^i))} +
+    (1-y^i) \cdot \log{(1 - f_{\vec{w},b}(\vec{x}^i))}
+        \right] + \frac{\lambda}{2m} \sum_{j=1}^n w_j^2
+\]</div>
+<p>同样的，我们需要修改梯度下降的迭代式</p>
+<div class="arithmatex">\[
+\left\{
+\begin{align*}
+&amp;w_j = w_j - \alpha \cdot \frac{1}{m}\left[
+    \sum_{i=1}^m(f_{\vec{w},b}(\vec{x}^i) - y^i)x_j^i + \lambda \cdot w_j
+    \right] \\
+&amp;b = b - \alpha \cdot \frac{1}{m}\sum_{i=1}^m(f_{\vec{w},b}(\vec{x}^i) - y^i)
+\end{align*}
+\right.
+\]</div>
+<blockquote>
+<p>emmm，和线性回归模型的递归式长得一样（但 <span class="arithmatex">\(f(x)\)</span> 的定义不同）</p>
+</blockquote>
+<h2 id="3-neural-networks">3 Neural Networks 神经网络</h2>
+<p>神经网络模型使用一个简化的数学模型来模拟单个 <em>神经元 neuron</em>：</p>
+<ol>
+<li>接受一个（或多个）输入</li>
+<li>进行计算（例如简单的逻辑回归）</li>
+<li>产生一个输出（并作为下一个神经元的输入）</li>
+</ol>
+<hr />
+<p>下面是神经网络模型中可能涉及的一些术语：</p>
+<ul>
+<li><span class="arithmatex">\(a\)</span> - 单个神经元的输出（activation）</li>
+<li>
+<p><span class="arithmatex">\(\text{layer}\)</span> - 一组采用 相同/相似 input 的神经元，输出 <span class="arithmatex">\(\vec{a}\)</span> (activations)</p>
+<blockquote>
+<p>第 <span class="arithmatex">\(i\)</span> 层的输出将被记为 <span class="arithmatex">\(\vec{a}^{[i]}\)</span>；这一上标同时也被用于区分来自不同层的参数，如 <span class="arithmatex">\((w_1^{[i]}, b_1^{[i]})\)</span></p>
+</blockquote>
+<ul>
+<li>
+<p><span class="arithmatex">\(\text{input layer } \vec{x}\)</span> - <em>原始输入</em> (features) 构成的层，也被称为 <span class="arithmatex">\(\text{layer 0}\)</span></p>
+<p>在图像识别任务中，一张 <span class="arithmatex">\(1000 \times 1000\)</span> 的图片将被展开为 <span class="arithmatex">\(10^6 \times 1\)</span> 的列向量 <span class="arithmatex">\(\vec{x}\)</span></p>
+</li>
+<li>
+<p><span class="arithmatex">\(\text{output layer}\)</span> - <em>最后一层</em>，输出模型的最终预测结果</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\text{hidden layer}\)</span> - 产生中间结果的层（可有多层），<em>自动</em> 完成 feature engineering 工作</p>
+<blockquote>
+<p>您可以在训练集中直观的看到输入输出，而中间结果被 <em>隐藏</em></p>
+</blockquote>
+<ul>
+<li>神经网络模型的不同 <em>架构</em> 将决定 <em>有多少个隐藏层 &amp; 每层有多少个神经元</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="sample-with-4-layers">Sample with 4 layers</h4>
 
 
 
