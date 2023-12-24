@@ -2323,13 +2323,14 @@
 <h2 id="anaconda">Anaconda</h2>
 <blockquote>
 <p>您可以通过 <code>brew install anaconda</code> 命令以使用 homebrew 进行安装</p>
+<p>以下指令适用于 <code>&gt;= 23.7.4</code> 版本</p>
 </blockquote>
 <ul>
 <li>检查当前安装的 Anaconda 版本 <code>conda --version</code></li>
 <li>目前安装的所有环境 <code>conda info --envs</code></li>
 <li>检查可安装的 Python 版本 <code>conda search --full-name python</code></li>
-<li>创建环境 <code>conda create --name [envName] python=[PyVersion]</code>，删除环境 <code>conda remove [envName]</code></li>
-<li>激活指定环境 <code>activate [envName]</code>，退出当前环境 <code>deactivate</code></li>
+<li>创建环境 <code>conda create --name [envName] python=[PyVersion]</code>，删除环境 <code>conda remove -n [envName] --all</code></li>
+<li>激活指定环境 <code>source activate [envName]</code>，退出当前环境 <code>conda deactivate</code></li>
 </ul>
 <h2 id="_1">静态站点成器</h2>
 <h3 id="mkdocs">Mkdocs</h3>
