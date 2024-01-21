@@ -617,12 +617,12 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#transformer">
+<a class="md-nav__link" href="#1-transformer">
 <span class="md-ellipsis">
-      Transformer
+      1 Transformer
     </span>
 </a>
-<nav aria-label="Transformer" class="md-nav">
+<nav aria-label="1 Transformer" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#encoder">
@@ -672,6 +672,13 @@
 </li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-bert">
+<span class="md-ellipsis">
+      2 BERT
+    </span>
+</a>
 </li>
 </ul>
 </nav>
@@ -1138,12 +1145,12 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#transformer">
+<a class="md-nav__link" href="#1-transformer">
 <span class="md-ellipsis">
-      Transformer
+      1 Transformer
     </span>
 </a>
-<nav aria-label="Transformer" class="md-nav">
+<nav aria-label="1 Transformer" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#encoder">
@@ -1193,6 +1200,13 @@
 </li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-bert">
+<span class="md-ellipsis">
+      2 BERT
+    </span>
+</a>
 </li>
 </ul>
 </nav>
@@ -1299,19 +1313,36 @@ Output &amp;= V \cdot A'
 <h4 id="multi-head-self-attention">Multi-head Self-Attention</h4>
 <div class="admonition tip">
 <p class="admonition-title">事物之间的联系是多种多样的 =&gt; 我们需要多个 <span class="arithmatex">\(q\)</span> 来判断两者是否相关</p>
+<p>“多头注意力”机制有助于 Transformer 更好的捕捉各个单词之间的 <u>多重联系</u> 与 细微差别</p>
 </div>
+<ul>
+<li>
 <p>我们可以通过超参数 <span class="arithmatex">\(n\)</span> 决定具体计算多少种联系（于是参数多了 <span class="arithmatex">\(n\)</span> 倍）</p>
-<p>每种联系独立计算，可以得到 <span class="arithmatex">\(b_{i,1}, ... b_{i,n}\)</span> =&gt; 对其进行 concat：</p>
-<div class="arithmatex">\[
+<ul>
+<li>
+<p>每种联系<strong>独立计算</strong>，可以得到 <span class="arithmatex">\(b_{i,1}, ... b_{i,n}\)</span> =&gt; 对其进行 concat：</p>
+<p>$$
 b_i = W_O \cdot \left[
     \begin{array}{1}
-    b_{i,1} \\
-    b_{i,2} \\
-    ... \\
+    b_{i,1} \
+    b_{i,2} \
+    ... \
     b_{i,n}
     \end{array}
 \right]
-\]</div>
+$$
+    - 最终 <span class="arithmatex">\(b_1,...,b_n\)</span> 将通过 fusion 操作融合得到最终的 <u>一个</u> Attention Score</p>
+</li>
+</ul>
+</li>
+<li>
+<p>此处的 “独立计算” 只是 <em>逻辑上</em> 的分割</p>
+<ul>
+<li><span class="arithmatex">\(Q,K,V\)</span> 参数矩阵 并非独立的 <span class="arithmatex">\(n\)</span> 个矩阵，仍是一个单一的大矩阵 (concat)</li>
+<li>所有的 Attention Head 共享相同的线性层</li>
+</ul>
+</li>
+</ul>
 <h4 id="positional-encoding">Positional Encoding</h4>
 <div class="admonition bug">
 <p class="admonition-title">Self-Attention 并没有关注 Position info.</p>
@@ -1332,13 +1363,14 @@ b_i = W_O \cdot \left[
 </blockquote>
 <p>在处理语音信号时，因为采样频率很高 =&gt; 输入会变的长长长 ...</p>
 <p>=&gt; Attention in a range：只考虑对 <em>指定 window size</em> 内的输入应用 Self-Attention</p>
-<h3 id="transformer">Transformer</h3>
+<h3 id="1-transformer">1 Transformer</h3>
 <blockquote>
 <p>解决 Sequence to Sequence 问题：自己决定输出序列长度</p>
 </blockquote>
 <pre class="mermaid"><code>graph LR
     A[Input Seq]--&gt;B(Encoder)--&gt;C(Decoder)--&gt;D[Output Seq]
 </code></pre>
+<p>Paper 中提出的架构实际上是 6 * Encoder 构成编码端 + 6 * Decoder 构成解码端</p>
 <h4 id="encoder">Encoder</h4>
 <p>$$
     [x_1, x_2, ... x_n] \rightarrow Encoder \rightarrow [h_1, h_2,...h_n]
@@ -1460,6 +1492,100 @@ Output &amp;= [y_1, y_2, ... ,y_m]
 <p>Not always work，有时加一些 random 可能会更好</p>
 </li>
 </ol>
+<h3 id="2-bert">2 BERT</h3>
+<ul>
+<li>
+<p>模型架构</p>
+<p>BERT 模型的基础即为 Transformer-Encoder 部分，BERT-Base 即为 12 层 <strong>Encoder</strong> 的堆叠。</p>
+</li>
+<li>
+<p>预训练任务</p>
+<ol>
+<li>
+<p>MLM：随机 mask 掉 15% 的单词，其中：</p>
+<ul>
+<li>10 % 替换成其他单词</li>
+<li>10% 保持不变</li>
+<li>80% 替换成 <code>[mask]</code> (unknown)</li>
+</ul>
+<div class="highlight"><span class="filename">MLM 的 mask 操作实现</span><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">mask_indices</span><span class="p">:</span>        <span class="c1"># mask_indices 中包含了总量 15% 的下标</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="p">:</span>     <span class="c1"># 80% =&gt; [mask]</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>        <span class="n">masked_token</span> <span class="o">=</span> <span class="s2">"[MASK]"</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>    <span class="k">else</span><span class="p">:</span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span> <span class="c1"># 10% =&gt; original</span>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>            <span class="n">masked_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>        <span class="k">else</span><span class="p">:</span>                     <span class="c1"># 10% =&gt; random replacement</span>
+<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>            <span class="n">masked_token</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">vocab_list</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition comment">
+<p class="admonition-title">AR vs AE</p>
+<ul>
+<li>
+<p>AR（自回归，类似于 GPT 的文本生成模型）：只用到了单侧（前侧）信息</p>
+<div class="arithmatex">\[
+P(\overline{abcd}) = P(a) \cdot P(b | a) \cdot P(c | \overline{ab}) \cdot P(d | \overline{abc})
+\]</div>
+</li>
+<li>
+<p>AE（自掩码，MLM使用的模型）：同时利用上下文信息做 “完形填空”</p>
+<p>训练时，AE 将文本“切碎”（mask）来迫使模型学习从上下文中推导缺失部分（文本重建）</p>
+<div class="arithmatex">\[
+P(\overline{abcd}|\overline{ab*d}) = P(*==c|abd)
+\]</div>
+<p>mask 方案的缺点在于：它认为每个碎片的出现概率是独立的 =&gt; 但事实上构成同一个词汇的各个汉字之间是相互纠缠的</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>NSP（二分类）：判断两个 sentence 之间的关系、插入一些特殊 token</p>
+<ul>
+<li>
+<p>样本构造：</p>
+<ol>
+<li>从训练集中取出两个 <u>连续的段落</u> 作为 Positive Sample</li>
+<li>从 <u>不同文档</u> 中随机选出两个段落作为 Negative Sample</li>
+</ol>
+</li>
+<li>
+<p>缺点：NSP 将 “主题预测” &amp; “连贯性预测” 合并为一个任务</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>Input</p>
+<p>BERT 的输入由三部分组成：Token-Embedding + Segment-Embedding + Position-Embedding</p>
+<blockquote>
+<p>区别于 Transformer 中的  Position <u>Encoding</u>（使用三角函数），此处的 Position-Embedding 让算法自己调整随机初始化的参数</p>
+</blockquote>
+</li>
+<li>
+<p>提升 Downstream 应用效果（四步）：微博文本情感分析</p>
+<ol>
+<li>在大的通用语料库中训练一个语言模型（LM） =&gt; 当然，您可以直接下载 Google 训练好的 BERT</li>
+<li>Domain Transfer：在较大的领域语料库（有关或无关的微博文本）上进行 Continual Pretraining</li>
+<li>Task Transfer：在较小的相关语料库（微博的情感文本）上进行 Continual Pretraining</li>
+<li>Fine Tune：在相关数据上做具体的目标任务</li>
+</ol>
+</li>
+<li>
+<p>其他 Tips</p>
+<ol>
+<li>
+<p>使用动态 Mask</p>
+<ul>
+<li>BERT 在每一个 Epoch 中使用的 mask 是固定的（存储在本地文件中）</li>
+<li>可以在新的 Epoch 开始时重新生成 mask</li>
+</ul>
+</li>
+<li>
+<p>N-Gram Mask：对 “词汇” 而非 “单个文字” 进行 mask</p>
+</li>
+</ol>
+</li>
+</ul>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
