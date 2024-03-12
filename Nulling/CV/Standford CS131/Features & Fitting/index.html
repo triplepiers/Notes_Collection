@@ -1662,6 +1662,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-scale-invariant-keypoint-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 Scale invariant keypoint detection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Scale invariant keypoint detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatic-scale-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic scale selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#difference-of-gaussian-dog-detector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Difference-of-Gaussian (DoG) detector
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3115,6 +3148,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-scale-invariant-keypoint-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 Scale invariant keypoint detection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Scale invariant keypoint detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatic-scale-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic scale selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#difference-of-gaussian-dog-detector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Difference-of-Gaussian (DoG) detector
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3434,6 +3500,20 @@ M(\sigma_I,\sigma_D) = g(\sigma_I) *
 <li>具有 <em>旋转不变性</em></li>
 <li>不具备放缩不变性 —— 放大会导致原本的 corner 被判定为 edge</li>
 </ul>
+<h2 id="4-scale-invariant-keypoint-detection">4 Scale invariant keypoint detection</h2>
+<div class="admonition note">
+<p class="admonition-title">Scale Matters</p>
+<p>When detecting corners, the <code>scale</code> of the window you use can <strong>change the corners you detect</strong>.</p>
+</div>
+<ul>
+<li>
+<p>Scale Invariant Detection</p>
+<p>对于给定的中心点，考虑不同半径同心圆圈定的 region</p>
+<p>目标：</p>
+<h3 id="automatic-scale-selection">Automatic scale selection</h3>
+</li>
+</ul>
+<h3 id="difference-of-gaussian-dog-detector">Difference-of-Gaussian (DoG) detector</h3>
 
 
 

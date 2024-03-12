@@ -1063,6 +1063,17 @@
       LSTM 长短期记忆
     </span>
 </a>
+<nav aria-label="LSTM 长短期记忆" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_15">
+<span class="md-ellipsis">
+      前向传播过程
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -1964,6 +1975,17 @@
       LSTM 长短期记忆
     </span>
 </a>
+<nav aria-label="LSTM 长短期记忆" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_15">
+<span class="md-ellipsis">
+      前向传播过程
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -3576,6 +3598,31 @@ g = min(\frac{\theta}{\|g\|}, 1) \cdot g \Rightarrow \|g\| \lt \theta
 <p>门控循环单元的隐含状态只包含隐藏层变量 <span class="arithmatex">\(H\)</span>，假定隐含状态的长度为 <span class="arithmatex">\(h\)</span>。</p>
 <p>对于给定时刻 <span class="arithmatex">\(t\)</span></p>
 <h4 id="lstm">LSTM 长短期记忆</h4>
+<blockquote>
+<p>成功解决 <strong>梯度衰减</strong> 问题</p>
+</blockquote>
+<div class="admonition bug">
+<p class="admonition-title">RNN 会将 有关&amp;无关 信息全部记住</p>
+<p>LSTM 通过 memory cell 进行选择性记忆：过滤噪声、留存重要信息，从而减轻记忆负担</p>
+</div>
+<h5 id="_15">前向传播过程</h5>
+<p><img alt="" src="https://pic1.zhimg.com/70/v2-127bb0e841212b6d45b5599b0d1c6a64_1440w.avis?source=172ae18b&amp;biz_tag=Post"/></p>
+<p>每个 memory cell 均有 <em>三个</em> input：</p>
+<ol>
+<li><span class="arithmatex">\(c^{i-1}\)</span>：记忆前部序列中的重要信息（支持记忆较远处的信息）</li>
+<li><span class="arithmatex">\(h^{i-1}\)</span>：普通 RNN 也有，<strong>所有</strong> 前序信息之和，距离越远信息丢失越多</li>
+<li><span class="arithmatex">\(x^i\)</span>：当前时间点的 feature</li>
+</ol>
+<p><center>
+<img src="https://zh.d2l.ai/_images/lstm-2.svg" style="background-color:#fff;"/>
+</center>
+<center>单个 memory cell 的结构</center>
+memory cell 中三个 gate 的作用如下：</p>
+<ul>
+<li>遗忘门：选择性丢弃 <span class="arithmatex">\(h^{i-1}\)</span> 和 <span class="arithmatex">\(x^i\)</span> 中不重要的部分</li>
+<li>输入门：尝试向长期记忆 <span class="arithmatex">\(c^{i-1}\)</span> 中塞入新的信息</li>
+<li>输出门：筛选 <span class="arithmatex">\(h^i\)</span> 中实际需要输出的信息</li>
+</ul>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
