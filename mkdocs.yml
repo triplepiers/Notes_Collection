@@ -4,6 +4,7 @@ copyright: Copyright © 2023 SeaBee
 repo_url: https://github.com/triplepiers/Notes_Collection
 repo_name: Notes_Collection
 theme:
+  favicon: images/favicon.svg
   name: material
   palette:
     scheme: slate
