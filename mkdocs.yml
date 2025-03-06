@@ -4,14 +4,14 @@ copyright: Copyright © 2023 SeaBee
 repo_url: https://github.com/triplepiers/Notes_Collection
 repo_name: Notes_Collection
 theme:
-  favicon: images/favicon.svg # 标签页
+  favicon: images/favicon.svg
   name: material
   palette:
     scheme: slate
     accent: amber
     primary: black
   icon:
-    logo: images/favicon.svg # topBar
+    logo: images/favicon.svg
     repo: fontawesome/brands/github
     admonition:
       note: octicons/tag-16
@@ -46,8 +46,8 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
-extra:
-  homepage: https://triplepiers.github.io/Notes_Collection/
+# extra:
+#   homepage: https://triplepiers.github.io/Notes_Collection/
 nav:
 - Home: index.md
 - Front End:
