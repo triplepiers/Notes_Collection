@@ -2,3 +2,8 @@
 [data-md-color-scheme="seabee"] {
     --md-primary-fg-color:        #000;
 }
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}

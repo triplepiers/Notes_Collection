@@ -30,10 +30,9 @@ theme:
     - navigation.tabs
     - navigation.footer
     - toc.follow
+    - content.code.copy
 extra_css:
   - stylesheets/extra.css
-  # fontawesome 
-  - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css
 extra_javascript:
   # - javascripts/config.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
@@ -65,6 +64,7 @@ markdown_extensions:
 nav:
 - Home: index.md
 - Front End:
+  - TailWindCSS: Nulling/Front End/TailWind.md
   - Java Script:
     - 1 基础: Nulling/Front End/JS/基础.md
     - 2 对象与函数: Nulling/Front End/JS/对象与函数.md
