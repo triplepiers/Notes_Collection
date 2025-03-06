@@ -4,15 +4,15 @@ copyright: Copyright © 2023 SeaBee
 repo_url: https://github.com/triplepiers/Notes_Collection
 repo_name: Notes_Collection
 theme:
-  favicon: images/favicon.svg
+  favicon: images/favicon.svg # 标签页
   name: material
   palette:
     scheme: slate
     accent: amber
     primary: black
   icon:
+    logo: images/favicon.svg # topBar
     repo: fontawesome/brands/github
-  # icon reop: https://primer.style/design/foundations/icons?ref=techmoon
     admonition:
       note: octicons/tag-16
       abstract: octicons/checklist-16
