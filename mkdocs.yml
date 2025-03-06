@@ -1,17 +1,17 @@
 site_name: SeaBee 的笔记合集
 site_url: https://triplepiers.github.io/Notes_Collection/
-copyright: Copyright © 2023 SeaBee
+copyright: Copyright © 2023-2025 SeaBee
 repo_url: https://github.com/triplepiers/Notes_Collection
 repo_name: Notes_Collection
 theme:
-  favicon: images/favicon.svg
+  favicon: images/favicon.svg # 标签页
+  logo: images/favicon.svg    # topBar
   name: material
   palette:
     scheme: slate
     accent: amber
     primary: black
   icon:
-    logo: images/favicon.svg
     repo: fontawesome/brands/github
     admonition:
       note: octicons/tag-16
@@ -29,13 +29,22 @@ theme:
   features:
     - navigation.tabs
     - navigation.footer
+    - toc.follow
 extra_css:
   - stylesheets/extra.css
+  # fontawesome 
+  - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css
 extra_javascript:
-  - javascripts/config.js
+  # - javascripts/config.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+plugins:
+  - statistics:
+      ignore_languages:
+        - mermaid
+        - markdown
 markdown_extensions:
+  - md_in_html
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
@@ -46,6 +55,11 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+
 # extra:
 #   homepage: https://triplepiers.github.io/Notes_Collection/
 nav:
