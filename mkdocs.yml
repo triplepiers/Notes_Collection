@@ -93,9 +93,12 @@ nav:
   - Tips:
     - 布局: Nulling/Front End/布局.md
   - Tools:
-    - Axios: Nulling/Tool/Axios.md
-    - Promise: Nulling/Front End/Promise.md
     - WebSocket: Nulling/Tool/WebSocket.md
+    - 测试:
+      - Mccha: Nulling/Tool/Mocha.md
+    - 异步请求:
+      - Axios: Nulling/Tool/Axios.md
+      - Promise: Nulling/Front End/Promise.md
     - NodeJS:
       - 1 火速上手: Nulling/Tool/NodeJS/1_Intro.md
       - 2 搓点项目: Nulling/Tool/NodeJS/2_Project.md
