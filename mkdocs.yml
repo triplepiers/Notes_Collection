@@ -65,6 +65,7 @@ nav:
 - Home: index.md
 - Front End:
   - TailWindCSS: Nulling/Front End/TailWind.md
+  - Type Script: Nulling/Front End/TS.md
   - Java Script:
     - 1 基础: Nulling/Front End/JS/基础.md
     - 2 对象与函数: Nulling/Front End/JS/对象与函数.md
