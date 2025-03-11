@@ -125,6 +125,9 @@ nav:
   - Go:
     - 1 Basic: Nulling/Go/1 Basic.md
     - 2 面向对象: Nulling/Go/2 OOP.md
+  - Rust:
+    - 1 Basic: Nulling/Rust/1_init.md
+    - 2 基础语法(tbc): Nulling/Rust/2_base.md
 - 常用工具:
   - Git: Nulling/Tool/Git.md
   - 常用项目创建: Nulling/Tool/常用项目创建.md
