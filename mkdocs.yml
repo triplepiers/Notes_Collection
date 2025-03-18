@@ -103,6 +103,7 @@ nav:
     - NodeJS:
       - 1 火速上手: Nulling/Tool/NodeJS/1_Intro.md
       - 2 搓点项目: Nulling/Tool/NodeJS/2_Project.md
+    - NextJS: Nulling/React/NextJS.md
 - DataBase:
   - Mongo DB:
       - 1 快速上手: Nulling/Tool/Mongo DB - 快速上手.md
