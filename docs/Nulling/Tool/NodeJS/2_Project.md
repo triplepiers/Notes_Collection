@@ -701,7 +701,7 @@ npm install koa
 
 ```js
 const Koa = require('koa');
-const app = new Koa();     // 不同于 express()，这里必须实例华
+const app = new Koa();     // 不同于 express()，这里必须实例化
 // 先执行
 app.use(async (ctx, next) => {   // ctx: context（合并了 req & res）
   console.log('111');
