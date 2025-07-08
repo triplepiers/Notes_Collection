@@ -67,7 +67,7 @@ fn main() {
             .expect("[Error] Fail to read input");
 
         // Shadiwing: String => Number
-        let ipt:u32 = match ipt.trim().parse() {
+        let ipt:i32 = match ipt.trim().parse() {
             Ok(num) => num,
             Err(_) => continue            // 直接用 expect 会崩溃性退出
         };
@@ -174,20 +174,242 @@ Rust 支持通过 **相同变量名** 声明新变量（可以与旧变量 *类�
 #### 字符串
 
 1. 字符串字面量：程序里已经写死的字符串值（内容会被硬编码至可执行文件），不可变
-2. String 类型：能在编译时存储长度未知的文本，可变
+2. String 类型：能在编译时存储长度未知的文本，可变（本质是对 `Vec<u8>` 的包装）
 
     在 Stack 上由三部分组成、实际文本内容放在 Heap 上
      
     1) `ptr` 指向内存地址 
 
-    2) `len` 实际长度 (字节数) 
+    2) `len()` 实际长度 (字节数)
 
     3) `capacity` 最大容量 (从 OS 毛来的空间大小)
 
     ```rs
-    let mut s = String::from('hello'); // 基于字面值初始化
-    s.push_str(" World!");             // 再往后面塞点东西
+    // 创建
+    let mut s = String::new();         // 空的
+    let s = "sth".to_string();         // 只要实现了 Display trait 的都能用
+    let mut s = String::from('hello'); // 基于 字面值 初始化
+
+    // 更新
+    s.push_str(" World!" / &str);      // 往后面塞字符串切片
+    s.push('a');                       // 往后面塞 char
+    let s = s1 + &s2;                  // 拼接，后面那个需要是引用 (s1 不能用，但 s2 还能用)
+    let s = format!("{}-{}-{}", s1, s2, s2);   // 返回一个新串（s1~s3 都可以继续用）
+
+    // 遍历访问（不支持索引）：bytes() chars() 但这俩都不太对，字型簇又不提供
+    // 切割：切片 &s[..] 是按 byte 切的、可能切到半个字然后报 panic
     ```
+
+#### Struct
+
+- Struct 实例拥有其所有数据的所有权，只要实例有效、字段一定有效
+
+    > 有生命周期时，字段值也可以是引用（保证 struct 有效时、引用一定有效）
+
+    - Struct 定义：可以用 `pub struct` 声明为公共（但字段仍是私有的）
+
+        ```rs
+        // 就是简单的把一些属性拼在一起（最后没有分号）
+        struct User {
+            username: String,
+            email:    String,
+            account:  u64,
+            active:   bool,  // 这里也有逗号
+        }
+        ```
+    
+    - 实例化
+
+        ```rs
+        /* 实例化时，需要为 *每一个* 字段指定值（顺序随意）
+        * 当 struct 实例可变时，所有属性 *均可变* => 无法对单个属性进行指定
+        */
+        let mut usr1 = User {
+            email:    String::from("e@addr"),
+            username: String::from("John"),
+            active:   true,
+            account:  556,   // 这里也有逗号
+        };
+
+        // 可以通过 .attribute 访问 & 赋值
+        usr.active = false;
+        ```
+
+    - 塞给函数
+        ```rs
+        // 可以作为函数返回值
+        fn build_usr(email: String, username: String) -> User {
+            User {
+                email, username,         // 变量名与属性名一致时，可以简写 
+                active: true, account: 0,
+            }
+        }
+
+        struct Rectangle { width: i32, length: i32, }
+        // 使用引用作为形参 => 原变量将保有所有权
+        fn area(rect: &Rectangle) -> u32 { rect.width * rect.length }
+        ```
+
+    - 更新语法：基于已有实例新建
+
+        ```rs
+        let usr2 = User {
+            email:    String::from("neo@addr"),
+            username: String::from("Doe"),
+            ..usr1    // 剩下字段沿用 usr1
+        };
+        ```
+
+    - 结构体方法：需要在 `impl` 块内定义，第一个参数是 `self`（也可以是引用）
+
+        在调用时，Rust 会自动添加 `&, &mut, *`，所以 `r.area() == (&r).area()`
+
+        ```rs
+        // 直接 println!("{}", rect) 会报错，需要加 trait / 手动实现
+        #[derive(Debug)]    // {:?} = structName { attr: val } , {:#?} = 在 attr 间换行
+        struct Rectangle {}
+
+        impl Rectangle {
+            fn can_hold(&self, r2: &Rectangle) -> bool {
+                self.width > r2.width && self.length > r2.length
+            }
+
+            // getter (因为属性默认是私有的)
+            pub fn width(&self) -> i32 {
+                slef.width
+            }
+        }
+
+        // 需要通过实例调用
+        r1.can_hold(&r2);
+        ```
+
+    - 关联函数：在 `impl` 块内定义，但第一个参数不是 `self`（一般用于构造函数）
+
+        ```rs
+        impl Rectangle {
+            // 构造函数，同时验证 a>0
+            pub fn new_square(a: i32) -> Rectangle {
+                if a < 0 { panic!("Less than 0"); }
+                Rectangle { width: a, length: a}
+            }
+        }
+        // 有点像静态方法，通过 :: 调用
+        let sq = Rectangle::new_square(10);
+        ```
+
+- Tuple Struct：整体有名字，但里面的元素没有属性名
+
+    ```rs
+    struct Color(i32, i32, i32);  // 没必要为 RGB 单独取名
+    struct Point(i32, i32, i32);
+    // black 和 origin 是 *不同类型*（不同 tuple struct 的实例）
+    let black = Color(0, 0, 0);
+    let origin = Point(0, 0, 0);
+    ```
+
+- Unit-Like Struct：没有任何字段，长得像 `()`
+
+    用于在特定类型上实现 trait，但有没有需要存的东西
+
+#### 枚举
+
+- Enum：
+
+    - Rust 允许为枚举定义不同的数据类型，也可以在 `impl` 块中为其实现方法
+    - 可以通过 `pub enum` 声明为公共的、此时所有变体 *都是公共的*
+
+    ```rs
+    enum IpAddr {
+        V4(u8, u8, u8. u8),
+        V6(String),
+    }
+
+    let home =     IpAddr::V4(127,0,0,1);
+    let loopback = IpAddr:V6(String::from("::1"));
+
+    // 你甚至可以往里面嵌 struct
+    struct IpV4Addr {}
+    struct IpV6Addr {}
+    enum IpAddr {
+        V4(IpV4Addr), V6(IpV6Addr),
+    }
+    ```
+
+- Option：用于描述某个值可能存在的类型 + 不存在的情况
+
+    - 在预导入模块里，你可以直接使用 `Option<T>, Some(T), None`
+    - `Option<T> != T`，确保 `T` 类型一定非空
+
+    ```rs
+    enum Option<T> {
+        Some(T), None,
+    }
+
+    let some_num = Some(5);          // i32
+    let abs_num: Option<i32> = None; // 没法自动推断
+    ```
+
+#### Vector `Vec<T>`
+
+在内存中连续存储多个 *相同类型* 的值（但你可以套一个 Enum 逃课）
+
+```rs
+// 创建
+let mut v: Vec<i32> = Vec::new(); // 创建空 Vec，需要手动指定类型
+let v = vec![1,2,3];
+
+// 更新
+v.push(1);
+
+// 访问（下标 / get）
+println!("{}", v[0]);  // OOB 会报 panic => 也可以定义借用 &v[0]
+match v.get(0) {
+    Some(v0) => println!("{}", v0);
+    None => println!("Out Of Bound")
+}
+
+// 遍历 + 可变引用更新
+let mut v = vec![...];
+for i in &mut v {
+    *i += 50;
+}
+```
+
+#### HashMap
+
+- 存储在 Heap 上的键值对，但单条数据同构
+- 实现 Copy Trait 的会复制一份，有所有权的会抢走+移动值（可以通过插入引用避免）
+
+```rs
+use std::collections::HashMap;
+
+// 手动插值
+let mut scores: HashMap<String, i32> = HashMap::new();
+scores.insert(String::from("aaa"), 32);
+
+// 通过 collect 基于两个 arr 创建
+let keys = vec![String::from("a"), String::from("b")];
+let vals = vec![10, 20];
+
+let scores: HashMap<_, _> = // 可以推断，但 collect 可能返回多种类型、所以至少要指定 HashMap
+    keys.iter().zip(vals.iter()).collect;
+
+// 访问: 需要手动处理 key 不存在的情况
+let score = scores.get("ccc");
+match score {
+    Some(s) => println!("{}", s),
+    None    => println!("None"),
+}
+
+// 遍历（使用引用的话，之后还能继续用）
+for (k, v) in &scores {}
+
+// 更新
+scores.insert(String::from("aaa"), 64);    // 覆盖原来的 32
+let s = scores.entry("ccc").or_insert(50); // 仅当不存在时插入+返回新值引用，否则提供原 val 的可变引用
+*s += 1;                                   // 存在时，v += 1
+```
 
 ## 2 函数
 
@@ -236,6 +458,53 @@ Rust 支持通过 **相同变量名** 声明新变量（可以与旧变量 *类�
     else          {}
 
     let num = if cond {5} else {6}; // 但这俩值的类型必须兼容
+    ```
+
+- MATCH: 必须穷举 **所有** 可能性（或用 `_ => ()` 作为兜底）
+
+    ```rs
+    #[derive(Debug)]
+    struct State {}
+
+    enum Coin { 
+        Penny, Nickel, Dime, 
+        Quarter(State), 
+    }
+
+    fn coin_2_value(coin: Coin) -> u8 {
+        match coin {
+            Coin::Penny   => 1,
+            Coin::Nickle  => 5,
+            Coin::Dime    => 10,
+            Coin::Quarter(state) => {
+                println!("from: {}", state);
+                25
+            },
+        }
+    }
+    ```
+
+    - 你也可以用来处理 `Option<T>` 里存在空值的情况
+  
+        ```rs
+        fn plus_one(x: Option<i32>) -> Option<i32> {
+            match x {
+                None    => None,
+                Some(i) => Some(i+1),
+            }
+        }
+        ```
+
+- IF LET: 只关心一种 case，其他放生
+
+    ```rs
+    let v = Some(3);
+
+    if let Some(3) = v {
+        println!("Got Three");
+    } else {
+        println!("Other");
+    }
     ```
 
 #### 循环
@@ -431,3 +700,280 @@ println!(f"y = {}", y); // ⚠️ y 已经不再拥有所有权
     ```rs
     let s = "Hello"; // s is &str
     ```
+
+## 5 包与模块
+
+感觉 Rust 的模块系统有点魔幻：
+
+- Package（包）：
+    - 是 Cargo 的特性，可以用于构建、测试、共享 crate
+    - 包含 `Cargo.toml`，用于描述如何构建 Crates（如：导入外部依赖）
+    - 可以拥有 0/1 个 LibCrate，但可以拥有任意个 binCrate（放在 `src/bin` 下）
+- Crate（单元包）：
+    > 或许可以认为是单个 Rust 文件？
+    - 一棵模块树，可以生成 Lib / 可执行文件
+    - 具有 binary / library 两种类型
+    - Crate Root 是编译的入口文件，组成 Crate 的 根 Module
+        - binCrate 的 root 默认为 `src/main.rs`
+        - LibCreate 的 root 默认为 `src/lib.rs`
+- Module-Use（模块）：
+    - 在单个 Crate 内对代码进行分组，用于控制代码组织、作用域、私有 Path
+    - 使用 `mod [ModName];` 时，会把 `src/ModName.rs` 中的代码全贴进来
+    - 通过 `mod` 关键字定义、支持嵌套
+    - 可以通过 `as` 为引入路径指定别名: `use std::io::Result as IoResult`
+    - 可以通过 `pub use` 重新导出名称（默认是私有的）: `pub use crate::front_of_house::hosting`
+    - 可以通过嵌套路径引入同前缀下的多个条目：
+
+        ```rs
+        use std::{cmp::Ordering, io};
+        use std::io::{self, Write};  // 同时引入 std::io + std::io::Write
+        use std::collections::*;     // 引一坨
+        ```
+
+- Path（路径）：用于为 struct、func、module 命名
+    - 绝对路径：从 create root 开始，通过 crateName / 字面值 "crate" 访问
+    - 相对路径：从当前 Module 开始，通过 self / super / Module 标识符 访问
+
+!!!info "Rust 中的所有条目默认都是私有的"
+    - 兄弟模块之间可以互相调用
+    - 父模块 *无法使用* 子模块中的私有条目
+    - 自模块可以使用所有 *祖先模块* 中的条目（因为套在上下文里面）
+
+```rs title="main.rs"
+fn test() {}
+
+mod front_of_house { // 前台行为（private）
+    pub mod hosting {
+        pub fn add_to_waitlist() {} // 需要逐级暴露出去}
+        fn seat_at_table()   {}
+    }
+    mod serving {
+        fn take_oreder()  {}
+        fn serve_order()  {}
+        fn take_payment() {}
+    }
+    fn test() {
+        crate::test();    // 绝对路径
+        super::test();    // 相对路径（退一级）
+    }
+}
+
+pub fn eat_at_restaurant() {
+    // 绝对路径调用
+    crate::front_of_house::hosting::add_to_waitlist();
+    // 相对路径调用
+    front_of_house::hosting::add_to_waitlist();
+    /* 通过 use 引入后，相对路径可以更短一点
+     * use crate::front_of_house::hosting => 也可以 use <相对路径>
+     * hosting::add_to_waitlist(); 
+     * 函数通常引用到父模块，struct/enum 通常引用到本体 */
+}
+```
+
+## 6 错误处理
+
+Rust 没有 try-catch 的机制
+
+- `panic!`（不可恢复）：可以手动触发 `panic!("crash 4 fun")`
+  
+    - 默认：打印错误信息 -> 展开、清理调用栈 -> 退出程序
+    - 也可以通过配置 `panic = 'abort'` 直接中断（此情况下内存由 OS、而非 Rust 清理）
+    - 可以设置环境变量 `RUST_BACKTRACE=1` 定位具体报错的代码
+
+- `enum Result<T, E>{ Ok(T), Err(E), }`(可恢复):
+  
+    - `main()` 也能返回 `Result<(), Box<dyn Err>>`，后者兜底了任何可能的错误类型
+    - `T` 为操作成功时返回的类型，`E` 为失败时的返回类型
+    - 需要通过 match 处理
+
+        ```rs
+        let f = File::open(file_url); // 返回 Result
+        let f = match f {
+            Ok(file) => file,
+            Err(err) => match err.kind() { // 适配不同错误
+                ErrorKind::NotFound => match File::create(file_url) {
+                    Ok(fc) => fc,
+                    Err(e) => panic!("Can't create {:?}", e),
+                },
+                other_e    => panic!("Can't open {:?}", other_e),
+            },
+        };
+        ```
+
+        - 通过 `unwrap` 改写：Ok 直接返回，Err 报 panic（信息不能自定义）
+        - 通过 `expect` 改写：Ok 直接返回，Err 报自定义 panic
+
+- 错误传播：返回 Result，Err 丢给 caller 处理
+
+    ```rs
+    fn read_file(file_url: &String) -> Result<String, io::Error> {
+        let mut s = String::new();
+
+        let mut f = match  File::open(file_url) {
+            Ok(file) => file,
+            Err(e)   => return Err(e),
+        };
+        
+        return match f.read_to_string(&mut s) {
+            Ok(_)  => Ok(s),
+            Err(e) => Err(e),
+        };
+    }
+
+    // 上面的一坨等价于
+    fn read_file(file_url: &String) -> Result<String, io::Error> {
+        let mut s = String::new();
+        let mut f = File::open(file_url)?; // 这里有个问号
+        f.read_to_string(&mut s)?;         // 这里有个问号
+        Ok(s)
+    }
+
+    // 还有链式调用版本
+    fn read_file(file_url: &String) -> Result<String, io::Error> {
+        let mut s = String::new();
+        File::open(file_url)?.read_to_string(&mut s)?;
+        Ok(s)
+    }
+    ```
+
+- 错误类型转换：`std::convert::From` 中的 `from()` 可以改变错误类型
+
+    由 `?` 简化的错误会由 `from` 隐式转化为返回值中定义的错误类型（但必须实现对应类型的转化函数）
+
+## 7 泛型，trait，生命周期
+
+### 泛型
+
+- 由编译器将 `T` 替换为具体数据类型（可以用其他复合 CamelCase 的名称）
+
+- 泛型函数：
+
+    ```rs
+    // 因为涉及比较操作，所以 T 必须实现特定 trait
+    fn max<T: std::cmp::PartialOrd + Clone>(list: [T]) -> &T {
+        let mut maxx = &list[0];
+        for item in list {
+            if item > &maxx { maxx = item; }
+        }
+        maxx
+    }
+    ```
+
+- 泛型结构体 (在 enum 中也能用)
+
+    ```rs
+    struct Point<T> {
+        x: T, y: T,    // 必须类型一样
+    }
+    impl<T> Point<T> { // 针对所有类型实现
+        pub fn x(&self) -> &T {
+            &self.x
+        }
+        // 方法的泛型可以和结构题不一样
+        fn mixup<V, W>(self, otehr: Point<V,W>) -> Point<T, W> {
+            Point {
+                x: self.x,
+                y: other.y,
+            }
+        }
+    }
+    impl Point<i32> {  // 仅针对具体类型实现
+        pub fn x(&self) -> &i32 {
+            &self.x
+        }
+    }
+
+    struct Point<T, U> {
+        x: T, y: U,    // 类型可以不同   
+    }
+    ```
+
+### Trait
+
+- 只有方法的签名，没有具体实现
+- 声明特定类型具有某种与其他类型共享的功能（有点像 JAVA 的空接口）
+- 可以将 泛型 支持范围限制于 实现了特定行为的类型
+- 跨 crate 使用时，需要同时引入 trait + 对应类型
+- 当且仅当 类型/trait 中至少有一个在本地定义时支持实现（否则可能存在多个实现）
+
+```rs
+// 定义
+pub trait Summary {
+    fn summarize(&self) -> String;
+    fn suma(&self) -> String {      // 默认实现
+        self.summarize();           // 可以调兄弟（即使没有默认实现）
+        String::from("Read more...")
+    }
+}
+
+// 实现 trait
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.usr, self.msg)
+    }
+    // 也可以手动重写 fn summa(&self) -> Srting {}
+}
+// 有条件的实现 Trait
+impl<T: Display> toString for T {}
+
+// 限制参数类型（同时实现 Summary & Display）
+pub fn notify(item: impl Summary + Display) {}
+pub fn notify<T: Summary + Dispay, U: Clone + Debug>(item1: T, item2: U) {} // 长
+pub fn notify<T, U>(item1: T, item2: U) 
+    where T: Summary + Display, 
+          U: Clone + Debug, {}
+
+// 限制返回值类型（但只能返回一种具体类型）
+pub fn notify() -> impl Summary {}
+
+// 有条件的实现方法
+impl<T: Display+PartialOrd> Point<T> {
+    fn cmp_display(&self) {}
+}
+```
+
+### 生命周期
+
+- "生命周期" 即 引用保持有效 的作用域，目标是避免 dangling ref
+
+- 生命周期标注
+    - 以 `'` 开头、全小写，放在引用符号 `&` 之后
+    -  *不会* 影响引用的实际生命周期长度、只是描述不同生命周期之间的关系
+
+- 函数的泛型生命周期参数
+
+    函数返回 *引用* 时，返回值生命周期至少与一个参数匹配
+
+    ```rs title="同时使用泛型 + 生命周期"
+    // 'a 为 x&y 生命周期 *重叠* 的部分
+    // 两个参数+返回值的生命周期 >= 'a
+    fn longer<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a str
+        where T: Display,
+    {
+        println!("Announce {}", ann);
+        if x.len() > y.len() { return x; }
+        else                 { return y; }
+    }
+    ```
+
+- Struct 定义的生命周期标注：字段中存在引用
+
+    生命周期标注也是 struct 类型的一部分
+
+    ```rs
+    struct Sample<'a> {
+        part: &'a str,  // Part 活得要比 Sample 实例长
+    }
+    ```
+
+    - 方法签名的生命周期标注（通常可以默认推导）
+
+        引用和 struct 字段引用的生命周期绑定 / 独立引用
+
+        ```rs
+        // impl & structName 之后的 <'a> 不可省略
+        impl<'a> Sample<'a> {}
+        ```
+
+- 静态生命周期 `static` == 整个程序的持续时间
+
