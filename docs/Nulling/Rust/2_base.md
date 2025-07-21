@@ -89,16 +89,67 @@ fn main() {
 
 ### 变量
 - 命名遵循 snake case 规范（全小写、通过 `_` 分隔）
-- 通过 `let` 关键字进行声明，且默认为 **不可变**
-- 如需声明可变变量，请在声明时附加 `mut` 关键字
 
-```rs title="奇妙sample"
-let x = 5;
-let y = {      // 创建块表达式 = 最后一个表达式的值
-    let x = 1; // 这是语句
-    x+3        // 这是表达式（结尾没有 ;）
-};             // y = 1+3 = 4
-```
+- 通过 `let` 关键字进行声明，且默认为 **不可变**
+
+    如需声明可变变量，请在声明时附加 `mut` 关键字
+
+    ```rs title="奇妙sample"
+    let x = 5;
+    let y = {      // 创建块表达式 = 最后一个表达式的值
+        let x = 1; // 这是语句
+        x+3        // 这是表达式（结尾没有 ;）
+    };             // y = 1+3 = 4
+    ```
+
+    声明后*未使用*会让编译器报 warning（可以通过 `_varName` 解决）
+
+- @ 绑定：仅在特定模式下保存变量值
+
+    ```rs
+    enum Msg { Hello { id: i32}, }
+    
+    let msg = Msg::Hello { id: 5 };
+    match msg {
+        Msg::Hello {
+            id: id_var @ 3..=7, // 仅当 3 <= id <= 7 时，为 id_var 赋值
+        } => { println!("Found id={} in [3,7]", id_var); },
+        Msg::Hello { id: 10..=12 } => { println!("Found id in [10,12]"); },
+        Mgs::Hello { id } => { println!("Unexpected id={}", id); },
+
+    }
+    ```
+
+- 解构赋值
+
+    ```rs
+    """ 普通 Struct """
+    struct  Point { x:i32, y:i32 }
+    let p = Point { x:0, y:1 };
+    
+    let Point { x:a, y:b } = p; // a == 0, b == 1
+    let Point { x,y } = p;      // x == 0, y == 1
+
+    """ Tuple 和 Struct 混合的怪东西 """
+    let ((_, inch), Point { x, .. }) = ((3,10), Point {x:3, y:-10});
+    ```
+
+    ```rs title="解构嵌套 struct"
+    enum Clr {
+        RGB(i32, i32, i32),
+        HSV(i32, i32, i32),
+    }
+    enum Message { ChangeClr(Clr) }
+
+    let msg = Message::ChangeClr(Clr::HSV(0,160,255));
+
+    """有点长就是说"""
+    match msg {
+        Message::ChangeClr(Clr::RGB(r,g,b)) => {},
+        Message::ChangeClr(Clr::HSV(h,s,v)) => {},
+        _ => {},
+    }
+    ```
 
 ### 常量
 - 通常使用 *全大写* 字母命名，不同单词间通过 `_` 分隔
@@ -427,9 +478,11 @@ let s = scores.entry("ccc").or_insert(50); // 仅当不存在时插入+返回新
 - 默认使用函数体中最后一个 *表达式* 作为返回值，类型在 `->` 后声明
 
     ```rs
-    fn plus_five(x: i32) -> i32 {
-        x+5 // 不能加分号
+    fn plus_five(x: i32, _: i32) -> i32 {
+        x+5 // 不加分号
     }
+    // 可以接收俩参数，但忽略后一个
+    plus_five(1, 2);
     ```
 
     - 你也可以提前通过 `return` 关键字返回
@@ -465,22 +518,33 @@ let s = scores.entry("ccc").or_insert(50); // 仅当不存在时插入+返回新
     ```rs
     #[derive(Debug)]
     struct State {}
-
     enum Coin { 
-        Penny, Nickel, Dime, 
+        Penny, Nickel, Dime, Sth
         Quarter(State), 
     }
 
+    let flag = true;
     fn coin_2_value(coin: Coin) -> u8 {
         match coin {
-            Coin::Penny   => 1,
-            Coin::Nickle  => 5,
-            Coin::Dime    => 10,
+            Coin::Penny | Coin::Sth   => 1, // 可以用 | 表示 OR
+            Coin::Nickle if flag      => 5, // 添加一个 flag 筛选
+            Coin::Dime                => 10,
+            1..=5      => println!("1~5"),
+            'a'..='z'  => println!("a~z"),
             Coin::Quarter(state) => {
                 println!("from: {}", state);
                 25
             },
         }
+    }
+
+    // 微妙小匹配
+    struct Point { x:i32, y:i32 }
+    let p = Point { x:3, y:4 };
+    match p {
+        Point {x, y:0} => println!("@ X-Axis"),
+        Point {x:0, y} => println!("@ Y-Axis"),
+        Point {x,y}    => println!("Normal")
     }
     ```
 
@@ -500,11 +564,10 @@ let s = scores.entry("ccc").or_insert(50); // 仅当不存在时插入+返回新
     ```rs
     let v = Some(3);
 
-    if let Some(3) = v {
-        println!("Got Three");
-    } else {
-        println!("Other");
-    }
+    if let Some(3) = v { println!("Got Three"); }
+    // 只要不是 Null 都行
+    else if Some(_)    { println!("Not Null & Not Three"); } 
+    else { println!("Other"); }
     ```
 
 #### 循环
@@ -518,6 +581,7 @@ loop {
 }
 
 while num != 0 { num = num-1; }
+while let Some(x) = stack.pop() {}
 
 // FOR 一般拿来遍历数组
 let arr = [1,2,3,4,5];
@@ -703,32 +767,45 @@ println!(f"y = {}", y); // ⚠️ y 已经不再拥有所有权
 
 ## 5 包与模块
 
-感觉 Rust 的模块系统有点魔幻：
+> 感觉 Rust 的模块系统有点魔幻
 
-- Package（包）：
-    - 是 Cargo 的特性，可以用于构建、测试、共享 crate
-    - 包含 `Cargo.toml`，用于描述如何构建 Crates（如：导入外部依赖）
-    - 可以拥有 0/1 个 LibCrate，但可以拥有任意个 binCrate（放在 `src/bin` 下）
-- Crate（单元包）：
-    > 或许可以认为是单个 Rust 文件？
-    - 一棵模块树，可以生成 Lib / 可执行文件
-    - 具有 binary / library 两种类型
-    - Crate Root 是编译的入口文件，组成 Crate 的 根 Module
-        - binCrate 的 root 默认为 `src/main.rs`
-        - LibCreate 的 root 默认为 `src/lib.rs`
-- Module-Use（模块）：
-    - 在单个 Crate 内对代码进行分组，用于控制代码组织、作用域、私有 Path
-    - 使用 `mod [ModName];` 时，会把 `src/ModName.rs` 中的代码全贴进来
-    - 通过 `mod` 关键字定义、支持嵌套
-    - 可以通过 `as` 为引入路径指定别名: `use std::io::Result as IoResult`
-    - 可以通过 `pub use` 重新导出名称（默认是私有的）: `pub use crate::front_of_house::hosting`
-    - 可以通过嵌套路径引入同前缀下的多个条目：
+### Package（包）
+- 是 Cargo 的特性，可以用于构建、测试、共享 crate
+- 包含 `Cargo.toml`，用于描述如何构建 Crates（如：导入外部依赖）
+- 可以拥有 0/1 个 LibCrate，但可以拥有任意个 binCrate（放在 `src/bin` 下）
+### Crate（单元包）
+> 或许可以认为是单个 Rust 文件？
 
-        ```rs
-        use std::{cmp::Ordering, io};
-        use std::io::{self, Write};  // 同时引入 std::io + std::io::Write
-        use std::collections::*;     // 引一坨
-        ```
+- 一棵模块树，可以生成 Lib / 可执行文件
+- 具有 binary / library 两种类型
+- Crate Root 是编译的入口文件，组成 Crate 的 根 Module
+    - binCrate 的 root 默认为 `src/main.rs`
+    - LibCreate 的 root 默认为 `src/lib.rs`
+### Module-Use（模块）
+- 在单个 Crate 内对代码进行分组，用于控制代码组织、作用域、私有 Path
+- 通过 `mod` 关键字定义、支持嵌套
+
+    使用 `mod [ModName];` 时，会把 `src/ModName.rs` 中的代码全贴进来
+
+- 可以通过 `as` 为引入路径指定别名
+
+    ```rs
+    use std::io::Result as IoResult;
+    ```
+
+- 可以通过 `pub use` 重新导出名称（默认是私有的）
+
+    ```rs
+    pub use crate::front_of_house::hosting;
+    ```
+
+- 可以通过嵌套路径引入同前缀下的多个条目
+
+    ```rs
+    use std::{cmp::Ordering, io};
+    use std::io::{self, Write};  // 同时引入 std::io + std::io::Write
+    use std::collections::*;     // 引一坨
+    ```
 
 - Path（路径）：用于为 struct、func、module 命名
     - 绝对路径：从 create root 开始，通过 crateName / 字面值 "crate" 访问
@@ -772,75 +849,84 @@ pub fn eat_at_restaurant() {
 
 ## 6 错误处理
 
-Rust 没有 try-catch 的机制
+> Rust 没有 try-catch 的机制
 
-- `panic!`（不可恢复）：可以手动触发 `panic!("crash 4 fun")`
-  
-    - 默认：打印错误信息 -> 展开、清理调用栈 -> 退出程序
-    - 也可以通过配置 `panic = 'abort'` 直接中断（此情况下内存由 OS、而非 Rust 清理）
+### `panic!`
+
+- **不可恢复**，但可以手动触发：`panic!("crash 4 fun")`
+- 报 panic 后的默认行为：打印错误信息 -> 展开、清理调用栈 -> 退出程序
+    - 可以通过配置 `panic = 'abort'` 直接中断（此情况下内存由 OS、而非 Rust 清理）
     - 可以设置环境变量 `RUST_BACKTRACE=1` 定位具体报错的代码
 
-- `enum Result<T, E>{ Ok(T), Err(E), }`(可恢复):
+### `Result<T, E>`
   
-    - `main()` 也能返回 `Result<(), Box<dyn Err>>`，后者兜底了任何可能的错误类型
-    - `T` 为操作成功时返回的类型，`E` 为失败时的返回类型
-    - 需要通过 match 处理
-
-        ```rs
-        let f = File::open(file_url); // 返回 Result
-        let f = match f {
-            Ok(file) => file,
-            Err(err) => match err.kind() { // 适配不同错误
-                ErrorKind::NotFound => match File::create(file_url) {
-                    Ok(fc) => fc,
-                    Err(e) => panic!("Can't create {:?}", e),
-                },
-                other_e    => panic!("Can't open {:?}", other_e),
-            },
-        };
-        ```
-
-        - 通过 `unwrap` 改写：Ok 直接返回，Err 报 panic（信息不能自定义）
-        - 通过 `expect` 改写：Ok 直接返回，Err 报自定义 panic
-
-- 错误传播：返回 Result，Err 丢给 caller 处理
+- **可恢复**，实际上是一个 Enum 类型
 
     ```rs
-    fn read_file(file_url: &String) -> Result<String, io::Error> {
-        let mut s = String::new();
-
-        let mut f = match  File::open(file_url) {
-            Ok(file) => file,
-            Err(e)   => return Err(e),
-        };
-        
-        return match f.read_to_string(&mut s) {
-            Ok(_)  => Ok(s),
-            Err(e) => Err(e),
-        };
-    }
-
-    // 上面的一坨等价于
-    fn read_file(file_url: &String) -> Result<String, io::Error> {
-        let mut s = String::new();
-        let mut f = File::open(file_url)?; // 这里有个问号
-        f.read_to_string(&mut s)?;         // 这里有个问号
-        Ok(s)
-    }
-
-    // 还有链式调用版本
-    fn read_file(file_url: &String) -> Result<String, io::Error> {
-        let mut s = String::new();
-        File::open(file_url)?.read_to_string(&mut s)?;
-        Ok(s)
+    enum Result<T, E> { 
+        Ok(T),   // T 为操作成功时返回的类型
+        Err(E),  // E 为失败时的返回类型
     }
     ```
+
+- `main()` 也能返回 `Result<(), Box<dyn Err>>`，后者兜底了任何可能的错误类型
+- 需要通过 match 处理
+
+    ```rs
+    let f = File::open(file_url); // 返回 Result
+    let f = match f {
+        Ok(file) => file,
+        Err(err) => match err.kind() { // 适配不同错误
+            ErrorKind::NotFound => match File::create(file_url) {
+                Ok(fc) => fc,
+                Err(e) => panic!("Can't create {:?}", e),
+            },
+            other_e    => panic!("Can't open {:?}", other_e),
+        },
+    };
+    ```
+
+    - 通过 `unwrap` 改写：Ok 直接返回，Err 报 panic（信息不能自定义）
+    - 通过 `expect` 改写：Ok 直接返回，Err 报自定义 panic
+
+### 错误传播
+
+```rs title="返回 Result，Err 丢给 caller 处理"
+fn read_file(file_url: &String) -> Result<String, io::Error> {
+    let mut s = String::new();
+
+    let mut f = match  File::open(file_url) {
+        Ok(file) => file,
+        Err(e)   => return Err(e),
+    };
+    
+    return match f.read_to_string(&mut s) {
+        Ok(_)  => Ok(s),
+        Err(e) => Err(e),
+    };
+}
+
+// 上面的一坨等价于
+fn read_file(file_url: &String) -> Result<String, io::Error> {
+    let mut s = String::new();
+    let mut f = File::open(file_url)?; // 这里有个问号
+    f.read_to_string(&mut s)?;         // 这里有个问号
+    Ok(s)
+}
+
+// 还有链式调用版本
+fn read_file(file_url: &String) -> Result<String, io::Error> {
+    let mut s = String::new();
+    File::open(file_url)?.read_to_string(&mut s)?;
+    Ok(s)
+}
+```
 
 - 错误类型转换：`std::convert::From` 中的 `from()` 可以改变错误类型
 
     由 `?` 简化的错误会由 `from` 隐式转化为返回值中定义的错误类型（但必须实现对应类型的转化函数）
 
-## 7 泛型，trait，生命周期
+## 7 泛型，Trait，生命周期
 
 ### 泛型
 
@@ -976,4 +1062,429 @@ impl<T: Display+PartialOrd> Point<T> {
         ```
 
 - 静态生命周期 `static` == 整个程序的持续时间
+
+## 8 迭代器与闭包
+
+### 闭包
+
+- “闭包” 是一种匿名函数，可以捕获其 **被定义作用域** 中的值
+
+    !!!comment "就是 JS 的箭头函数，感觉 Rust 的写法好丑陋"
+
+    ```rs
+    fn gen_workout_plan(intensity: u32, rand_num: u32) {
+        // 说是用 () 会和 tuple 分不开
+        let closure_sample = |num: u32| -> u32 {
+            println!("calc sth ... {}", intensity); // 捕获环境
+            thread::sleep(Duration::from_secs(2)); 
+            return num;
+        }
+        // 调用
+        clouser_sample(intensity);
+    }
+    ```
+
+- 不同于普通函数，闭包 **不强制要求** 标注形参和返回值的类型
+
+    > 因为闭包不会暴露给用户
+
+- 闭包只会为形参和返回值推断出 **唯一的具体类型**
+
+    ```rs title="所以这里会报错"
+    let f = |x| x;
+    let s = f(String::from("hello")); // 这里推断为 str
+    let n = f(5); // 这里给的 num，和推断不一致
+    ```
+
+- 基于泛型参数和 Fn Trait 存储闭包
+
+    我们可以用一个 struct 来存储闭包 **及其执行结果**，从而实现缓存（仅执行一次计算）
+
+    !!!Bug "无论实参如何，仅返回首次计算结果（换 HashMap 存 res 就行）"
+
+    ```rs
+    struct Cacher<T>
+    where T: Fn(u32) => u32,
+    {
+        calc_fn: T，
+        res：    Option<u32>,
+    }
+
+    impl<T> Cacher<T>
+    where T: Fn(u32) => u32,
+    {
+        fn new(calc_fn: T) -> Cacher<T> {
+            Cacher {
+                calculation,
+                res: None // Option 兼容了 None 情形
+            }
+        }
+        // 仅当 self.res == None 时调用计算函数
+        fn res(&muy self, arg: u32) => u32 {
+            match self.res {
+                Some(val) => val,
+                None => {
+                    let val = (self.calc_fn)(arg);
+                    self.res = Some(val);
+                    val
+                }
+            }
+        }
+    }
+
+    // 好的，下面实例化一个
+    let mut plan = Cacher::new(|num| {
+        thread::sleep(Duraction::from_secs(2));
+        num
+    })
+    println!("res = {}", plan.res(123));
+    ```
+
+- 闭包从环境捕获值的方式（和函数传参一致）
+
+    | Trait | 说明 |
+    | :---: | :-- |
+    | `FnOnce` | 获取所有权 | 
+    | `FnMut` | 可变借用 |
+    | `Fn`    |  (不可变)借用 |
+
+- 在形参列表前添加 `move` 关键字，可以强制闭包 **取得所有权**
+
+    ```rs
+    fn main() {
+        let x = vec![1,2,3];
+        let is_eq_to_x = move |z| {z==x};
+        // 在这里就不能使用变量 x 了
+    }
+    ```
+
+### 迭代器
+
+```rs
+let v = vec![1,2,3];
+let v_iter = v.iter();
+
+// 遍历
+for val in v_iter {}
+// 手动拿下一个值，可能为 None
+let val = v_iter.next(); // 需要 <mut> v_iter、会改变其中的下标信息
+```
+
+- `iter()` 方法创建了元素的 **不可变引用**
+
+    - `into_iter()` 创建的迭代器将获得元素的所有权
+    - `iter_mut()`  将创建元素的 **可变引用**
+
+- 迭代器适配器：用于迭代器的类型转换、可以通过链式调用进行一些骚操作
+
+    ```rs
+    let v = vec![1,2,3];
+    // Rust 的迭代器是 lazy 的，不调用消耗性方法就啥也不干
+    // 所以这边要手动套一个 collect 让它干活
+    let v1: Vec<_> = v.iter().map(|x| x+1).collect();
+
+    // 这边需要用 into_iter 拿到所有权
+    fn shoes_in_my_size(shoes: Vec<u32>, my_size: u32) -> Vec<u32> {
+        shoes.into_iter().filter(|size| size==my_size).collect();
+    }
+
+    // 你也可以手动跳过开头的 N 个元素
+    let iter = v.iter().skip(N);
+    ```
+
+- 所有迭代器都实现了 Iterator trait
+
+    ```rs
+    pub trait Iterator {
+        type Item; // 实际使用的数据类型
+        fn next(&mut self) => Option<Self::Item>;
+    }
+    ```
+
+    ```rs title="创建自定义迭代器"
+    //  [1～5] 的计数器
+    struct Counter {
+        count: u32,
+    }
+    impl Counter {
+        fn new() => Counter {
+            Counter { count: 0 }
+        }
+    }
+    impl Iterator for Counter {
+        type Item = u32;
+        fn next(&mut self) -> Option<Slef::Item> {
+            if self.count < 5 {
+                self.count += 1;
+                Some(Self.count)
+            } else {
+                None
+            }
+        }
+    }
+    ```
+
+## 9 智能指针
+
+- "智能指针" 添加了额外的 MetaData 和功能，通常通过 Struct 实现
+
+    > "引用" 通常只能借用数据，而 "智能指针" 在多数情况下都 **持有** 其指向的数据
+
+    - 均实现 Deref & Drop Trait
+    
+      - Defref Trait: 自定义 解引用运算符`*` 的行为
+
+        在实参（引用类型）与实参不匹配时，连续调用 Deref 实现自动类型转换
+
+        ```rs
+        let x = 5;
+        let y = Box::new(x); //  y = &x
+        assert_eq!(5, *y);   // *y = *(y.deref()) = x  
+        ```
+    
+      - Drop Trait：trait 中实现的 `drop()` 无法手动触发，但可以通过 `std::mem::drop` 提前进行清理
+
+
+### `Box<T>`
+
+- 在 Heap 上存储数据、Stack 上仅存放指向 Heap 的指针
+- 应用场景
+    - 解决递归类型（链表）在编译时无法确认实际大小的问题
+    - 在编译时无法确认大小，但在使用时需要知道其确切值
+    - 需要移交大量数据的所有权，切确保操作时不会 *复制数据*
+    - 使用值时，仅关注其实现的 trait、不关注具体类型
+
+    ```rs title="创建一个 1->2->3->Nil 的链表"
+    enum List {
+        Cons(i32, Box<List>),
+        Nil,
+    }
+
+    let l = Cons(1,
+        Box::new(Cons(2, 
+        Box::new(Cons(3, 
+        Box::new(Nil))))));
+    ```
+
+- 手动实现一下 `Box<T>`
+
+    ```rs
+    use std::ops::Deref;
+
+    struct MyBox<T>(T); // 定义了一个 tuple struct
+    impl<T> MyBox<T> {
+        fn new(x: T) -> MyBox<T> {
+            MyBox(x)
+        }
+    }
+    impl<T> Deref for MyBox<T> {
+        type Target = T;
+        fn deref(&self) -> &T { &self.0 }
+    }
+    ```
+
+### `Rc<T>`
+
+- 仅用于 **单线程** 场景，提供 **不可变引用**
+
+- 通过记录所有者数量，允许一份数据**被多个所有者同时持有**、并自动进行清理
+
+- 场景
+
+    需要在 heap 上分配被程序的多个部分 **只读访问** 的数据，且在编译时 **无法确定** 哪一部分最后进行使用
+
+    > 可以确定最后使用者时，将所有者分配给最后持有的部分就好了
+
+```rs
+Rc::clone(&a);        // 增加引用计数，返回 Rc<T>、strong_count ++
+Rc::strong_count(&a); // 读取引用计数，仅当 strong_count == 0 时清理
+
+// 解决循环引用：strong_cnt == 0 时，Weak<T> 自动断开（无论 weak_cnt ?= 0）
+Rc::downgrade(&a);    // 返回 Weak<T>、weak_count ++
+// 因此，Weak<T> 可能指向已经被清理的值、需要手动检查
+Weak<T>.upgrade => Option<Rc<T>>
+```
+
+- Sample
+
+    ```text title="两个 linked list 存在共享片段"
+    3 ↘
+        5 -> 10 -> Nil
+    4 ↗
+    ```
+    ```rs
+    use std::rc::Rc;
+    // 节点类型
+    enum List { Cons(i32, Rc<List>), Nil }
+    // 创建共享部分
+    let shared = Rc::new(Cons(5,
+        Rc::new(Cons(10,
+            Rc::new(Nil)))));
+    // l1, l2 不会持有 shared 的所有权
+    let l1 = Cons(3, Rc::clone(&shared));
+    let l2 = Cons(4, Rc::clone(&shared));
+    ```
+
+
+### `RefCell<T>`
+
+- 包含 `Ref<T> & RefMut<T>`，仅在 **运行时** 检查借用规则
+- 用于 **单线程** 场景，同时支持 **可变**、不可变 借用
+  
+    ```rs
+    borrow()     // 返回不可变引用 Ref<T>
+    borrow_mut() // 返回可变引用 RefMut<T>
+    ```
+    > 可以用 `Rc<RefCell<T>>` 套娃，实现多个所有者的可变借用
+
+- 内部可变性：方法内可变、方法外不可变
+
+    ```rs
+    pub trait Messenger {
+        fn send(&self, msg: &str); // 接口定义的 self 不可变
+    }
+
+    use std::cell:RefCell;
+    struct MockMessenger {
+        sent_messages: RefCell<Vec<String>>>,
+    }
+    impl MockMessenger {
+        fn new() => MockMessenger {
+            MockMessenger { 
+                sent_messages: RefCell::new(vec![]), 
+            }
+        }
+    }
+    impl Messenger for MockMessenger {
+        fn send(&mut self, msg &str) {
+            self.sent_messages.borrow_mut() // 获得可变引用
+                .push(String::from(msg));
+        }
+    }
+    ```
+
+## 10 OOP
+
+其实 Rust 不是很 OOP，它没有 “继承”、只能通过 trait 实现代码复用 
+
+- Sample
+
+    ```rs title="为一组不同的 component 调用 draw()"
+    // 所有的 Component 都必须实现 Draw Trait
+    pub trait Draw { fn draw(&self); }
+
+    // Screen 用于存储所有的 Components，并依次调用 Draw 方法
+    pub struct Screen {
+        pub components: Vec<Box<dyn Draw>>,
+    }
+    impl Screen {
+        pub fn run(&self) { for comp in self.components.iter() { comp.draw(); } }
+    }
+    
+    // 一些实现了 Draw Trait 的 struct
+    sturct Button {}    // impl Draw for Button {}
+    struct SelectBox {} // impl Draw for SelectBox {}
+
+    let screen = Screen { components: vec![
+        Box::new(SelectBox {}),
+        Box::new(Button {}),
+    ]};
+    screen.run();
+    ```
+
+### State Pattern
+
+每个实例由数个内部状态对象（State Object）构成，其表现行为随内部状态改变发生变化
+
+- 示例
+
+    - `Post` 共有三种状态（草稿、等待审批、审批通过）
+    - `post.content()` 仅展示 *审批通过* 的文本内容
+
+    ```rs
+    // State Trait 要求实现：请求审批、审批通过 两个功能
+    trait State {
+        fn request_review(self: Box<Self>) -> Box<dyn State>;
+        fn approve(self: Box<Self>) -> Box<dyn State>;
+    }
+    struct Draft, PendingReview, Published {} // impl State
+
+    pub struct Post {
+        state: Options<Box<dyn State>>,
+        content: String,
+    }
+    impl Post {
+        pub fn new() -> Post {
+            state: Some(Box::new(Draft {})), // init State = Draft
+            content: String::new(),
+        }
+        pub fn add_text(&mut self, text: &str) {
+            self.content.push_str(text);
+        }
+
+        """
+        个人感实现起来有点抽象的
+        - Post 可以不 care 具体的 state 种类，一股脑调 req / approv 就好
+        - 但所有的 State 要对 req / approv 做不同的实现了
+        - 状态相互耦合的时候就 ... 一言难尽
+        """
+        pub fn request_review(&mut self) {
+            // state 是 Option 类型的，take() 方法将取得其所有权
+            if let Some(s) = self.state.take() {
+                self.state = Some(s.request_review());
+            }
+        }
+        pub fn approve(&mut self) { // 逻辑和 request_review 一致
+            if let Some(s) = self.state.take() {
+                self.state = Some(s.approve());
+            }
+        }
+        // Getter
+        pub fn content(&self) -> &str {
+            return self.state.as_ref().unwrap().content(&self);
+        }
+    }
+    ```
+
+- 改进：将状态编码为不同的类型
+
+    - 在上一个片段中，每种 State 都实现了 `req_review & approve`
+    - 在改进后的片段中，只有特定的 State 实现了对应的功能
+
+    ```rs
+    // 存储 **审批** 后的内容
+    pub struct Post { content: String }
+    impl Post {
+        // 初始状态 -> 自动创建 Empty Draft
+        pub fn new() -> DraftPost {
+            DraftPost { content: String::new(), }
+        }
+        pub fn content(&self) -> &str { &self.content }
+    }
+
+    pub struct DraftPost { content: Srting }
+    impl DraftPost {
+        pub fn add_text(&mut self, text: &str) {
+            self.content.push_str(text);
+        }
+        pub fn req_review(self) -> PendingPost {
+            PendingPost { content: self.content }
+        }
+    }
+
+    pub struct PendingPost { content: Srting }
+    impl PendingPost {
+        pub fn aprrove(self) -> Post {
+            Post { content: self.content }
+        }
+    }
+
+    fn main() {
+        let mut post = Post::new();   // 返回 DraftPost
+        post.add_text("write sth here ...");
+        
+        let post = post.req_review(); // 变成 PendingPost
+        let post = post.approve();    // 变成 Post（且有内容）
+    }
+    ```
 

@@ -1,5 +1,7 @@
 # Start Up
 
+> 参照了阿b上的教程: [Rust编程语言入门教程 by 软件工艺师](https://www.bilibili.com/video/BV1hp4y1k7SV)
+
 [Rust](www.rust-lang.org) 相较于 C/C++ 更适用于以下场景：
 
 - 需要高效执行
@@ -96,3 +98,19 @@ replace-with = 'mirror'
 [source.mirror]
 registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 ```
+
+### 3.5* 安装二进制 Crate
+
+- 你可以通过 `cargo install` 命令，从 crates.io 安装具有 "binary target" 的 Crate
+
+    > 就是只能安装 “可执行程序”
+
+- 安装结果将被存放在 `$HOME/.cargo/bin` 目录下
+
+    为确保程序能够正常运行，请将该目录添加至环境变量 `$PATH`
+
+### 3.6* 为 Cargo 添加自定义命令
+
+- 当 `$PATH` 中存在名为 `cargo-xxx` 的可执行文件时，你可以通过 `cargo xxx` 来快速运行
+- 这些自定义命令可以通过 `cargo --list` 进行罗列
+- 你可以通过 3.5 中的方法安装扩展，并通过和内置工具一致的命令进行调用
