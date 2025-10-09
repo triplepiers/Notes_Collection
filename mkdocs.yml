@@ -65,6 +65,8 @@ nav:
 - Home: index.md
 - Front End:
   - Canvas: Nulling/Front End/Canvas.md
+  - Animation:
+      - GSAP: Nulling/Front End/Animations/GSAP.md
   - TailWindCSS: Nulling/Front End/TailWind.md
   - Type Script: Nulling/Front End/TS.md
   - Java Script:
