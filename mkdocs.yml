@@ -109,8 +109,8 @@ nav:
     - NextJS: Nulling/React/NextJS.md
 - DataBase:
   - Mongo DB:
-      - 1 快速上手: Nulling/Tool/Mongo DB - 快速上手.md
-      - 2 慢速上头: Nulling/Tool/Mongo DB - 慢速上头.md
+      - 1 快速上手: Nulling/Tool/MongoDB/快速上手.md
+      - 2 慢速上头: Nulling/Tool/MongoDB/慢速上头.md
 - 软工相关:
   - 编译原理(旷工中):
     - 5 语法制导翻译: Nulling/编译原理/5 语法制导翻译.md
@@ -137,4 +137,6 @@ nav:
   - 常用项目创建: Nulling/Tool/常用项目创建.md
   - Git: Nulling/Tool/Git.md
   - IgemUploads 使用文档: Nulling/Tool/igem-uploads.md
-  - LangChain: Nulling/Tool/LangChain.md
+  - LangChain: 
+    - 1 Base: Nulling/Tool/LangChain/1_Base.md
+    - 2 应用: Nulling/Tool/LangChain/2_Apps.md
