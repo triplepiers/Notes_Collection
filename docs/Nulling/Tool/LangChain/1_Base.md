@@ -588,3 +588,158 @@ response = chain.invoke({
 !!!note "模型本身 **不会记忆** 任何上下文信息，需要手动维护"
     Memory 模块会将用户当当前轮次 query 与历史上下文进行拼合，并将 response 拼接至 Context 尾部
 
+Memory 模块的几种实现思路如下：
+
+1. 最简单：保留完整的聊天消息列表
+2. 简单有效：返回最新的 k 条消息
+3. 略复杂：返回最新 k 条消息的概要
+4. 复杂：从历史消息中提取实体、仅返回与当前用户相关的实体信息
+
+LangChain 为其中的 对话、实体、摘要 类型实现都提供了对应工具
+
+### 3.1 ChatMessageHistory
+
+该类将直接操作消息对象，是其他 Memory 组件的底层存储工具、不涉及字符串格式化
+
+```py
+# 初始化
+from langchain.memory import ChatMessageHistory
+history = ChatMessageHistory()
+
+# 添加消息
+history.add_user_message("hello")
+history.add_ai_message("nice to meet you")
+history.add_user_maessage("calculate 1*2*3 = ?")
+
+# 喂给 LLM
+response = llm.invoke(history.messages)
+```
+
+### 3.2 ConversationBufferMemory
+
+- 仅返回最近 K 次交互结果（按一次交互为最小单位移除历史消息），节省 token
+
+- 支持通过 `return_messages` 参数控制返回格式：
+
+    - `True`：返回 `List[BaseMessage]`
+    - `False`（默认）：返回经拼接的纯字符串
+
+```py
+# 初始化，需要显式指定 K 值
+from langchain.memory import ConversationBufferMemory
+memo = ConversationBufferMemory(k=5, return_messages=True)
+
+"""手动塞 context"""
+memo.save_context({"input":"hello"}, {"output":"how are you"})
+memo.save_context({"input":"calc 1+3=?"}, {"output":"4"})
+memo.save_context({"input":"introduce yourself"}, {"output":"..."})
+
+"""使用 LLMChain 自动塞"""
+conversation_with_summary = LLMChain(
+    llm=llm, prompt=prompt_template,
+    memory=memo,
+    verbose=True
+)
+res1 = conversation_with_summary.invoke({"question":"usr input1"})
+res2 = conversation_with_summary.invoke({"question":"usr input2"})
+
+print(memo.load_memory_variables({}))
+```
+
+#### ConversationTokenBufferMemory
+
+类似的，只保留最近 Token 个对话数据
+
+```py
+from langchain.memory import ConversationTokenBufferMemory
+memo = ConversationTokenBufferMemory(
+    llm=llm, max_token_limit=50
+)
+# 手动/自动塞 的操作与之前一致
+```
+
+### 3.3 ConversationSummaryMemory
+
+!!!question "通过 K 值或 token 数控制记录均无法兼顾存储占用与对话质量"
+
+`ConversationSummaryMemory` 提供了智能对话历史压缩机制，能通过 LLM 自动生成并更新历史对话内容的精简摘要、而非存储原始对话文本
+
+```py
+from langchain.memory import ConversationSummaryMemory
+memo = ConversationSummaryMemory(llm=llm)
+
+# 熟悉的古法 save_context
+# 此时使用 load_memory_variables 将打印摘要
+```
+
+#### ConversationSummaryBufferMemory
+
+- 该类保留了 **近期** 对话内容的原始记录、同时对 **早期** 内容进行动态摘要
+- 早期 / 近期 消息的划分依据是 token 数
+
+```py
+from langchain.memory import ConversationSummaryBufferMemory
+memo = ConversationSummaryBufferMemory(
+    llm=llm, return_messages=True,
+    max_token_limit=50,
+    # mamory_key="prompt_template 中的 variable"
+)
+```
+
+### 3.4 ConversationEntityMemory
+
+该类支持智能识别、存储和利用对话中出现的 "实体-属性" 信息，解决信息过载
+
+```py
+from langchain.memory import ConversationEntityMemory
+from langchain.memory.prompt import ENTITY_MEMORY_CONVERSATION_TEMPLATE
+
+llm = ChatOpenAI()
+chain = LLMChain(
+    llm=llm,
+    prompt=ENTITY_MEMORY_CONVERSATION_TEMPLATE,
+    memory=ConversationEntityMemory(llm=llm)
+)
+
+# 推理、打印实体信息
+chain.invoke(input="")
+print(chain.memory.entity_store.store)
+```
+
+#### ConverstationKGMemory
+
+- 在识别出的 Entity 基础上构建知识图谱（Knowledge Graph, KG），从而进一步捕捉实体之间的复杂关系
+
+- 对话内容将被转换为 `(头实体, 关系, 尾实体)` 的三元组
+
+```py
+from langchain.memory import ConversationKGMemory
+memo = ConversationKGMemory(llm=llm)
+
+# 古法对话
+
+memo.load_memory_variable({"input":"Who is Sam"}) # 返回 Sam 相关节点
+memo.get_knowledge_triples("她最喜欢红色")          # 返回所有相关的三元组
+```
+
+### 3.5 VectorStoreRetrieverMemory
+
+该类将历史对话存储在向量数据库中，并基于向量相似度检索、返回语义相似度最高的 k 个文档
+
+```py
+from langchain.memory import VectorStoreRetrieverMemory
+from langchain_community.vectors import FAISS
+
+# 塞点初始文本（古法 save_context）
+memo = ConvertStaionMemory() 
+
+# 初始化向量数据库（需要配置 Embedding Model）
+vector_store = FAISS.from_texts(memo.buffer.split('\n'), embedding_model)
+# 定义检索器：只召回 k=1 个结果
+retriever = vector_store.as_retriever(search_kwag=dict(k=1))
+
+# 初始化带检索功能的向量对话记录
+memory = VectorStoreRetrieverMemory(retriever=retriever)
+
+# 通过 load_memory_variable({"prompt":"xxx"}) 检索最相关的 k 条数据
+```
