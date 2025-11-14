@@ -2,7 +2,7 @@
 
 > 参照了阿b上的教程: [Rust编程语言入门教程 by 软件工艺师](https://www.bilibili.com/video/BV1hp4y1k7SV)
 
-[Rust](www.rust-lang.org) 相较于 C/C++ 更适用于以下场景：
+[Rust](https://www.rust-lang.org) 相较于 C/C++ 更适用于以下场景：
 
 - 需要高效执行
 - 需要内存安全

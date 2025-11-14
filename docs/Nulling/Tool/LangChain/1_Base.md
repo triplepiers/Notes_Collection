@@ -743,3 +743,110 @@ memory = VectorStoreRetrieverMemory(retriever=retriever)
 
 # 通过 load_memory_variable({"prompt":"xxx"}) 检索最相关的 k 条数据
 ```
+
+## 4 Tools
+
+- Tools 用于自定义工具以扩展 LLM 能力，使其能够与外部系统、API 或自定义函数进行交互，以突破文本生成的能力边界
+
+- 每个 Tool 专注于特定功能，以便进行组合或复用
+
+- LangChain 框架本身就支持[大量第三方工具](https://docs.langchain.com/oss/python/integrations/tools/index#tools-and-toolkits)
+
+### 4.1 工具定义
+
+Tool 通常包含以下要素：
+
+| 属性 | 类型 | 描述 |
+| :-- | :-- | :-- |
+| `name` | str | 工具名称（唯一）|
+| `description` | str | [Optional] 功能描述 |
+| `args_schema` | Pydantic BaseModel | [Optional] 用于提供附加信息，或验证预期参数 |
+| `return_dict` | bool | 为 True 时，Agent 将停止并直接将调用结果反馈给用户 |
+
+Tool 可以通过以下两种方式进行自定义：
+
+1. 使用 `@tool` 装饰器
+
+    - 默认使用函数名作为工具名称（或通过 `name_or_callabel` 进行覆盖）
+
+    - 使用 docstring（必填）作为功能描述
+
+    ```py
+    from langchain_core.tools import tool
+
+    @tool
+    def add_number(a: int, b: int) -> int:
+        """计算两个整数之和
+        :param a: ...; b: ...
+        :return: int: ...
+        """
+        return a + b
+    # 此时，add_number 已经是一个 tool：
+    # - 可以通过 add_number.args 形式打印参数
+    # - 可以通过 add_number.invoke({"a": 1, "b": 2}) 进行调用
+    
+    from pydantic import BaseModel, Field
+    class FieldInfo(BaseModel):
+        a: int = Field(description="第一个整形参数")
+        b: int = Field(description="第二个整形参数")
+
+    # 以下写法将覆盖默认设置
+    @tool(name_or_callable="add_2_num", args_schema=FieldInfo)
+    def add_number(a: int, b: int) -> int:
+        return a+b
+    # 此时的工具名为 add_2_num
+    ```
+
+2. 使用 `StructuredTool.from_function` 方法
+
+    - 基于功能函数进行封装
+    - 该方式支持更多的配置项、同步/异步实现规范
+
+    ```py
+    from langchain_core.tools import StructuredTool
+
+    def search_google(query: str) -> str:
+        return "this is a result"
+
+    search_tool = StructuredTool.from_function(
+        func=search_google,
+        name="search",
+        description="查询搜索引擎，并返回结果"
+    )
+    # 此时需要通过 search_tool 进行调用（额，那 name 又有什么用？）
+    ```
+
+### 4.2 工具调用
+
+（包含 `name, description, JSON`）
+2. L
+3. 根据
+
+```py
+# 1 向大模型提供所有可用的 Tool 信息列表
+tools = [ MoveFileTool() ]
+## 由于 chat_model 只接受 func 列表，此处需要转换
+tools = [ convert_to_openai_function(t) for t in tools]
+
+# 2 LLM 通过 Prompt 推断需要调用的工具，并提供具体的实参信息
+## 用户需求
+messages = [ HumanMessage(content="将文件 a.out 移动到桌面") ]
+response = chat_model.invoke(
+    input=messages,
+    functions=tools 
+)
+"""
+AI Content 在不同情形下的格式：
+1. 需要调用工具: content 为空、additional_kwargs.function_call 给出工具名称与参数
+2. 不需要调用工具: content 为非空文本、additional_kwargs 不包含 function_call 字段
+"""
+
+# 3 (因为目前不是 Agent 模式) 根据 response 手动调用对应 tool
+if "function_call" in response.additional_kwargs:
+    tool_name = response.additional_kwargs["function_call"]["name"]
+    tool_args = json.loads(response.additional_kwargs["function_call"]["arguments"])
+    # 比较呆的调用方法
+    if "move_file" in tool_name: tool = MoveFileTool
+    # 统一调用方式
+    tool.run(tool_args)
+```
