@@ -140,3 +140,4 @@ nav:
   - LangChain: 
     - 1 Base: Nulling/Tool/LangChain/1_Base.md
     - 2 应用: Nulling/Tool/LangChain/2_Apps.md
+- Server: Nulling/Server/Install_Apps.md
