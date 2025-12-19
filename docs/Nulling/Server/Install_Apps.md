@@ -80,6 +80,37 @@ Host [HostAlias]                   # 用于 ssh HostAlias 简化连接
 
         该命令 **不会** 显示隐藏文件夹，可以尝试用 `du -sh ./.*` 救一下
 
+### 新增普通用户
+
+1. 创建新用户（自动复制 `/etc/skel` 中的基本配置文件）
+
+    ```bash
+    useradd -m -s /bin/bash [User]
+    # -m 表示为改用户创建 home 目录，并复制 /etc/skel 下的模版文件
+    # -s 指定默认 shell
+    ```
+
+2. 设置密码（可选）
+
+    ```bash
+    passwd [User] # 然后输入两次 PWD 就行
+    ```
+
+3. 配置 SSH 公钥
+
+    ```bash
+    # 切换到用户目录
+    mkdir -p /home/[User]/.ssh
+
+    # 粘贴公钥
+    echo "Public Key" > /home/[User]/.ssh/authorized_keys
+
+    # 设置正确权限（非常重要！）
+    chown -R [User]:[User] /home/[User]/.ssh
+    chmod 700 /home/[User]/.ssh
+    chmod 600 /home/[User]/.ssh/authorized_keys
+    ```
+
 ## 2 开发环境
 
 ### VSCode
