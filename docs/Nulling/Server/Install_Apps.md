@@ -356,13 +356,18 @@ tokenizer.add_special_tokens({            # 特殊 token
     wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.29-linux-glibc2.12-x86_64.tar
 
     # 解压 & 重命名
-    tar -zxvf mysql-5.7.29-linux-glibc2.12-x86_64.tar
+    tar -zxvf mysql-5.7.29-linux-glibc2.12-x86_64.tar 
+    # 报 gzip: stdin: not in gzip format 可以改成 -xvf，得到：
+    # - 主程序：mysql-5.7.29-linux-glibc2.12-x86_64.tar.gz (<- 继续处理这个)
+    # - 测试套件：mysql-test-5.7.29-linux-glibc2.12-x86_64.tar.gz
     mv mysql-5.7.29-linux-glibc2.12-x86_64 mysql
     ```
 
 2. 编写配置文件：将 $INSTALL_PREFIX 替换为实际安装路径
 
-    ```toml title="mysql/my.cnd"
+    > 因为 MySQL 不会扫描自定义路径下的配置文件，最好创建在 HOME 目录下：`~/.my.cnf`
+
+    ```toml title="mysql/my.cnf"
     [client]   
     port=3336  
     socket=$INSTALL_PREFIX/mysql/mysql.sock  
@@ -378,10 +383,11 @@ tokenizer.add_special_tokens({            # 特殊 token
     lower_case_table_names=1 # 设置大小写不敏感
     ```
 
-3. 安装：不打印任何消息即为安装成功，此处的 USER_NAME 为系统用户名
+1. 安装：不打印任何消息即为安装成功，此处的 USER_NAME 为系统用户名
 
     ```bash
     bin/mysqld \
+    # 前面配置文件为 ~/.my.cnf 的话，修改为对应路径
     --defaults-file=$INSTALL_PREFIX/mysql/my.cnf \
     --initialize \
     --user=USER_NAME \
@@ -389,16 +395,17 @@ tokenizer.add_special_tokens({            # 特殊 token
     --datadir=$INSTALL_PREFIX/mysql/data
     ```
 
-4. 启动服务
+2. 启动服务
 
     ```bash
-    cd $INSTALL_PREFIX/mysql/bin
-    bin/mysqld_safe \
-    --defaults-file=$INSTALL_PREFIX/mysql/my.cnf
+    cd $INSTALL_PREFIX/mysql
+    ./bin/mysqld_safe \
+    # 前面配置文件为 ~/.my.cnf 的话，修改为对应路径
+    --defaults-file=$INSTALL_PREFIX/mysql/my.cnf \
     --user=USER_NAME &
     ```
 
-5. 获取初始密码：
+3. 获取初始密码：
 
     - 随机密码在 `error.log` 文件中，可通过以下命令进行查看
 
@@ -416,6 +423,28 @@ tokenizer.add_special_tokens({            # 特殊 token
         # 刷新系统权限
         flush privileges;
         ```
+
+4. 报错处理
+
+    1. 若通过 `mysql -u [User] -p` 登录报错：`Command 'mysql' not found`，则将 `$INSTALL_PREFIX/mysql/bin` 加入环境变量 `$PATH`
+
+        ```text
+        # @ ~/.bashrc
+        export PATH="$PATH:$INSTALL_PREFIX/mysql/bin"
+        ```
+    
+    2. 登录报错：` Can't connect to local MySQL server through socket '/tmp/mysql.sock'`
+
+        最好通过 `mysql --print-defaults` 检验一下客户端配置是否生效（打印为空说明未生效）
+
+        - 临时：指定连接使用的 socket 文件
+
+            ```bash
+            mysql --socket=$INSTALL_PREFIX/mysql/mysql.sock -u root -p
+            ```
+
+        - 长期：先 kill 掉所有 mysql 相关进程，然后把 `my.cnf` 挪到 HOME 目录后重启服务
+
 
 ### SQLite3
 
@@ -661,6 +690,55 @@ SQLite 依赖于 `gcc` 和 `make`，请确保已经安装
     pkg-config --exists libpq && echo "OK" || echo "Still missing" # 显示 OK 即可
     ```
 
+## 4 换源
 
+### 4.1 Pip
 
+1. 创建配置文件
 
+    ```bash
+    mkdir -p ~/.pip
+    touch  ~/.pip/pip.conf
+    ```
+
+2. 写入清华源
+
+    ```text
+    [global]
+    index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+    trusted-host = pypi.tuna.tsinghua.edu.cn
+    ```
+
+3. 验证
+
+    ```bash
+    pip config list # 观察是否输出清华源，或者直接安装、看有没有加速
+    ```
+
+### 4.2 Conda
+
+1. Conda 的配置文件是 `~/.condarc`，可以先通过以下命令备份为 `.condarc.bak`：
+
+    ```bash
+    mv ~/.condarc ~/.condarc.bak 2>/dev/null
+    ```
+
+2. 写入清华源
+
+    ```text
+    channels:
+        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/     # 如需 PyTorch
+        - defaults                                                         # 保留 defaults, 避免某些包在镜像中缺失
+    show_channel_urls: true
+    ssl_verify: true
+    ```
+
+3. 验证
+
+    ```bash
+    conda config --show channels # 查看当前配置
+    conda search numpy           # 尝试搜索包（观察 URL 是否含 tuna）
+    ```
