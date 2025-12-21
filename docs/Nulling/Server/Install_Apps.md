@@ -144,6 +144,14 @@ Host [HostAlias]                   # 用于 ssh HostAlias 简化连接
 
     其中，下载可以通过指定 `--downloader aria2` 进行加速（可以通过 `conda install aria2` 安装）
 
+4. 报错处理
+
+   -  `Slice MD5 mismatch`（小文件没问题，见 [Issue#741](https://github.com/houtianze/bypy/issues/741)）
+
+      - 原因： `bypy` 默认会在文件上传后执行 MD5 校验（比较本地计算和百度服务器回传结果），但百度方面的实现变了
+
+      - 解决：建议该用 BaiduPCS-Go
+     
 
 ### VSCode
 
