@@ -113,6 +113,38 @@ Host [HostAlias]                   # 用于 ssh HostAlias 简化连接
 
 ## 2 开发环境
 
+### bypy（百度网盘下载）
+
+1. 安装
+
+    ```bash
+    pip install bypy
+    ```
+
+2. 授权：随便输入一个命令，比如 `bypy info`，随后会出现一个百度网盘登录网址 => 复制粘贴登录后获得的 token，敲击回车即可
+
+3. 基本操作
+
+    `bypy` 能够同步的数据位于 `我的应用数据/bypy` 下
+
+    ```bash
+    bypy help # 显示帮助（基本都能在这里看）
+    bypy list # 列出网盘上对应位置下的所有文件
+
+    ## 上传
+    bypy upload [localpath] [remotepath] [ondup]      # 上传文件/递归上传路径
+    bypy syncup [localdir] [remotedir] [deleteremote] # 上传本地的整个文件夹
+
+    ## 下载
+    bypy downdir [remotedir] [localdir]                 # 递归下载指定路径
+    bypy downfile <remotefile> [localpath]              # 下载指定文件
+    bypy download [remotepath] [localpath]              # 下载指定文件/递归下载路径
+    bypy syncdown [remotedir] [localdir] [deletelocal]  # 把远程所有东西拉下来
+    ```
+
+    其中，下载可以通过指定 `--downloader aria2` 进行加速（可以通过 `conda install aria2` 安装）
+
+
 ### VSCode
 
 #### 持续显示 “正在下载服务器”
