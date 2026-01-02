@@ -90,6 +90,22 @@
         });
         ```
 
+- 快捷键注册
+
+    ```json title="pakcage.json"
+    {
+      ...,
+      "contributes": [
+        ...,
+        "keybindings": [
+          "command": "[plugin].helloWorld", // 需要和 commands 里的内容对应
+          "key": "ctrl+R R", // 默认配给 Win
+          "mac": "cmd+R R"
+        ]
+      ]
+    }
+    ```
+
 ## 2 功能实现
 
 该插件涉及的关键步骤如下：
@@ -279,7 +295,7 @@ import {getFunctionNode} from "./main";
 
 export function activate(context: vscode.ExtensionContext) {
   vscode.command.registerCommand(
-    "[plugin].deleteFunction", () => {
+    "[plugin].helloWorld", () => {
       // 如果没有打开的窗口，就可以直接润了
       const editor = vscode.window.activeTextEditor;
       if (!editor) { return; }
