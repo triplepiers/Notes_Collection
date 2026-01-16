@@ -80,6 +80,20 @@ Host [HostAlias]                   # 用于 ssh HostAlias 简化连接
 
         该命令 **不会** 显示隐藏文件夹，可以尝试用 `du -sh ./.*` 救一下
 
+### 进程筛选
+
+> 实际上 `ps aux` 查看的是快照，但凑合用吧
+
+```bash
+# 基础版
+ps aux | grep [xxx] # 把 xxx 替换成你要看的东西，比如 git / xxx.py
+                    # 用 nohup 挂的话，grep nohup 是看不出来的 => 用后面的命令
+
+# 进阶版
+ps -u [userName]    # 显示特定用户的所有进程（目测接 grep 也没用）
+ps aux | grep "^user" | grep xxx # 先匹配特定用户（行开头），再匹配特定任务
+```
+
 ### 新增普通用户
 
 1. 创建新用户（自动复制 `/etc/skel` 中的基本配置文件）
@@ -101,10 +115,10 @@ Host [HostAlias]                   # 用于 ssh HostAlias 简化连接
     ```bash
     # 切换到用户目录
     mkdir -p /home/[User]/.ssh
-
+    
     # 粘贴公钥
     echo "Public Key" > /home/[User]/.ssh/authorized_keys
-
+    
     # 设置正确权限（非常重要！）
     chown -R [User]:[User] /home/[User]/.ssh
     chmod 700 /home/[User]/.ssh
@@ -112,6 +126,23 @@ Host [HostAlias]                   # 用于 ssh HostAlias 简化连接
     ```
 
 ## 2 开发环境
+
+### Git
+
+- 撤销上一次 Commit（修改的代码还是会存在）
+
+  ```bash
+  git reset HEAD~1 # 后面的数字可以改来着，看回退多少次
+  ```
+
+- 远端存在修改：先拉取，再推送
+
+  ```bash
+  git pull origin <branch>
+  # 存在冲突的话，这里需要 merge
+  # 例如：CONFLICT (content): Merge conflict in .gitignore
+  git push origin <branch>
+  ```
 
 ### bypy（百度网盘下载）
 
@@ -151,7 +182,7 @@ Host [HostAlias]                   # 用于 ssh HostAlias 简化连接
       - 原因： `bypy` 默认会在文件上传后执行 MD5 校验（比较本地计算和百度服务器回传结果），但百度方面的实现变了
 
       - 解决：建议该用 BaiduPCS-Go
-     
+   
 
 ### VSCode
 
@@ -175,6 +206,71 @@ mv vscode-server-linux-x64 ${commit_id}
 ```
 
 !!!info "重启 VSCode 远程连接窗口，然后摆脱命令行神教吧"
+
+### Claude Code
+> 参考 [官方文档](https://code.claude.com/docs/zh-CN/overview)
+
+!!!comment "用对话搞 Git Commit 真的很智障啊 ..."
+
+1. 纯终端
+   
+   - 安装 Claude Code
+
+        ```bash
+        # macOS / Linux / WSL
+        curl -fsSL https://claude.ai/install.sh | bash
+        # macOS (by homebrew)
+        brew install --cask claude-code
+        ```
+    
+    - 开始使用
+
+        ```bash
+        cd path/to/your/project
+        claude # 随后根据提示进行登陆
+        ```
+
+    - 常用命令
+
+        | 命令 | 功能 | 示例 |
+        | --- | --- | --- |
+        |`claude` | 启动交互模式 | `claude` |
+        |`claude "task"` | 运行一次性任务 | `claude "fix the build error"` |
+        |`claude -p "query"` | 运行一次性查询，然后退出 | `claude -p "explain this function"` |
+        |`claude -c` | 在当前目录中继续最近的对话 | `claude -c` |
+        |`claude -r` | 恢复之前的对话 | `claude -r` |
+        |`claude commit` | 创建 Git 提交 | `claude commit` |
+        |`/clear` | 清除对话历史 | `/clear` |
+        |`/help` | 显示可用命令 | `/help` |
+        |`exit` / `Ctrl+C` | 退出 Claude Code | `exit` |
+
+2. 在 VSCode 中使用
+
+    **不需要** 安装 Claude Code CLI，除非需要 tool-using（使用 MCP 协议）
+
+    - 安装 `Claude Code for VS Code`
+
+    - 展开 GUI：点击文件右上角的皮燕子 / 在命令面板（`Cmd+Shift+P`）中搜索 `Claude Code`
+
+    - 开启终端模式：在设置（`Cmd+,`）中勾选 "扩展-ClaudeCode-使用终端"
+
+    - 使用第三方服务商
+  
+        - 在插件市场点击右下角齿轮 - 设置 - Environment Variables - 在 settings.json 中编辑
+        - 重启后，即可无登录使用 Claude
+
+        ```json title="settings.json"
+        "claudeCode.environmentVariables": [
+            {
+                "name": "ANTHROPIC_BASE_URL",
+                "value": "你的代理地址"
+            },
+            {
+                "name": "ANTHROPIC_AUTH_TOKEN",
+                "value": "你的 API KEY"
+            }
+        ],
+        ```
 
 ### Miniconda
 
@@ -264,10 +360,10 @@ Huggin Face 的主干库分为三部分：
     ```py title="用于下载的脚本"
     import os
     from huggingface_hub import snapshot_download
-
+    
     # 设置国内镜像
     os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
-
+    
     model_name = "google-bert/bert-base-chinese"
     while True: # 防止断联
     try:
@@ -364,7 +460,7 @@ Huggin Face 的主干库分为三部分：
         return_special_tokens_mask=True,
         return_length=True
     )
-
+    
     for k,v in outputs.items():
         print(k,';', v)
     for idx in range(len(outputs['input_ids'])):
@@ -390,11 +486,13 @@ tokenizer.add_special_tokens({            # 特殊 token
 
 ### MySQL
 
-1. 下载：请至 [官网](https://downloads.mysql.com/archives/community/) 选择合适版本，此处选用 v5.7.29
+1. 下载：请至 [官网](https://downloads.mysql.com/archives/community/) 选择合适版本，此处选用 v5.7.29（OS 需要选  `Linux Generic`）
+
+    > emmmmm `v8.0.18` 以上才支持 `EXPLAIN ANALYSE`
 
     ```bash
     wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.29-linux-glibc2.12-x86_64.tar
-
+    
     # 解压 & 重命名
     tar -zxvf mysql-5.7.29-linux-glibc2.12-x86_64.tar 
     # 报 gzip: stdin: not in gzip format 可以改成 -xvf，得到：
@@ -411,7 +509,7 @@ tokenizer.add_special_tokens({            # 特殊 token
     [client]   
     port=3336  
     socket=$INSTALL_PREFIX/mysql/mysql.sock  
-
+    
     [mysqld]
     port=3336
     basedir=$INSTALL_PREFIX/mysql
@@ -423,7 +521,7 @@ tokenizer.add_special_tokens({            # 特殊 token
     lower_case_table_names=1 # 设置大小写不敏感
     ```
 
-1. 安装：不打印任何消息即为安装成功，此处的 USER_NAME 为系统用户名
+3. 安装：不打印任何消息即为安装成功，此处的 USER_NAME 为系统用户名
 
     ```bash
     bin/mysqld \
@@ -435,7 +533,7 @@ tokenizer.add_special_tokens({            # 特殊 token
     --datadir=$INSTALL_PREFIX/mysql/data
     ```
 
-2. 启动服务
+4. 启动服务
 
     ```bash
     cd $INSTALL_PREFIX/mysql
@@ -445,26 +543,29 @@ tokenizer.add_special_tokens({            # 特殊 token
     --user=USER_NAME &
     ```
 
-3. 获取初始密码：
+5. 获取初始密码：
 
     - 随机密码在 `error.log` 文件中，可通过以下命令进行查看
 
         ```bash
         cat error.log | grep root@localhost
         ```
-    
+
     - 你可以在登录后通过以下 SQL 指令进行修改
 
         ```sql
         # 设置新密码
         SET PASSWORD FOR 'root'@'localhost' = PASSWORD('neo_pwd');
+        # v8.0.30 应该为
+        SET PASSWORD FOR 'root'@'localhost' = 'neo_pwd';
+        
         # 使用户root能被任何host访问
         update mysql.user set host = '%' where user = 'root';
         # 刷新系统权限
         flush privileges;
         ```
 
-4. 报错处理
+6. 报错处理
 
     1. 若通过 `mysql -u [User] -p` 登录报错：`Command 'mysql' not found`，则将 `$INSTALL_PREFIX/mysql/bin` 加入环境变量 `$PATH`
 
@@ -472,7 +573,7 @@ tokenizer.add_special_tokens({            # 特殊 token
         # @ ~/.bashrc
         export PATH="$PATH:$INSTALL_PREFIX/mysql/bin"
         ```
-    
+
     2. 登录报错：` Can't connect to local MySQL server through socket '/tmp/mysql.sock'`
 
         最好通过 `mysql --print-defaults` 检验一下客户端配置是否生效（打印为空说明未生效）
@@ -484,6 +585,12 @@ tokenizer.add_special_tokens({            # 特殊 token
             ```
 
         - 长期：先 kill 掉所有 mysql 相关进程，然后把 `my.cnf` 挪到 HOME 目录后重启服务
+
+7. （温和的）关闭服务
+
+    ```bash
+    mysqladmin -u root -p shutdown # 该命令可以防止数据损坏
+    ```
 
 
 ### SQLite3
@@ -529,7 +636,7 @@ SQLite 依赖于 `gcc` 和 `make`，请确保已经安装
     ```bash
     # 将 $INSTALL_PREFIX/sqlite3/bin 加入 PATH（永久生效）
     echo 'export PATH="$INSTALL_PREFIX/sqlite3/bin:$PATH"' >> ~/.bashrc
-
+    
     # 重新加载配置
     source ~/.bashrc
     ```
@@ -631,14 +738,14 @@ SQLite 依赖于 `gcc` 和 `make`，请确保已经安装
     # 下载
     wget -c http://ibiblio.org/pub/Linux/ALPHA/freetds/stable/freetds-stable.tgz
     tar -zxvf freetds-stable.tgz
-
+    
     # 安装
     cd freetds-0.91
     ./configure 、
     --prefix=$INSTALL_PREFIX/freetds \
     --with-tdsver=8.0 --enable-msdblib
     make && make install
-
+    
     # 添加到环境变量
     LD_LIBRARY_PATH="$INSTALL_PREFIX/freetds/lib:$LD_LIBRARY_PATH"
     ```
@@ -648,7 +755,7 @@ SQLite 依赖于 `gcc` 和 `make`，请确保已经安装
     1. 下载 [最新二进制包](http://www.sbcl.org/platform-table.html)，或 [较旧版本](https://sourceforge.net/projects/sbcl/files/sbcl/)
 
     2. 解压 & 指定安装路径（默认在 `/usr/local`）
-   
+      
         ```bash
         INSTALL_ROOT=$INSTALL_PREFIX/sbcl sh install.sh
         ```
