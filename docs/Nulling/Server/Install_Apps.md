@@ -49,7 +49,9 @@
 
 !!!warning "Azure 升级完之后会丢掉公钥，得用密码登录后重新传一遍"
 
-### SSH 连接简化
+### SSH
+
+#### 连接简化
 
 !!!question "还在为连接服务器得输入一长串 username / host / port 信息而烦恼吗？"
     请去霍霍 `~/.ssh/config` 这个文件，如果没有的话就 `touch` 一个出来
@@ -63,6 +65,32 @@ Host [HostAlias]                   # 用于 ssh HostAlias 简化连接
 ```
 
 现在，你可以用通过 `ssh [HostAlias]` 命令进行一键连接了
+
+#### WARNING
+
+在使用 SSH 连接时出现以下 WARNING 信息：
+
+```
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ED25519 key sent by the remote host is
+SHA256:[一串 SHA 256].
+Please contact your system administrator.
+Add correct host key in path/to/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in path/to/.ssh/known_hosts:[rowIndex]
+Host key for [IP]:port has changed and you have requested strict checking.
+Host key verification failed.
+```
+
+- 解释：待连接主机 `[IP]:port` 的密钥发生变化（可能是由于系统重装），SSH 出于安全考虑会默认拒绝连接
+
+- 修复：根据提示删除 `known_host` 文件中的对应行并重新连接，此时 SSH 会显示该主机的新密钥、确认无误后输入 `yes` 即可
+
+  > 目测有 `ssh-ed25519` 和 `endsa-sha2-nistp256` 两行、都需要删掉
 
 ### 存储占用查看
 
@@ -184,6 +212,54 @@ ps aux | grep "^user" | grep xxx # 先匹配特定用户（行开头），再匹
       - 解决：建议该用 BaiduPCS-Go
    
 
+### Rclone（Google Drive）
+
+1. [安装](https://rclone.org/downloads/)（略）
+
+2. 配置 Google Drive
+
+   ```bash
+   rclone config # 运行配置向导
+   [输入] n       # New Remote
+   [输入] GDrive  # 起个名字
+   [输入] 22      # 可能发生变动，对应 Google Drive (drive)
+   [输入] 回车     # 默认 client_id
+   [输入] 回车     # 默认 client_secret
+   [输入] 1       # Full access
+   [输入] 回车     # 默认 service_account_file
+   [输入] n       # 不对 advanced config 进行配置
+   [输入] n       # 远程服务器无法直接使用 Web Browser 进行验证
+   # 见 Step 3 的验证操作
+   [输入] y       # Keep（保存）此次配置
+   [输入] q       # 退出 Config 编辑
+   ```
+
+3. 在主力机安装 `rclone`，并运行以下指令
+
+   > 需要提前开启终端代理，否则会因超时失败
+
+   ```bash
+   rclone authorize "drive" # 然后会自动弹出网页，命令行显示 Wating for code...
+   ```
+
+   随后，将显示的整个 JSON 粘贴到服务器上
+
+   ```
+   Got code
+   Paste the following into your remote machine --->
+   {"access_token": "", ..., "expires_in":xxxx}
+   ```
+
+4. 上传文件：可以用 `--progress` 显示实时进度
+
+   ```bash
+   # 上传整个目录：copy 只会复制新文件，但 sync 会删除多余文件
+   rclone copy /local/path GDrive:remote/path
+   
+   # 上传单个文件
+   rclone copy /paht/to/local/file GDrive:remote/path/
+   ```
+
 ### VSCode
 
 #### 持续显示 “正在下载服务器”
@@ -222,7 +298,7 @@ mv vscode-server-linux-x64 ${commit_id}
         # macOS (by homebrew)
         brew install --cask claude-code
         ```
-    
+   
     - 开始使用
 
         ```bash
@@ -255,7 +331,7 @@ mv vscode-server-linux-x64 ${commit_id}
     - 开启终端模式：在设置（`Cmd+,`）中勾选 "扩展-ClaudeCode-使用终端"
 
     - 使用第三方服务商
-  
+    
         - 在插件市场点击右下角齿轮 - 设置 - Environment Variables - 在 settings.json 中编辑
         - 重启后，即可无登录使用 Claude
 
@@ -507,11 +583,11 @@ tokenizer.add_special_tokens({            # 特殊 token
 
     ```toml title="mysql/my.cnf"
     [client]   
-    port=3336  
+    port=3306  
     socket=$INSTALL_PREFIX/mysql/mysql.sock  
     
     [mysqld]
-    port=3336
+    port=3306
     basedir=$INSTALL_PREFIX/mysql
     datadir=$INSTALL_PREFIX/mysql/data
     pid-file=$INSTALL_PREFIX/mysql/mysql.pid
@@ -543,7 +619,13 @@ tokenizer.add_special_tokens({            # 特殊 token
     --user=USER_NAME &
     ```
 
-5. 获取初始密码：
+5. 设置环境变量（把 `bin` 加入 `$PATH` 变量）
+
+    ```txt title="~/.bashrc"
+    export PATH="$PATH:/path/to/mysql/client"
+    ```
+
+6. 获取初始密码：
 
     - 随机密码在 `error.log` 文件中，可通过以下命令进行查看
 
@@ -565,7 +647,7 @@ tokenizer.add_special_tokens({            # 特殊 token
         flush privileges;
         ```
 
-6. 报错处理
+7. 报错处理
 
     1. 若通过 `mysql -u [User] -p` 登录报错：`Command 'mysql' not found`，则将 `$INSTALL_PREFIX/mysql/bin` 加入环境变量 `$PATH`
 
@@ -586,12 +668,88 @@ tokenizer.add_special_tokens({            # 特殊 token
 
         - 长期：先 kill 掉所有 mysql 相关进程，然后把 `my.cnf` 挪到 HOME 目录后重启服务
 
-7. （温和的）关闭服务
+8. （温和的）关闭服务
 
     ```bash
     mysqladmin -u root -p shutdown # 该命令可以防止数据损坏
+    pkill mysqld                   # 也能用
+    # 目测不如把 mysql_safe 那个进程给 KILL 掉（只 KILL mysqld 会被这个拉起来）
     ```
 
+#### 卡顿处理
+
+- 表现：可以登录，但执行 `show databases` / `use DB` 等基本命令均无响应
+
+- 处理：
+
+  - 注意，执行 `KILL` **不会立刻** 杀死线程（Command 已标记为 `killed`，但 Satate 仍为 `executing`）
+    只有在达到特定的 safe point，这些线程才会真正退出
+  - 你可以关注其中的 Time 是否增长进行确认（不行就重启吧）
+
+  ```bash
+  SHOW PROCESSLIST       # 检查正在排队的进程
+  KILL QUERY [therad_id] # 直接 KILL xxx 会导致断开连接
+  ```
+
+#### 重装系统后无法正常登录
+
+- 表现：在通过 `error.log` 提供的初始密码登录时，一直提示
+  ```
+  ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+  ```
+
+- 修复过程
+
+  1. 使用安全模式重启、跳过密码验证
+
+     ```bash
+     ./bin/mysqld_safe \
+     	--defaults-file=/home/yunfengshen/.my.cnf \
+       --skip-grant-tables \ # 跳过密码验证
+       --skip-networking \   # 仅本地连接
+       --datadir=/data-2/yunfengshen/apps/mysql-8.0.30/data \
+       --socket=/data-2/yunfengshen/apps/mysql-8.0.30/mysql.sock \
+       &
+     ```
+
+  2. 无密码登录
+
+     ```bash
+     ./bin/mysql -u root -S ./mysql.sock
+     ```
+
+  3. 修改 `root` 的密码
+
+     ```sql
+     FLUSH PRIVILEGES;
+     ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+     ```
+
+     此时依然报错：`Operation ALTER USER failed for 'root'@'localhost'`，进一步排查
+
+     ```sql
+     SELECT User, Host FROM mysql.user WHERE User = 'root';
+     +------+------+
+     | User | Host |
+     +------+------+
+     | root | %    | -- 不存在 Host = localhost 的用户
+     +------+------+ 
+     ```
+
+  4. 创建 `root@localhost`
+
+     ```sql
+     CREATE USER 'root'@'localhost' IDENTIFIED BY '123456';
+     -- 报错: ERROR 1396 (HY000): Operation CREATE USER failed for 'root'@'localhost'
+     -- 原因：没卸载干净，需要先执行 DROP USER IF EXISTS 'root'@'localhost';
+     GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+     
+     -- 刷新并退出
+     FLUSH PRIVILEGES;
+     EXIT;
+     ```
+
+  5. 随后退出无密码模式 `pkill mysqld`，并重新启动普通服务
 
 ### SQLite3
 
