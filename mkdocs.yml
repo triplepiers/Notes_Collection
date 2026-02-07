@@ -4,6 +4,7 @@ copyright: Copyright © 2023-2025 SeaBee
 repo_url: https://github.com/triplepiers/Notes_Collection
 repo_name: Notes_Collection
 theme:
+  font: false                 # 禁止从 Google Fonts 加载
   favicon: images/favicon.svg # 标签页
   logo: images/favicon.svg    # topBar
   name: material
@@ -63,7 +64,7 @@ markdown_extensions:
 #   homepage: https://triplepiers.github.io/Notes_Collection/
 nav:
 - Home: index.md
-- Front End:
+- FrontEnd:
   - VSCode插件: Nulling/Front End/VSCodePlugin.md
   - Canvas: Nulling/Front End/Canvas.md
   - Animation:
@@ -112,16 +113,6 @@ nav:
   - Mongo DB:
       - 1 快速上手: Nulling/Tool/MongoDB/快速上手.md
       - 2 慢速上头: Nulling/Tool/MongoDB/慢速上头.md
-- 软工相关:
-  - 编译原理(旷工中):
-    - 5 语法制导翻译: Nulling/编译原理/5 语法制导翻译.md
-    - 6 中间代码生成: Nulling/编译原理/6 中间代码生成.md
-    - 7 运行存储分配: Nulling/编译原理/7 运行存储分配.md
-    - 8 代码优化: Nulling/编译原理/8 代码优化.md
-    - 9 代码生成: Nulling/编译原理/9 代码生成.md
-  - 计算机系统概论:
-    - Chap 2 Bit, 数据类型与运算: Nulling/ICS/Chap 2 Bit, 数据类型与运算.md
-    - Chap 3 数字逻辑: Nulling/ICS/Chap 3 数字逻辑.md
 - 编程语言:
   - Python:
     - 1 Basic: Nulling/Python/1 Basic.md
@@ -134,11 +125,25 @@ nav:
     - 1 Basic: Nulling/Rust/1_init.md
     - 2 基础语法: Nulling/Rust/2_base.md
     - 3 项目实战: Nulling/Rust/3_project.md
+- Agent:
+  - LangChain: 
+    - 1 Base: Nulling/Agent/LangChain/1_Base.md
+    - 2 应用: Nulling/Agent/LangChain/2_Apps.md
+  - Brainary: Nulling/Agent/Brainary.md
+- Server: 
+  - 1 基本环境: Nulling/Server/Base.md
+  - 2 应用安装: Nulling/Server/Install_Apps.md
 - 常用工具:
   - 常用项目创建: Nulling/Tool/常用项目创建.md
   - Git: Nulling/Tool/Git.md
-  - IgemUploads 使用文档: Nulling/Tool/igem-uploads.md
-  - LangChain: 
-    - 1 Base: Nulling/Tool/LangChain/1_Base.md
-    - 2 应用: Nulling/Tool/LangChain/2_Apps.md
-- Server: Nulling/Server/Install_Apps.md
+  - Igem Uploads: Nulling/Tool/igem-uploads.md
+- 软工课程:
+  - 编译原理(旷工中):
+    - 5 语法制导翻译: Nulling/编译原理/5 语法制导翻译.md
+    - 6 中间代码生成: Nulling/编译原理/6 中间代码生成.md
+    - 7 运行存储分配: Nulling/编译原理/7 运行存储分配.md
+    - 8 代码优化: Nulling/编译原理/8 代码优化.md
+    - 9 代码生成: Nulling/编译原理/9 代码生成.md
+  - 计算机系统概论:
+    - Chap 2 Bit, 数据类型与运算: Nulling/ICS/Chap 2 Bit, 数据类型与运算.md
+    - Chap 3 数字逻辑: Nulling/ICS/Chap 3 数字逻辑.md

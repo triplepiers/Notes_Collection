@@ -7,3 +7,16 @@
 html {
     scroll-behavior: smooth;
 }
+
+/* 加载字体 */
+/* JetBrains Mono */
+@import url('https://fonts.loli.net/css?family=JetBrains Mono:400,500,600,700&display=swap');
+/* Futura */
+@import url('https://fonts.loli.net/css?family=Futura:400,500,600,700&display=swap');
+/* Noto Sans SC 思源宋*/
+@import url('https://fonts.loli.net/css2?family=Noto Sans SC&display=swap');
+
+:root {
+  --md-text-font: "JetBrains Mono", "Noto Sans SC"; 
+  --md-code-font: "JetBrains Mono";
+}

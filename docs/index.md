@@ -18,9 +18,7 @@ alt="Typing SVG"
 - 共有 {{ pages }} 个页面，{{ words }} 个字，{{ codes }} 行代码，{{ images }} 张图片。
 - 继承了学习前端框架的笔记
 - 勉强消除了 Obsidian 和 Mkdocs 渲染结果不一致的问题
-- 尝试搞了代码高亮（不支持 JS 代码高亮，烦内）
-- 支持 MathJax，试一下： $E = MC^2$
-- 尝试了一些新的高亮块（从 Promise 开始）
+- 尝试搞了代码高亮（🤔似乎不支持 JS）&& MathJax（试一下： $E = MC^2$）
 
 !!! Info "广告位招租 -> 试图成为指针数组"
 

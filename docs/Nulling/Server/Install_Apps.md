@@ -2,158 +2,7 @@
 
 > 没有 `sudo` 权限，就这样从源码编译直到厌烦
 
-## 1 基本环境
-
-### 升级 Ubuntu 系统
-> 以  20.04 => 22.04 为例
-
-1. 保持 SSH 会话活跃
-
-    - 启用 screen 服务
-
-        ```bash
-        sudo apt install screen # 通过 screen 保证 OpenSSH 会话活跃
-        screen                  # 启动服务 => 会显示介绍文本
-        ```
-
-    - 修改配置 `/etc/ssh/sshd_config`，追加以下内容
-
-        ```text
-        ClientAliveInterval 60
-        ```
-
-    - 重启 SSH 守护进程
-
-        ```bash
-        sudo systemctl restart ssh
-        ```
-
-2. 升级软件、安装依赖
-
-    ```bash
-    sudo apt update && sudo apt dist-upgrade
-    sudo apt install update-manager-core
-    ```
-
-4. 编辑 `/etc/update-manager/release-upgrades`，确保以下字段设置
-
-    ```text
-    Prompt=normal
-    ```
-
-5. 开始升级
-
-    ```bash
-    do-release-upgrade
-    ```
-
-!!!warning "Azure 升级完之后会丢掉公钥，得用密码登录后重新传一遍"
-
-### SSH
-
-#### 连接简化
-
-!!!question "还在为连接服务器得输入一长串 username / host / port 信息而烦恼吗？"
-    请去霍霍 `~/.ssh/config` 这个文件，如果没有的话就 `touch` 一个出来
-
-```text
-Host [HostAlias]                   # 用于 ssh HostAlias 简化连接
-	HostName [IP / URL]
-	User     [UserName]
-	Port     [PortNum]             # 非默认端口时需要配置
-	IdentityFile [path2privateKey] # 存在多个私钥时，指定私钥
-```
-
-现在，你可以用通过 `ssh [HostAlias]` 命令进行一键连接了
-
-#### WARNING
-
-在使用 SSH 连接时出现以下 WARNING 信息：
-
-```
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
-Someone could be eavesdropping on you right now (man-in-the-middle attack)!
-It is also possible that a host key has just been changed.
-The fingerprint for the ED25519 key sent by the remote host is
-SHA256:[一串 SHA 256].
-Please contact your system administrator.
-Add correct host key in path/to/.ssh/known_hosts to get rid of this message.
-Offending ECDSA key in path/to/.ssh/known_hosts:[rowIndex]
-Host key for [IP]:port has changed and you have requested strict checking.
-Host key verification failed.
-```
-
-- 解释：待连接主机 `[IP]:port` 的密钥发生变化（可能是由于系统重装），SSH 出于安全考虑会默认拒绝连接
-
-- 修复：根据提示删除 `known_host` 文件中的对应行并重新连接，此时 SSH 会显示该主机的新密钥、确认无误后输入 `yes` 即可
-
-  > 目测有 `ssh-ed25519` 和 `endsa-sha2-nistp256` 两行、都需要删掉
-
-### 存储占用查看
-
-- 所有文件
-  
-    - 磁盘使用情况 `df -h`
-
-    - 剩余磁盘空间 `df -hl`
-
-- 当前路径
-
-    - 占用内存的总量 `du -sh`
-
-    - 各子目录/文件分别占用的内存容量：`du -sh ./*`
-
-        该命令 **不会** 显示隐藏文件夹，可以尝试用 `du -sh ./.*` 救一下
-
-### 进程筛选
-
-> 实际上 `ps aux` 查看的是快照，但凑合用吧
-
-```bash
-# 基础版
-ps aux | grep [xxx] # 把 xxx 替换成你要看的东西，比如 git / xxx.py
-                    # 用 nohup 挂的话，grep nohup 是看不出来的 => 用后面的命令
-
-# 进阶版
-ps -u [userName]    # 显示特定用户的所有进程（目测接 grep 也没用）
-ps aux | grep "^user" | grep xxx # 先匹配特定用户（行开头），再匹配特定任务
-```
-
-### 新增普通用户
-
-1. 创建新用户（自动复制 `/etc/skel` 中的基本配置文件）
-
-    ```bash
-    useradd -m -s /bin/bash [User]
-    # -m 表示为改用户创建 home 目录，并复制 /etc/skel 下的模版文件
-    # -s 指定默认 shell
-    ```
-
-2. 设置密码（可选）
-
-    ```bash
-    passwd [User] # 然后输入两次 PWD 就行
-    ```
-
-3. 配置 SSH 公钥
-
-    ```bash
-    # 切换到用户目录
-    mkdir -p /home/[User]/.ssh
-    
-    # 粘贴公钥
-    echo "Public Key" > /home/[User]/.ssh/authorized_keys
-    
-    # 设置正确权限（非常重要！）
-    chown -R [User]:[User] /home/[User]/.ssh
-    chmod 700 /home/[User]/.ssh
-    chmod 600 /home/[User]/.ssh/authorized_keys
-    ```
-
-## 2 开发环境
+## 1 开发环境
 
 ### Git
 
@@ -171,94 +20,6 @@ ps aux | grep "^user" | grep xxx # 先匹配特定用户（行开头），再匹
   # 例如：CONFLICT (content): Merge conflict in .gitignore
   git push origin <branch>
   ```
-
-### bypy（百度网盘下载）
-
-1. 安装
-
-    ```bash
-    pip install bypy
-    ```
-
-2. 授权：随便输入一个命令，比如 `bypy info`，随后会出现一个百度网盘登录网址 => 复制粘贴登录后获得的 token，敲击回车即可
-
-3. 基本操作
-
-    `bypy` 能够同步的数据位于 `我的应用数据/bypy` 下
-
-    ```bash
-    bypy help # 显示帮助（基本都能在这里看）
-    bypy list # 列出网盘上对应位置下的所有文件
-
-    ## 上传
-    bypy upload [localpath] [remotepath] [ondup]      # 上传文件/递归上传路径
-    bypy syncup [localdir] [remotedir] [deleteremote] # 上传本地的整个文件夹
-
-    ## 下载
-    bypy downdir [remotedir] [localdir]                 # 递归下载指定路径
-    bypy downfile <remotefile> [localpath]              # 下载指定文件
-    bypy download [remotepath] [localpath]              # 下载指定文件/递归下载路径
-    bypy syncdown [remotedir] [localdir] [deletelocal]  # 把远程所有东西拉下来
-    ```
-
-    其中，下载可以通过指定 `--downloader aria2` 进行加速（可以通过 `conda install aria2` 安装）
-
-4. 报错处理
-
-   -  `Slice MD5 mismatch`（小文件没问题，见 [Issue#741](https://github.com/houtianze/bypy/issues/741)）
-
-      - 原因： `bypy` 默认会在文件上传后执行 MD5 校验（比较本地计算和百度服务器回传结果），但百度方面的实现变了
-
-      - 解决：建议该用 BaiduPCS-Go
-   
-
-### Rclone（Google Drive）
-
-1. [安装](https://rclone.org/downloads/)（略）
-
-2. 配置 Google Drive
-
-   ```bash
-   rclone config # 运行配置向导
-   [输入] n       # New Remote
-   [输入] GDrive  # 起个名字
-   [输入] 22      # 可能发生变动，对应 Google Drive (drive)
-   [输入] 回车     # 默认 client_id
-   [输入] 回车     # 默认 client_secret
-   [输入] 1       # Full access
-   [输入] 回车     # 默认 service_account_file
-   [输入] n       # 不对 advanced config 进行配置
-   [输入] n       # 远程服务器无法直接使用 Web Browser 进行验证
-   # 见 Step 3 的验证操作
-   [输入] y       # Keep（保存）此次配置
-   [输入] q       # 退出 Config 编辑
-   ```
-
-3. 在主力机安装 `rclone`，并运行以下指令
-
-   > 需要提前开启终端代理，否则会因超时失败
-
-   ```bash
-   rclone authorize "drive" # 然后会自动弹出网页，命令行显示 Wating for code...
-   ```
-
-   随后，将显示的整个 JSON 粘贴到服务器上
-
-   ```
-   Got code
-   Paste the following into your remote machine --->
-   {"access_token": "", ..., "expires_in":xxxx}
-   ```
-
-4. 上传文件：可以用 `--progress` 显示实时进度
-
-   ```bash
-   # 上传整个目录：copy 只会复制新文件，但 sync 会删除多余文件
-   rclone copy /local/path GDrive:remote/path
-   
-   # 上传单个文件
-   rclone copy /paht/to/local/file GDrive:remote/path/
-   ```
 
 ### VSCode
 
@@ -557,6 +318,149 @@ tokenizer.add_special_tokens({            # 特殊 token
   'eos_token': '[EOS]'
 })
 ```
+
+### 换源
+
+#### Pip
+
+1. 创建配置文件
+
+    ```bash
+    mkdir -p ~/.pip
+    touch  ~/.pip/pip.conf
+    ```
+
+2. 写入清华源
+
+    ```text
+    [global]
+    index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+    trusted-host = pypi.tuna.tsinghua.edu.cn
+    ```
+
+3. 验证
+
+    ```bash
+    pip config list # 观察是否输出清华源，或者直接安装、看有没有加速
+    ```
+
+#### Conda
+
+1. Conda 的配置文件是 `~/.condarc`，可以先通过以下命令备份为 `.condarc.bak`：
+
+    ```bash
+    mv ~/.condarc ~/.condarc.bak 2>/dev/null
+    ```
+
+2. 写入清华源
+
+    ```text
+    channels:
+        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/     # 如需 PyTorch
+        - defaults                                                         # 保留 defaults, 避免某些包在镜像中缺失
+    show_channel_urls: true
+    ssl_verify: true
+    ```
+
+3. 验证
+
+    ```bash
+    conda config --show channels # 查看当前配置
+    conda search numpy           # 尝试搜索包（观察 URL 是否含 tuna）
+    ```
+
+## 2 网盘同步
+
+### bypy（百度网盘下载）
+
+1. 安装
+
+    ```bash
+    pip install bypy
+    ```
+
+2. 授权：随便输入一个命令，比如 `bypy info`，随后会出现一个百度网盘登录网址 => 复制粘贴登录后获得的 token，敲击回车即可
+
+3. 基本操作
+
+    `bypy` 能够同步的数据位于 `我的应用数据/bypy` 下
+
+    ```bash
+    bypy help # 显示帮助（基本都能在这里看）
+    bypy list # 列出网盘上对应位置下的所有文件
+
+    ## 上传
+    bypy upload [localpath] [remotepath] [ondup]      # 上传文件/递归上传路径
+    bypy syncup [localdir] [remotedir] [deleteremote] # 上传本地的整个文件夹
+
+    ## 下载
+    bypy downdir [remotedir] [localdir]                 # 递归下载指定路径
+    bypy downfile <remotefile> [localpath]              # 下载指定文件
+    bypy download [remotepath] [localpath]              # 下载指定文件/递归下载路径
+    bypy syncdown [remotedir] [localdir] [deletelocal]  # 把远程所有东西拉下来
+    ```
+
+    其中，下载可以通过指定 `--downloader aria2` 进行加速（可以通过 `conda install aria2` 安装）
+
+4. 报错处理
+
+   -  `Slice MD5 mismatch`（小文件没问题，见 [Issue#741](https://github.com/houtianze/bypy/issues/741)）
+
+      - 原因： `bypy` 默认会在文件上传后执行 MD5 校验（比较本地计算和百度服务器回传结果），但百度方面的实现变了
+
+      - 解决：建议该用 BaiduPCS-Go
+   
+
+### Rclone（Google Drive）
+
+1. [安装](https://rclone.org/downloads/)（略）
+
+2. 配置 Google Drive
+
+   ```bash
+   rclone config # 运行配置向导
+   [输入] n       # New Remote
+   [输入] GDrive  # 起个名字
+   [输入] 22      # 可能发生变动，对应 Google Drive (drive)
+   [输入] 回车     # 默认 client_id
+   [输入] 回车     # 默认 client_secret
+   [输入] 1       # Full access
+   [输入] 回车     # 默认 service_account_file
+   [输入] n       # 不对 advanced config 进行配置
+   [输入] n       # 远程服务器无法直接使用 Web Browser 进行验证
+   # 见 Step 3 的验证操作
+   [输入] y       # Keep（保存）此次配置
+   [输入] q       # 退出 Config 编辑
+   ```
+
+3. 在主力机安装 `rclone`，并运行以下指令
+
+   > 需要提前开启终端代理，否则会因超时失败
+
+   ```bash
+   rclone authorize "drive" # 然后会自动弹出网页，命令行显示 Wating for code...
+   ```
+
+   随后，将显示的整个 JSON 粘贴到服务器上
+
+   ```
+   Got code
+   Paste the following into your remote machine --->
+   {"access_token": "", ..., "expires_in":xxxx}
+   ```
+
+4. 上传文件：可以用 `--progress` 显示实时进度
+
+   ```bash
+   # 上传整个目录：copy 只会复制新文件，但 sync 会删除多余文件
+   rclone copy /local/path GDrive:remote/path
+   
+   # 上传单个文件
+   rclone copy /paht/to/local/file GDrive:remote/path/
+   ```
 
 ## 3 DBMS
 
@@ -993,57 +897,4 @@ SQLite 依赖于 `gcc` 和 `make`，请确保已经安装
 
     ```bash
     pkg-config --exists libpq && echo "OK" || echo "Still missing" # 显示 OK 即可
-    ```
-
-## 4 换源
-
-### 4.1 Pip
-
-1. 创建配置文件
-
-    ```bash
-    mkdir -p ~/.pip
-    touch  ~/.pip/pip.conf
-    ```
-
-2. 写入清华源
-
-    ```text
-    [global]
-    index-url = https://pypi.tuna.tsinghua.edu.cn/simple
-    trusted-host = pypi.tuna.tsinghua.edu.cn
-    ```
-
-3. 验证
-
-    ```bash
-    pip config list # 观察是否输出清华源，或者直接安装、看有没有加速
-    ```
-
-### 4.2 Conda
-
-1. Conda 的配置文件是 `~/.condarc`，可以先通过以下命令备份为 `.condarc.bak`：
-
-    ```bash
-    mv ~/.condarc ~/.condarc.bak 2>/dev/null
-    ```
-
-2. 写入清华源
-
-    ```text
-    channels:
-        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
-        - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/     # 如需 PyTorch
-        - defaults                                                         # 保留 defaults, 避免某些包在镜像中缺失
-    show_channel_urls: true
-    ssl_verify: true
-    ```
-
-3. 验证
-
-    ```bash
-    conda config --show channels # 查看当前配置
-    conda search numpy           # 尝试搜索包（观察 URL 是否含 tuna）
     ```
