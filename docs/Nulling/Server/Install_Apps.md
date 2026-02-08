@@ -109,6 +109,67 @@ mv vscode-server-linux-x64 ${commit_id}
         ],
         ```
 
+### Codex
+> Codex 依赖于 NodeJS，需要提前安装
+
+1. 安装 & 验证
+
+    ```bash
+    npm install -g @openai/codex@latest
+    brew install codex # for MacOS only
+
+    codex --version # validate
+    ```
+
+2. 配置文件
+
+    Codex CLI 将自动读取 `~/.codex` 下的配置信息、**重启终端后** 生效：
+
+    - `auth.json`：存放 API KEY
+
+        ```json
+        {
+            "OPENAI_API_KEY": "sk-xxxx"
+        }
+        ```
+
+    - `config.toml`：存放模型与网关配置
+
+        ```toml
+        wire_api = "responses"
+        model_provider = "rightcode"
+        model = "gpt-5.2-codex" # 根据需求替换
+        model_reasoning_effort = "xhigh"
+        network_access = "enabled"
+        disable_response_storage = true
+        windows_wsl_setup_acknowledged = true
+        model_verbosity = "high"
+
+        # 需要和 model_provider 对应
+        [model_providers.rightcode]
+        name = "rightcode"
+        base_url = "https://right.codes/codex/v1"
+        wire_api = "responses"
+        requires_openai_auth = true
+        ```
+
+3. 使用
+
+    - CLI：
+
+        ```bash
+        codex # 直接启动
+
+        codex \
+            -m "model_name" \ # 手动切换模型（最好别这么干）
+            -c model_reasoning_effort="xhigh"
+        ```
+
+    - VSCode 插件：搜索 `codex` 进行安装，随后会在左侧出现对应 icon
+
+        > 会自动从 `~/.codex` 读取配置，不用重新写了
+
+
 ### Miniconda
 
 具体方式可以参照 [文档](https://www.anaconda.com/docs/getting-started/miniconda/install)，这边选用了比较手动的方式

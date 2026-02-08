@@ -43,6 +43,9 @@ plugins:
       ignore_languages:
         - mermaid
         - markdown
+  - search:
+      lang: ['zh', 'en']
+      min_search_length: 3
 markdown_extensions:
   - md_in_html
   - pymdownx.highlight:
