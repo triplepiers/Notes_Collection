@@ -1,0 +1,5489 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/8%20%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/">
+      
+      
+        <link rel="prev" href="../7%20%E8%BF%90%E8%A1%8C%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/">
+      
+      
+        <link rel="next" href="../9%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../images/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>8 代码优化 - SeaBee 的笔记合集</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8%201.5c-2.363%200-4%201.69-4%203.75%200%20.984.424%201.625.984%202.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621%201.49a.75.75%200%200%201-1.484.211c-.04-.282-.163-.547-.37-.847a9%209%200%200%200-.542-.68q-.126-.149-.268-.32C3.201%207.75%202.5%206.766%202.5%205.25%202.5%202.31%204.863%200%208%200s5.5%202.31%205.5%205.25c0%201.516-.701%202.5-1.328%203.259q-.142.172-.268.319c-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751%200%200%201-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848q.113-.133.213-.253c.561-.679.985-1.32.985-2.304%200-2.06-1.637-3.75-4-3.75M5.75%2012h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M6%2015.25a.75.75%200%200%201%20.75-.75h2.5a.75.75%200%200%201%200%201.5h-2.5a.75.75%200%200%201-.75-.75%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="SeaBee 的笔记合集" class="md-header__button md-logo" aria-label="SeaBee 的笔记合集" data-md-component="logo">
+      
+  <img src="../../../images/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SeaBee 的笔记合集
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              8 代码优化
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label=""  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label=""  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/triplepiers/Notes_Collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Notes_Collection
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Front%20End/VSCodePlugin/" class="md-tabs__link">
+          
+  
+  
+  FrontEnd
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Tool/MongoDB/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-tabs__link">
+          
+  
+  
+  DataBase
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Python/1%20Basic/" class="md-tabs__link">
+          
+  
+  
+  编程语言
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Agent/Overview/" class="md-tabs__link">
+          
+  
+  
+  Agent
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Server/Base/" class="md-tabs__link">
+          
+  
+  
+  Server
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Tool/%E5%B8%B8%E7%94%A8%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA/" class="md-tabs__link">
+          
+  
+  
+  常用工具
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/" class="md-tabs__link">
+          
+  
+  
+  软工课程
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="SeaBee 的笔记合集" class="md-nav__button md-logo" aria-label="SeaBee 的笔记合集" data-md-component="logo">
+      
+  <img src="../../../images/favicon.svg" alt="logo">
+
+    </a>
+    SeaBee 的笔记合集
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/triplepiers/Notes_Collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Notes_Collection
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FrontEnd
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FrontEnd
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/VSCodePlugin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSCode插件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/Canvas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Canvas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Animation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Animation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/Animations/GSAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GSAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/TailWind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TailWindCSS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/TS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java Script
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java Script
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/JS/%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/JS/%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 对象与函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/JS/%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%AD%A3%E5%88%99/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 内置对象与正则
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/JS/DOM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 DOM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/JS/BOM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 BOM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vue2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vue2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/1%20Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 HelloWorld
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/2%20%E7%BB%84%E4%BB%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 组件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/3%20%E4%BD%BF%E7%94%A8Cli%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 使用 Cli
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/4%20%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 消息传递
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/5%20Ajax%20%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 网络请求
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue2/6%20UI%20%E7%BB%84%E4%BB%B6%E5%BA%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 第三方组件库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Vue/Vue3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vue3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    React
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    React
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E6%85%A2%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 慢速上手
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E9%9D%A2%E5%90%91%E7%BB%84%E4%BB%B6%E7%BC%96%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 面向组件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 组件通信
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 网络请求
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/%E8%B7%AF%E7%94%B1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 路由
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/UI%20%E7%BB%84%E4%BB%B6%E5%BA%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 UI 组件库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WeChat
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    WeChat
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wechat%20App/Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wechat%20App/Template%20%26%20Setting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 Template & Setting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wechat%20App/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%20%26%20%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 组件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tips
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tips
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/%E5%B8%83%E5%B1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    布局
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/WebSocket/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WebSocket
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_12_2" id="__nav_2_12_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    测试
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_12_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    测试
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/Mocha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mccha
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_12_3" id="__nav_2_12_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    异步请求
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_12_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    异步请求
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/Axios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Axios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Front%20End/Promise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Promise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_12_4" id="__nav_2_12_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NodeJS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_12_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NodeJS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/NodeJS/1_Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 火速上手
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/NodeJS/2_Project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 搓点项目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/NextJS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NextJS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataBase
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DataBase
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mongo DB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mongo DB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/MongoDB/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 快速上手
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/MongoDB/%E6%85%A2%E9%80%9F%E4%B8%8A%E5%A4%B4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 慢速上头
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    编程语言
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    编程语言
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/1%20Basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Basic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/2-1%20Project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2-1 Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/2-2%20Project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2-2 Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Go
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Go
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Go/1%20Basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Basic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Go/2%20OOP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 面向对象
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rust
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Rust
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/1_init/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Basic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/2_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 基础语法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/3_project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 项目实战
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Agent
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Agent/Overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LangChain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    LangChain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Agent/LangChain/1_Base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Agent/LangChain/2_Apps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 应用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Agent/Brainary.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brainary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Server/Base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 基本环境
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Server/Install_Apps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 应用安装
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用工具
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    常用工具
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/%E5%B8%B8%E7%94%A8%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用项目创建
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/Git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tool/igem-uploads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Igem Uploads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    软工课程
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    软工课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    编译原理(旷工中)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    编译原理(旷工中)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 语法制导翻译
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6%20%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 中间代码生成
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7%20%E8%BF%90%E8%A1%8C%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7 运行存储分配
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8 代码优化
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8 代码优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 流图
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 流图">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-basic-block" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 基本块 Basic Block
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-flow-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 流图 Flow Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 常用代码优化方案
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 基本块优化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 基本块优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 基本块的 DAG 表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 基于基本块的 DAG 删除无用代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 数组元素赋值指令的表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 基本块 DAG 信息推断
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 根据 DAG 重组基本块
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-data-flow-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 数据流分析 Data-Flow Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 数据流分析 Data-Flow Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 数据流分析模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 到达定值分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 到达定值分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 到达定值的数据流方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-use-definition-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 引用-定值链 Use-Definition Chains
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 活跃变量分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 活跃变量分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 活跃变量数据流方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-definition-use-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 定值-引用链 Definition-Use Chains
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 可用表达式分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 可用表达式分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 可用表达式的传递函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 可用表达式的数据流方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 支配节点与回边
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8 支配节点与回边">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 支配节点的数据流方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-back-edge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 回边 Back Edge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-natrual-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 自然循环 Natrual Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 删除全局公共子表达式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 删除全局公共子表达式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 删除算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 删除复制语句
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 删除复制语句">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 删除算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 代码移动
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11 代码移动">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 检测循环不变计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 代码外提
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 作用于归纳变量的强度削弱
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12 作用于归纳变量的强度削弱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 归纳变量检测算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 强度削弱算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 删除归纳变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 删除仅用于测试的归纳变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9 代码生成
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机系统概论
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    计算机系统概论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ICS/Chap%202%20Bit%2C%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chap 2 Bit, 数据类型与运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ICS/Chap%203%20%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chap 3 数字逻辑
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 流图
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 流图">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-basic-block" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 基本块 Basic Block
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-flow-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 流图 Flow Graph
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 常用代码优化方案
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 基本块优化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 基本块优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 基本块的 DAG 表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 基于基本块的 DAG 删除无用代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 数组元素赋值指令的表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 基本块 DAG 信息推断
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 根据 DAG 重组基本块
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-data-flow-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 数据流分析 Data-Flow Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 数据流分析 Data-Flow Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 数据流分析模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 到达定值分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 到达定值分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 到达定值的数据流方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-use-definition-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 引用-定值链 Use-Definition Chains
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 活跃变量分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 活跃变量分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 活跃变量数据流方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-definition-use-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 定值-引用链 Definition-Use Chains
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 可用表达式分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 可用表达式分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 可用表达式的传递函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 可用表达式的数据流方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 支配节点与回边
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8 支配节点与回边">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 支配节点的数据流方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-back-edge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 回边 Back Edge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-natrual-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 自然循环 Natrual Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 删除全局公共子表达式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 删除全局公共子表达式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 删除算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 删除复制语句
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 删除复制语句">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 删除算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 代码移动
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11 代码移动">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 检测循环不变计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 代码外提
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 作用于归纳变量的强度削弱
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12 作用于归纳变量的强度削弱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 归纳变量检测算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 强度削弱算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 删除归纳变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 删除仅用于测试的归纳变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>8 代码优化</h1>
+
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 5630 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M360.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m64.6 136.1c-12.5 12.5-12.5 32.8 0 45.3l73.4 73.4-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0zm-274.7 0c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l73.3-73.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 83 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 20 分钟</p>
+</div>
+<h2 id="1">1 流图</h2>
+<blockquote>
+<p>用于描述程序控制流程的工具</p>
+</blockquote>
+<h3 id="11-basic-block">1.1 基本块 Basic Block</h3>
+<blockquote>
+<p>流图的基本单位</p>
+</blockquote>
+<p>「基本块」是满足下列条件的 <strong>最大连续</strong> 三地址指令序列：</p>
+<ul>
+<li>控制流只能从基本块的 <em>第一个指令</em> 进入该块 =&gt; 不存在跳转到基本块 中间/末尾 的指令</li>
+<li>控制流在 <em>离开</em> 基本块前不会 跳转/停机 =&gt; 直至该块的最后一条指令</li>
+</ul>
+<hr />
+<p>基本块划分算法</p>
+<ul>
+<li>输入：三地址指令序列</li>
+<li>输出：与输入序列对应的基本块列表（每条指令属于且仅属于一个基本块）</li>
+<li>
+<p>算法</p>
+<ol>
+<li>
+<p>确定指令序列中的「首指令 Leaders」，即基本块的第一条指令</p>
+<ul>
+<li>指令序列中的 <em>首条三地址指令</em> 是一个 Leader</li>
+<li>所有的 条件/无条件 跳转指令 的 <em>目标指令</em> 是一个 Leader</li>
+<li>紧跟 条件/无条件跳转指令 的 <em>后一条</em> 指令是一个 Leader（允许这条指令是跳转指令）</li>
+</ul>
+</li>
+<li>
+<p>每个代码块对应了 From CurLeader To NextLeader（前闭后开）/ 指令序列结尾 之间的所有指令</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="12-flow-graph">1.2 流图 Flow Graph</h3>
+<blockquote>
+<p>啊其实就是流程图？</p>
+</blockquote>
+<ul>
+<li>流图的节点是基本块</li>
+<li>可能存在自循环边</li>
+<li>当且仅当 <span class="arithmatex">\(C\)</span> 的首条指令可能紧随 <span class="arithmatex">\(B\)</span> 的最后一条指令执行时，存在边 <span class="arithmatex">\(B \rightarrow C\)</span><ul>
+<li>此时，我们称：<ul>
+<li>B 是 C 的「前驱 Predecessor」</li>
+<li>C 是 B 的「后继 Successor」</li>
+</ul>
+</li>
+<li>这条边可能存在于以下两种情形<ul>
+<li><span class="arithmatex">\(B \rightarrow C\)</span> 的 条件/无条件 跳转语句</li>
+<li>按照原始的三地址指令序列，<span class="arithmatex">\(C\)</span> 紧随 <span class="arithmatex">\(B\)</span>，且 <span class="arithmatex">\(B\)</span> 的结尾不存在跳转语句</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2">2 常用代码优化方案</h2>
+<ul>
+<li>
+<p>我们将代码优化分为以下几类：</p>
+<ul>
+<li>机器无关优化 —— 针对中间代码</li>
+<li>机器相关优化 —— 针对目标代码</li>
+<li>局部代码优化 —— 在单个基本块内进行优化</li>
+<li>全局代码优化 —— 面向多个基本块进行优化</li>
+</ul>
+</li>
+<li>
+<p>常用代码优化方式包括以下几种：</p>
+<ul>
+<li>
+<p>删除公共子表达式</p>
+<ul>
+<li>
+<p>若表达式 <code>X op Y</code> 已经被计算过，且设计的变量值没有变化</p>
+<p>=&gt; 此次出现的 <code>X op Y</code> 称为「公共子表达式 Common Subexpression」</p>
+</li>
+<li>
+<p>这次就不用算哩 =&gt; 直接把这一行从代码里删去（使用首条表达式的结果进行改写）</p>
+</li>
+<li>可能存在 局部/全局 的 公共子表达式</li>
+</ul>
+</li>
+<li>
+<p>删除无用代码</p>
+<ul>
+<li>
+<p>「无用代码 Dead-Code」- 计算结果永远不会被调用的代码</p>
+</li>
+<li>
+<p>「复制传播」</p>
+<p>常用的公共子表达式删除算法（及其他优化算法）会引入一些形如 <code>x = y</code> 的赋值语句</p>
+<p>在执行完 <code>x = y</code> 后，我们应该尽可能使用 <code>y</code> 替换原本对于 <code>x</code> 的引用</p>
+<p>=&gt; 复制传播为删除无用代码提供了便利（复制语句本身可能冗余 -&gt; 我们不再使用左侧的变量）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>常量合并 Constant Folding</p>
+<p>若在编译时刻推导出 <em>一个表达式的值为常量</em>，我们就可以用一个 <code>const</code> 对表达式进行替换（不用算哩）</p>
+</li>
+<li>
+<p>代码移动 Code Motion</p>
+<p>用于处理「循环不变计算 Loop-Invariant Computation」（无论循环多少次结果都不变的表达式）</p>
+<p>我们将这些表达式移出循环 =&gt; 在 <em>进入代码前</em> 就进行求值</p>
+<ul>
+<li>
+<p>循环不变计算的相对性</p>
+<p>对于 <em>多重嵌套循环</em>，某给表达式可能对于当前循环不变，但对于更外层的循环迁移</p>
+<p>=&gt; 只能外移有限层</p>
+</li>
+</ul>
+</li>
+<li>
+<p>强度削弱 Strengt Reduction</p>
+<p>我们使用较快的操作代替较慢的操作，如用 PLUS 替代 MUL</p>
+<ul>
+<li>
+<p>循环中的强度削弱</p>
+<p>对于变量 <span class="arithmatex">\(X\)</span> ，若存在常数 <span class="arithmatex">\(c\)</span> 是的每次都是 <span class="arithmatex">\(X += c\)</span> ，则称 <span class="arithmatex">\(X\)</span> 为「归纳变量 Induction Variable」</p>
+<p>归纳变量可以通过在每次迭代中进行一次简单的 增量运算 实现</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Init</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">// After</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="c1">// 加法比乘法简单</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1">// 同时需要在前一状态中追加 t 的初始化（本来依赖 i，现在靠自己）</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="c1">// =&gt; 只用算一次乘法</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p>删除归纳变量</p>
+<p>在循环中，若 <em>一组归纳变量</em> 的变化步调保持一致，可以删到只剩一个</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Before j&amp;t 每次变化 -1 的整数倍</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">for</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">        </span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1">// After 删除当前状态中不使用的变量</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="k">for</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">}</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1">// 按比例替换后续状态中被删除的变量</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="k">if</span><span class="p">(</span><span class="n">t1</span><span class="o">&lt;=</span><span class="n">t2</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">// 按比例是 4*t1&lt;=4*t2 约分一下</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3">3 基本块优化</h2>
+<blockquote>
+<p>许多重要的局部优化技术都需要将 <em>基本块</em> 转换为「无环有向图 Directed Acyclic Graph」</p>
+</blockquote>
+<h3 id="31-dag">3.1 基本块的 DAG 表示</h3>
+<p>块内的每一条语句 <span class="arithmatex">\(s\)</span> 都对应了一个内部节点 <span class="arithmatex">\(N\)</span></p>
+<ul>
+<li>语句节点 <span class="arithmatex">\(N\)</span> 的标号为语句中的 <em>运算符</em></li>
+<li><em>定值变量表</em> （左侧变量）与节点 <span class="arithmatex">\(N\)</span> 相关联，表示 <span class="arithmatex">\(s\)</span> 为基本块内 <em>最晚</em> 对表中该变量进行赋值的语句</li>
+<li><span class="arithmatex">\(N\)</span> 的 childs 为本块中 处于 <span class="arithmatex">\(s\)</span> 之前 · 最后一个 对 <span class="arithmatex">\(s\)</span> 中涉及的运算分量进行赋值语句所对应的节点</li>
+<li>
+<p>若 <span class="arithmatex">\(s\)</span> 中的某个运算分量在 <span class="arithmatex">\(s\)</span> 之前尚未被赋值</p>
+<p>=&gt; 该分量对应的子节点即为代表该分量初值的 Leaf Node</p>
+<p>这种节点的变量标号需要加下标 0，表示初始化</p>
+</li>
+<li>
+<p>若新构造节点的 <em>定值变量表</em> 曾出现在其他节点的依赖中，则对其他节点的依赖进行删除（变量只出现一次）</p>
+<p>对于以下两条三地址指令：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+</code></pre></div>
+<p>显然在构建第二条指令时，已经存在重复结构 -&gt; 直接在 <span class="arithmatex">\(b\)</span> 所在的节点附加 <span class="arithmatex">\(d\)</span></p>
+<p>=&gt; 这一情况也表明该代码中存在 <em>局部公共子表达式</em></p>
+</li>
+<li>
+<p>若变量的值在编译过程中可以确定，如常量赋值 <code>x = 3</code>，我们就需要将同时记录 定值变量名 + 确定值 <span class="arithmatex">\(x = 3\)</span></p>
+</li>
+</ul>
+<h3 id="32-dag">3.2 基于基本块的 DAG 删除无用代码</h3>
+<ul>
+<li>
+<p>从 DAG 中删除所有 <em>没有</em> 附加活跃变量（在基本块外没有被使用）的 <em>根节点</em>，既可以删除所有对应无用代码的节点。</p>
+</li>
+<li>
+<p><em>根节点</em> 表示在 本块内 该变量不是任何人的依赖</p>
+</li>
+</ul>
+<h3 id="33">3.3 数组元素赋值指令的表示</h3>
+<div class="admonition question">
+<p class="admonition-title">如何防止系统将可能被更改的数组元素 <code>a[i]</code> 判定为公共子表达式</p>
+</div>
+<ul>
+<li>对形如 <code>x = a[i]</code> 的指令，我们记运算符为 <code>=[]</code> ，定值变量表为 <code>a</code>，子节点为 <code>a, i</code></li>
+<li>
+<p>对形如 <code>a[j] = x</code> 的指令，我们记运算符为 <code>[]=</code> ，定值变量表为 空，子节点为 <code>a, j, y</code></p>
+<p>改节点的创建将 <em>杀死 kill</em> 所有 · 已经存在的 · 依赖于数组<code>a</code> 的节点（如前面创建的 <code>=[]</code>）</p>
+<p>=&gt; <em>被杀死 killed</em> 的节点不会有定值变量，不会成为公共子表达式</p>
+</li>
+</ul>
+<h3 id="34-dag">3.4 基本块 DAG 信息推断</h3>
+<ul>
+<li>
+<p>确定哪些变量的值在 <em>被本基本块赋值前</em> 被引用过</p>
+<p>=&gt; 创建了 Leaf Node 的变量</p>
+</li>
+<li>
+<p>哪些语句的计算结果可以在 <em>本块以外</em> 被引用</p>
+<p>=&gt; 节点的定值变量从创建到构造结束一直没变的变量</p>
+</li>
+</ul>
+<h3 id="35-dag">3.5 根据 DAG 重组基本块</h3>
+<ul>
+<li>
+<p>对于每个具有 <em>若干定值变量</em> 的节点，构造一个三地址语句以计算变量的值（大家值是一样的）</p>
+<ul>
+<li>我们倾向于将计算结果赋给在 基本块<em>出口处活跃</em> 的变量（缺少 <em>全局活跃变量信息</em> 的话，就假设除临时变量外的 <em>所有人</em> 在出口处活跃）</li>
+<li>
+<p>若节点具有 <em>多个活跃变量</em>，就必须使用 <em>复制语句</em> 为 <em>每个变量</em> 赋正确的值</p>
+<p>如 <span class="arithmatex">\(x,y,z\)</span> 是同一节点上的多个活跃变量，首先 <span class="arithmatex">\(x=res\)</span>，紧接着 <span class="arithmatex">\(y = x,\ z = x\)</span></p>
+</li>
+</ul>
+</li>
+<li>
+<p>对于 <em>记录了确定值</em> 的变量，我们直接用定值对其进行替换</p>
+</li>
+<li>对于 <em>被删除</em> 的变量，我们使用同一节点中的保留者进行替换（是公共子表达式）</li>
+</ul>
+<h2 id="4-data-flow-analysis">4 数据流分析 Data-Flow Analysis</h2>
+<p>数据流分析将每个 <em>程序点</em> 与 一个 <em>数据流值</em> 相关联，主要应用包括：</p>
+<ul>
+<li>到达-定值 分析 Reaching-Definition Analysis</li>
+<li>活跃变量 分析 Live-Variable Analysis</li>
+<li>可用表达式 分析 Available- Expression Analysis</li>
+</ul>
+<h4 id="41">4.1 数据流分析模式</h4>
+<ul>
+<li>
+<p><em>语句</em> 的数据流模式</p>
+<ul>
+<li><code>IN[s]</code> 表示 语句 s 之前的数据流值</li>
+<li><code>OUT[s]</code> 表示 语句 s 之后的数据流值</li>
+<li><span class="arithmatex">\(f_S\)</span> 表示 语句 s 的「传递函数 Transfer Function」，具有两种风格：<ul>
+<li>信息沿执行路径传播 <span class="arithmatex">\(OUT[s]= f_s(IN[s])\)</span></li>
+<li>信息沿执行路径逆向传播 <span class="arithmatex">\(IN[s] = f_s(OUT[s])\)</span></li>
+</ul>
+</li>
+<li>
+<p>基本块内相邻语句的数据流传递关系</p>
+<p>假设 基本块 <span class="arithmatex">\(B = s_1,s_2,...,s_n\)</span>，则 <span class="arithmatex">\(IN[s_{i+1} = OUT[s_i], i \in [1,n-1]\)</span></p>
+</li>
+</ul>
+</li>
+<li>
+<p><em>基本块</em> 的数据流模式</p>
+<ul>
+<li><code>IN[B]</code> 表示 基本块 B 之前的数据流值，<span class="arithmatex">\(IN[B]=IN[s_1]\)</span></li>
+<li><code>OUT[B]</code> 表示 基本块 B 之后的数据流值，<span class="arithmatex">\(OUT[B]=OUT[s_n]\)</span></li>
+<li>
+<p><span class="arithmatex">\(f_B\)</span> 表示 基本块B 的传递函数，在前向传递过程中：</p>
+<p><span class="arithmatex">\(OUT[B] = OUT[s_n] = f_{sn}(IN[s_n]) = ... = f_{sn}f{s(n-1)}...f_{s1}(IN[B])\)</span></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5">5 到达定值分析</h2>
+<ul>
+<li>
+<p>定值 Definition</p>
+<p>对于变量 <span class="arithmatex">\(x\)</span>，定值 可以是一个 对 <span class="arithmatex">\(x\)</span> 赋值的语句</p>
+</li>
+<li>
+<p>到达定值 Reaching Definition</p>
+<p>若存在一条 From 紧跟在 <span class="arithmatex">\(x\)</span> 的定值 <span class="arithmatex">\(d\)</span> 后的点 To 某一程序点 <span class="arithmatex">\(p\)</span> 的路径，且 <span class="arithmatex">\(d\)</span> 在该路径上没有被 killed，则称 定值 <span class="arithmatex">\(d\)</span> 到达程序点 <span class="arithmatex">\(p\)</span></p>
+<p>=&gt; 在 <span class="arithmatex">\(p\)</span> 出使用的 <span class="arithmatex">\(x\)</span> <strong>可能</strong> 由 <span class="arithmatex">\(d\)</span> 最后赋值</p>
+<ul>
+<li>我们为每个控制流图添加空基本块 ENTRY &amp; EXIT，所有离开流程图的控制流都止于 EXIT</li>
+</ul>
+</li>
+<li>
+<p>到达定值分析的主要用途</p>
+<ul>
+<li>检测 <em>循环不变计算</em></li>
+<li>常量合并</li>
+<li>判定变量在该点是否 <em>未经定值</em> 就被引用</li>
+</ul>
+</li>
+<li>
+<p>到达定值的传递函数</p>
+<ul>
+<li>
+<p>对于 <em>语句</em> - <span class="arithmatex">\(f_s\)</span> - <span class="arithmatex">\(s:u=v+w\)</span></p>
+<p><span class="arithmatex">\(f_s(x) = gen_s \cup (x-kill_s)\)</span></p>
+<ul>
+<li><span class="arithmatex">\(f_s(x)\)</span> 即为语句 s 之后所有定值语句狗生的集合</li>
+<li><span class="arithmatex">\(gen_s\)</span> 由语句 s 生成的定值语句集合，此处为 <span class="arithmatex">\(\{s\}\)</span></li>
+<li><span class="arithmatex">\(kill_s\)</span> 由语句 s 杀死的定值语句集合，即程序中所有其他已存在的对 <span class="arithmatex">\(u\)</span> 的定值语句</li>
+</ul>
+</li>
+<li>
+<p>对于 <em>基本块</em> - <span class="arithmatex">\(f_B\)</span></p>
+<div class="arithmatex">\[
+\begin{align}
+&amp;f_B(x) = gen_B \cup (x-kill_B)\\\\
+&amp;kill_B = kill_1 \cup kill_2 \cup ... \cup kill_n\\\\
+&amp;gen_B = gen_n \cup (gen_{n-1}-kill_n) \cup ... \cup (gen_1 - kill_n - kill_{n-1} - ... - kill_2)
+\end{align}
+    \]</div>
+<ul>
+<li><span class="arithmatex">\(gen_B\)</span> 就是基本块 B 中所有最后对一个变量赋值语句的集合</li>
+<li><span class="arithmatex">\(kill\)</span> 的语句对象可以跨越基本块</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="51">5.1 到达定值的数据流方程</h3>
+<div class="arithmatex">\[
+\begin{align}
+&amp;OUT[ENTRY] = \phi \tag{1}\\\\
+&amp;OUT[B] = gen_B \cup (IN[B]-kill_B),\ B \neq ENTRY\tag{2}\\\\
+&amp;IN[B] = \cup_{P为B的一个前驱}\ OUT[P],\ B \neq ENTRY\tag{3}
+\end{align}
+\]</div>
+<p>我们可以通过以下的迭代算法计算 <span class="arithmatex">\(IN[B],\ OUT[B]\)</span>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// initialization</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nx">OUT</span><span class="p">[</span><span class="nx">ENTRY</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">for</span><span class="p">(</span><span class="nx">B</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">ENTRY</span><span class="p">)</span><span class="w"> </span><span class="nx">OUT</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1">// calculation</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="kd">var</span><span class="w"> </span><span class="nx">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// 某个 OUT 发生了变化</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">while</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nx">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="nx">B</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">ENTRY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="nx">IN</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">OUT</span><span class="p">[</span><span class="nx">P1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="nx">OUT</span><span class="p">[</span><span class="nx">Pn</span><span class="p">];</span><span class="w"> </span><span class="c1">// P 为 B 的前驱</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="nx">OUT</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">genB</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">IN</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">killB</span><span class="p">);</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="nx">some</span><span class="w"> </span><span class="nx">OUT</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="nx">changed</span><span class="p">)</span><span class="w"> </span><span class="nx">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="52-use-definition-chains">5.2 引用-定值链 Use-Definition Chains</h3>
+<ul>
+<li>UD Links 是一个 <em>列表</em>， 记录到达变量每一次引用所有到达定值</li>
+<li>建立 UD Links<ul>
+<li>若 基本块 B 中的 变量 a 在引用前存在定值，则存储 a 的 <em>最后一次定值</em></li>
+<li>若 基本块 B 中的 变量 a 在 <em>引用前不存在定值</em>，则保存 <span class="arithmatex">\(IN[B]\)</span> 中 <em>所有</em> 对于 a 的定值</li>
+</ul>
+</li>
+</ul>
+<h2 id="6">6 活跃变量分析</h2>
+<ul>
+<li>
+<p>活跃变量</p>
+<p>对于变量 <span class="arithmatex">\(x\)</span> 与程序点 <span class="arithmatex">\(p\)</span>，若在流图中沿着 从 <span class="arithmatex">\(p\)</span> 开始的某条路径会引用 变量 <span class="arithmatex">\(x\)</span> 在 <span class="arithmatex">\(p\)</span> 处的值，则称 变量 <span class="arithmatex">\(x\)</span> 在 <span class="arithmatex">\(p\)</span> 处是「活跃 live」的；否则称其在 <span class="arithmatex">\(p\)</span> 出「不活跃 dead」</p>
+<p>=&gt; 在后面还会用到此处为变量赋的值</p>
+</li>
+<li>
+<p>活跃变量信息的用途</p>
+<ul>
+<li>
+<p>删除无用赋值 </p>
+<p>=&gt; 本处赋值在本块的后续、出口后的其他块中均不被使用</p>
+</li>
+<li>
+<p>为基本块分配寄存器</p>
+<ul>
+<li>若所有寄存器都被占用，则清理存储 dead 变量的寄存器</li>
+<li>若在基本块结束时，不需要保存 dead 状态的变量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>活跃变量的传递函数 <span class="arithmatex">\(f_B\)</span></p>
+<p>这是一个「逆向数据流」问题 =&gt; 考虑会不会在之后被使用 <span class="arithmatex">\(IN[B] = f_B(OUT[B]\)</span>)</p>
+<p><span class="arithmatex">\(f_B(x) = use_B \cup (x-def_B)\)</span></p>
+<ul>
+<li><span class="arithmatex">\(x\)</span> 在 B 出口处的 <em>活跃变量</em> 集合</li>
+<li>
+<p><span class="arithmatex">\(def_B\)</span> 在 B 中被赋值，但 <em>定值前</em> 在 B 中 <em>没有被引用</em> 的变量集合</p>
+<p>在 B 中首次被定义（等式左侧） =&gt; 在 入口处 一定不活跃</p>
+</li>
+<li>
+<p><span class="arithmatex">\(use_B\)</span> 在 B 中被引用，但 <em>引用前</em> 在 B 中 <em>没有被定值</em> 的变量集合</p>
+<p>在 B 中没有定义却直接使用（等式右侧），一定是前面传来的 =&gt; 入口处活跃</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="61">6.1 活跃变量数据流方程</h3>
+<div class="arithmatex">\[
+\begin{align}
+&amp;IN[EXIT] = \phi \\\\
+&amp;IN[B] = use_B \cup (OUT[B]-def_B),\ B \neq EXIT\\\\
+&amp;OUT[B] = \cup_{S为B的后继}\ IN[S],\ B \neq EXIT
+\end{align}
+\]</div>
+<p>迭代算法如下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">IN</span><span class="p">[</span><span class="nx">EXIT</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">for</span><span class="p">(</span><span class="nx">B</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">EXIT</span><span class="p">)</span><span class="w"> </span><span class="nx">IN</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">while</span><span class="p">(</span><span class="nx">某个</span><span class="w"> </span><span class="nx">IN</span><span class="w"> </span><span class="nx">变化</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="nx">B</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">EXIT</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="nx">OUT</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IN</span><span class="p">[</span><span class="nx">S1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">IN</span><span class="p">[</span><span class="nx">Sn</span><span class="p">];</span><span class="w"> </span><span class="c1">// S是B的后继</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="nx">IN</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useB</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">OUT</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">defB</span><span class="p">);</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="62-definition-use-chains">6.2 定值-引用链 Definition-Use Chains</h3>
+<ul>
+<li>假设变量 <span class="arithmatex">\(x\)</span> 有一的定值 <span class="arithmatex">\(d\)</span>，该定值能够到达的所有引用的集合被称为 <span class="arithmatex">\(x\)</span> 在 <span class="arithmatex">\(d\)</span> 处的「定值-引用链 DU Chain」</li>
+<li>
+<p>在求解活跃变量数据流方程的 <span class="arithmatex">\(OUT[B]\)</span> 时，将其表示为 <em>从 B 的末尾能够到达的的引用集合</em>，就可以根据这些信息计算 B 中每个变量在其定值处的 DU 链</p>
+<ul>
+<li>
+<p>若 B 中先后存在两个对 变量<span class="arithmatex">\(x\)</span> 定值的语句 <span class="arithmatex">\(d,d'\)</span>，则 之间所有对 <span class="arithmatex">\(x\)</span> 的引用都是 <span class="arithmatex">\(d\)</span> 的 DU 链</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>d: x = val1;
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    ...
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>   ? = x + ...; =&gt; d 的 DU 链
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    ...
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>d&#39;: x = val2;
+</code></pre></div>
+</li>
+<li>
+<p>若 <span class="arithmatex">\(d\)</span> 为 B 中最后对 <span class="arithmatex">\(x\)</span> 定值的语句，则 <span class="arithmatex">\(d\)</span> 的 DU 链 =  B中其后所有对 <span class="arithmatex">\(x\)</span> 的引用 + <span class="arithmatex">\(OUT[B]\)</span> 中所有对 <span class="arithmatex">\(x\)</span> 的引用</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="7">7 可用表达式分析</h2>
+<ul>
+<li>
+<p>从流图的 <em>首节点</em> 到某一程序点 <span class="arithmatex">\(p\)</span> 的 <em>所有路径</em> 都对表达式 <span class="arithmatex">\(x \ op \ y\)</span> 进行了计算，且最后一次计算到点 <span class="arithmatex">\(p\)</span> 之间不涉及 <span class="arithmatex">\(x,\ y\)</span> 的修改，则称 <span class="arithmatex">\(x\ op\ y\)</span> 在 <span class="arithmatex">\(p\)</span> 处「可用 available」</p>
+<p>=&gt; 之前的计算结果有效，不用再算一遍了</p>
+</li>
+<li>
+<p>主要用途</p>
+<ul>
+<li>消除 <em>全局</em> 公共子表达式</li>
+<li>
+<p>进行 <em>复制传播</em></p>
+<p>对于复制语句 <code>x=y</code> 可以使用 <span class="arithmatex">\(y\)</span> 替代 <span class="arithmatex">\(x\)</span> 的条件为：</p>
+<p>从流图的 <em>首节点</em> 到达该程序点的 <em>每条路径</em> 都存在复制语句 <code>x=y</code>，且从最后一次复制到该程序点之间 <em>没有再次</em> 对 <span class="arithmatex">\(x,\ y\)</span> 进行赋值</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="71">7.1 可用表达式的传递函数</h3>
+<ul>
+<li>若基本块 B 对依赖变量 <span class="arithmatex">\(x,\ y\)</span> 重新赋值，并且没有重新计算 <span class="arithmatex">\(x\ op\ y\)</span>，则称 B <em>杀死该表达式</em></li>
+<li>若基本块 B 对 <span class="arithmatex">\(x\ op\ y\)</span> 进行计算，且没有更改其依赖，则称 B <em>生成该表达式</em></li>
+<li>传递函数 <span class="arithmatex">\(f_B(x) = e-gen_B \cup (x - e-kill_B)\)</span><ul>
+<li><span class="arithmatex">\(e-gen_B\)</span> 基本块 B 生成的表达式集合，计算方法如下：<ol>
+<li>初始化 <span class="arithmatex">\(e-gen_B = \phi\)</span></li>
+<li>扫描基本块中的每个 <code>z = x op y</code><ul>
+<li>将 <code>x op y</code> 加入 <span class="arithmatex">\(e-gen_B\)</span></li>
+<li>从 <span class="arithmatex">\(e-gen_B\)</span> 中删除与 <code>z</code> 相关的表达式</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><span class="arithmatex">\(e-kill_B\)</span> 基本块 B 杀死的表达式集合（杀死对象是所有块组成的全集），计算方法如下：<ol>
+<li>初始化 <span class="arithmatex">\(e-kill_B = \phi\)</span></li>
+<li>扫描基本块中的每个 <code>z = x op y</code><ul>
+<li>从 <span class="arithmatex">\(e-kill_B\)</span> 中删除与 <code>x op y</code></li>
+<li>将所有与 <code>z</code> 相关的表达式加入 <span class="arithmatex">\(e-kill_B\)</span></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="72">7.2 可用表达式的数据流方程</h3>
+<div class="arithmatex">\[
+\begin{align}
+&amp;OUT[ENTRY] = \phi\\\\
+&amp;OUT[B] = f_B(IN[B])\\\\
+&amp;f_B(x) = e\_gen_B \cup (x-e\_kill_B)\\\\
+&amp;IN[B] = \cap_{P是B的前驱}\ OUT[P]
+\end{align}
+\]</div>
+<p>迭代算法如下：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">OUT</span><span class="p">[</span><span class="nx">ENTRY</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">// 初始化为 空集 局限性很大（交集一直为 empty）</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">for</span><span class="p">(</span><span class="nx">B</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">ENTRY</span><span class="p">)</span><span class="w"> </span><span class="nx">OUT</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">U</span><span class="p">;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">while</span><span class="p">(</span><span class="nx">OUT</span><span class="w"> </span><span class="nx">changed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="nx">B</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">ENTRY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="nx">IN</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">intersection</span><span class="p">(</span><span class="nx">OUT</span><span class="p">[</span><span class="nx">Pi</span><span class="p">]);</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="nx">OUT</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">eGenB</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">IN</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">eKillB</span><span class="p">);</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="p">}</span>
+</code></pre></div></p>
+<h2 id="8">8 支配节点与回边</h2>
+<ul>
+<li>
+<p>支配节点 Dominators</p>
+<p>若从流图的入口节点到某一节点 <span class="arithmatex">\(n\)</span> 的 <em>每条路径</em> 都经过节点 <span class="arithmatex">\(d\)</span>，则称 <span class="arithmatex">\(d dominate n\)</span>，记为 <span class="arithmatex">\(d \ dom \ n\)</span></p>
+<ul>
+<li>
+<p>每个节点都支配本身</p>
+</li>
+<li>
+<p>入口节点支配所有节点</p>
+</li>
+<li>
+<p>我们可以用 支配节点数 Dominator Tree 表达节点间的支配关系：每个节点支配包括自己在内的所有后代节点</p>
+</li>
+</ul>
+</li>
+<li>
+<p>直接支配节点 Immediate Dominator</p>
+<p>从入口节点到 curNode 的 <em>所有</em> 路径上，与其相连的最后一个支配节点</p>
+</li>
+</ul>
+<h3 id="81">8.1 支配节点的数据流方程</h3>
+<ul>
+<li><span class="arithmatex">\(IN[B]\)</span> 为基本块入口处的支配节点集合，<span class="arithmatex">\(OUT[B]\)</span> 为出口处的支配节点集合</li>
+</ul>
+<p>方程组如下：
+$$
+\begin{align}
+&amp;OUT[ENTRY] = {ENTRY}\\
+&amp;OUT[B] = IN[B] \cup {B},\ B \neq ENTRY\\
+&amp;IN[B] = \cap_{P是B的前驱}\ OUT[P]
+\end{align}
+$$</p>
+<p>可以通过以下迭代算法进行求解：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nx">OUT</span><span class="p">[</span><span class="nx">ENTRY</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nx">ENTRY</span><span class="p">};</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">for</span><span class="p">(</span><span class="nx">B</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">ENTRY</span><span class="p">)</span><span class="w"> </span><span class="nx">OUT</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">N</span><span class="p">;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">while</span><span class="p">(</span><span class="nx">OUT</span><span class="w"> </span><span class="nx">changed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="nx">B</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">ENTRY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="nx">IN</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">interception</span><span class="p">(</span><span class="nx">OUT</span><span class="p">[</span><span class="nx">Pi</span><span class="p">]);</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="nx">OUT</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IN</span><span class="p">[</span><span class="nx">B</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">{</span><span class="nx">B</span><span class="p">};</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="p">}</span>
+</code></pre></div></p>
+<h3 id="82-back-edge">8.2 回边 Back Edge</h3>
+<blockquote>
+<p>用于识别自然循环</p>
+</blockquote>
+<ul>
+<li>对于流图中的两个节点 <span class="arithmatex">\(d,\ n\)</span> 满足关系 <span class="arithmatex">\(d \ dom \ n\)</span>。若存在有向边 <span class="arithmatex">\(n \rightarrow d\)</span>，则称为「回边 Back Edge」</li>
+</ul>
+<h3 id="83-natrual-loop">8.3 自然循环 Natrual Loop</h3>
+<ul>
+<li>具有<em>唯一的入口节点</em> header，支配循环中的所有节点</li>
+<li>循环中至少有一条 <em>返回 header</em> 的路径</li>
+<li>「性质」除非两个自然循环的 <em>header 相同</em>，否则 互斥/完全包含<ul>
+<li>我们将不包含其他循环的循环称为「最内循环 Innermost Loop」</li>
+</ul>
+</li>
+<li>对于具有 <em>相同 header</em> 的两个循环，我们难以确定哪个是最内循环 =&gt; 直接合并</li>
+</ul>
+<hr />
+<p>自然循环可以通过以下方法进行识别：</p>
+<ul>
+<li>
+<p>给定回边 <span class="arithmatex">\(n \rightarrow d\)</span>，其自然循环为 <span class="arithmatex">\(d\)</span> + 所有不经 <span class="arithmatex">\(d\)</span> 到达 <span class="arithmatex">\(n\)</span> 的节点 + <span class="arithmatex">\(n\)</span> 本身（<span class="arithmatex">\(d\)</span> 为循环的 header）</p>
+</li>
+<li>
+<p>一般步骤</p>
+<ol>
+<li>加入 <span class="arithmatex">\(n,\ d\)</span></li>
+<li>加入所有直接到达 <span class="arithmatex">\(n\)</span> 的节点 <span class="arithmatex">\(x\)</span></li>
+<li>加上所有 <span class="arithmatex">\(x\)</span> 的 <em>直接前驱</em>（是 <span class="arithmatex">\(n\)</span> 就停止）</li>
+<li>递归</li>
+</ol>
+</li>
+<li>
+<p>构造某条回边所在自然循环的算法
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nx">loop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nx">n</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="p">};</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span><span class="w"> </span><span class="c1">// 不用考虑 d 的前驱</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">while</span><span class="p">(</span><span class="nx">stack</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">empty</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nx">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">stack</span><span class="p">.</span><span class="nx">top</span><span class="p">();</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nx">stack</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="nx">的</span><span class="w"> </span><span class="nx">所有前驱</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">NOT</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">loop</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">            </span><span class="nx">loop</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">{</span><span class="nx">p</span><span class="p">};</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">            </span><span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="p">}</span>
+</code></pre></div></p>
+</li>
+</ul>
+<h2 id="9">9 删除全局公共子表达式</h2>
+<blockquote>
+<p>我们可以使用 <em>可用表达式</em> 来判断点 <span class="arithmatex">\(p\)</span> 处的表达式是否为 <em>全局公共子表达式</em></p>
+</blockquote>
+<p>我们查看以下情形：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>// 部分代码
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>1: a = x + y;
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>2: b = x + y;
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>3: c = x + y;
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>// 前后继关系
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>a   b
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a> \ /
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>  c
+</code></pre></div>
+<p>=&gt; 单独以 <span class="arithmatex">\(a,\ b\)</span> 替换 <span class="arithmatex">\(c\)</span> 都是不合适的 =&gt; 我们不知道具体会走哪条路径</p>
+<hr />
+<p>下面是一个正确的替换方法 =&gt; 使用第三方 <span class="arithmatex">\(u\)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>// code
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>1: u = x + y;
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>   a = u;
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>2: u = x + y;
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>   b = u;
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>3: c = u;
+</code></pre></div></p>
+<hr />
+<h3 id="91">9.1 删除算法</h3>
+<ul>
+<li>输入：带有可用表达式信息的 Flow Graph</li>
+<li>输出：修正后的 Flow Graph</li>
+</ul>
+<p>对于语句 <span class="arithmatex">\(s:z=x\ op\ y\)</span>，若 <span class="arithmatex">\(x\ op\ y\)</span> 在 <span class="arithmatex">\(s\)</span> 之前 <em>可用</em>，则执行如下步骤：
+1. 从 <span class="arithmatex">\(s\)</span> 开始 <em>逆向</em> 搜索，但不 <em>穿过</em> 任何计算了 <span class="arithmatex">\(x\ op\ y\)</span> 的块</p>
+<div class="highlight"><pre><span></span><code> =&gt; 找到 *所有 · 最近的 · 计算了* $x\ op\ y$ 的语句
+</code></pre></div>
+<ol>
+<li>建立临时变量 <span class="arithmatex">\(u\)</span></li>
+<li>
+<p>将所有在 Step 1 中找到的所有语句 <span class="arithmatex">\(w = x\ op\ y\)</span> 使用以下语句组替代：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nx">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="nx">op</span><span class="w"> </span><span class="nx">y</span><span class="p">;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nx">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span>
+</code></pre></div>
+</li>
+<li>
+<p>替换 <span class="arithmatex">\(s\)</span> 为 <span class="arithmatex">\(z=u\)</span></p>
+</li>
+</ol>
+<h2 id="10">10 删除复制语句</h2>
+<p>我们查看以下例子：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>           x = y        x = y+1
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>          /     \       /
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  t1 = x*2      t2 = x*3
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a> 支持复制传播    不支持复制传播
+</code></pre></div></p>
+<p>-&gt; 因为不是所有的 subNode 都可以进行复制传播，<span class="arithmatex">\(x= y\)</span> 不可删除</p>
+<h3 id="101">10.1 删除算法</h3>
+<ul>
+<li>输入：流图 G，DU 链，个基本块<em>入口</em>处的 <em>可用复制语句</em> 集合</li>
+<li>输出：修改后的流图 G‘</li>
+</ul>
+<p>对于每个复制语句 <span class="arithmatex">\(x=y\)</span> ：
+1. 根据 DU 链找出该定值语句所能到达的对于 <span class="arithmatex">\(x\)</span> 的引用
+2. 确定对于每个引用所在的 B' ，<span class="arithmatex">\(IN[B]\)</span> 是否都包含了 <span class="arithmatex">\(x=y\)</span>，B‘ 的该引用前没有重新对 <span class="arithmatex">\(x,\ y\)</span> 进行赋值
+3. 若满足 Step 2，删除原本的 <span class="arithmatex">\(x=y\)</span>，对于 Step 1 中找到的引用都适用 <span class="arithmatex">\(y\)</span> 进行替换</p>
+<h2 id="11">11 代码移动</h2>
+<h3 id="111">11.1 检测循环不变计算</h3>
+<ul>
+<li>输入：循环 L，每个三地址指令的 UD 链</li>
+<li>
+<p>输出：L 的循环不变计算语句</p>
+</li>
+<li>
+<p>将 运算分量 为 <em>常数</em> / 所有定值点都在L外部 的语句标记为“不变”</p>
+</li>
+<li>将 先前未被标记，且 运算分量 为 <em>常数</em> / 所有定值点都在L外部 / 只有一个到达定值且为L中已经标为“不变” 的语句标记为“不变”</li>
+<li>循环执行 Step 2 直至不出现新的“不变”语句</li>
+</ul>
+<h3 id="112">11.2 代码外提</h3>
+<ul>
+<li>前置首节点 preHeader<ul>
+<li>循环不变计算将被提前至原本 header 之前一个称为 preHeader 的 new Block 中</li>
+<li>preHeader 的 <em>唯一后继</em> 为原本的 header，并且代理了原本所有从循环外进入 header 的路径（内部到达 header 的路径不变）</li>
+</ul>
+</li>
+<li>循环不变计算语句 <span class="arithmatex">\(s:x=y+z\)</span> 移动条件<ul>
+<li>语句所在的 Block 是 L 的 <em>所有出口节点</em> 的 <em>支配节点</em></li>
+<li>循环中 <em>没有其他语句</em> 对其变量 <span class="arithmatex">\(x\)</span> 进行赋值</li>
+<li>循环中 <em>所有</em> 对 <span class="arithmatex">\(x\)</span> 的引用 <em>仅</em> 由 <span class="arithmatex">\(s\)</span> 到达</li>
+</ul>
+</li>
+<li>算法<ol>
+<li>寻找 <em>循环不变计算</em></li>
+<li>对于 Step 1 中找到的每一条语句，检查是否符合上述条件</li>
+<li>按照书写顺序，将所有循环不变语句移动至 preHeader（若其计算分量的定值点在循环体内，则只有可以一同外提的时候才能拎出来）</li>
+</ol>
+</li>
+</ul>
+<h2 id="12">12 作用于归纳变量的强度削弱</h2>
+<ul>
+<li>对于变量 <span class="arithmatex">\(x\)</span>，若存在常量 <span class="arithmatex">\(c\)</span> ，是的每次 <span class="arithmatex">\(x\)</span> 的操作都满足 <span class="arithmatex">\(x += c\)</span>，则称 <span class="arithmatex">\(x\)</span> 为归纳变量</li>
+<li>若循环 L 中的变量 <span class="arithmatex">\(i\)</span> 形如 <span class="arithmatex">\(i=i+c\)</span>，则称 <span class="arithmatex">\(i\)</span> 为 L 的 <em>基本归纳变量</em></li>
+<li>
+<p>若 <span class="arithmatex">\(j=c*i+d\)</span> 且 <span class="arithmatex">\(i\)</span> 为基本归纳变量，则 <span class="arithmatex">\(j\)</span> 为 <em>属于 <span class="arithmatex">\(i\)</span> 族的归纳变量</em></p>
+<p>我们认为与变量 <span class="arithmatex">\(j\)</span> 关联的三元组为 <span class="arithmatex">\((i,c,d)\)</span></p>
+</li>
+</ul>
+<h3 id="121">12.1 归纳变量检测算法</h3>
+<ol>
+<li>扫描循环 L 的语句，找出所有的 <em>基本归纳变量</em>，与其关联的三元组为 <span class="arithmatex">\((id,1,0)\)</span></li>
+<li>寻找循环中 <em>只有一次定值</em> 的变量 <span class="arithmatex">\(k\)</span>，具有形式 <span class="arithmatex">\(k=c'*j+d'\)</span>，<span class="arithmatex">\(j\)</span> 为 基本/非基本归纳变量<ul>
+<li>基本归纳变量 =&gt; <span class="arithmatex">\(k \in i\)</span>，三元组为 <span class="arithmatex">\((j,c',d')\)</span></li>
+<li>非基本归纳变量 =&gt; 假设 <span class="arithmatex">\(k\in i\)</span><ul>
+<li>循环 L 中对 <span class="arithmatex">\(j\)</span> 的 <em>唯一定值</em> &amp; 对 <span class="arithmatex">\(k\)</span> 的唯一定值之间，<em>没有</em> 对 <span class="arithmatex">\(i\)</span> 定值</li>
+<li>循环 L 外 <em>没有</em> <span class="arithmatex">\(j\)</span> 的定值可以到达 <span class="arithmatex">\(k\)</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="122">12.2 强度削弱算法</h3>
+<p>对于每个 <em>基本归纳变量</em> <span class="arithmatex">\(i\)</span>，对于族中的每个归纳变量 <span class="arithmatex">\(j:(i,c,d)\)</span> ：
+1. 建立临时变量 <span class="arithmatex">\(t\)</span> =&gt; 具有相同三元组的族裔可以共用一个
+2. 使用 <span class="arithmatex">\(j=t\)</span> 替换 <span class="arithmatex">\(j=c*i+d\)</span>
+3. 在紧跟定值 <span class="arithmatex">\(i = i+n\)</span> 处添加 <span class="arithmatex">\(t=t+c*n\)</span>
+4. 将 <span class="arithmatex">\(t:(i,c,d)\)</span> 加入 <span class="arithmatex">\(i\)</span> 族
+5. 在 preHead 末尾追加 <span class="arithmatex">\(t=c*i,\ t = t+d\)</span>，使得循环开始时 <span class="arithmatex">\(t=c*i+d = j\)</span></p>
+<h3 id="123">12.3 删除归纳变量</h3>
+<ul>
+<li>对于引入的 <span class="arithmatex">\(j=t\)</span> ，若可以在归纳变量 <span class="arithmatex">\(j\)</span> 的 <em>所有引用点</em> 用 <span class="arithmatex">\(t\)</span> 进行替换，且 <span class="arithmatex">\(j\)</span> 在 L 的出口处不活跃，则可以删除语句 <span class="arithmatex">\(j=t\)</span></li>
+</ul>
+<h3 id="124">12.4 删除仅用于测试的归纳变量</h3>
+<ul>
+<li>完成 <em>强度削弱</em> 后，部分归纳变量仅用于测试。若可以使用对其他归纳变量的测试替代，则可以删除该归纳变量。</li>
+<li>对于用于测试的基本归纳变量 <span class="arithmatex">\(i\)</span> ，取其某个族裔 <span class="arithmatex">\(j\)</span>（让两个常数尽可能简单），使用对 <span class="arithmatex">\(j\)</span> 的测试替换对 <span class="arithmatex">\(i\)</span> 的测试，即 <span class="arithmatex">\(relop\ i \ x \ B \rightarrow relop \ j\ c*x+d\ B\)</span></li>
+<li>对于 <span class="arithmatex">\(relop \ i_1\ i_2\ B\)</span>，若能找到两族族裔 <span class="arithmatex">\(j_1:(i_1,c,d),\ j_2:(i_2,c,d)\)</span>，则可以替换为 <span class="arithmatex">\(relop\ (j_1,\ j_2,\ B),\ c &gt; 0\)</span></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../7%20%E8%BF%90%E8%A1%8C%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 7 运行存储分配">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                7 运行存储分配
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../9%20%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="md-footer__link md-footer__link--next" aria-label="Next: 9 代码生成">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                9 代码生成
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023-2025 SeaBee
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.footer", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill-fastly.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
