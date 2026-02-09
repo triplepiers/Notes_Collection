@@ -9,9 +9,17 @@ theme:
   logo: images/favicon.svg    # topBar
   name: material
   palette:
-    scheme: slate
-    accent: amber
-    primary: black
+    - scheme: slate   # 暗色
+      accent: cyan
+      primary: black
+      toggle:
+        icon: material/weather-night
+    - scheme: default # 亮色
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+    
   icon:
     repo: fontawesome/brands/github
     admonition:
@@ -61,8 +69,6 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-
-
 # extra:
 #   homepage: https://triplepiers.github.io/Notes_Collection/
 nav:
@@ -129,6 +135,7 @@ nav:
     - 2 基础语法: Nulling/Rust/2_base.md
     - 3 项目实战: Nulling/Rust/3_project.md
 - Agent:
+  - Overview: Nulling/Agent/Overview.md
   - LangChain: 
     - 1 Base: Nulling/Agent/LangChain/1_Base.md
     - 2 应用: Nulling/Agent/LangChain/2_Apps.md
