@@ -140,6 +140,7 @@ nav:
     - 1 Base: Nulling/Agent/LangChain/1_Base.md
     - 2 应用: Nulling/Agent/LangChain/2_Apps.md
   - Brainary: Nulling/Agent/Brainary.md
+  - Skills: Nulling/Agent/Skills.md
 - Server: 
   - 1 基本环境: Nulling/Server/Base.md
   - 2 应用安装: Nulling/Server/Install_Apps.md

@@ -150,3 +150,37 @@ ps aux | grep "^user" | grep xxx # 先匹配特定用户（行开头），再匹
     chmod 700 /home/[User]/.ssh
     chmod 600 /home/[User]/.ssh/authorized_keys
     ```
+
+## 6 奇妙 bug
+
+### terminals database is inaccessible
+
+- 表现：输入 `clear` 命令后，返回 `terminals database is inaccessible`
+
+- 可能原因：Conda 的 `clear` 指令覆盖了系统命令
+
+    验证：检查 `which clear` 的命令中是否包含 `conda`
+
+- 解决方案：
+
+    1. ✅ 重命名 conda 的 `clear` 命令
+
+        ```bash
+        cd path/to/miniconda3/bin
+        mv clear clear_backup
+        ```
+
+        还不行的话，再用 `which clear` 检查一遍 —— 可能需要对当前 conda 环境的命令也做一次替换
+
+    2. ❌（看起来不管用）修正 `$TERMINFO` 环境变量
+
+        先尝试一下临时修改后能不能用，不管用就不要写到 srcFile 里了
+
+        ```bash
+        # 先 check 一下目录是否存在
+        ls /usr/share/terminfo
+
+        # 尝试临时修改
+        export TERMINFO=/usr/share/terminfo
+        clear
+        ```
