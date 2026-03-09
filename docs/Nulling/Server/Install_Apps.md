@@ -21,6 +21,41 @@
   git push origin <branch>
   ```
 
+### NodeJS
+> 基于 NVM 安装（可以控制版本）
+
+1. 安装 NVM
+   1. 下载，并使用 bash 运行安装脚本
+        ```bash
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+        ```    
+   2. 激活环境变量
+
+        上述安装脚本会对 `~/.bashrc` 进行修改，这里重新加载一次、使其立即生效
+
+        ```
+        source ~/.bashrc
+        ```
+    3. 验证安装（输出 `nvm`）
+   
+        ```bash
+        command -v nvm
+        ```
+2. 安装 NodeJS
+
+    - 版本选择
+
+        ```bash
+        nvm install --lts # 安装最新稳定版本
+        nvm install node  # 安装最新版
+        ```
+
+    - 验证安装
+        ```bash
+        node -v
+        npm -v
+        ```
+
 ### VSCode
 
 #### 持续显示 “正在下载服务器”
@@ -115,8 +150,8 @@ mv vscode-server-linux-x64 ${commit_id}
 1. 安装 & 验证
 
     ```bash
-    npm install -g @openai/codex@latest
-    brew install codex # for MacOS only
+    npm install -g @openai/codex@latest # Ubuntu / Win
+    brew install codex                  # MacOS only
 
     codex --version # validate
     ```
