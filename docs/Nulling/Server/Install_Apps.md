@@ -415,6 +415,23 @@ tokenizer.add_special_tokens({            # 特殊 token
 })
 ```
 
+### LangChain
+
+
+1. 安装核心依赖包
+
+    ```bash
+    pip install langchain langgraph
+    ```
+
+2. 按需安装生态扩展包（看用哪个 LLM）
+
+    ```bash
+    pip install langchain-openai
+    pip install langchain-anthropic
+    pip install langchain-community # Local Model / 第三方工具
+    ```
+
 ### 换源
 
 #### Pip
