@@ -8,6 +8,7 @@ theme:
   favicon: images/favicon.svg # 标签页
   logo: images/favicon.svg    # topBar
   name: material
+  custom_dir: overrides
   palette:
     - scheme: slate   # 暗色
       accent: cyan
@@ -36,6 +37,8 @@ theme:
       example: octicons/beaker-16
       quote: octicons/quote-16
   features:
+    - navigation.top
+    - navigation.prune
     - navigation.tabs
     - navigation.footer
     - toc.follow
@@ -44,7 +47,7 @@ extra_css:
   - stylesheets/extra.css
 extra_javascript:
   # - javascripts/config.js
-  - https://polyfill-fastly.io/v3/polyfill.min.js?features=es6
+  - javascripts/loading.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 plugins:
   - statistics:

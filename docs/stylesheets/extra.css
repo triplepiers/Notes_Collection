@@ -61,3 +61,33 @@ html {
     font-family: "Noto Sans SC" !important;
     letter-spacing: -0.02em;
 }
+
+.loading {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--md-primary-fg-color);
+    z-index: 100000000;
+    transition: 1s ease;
+}
+
+.loading svg {
+    width: 5rem;
+    overflow: visible;
+    transition: 0.3s ease;
+}
+
+.loading_out {
+    transform: translateY(100%);
+}
+
+.loading_out svg,
+.loading_out p {
+    opacity: 0;
+}
