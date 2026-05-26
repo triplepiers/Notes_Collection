@@ -28,7 +28,23 @@
    1. 下载，并使用 bash 运行安装脚本
         ```bash
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-        ```    
+        ```
+
+        如果一直卡在 Git Clone，可以手动从国内镜像拉取源码 + 手动在 `~/.bashrc` 中新增环境变量
+
+        ```bash
+        git clone https://gitee.com/mirrors/nvm.git ~/.nvm
+
+        cd ~/.nvm
+        git checkout v0.40.0 # checkout 到对应版本
+        ```
+
+        ```text title="~/.bashrc"
+        export NVM_DIR="~/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # 加载 nvm
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # 加载 nvm 的 bash 补全
+        ```
+
    2. 激活环境变量
 
         上述安装脚本会对 `~/.bashrc` 进行修改，这里重新加载一次、使其立即生效
@@ -41,6 +57,7 @@
         ```bash
         command -v nvm
         ```
+
 2. 安装 NodeJS
 
     - 版本选择
@@ -91,8 +108,12 @@ mv vscode-server-linux-x64 ${commit_id}
         ```bash
         # macOS / Linux / WSL
         curl -fsSL https://claude.ai/install.sh | bash
+
         # macOS (by homebrew)
         brew install --cask claude-code
+
+        # Linux (by npm)
+        npm install -g @anthropic-ai/claude-code
         ```
    
     - 开始使用
@@ -156,6 +177,13 @@ mv vscode-server-linux-x64 ${commit_id}
     codex --version # validate
     ```
 
+    如果不是管理员，需要修改 npm 使用的目录、随后全局安装
+    ```bash
+    mkdir ~/.npm-packages
+    npm config set prefix ~/.npm-packages
+    echo 'export PATH=~/.npm-packages/bin:$PATH' >> ~/.bashrc
+    ```
+
 2. 配置文件
 
     Codex CLI 将自动读取 `~/.codex` 下的配置信息、**重启终端后** 生效：
@@ -204,6 +232,25 @@ mv vscode-server-linux-x64 ${commit_id}
 
         > 会自动从 `~/.codex` 读取配置，不用重新写了
 
+#### 接入 Figma
+> 免费版限额好严重 ... 
+
+1. 生成 Figma Access Token: Settings -> Security -> Personal access tokens -> Generate new token
+
+2. 安装 Skill: Figma (MCP) + Figma Implement Design (UI2Code)
+
+    ```bash
+    npx skills add openai/skills --skill figma
+    npx skills add openai/skills --skill figma-implement-design
+    ```
+
+3. 接入 MCP 服务器（临时降级、曲线救国）：在弹出的网页中进行授权
+
+    ```bash
+    npx -y @openai/codex@0.129.0 mcp add figma --url https://mcp.figma.com/mcp
+    ```
+
+4. 直接命令你的 Codex 开始工作吧！
 
 ### Miniconda
 
@@ -295,7 +342,7 @@ Huggin Face 的主干库分为三部分：
     from huggingface_hub import snapshot_download
     
     # 设置国内镜像
-    os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+    os.environ["HF_ENDPOINT"] = "https://hf-mirror.com" # 或改用 https://aifasthub.com
     
     model_name = "google-bert/bert-base-chinese"
     while True: # 防止断联
