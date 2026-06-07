@@ -139,6 +139,7 @@ nav:
     - 3 项目实战: Nulling/Rust/3_project.md
 - Agent:
   - Overview: Nulling/Agent/Overview.md
+  - LearnClaudeCode: Nulling/Agent/LearnClaudeCode.md
   - LangChain: 
     - 1 Base: Nulling/Agent/LangChain/1_Base.md
     - 2 应用: Nulling/Agent/LangChain/2_Apps.md
