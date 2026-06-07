@@ -955,3 +955,266 @@ class SystemPromptBuilder:
         
         # 正常工具处理
     ```
+
+## 3 Task Runtime
+
+### 3.1 Task System
+
+!!! info "Todo 只能提供 '有序列表' 形式的任务拆分，无法提供任务依赖拓扑"
+    - Todo 对于 简单的、可被顺序拆分的 目标已经足够
+    - Task 是一个可以被跟踪、被分配、被完成、被阻塞的工作目标（不是某个正在执行的线程）
+    - 让 Task System 帮你把 Todos 升级成持久化的 Task Graph
+
+- 任务状态
+
+    - pending => in_progress => completed
+    - deleted：逻辑删除
+    - 仅当 `task["status"] == "pending" && not task["blockedBy"]` 时，可被执行（Ready）
+
+- 任务持久化：不止是塞在 `messages` 中
+
+    一个任务存一个文件 => `tasks/task_idx.json`
+
+    ```py
+    class TaskManager:
+    def create(self, subject: str, description: str = "") -> dict:
+        task = {
+            "id": self._next_id(),
+            "subject": subject,         # 任务概括
+            "description": description, # 补充说明
+            "status": "pending",
+            "blockedBy": [],            # 前置依赖
+            "blocks": [],               # 完成后解锁哪些任务
+            "owner": "",                # ？谁来做
+        }
+        self._save(task)
+        return task
+    ```
+
+- 依赖关系维护
+
+    - 添加依赖关系：同时维护 A => B + B => A
+
+        ```py
+        def add_dependency(self, task_id: int, blocks_id: int):
+            task = self._load(task_id)
+            blocked = self._load(blocks_id)
+
+            if blocks_id not in task["blocks"]:
+                task["blocks"].append(blocks_id)
+            if task_id not in blocked["blockedBy"]:
+                blocked["blockedBy"].append(task_id)
+
+            self._save(task)
+            self._save(blocked)
+        ```
+    
+    - 解锁依赖关系：从所有直接后继任务的 blockedBy 中移除
+
+        ```py
+        def complete(self, task_id: int):
+            task = self._load(task_id)
+            task["status"] = "completed"
+            self._save(task)
+
+            for other in self._all_tasks():
+                if task_id in other["blockedBy"]:
+                    other["blockedBy"].remove(task_id)
+                    self._save(other)
+        ```
+
+- 接入主循环：提供以下工具
+
+    | tool_name | desc | tool_name | desc |
+    | :-- | :-- | :-- | :-- |
+    | `task_create` | 新建任务 | `task_update` | 更新任务状态 |
+    | `task_get` | 查看单一任务 |  `task_list` | 查看完整任务板 |
+
+### 3.2 后台任务
+
+!!! info "把慢命令移到后台，至少让主循环看上去没在傻等"
+    主循环仍然只有一条，并行的是等待，不是主循环本身
+
+```py 
+Main Loop                            已在后台
+  |                                     |
+  +-- background_run("pytest") ---> 执行 pytest
+  |      -> 立刻返回 task_id              -> 完成后，写 notification
+  |
+  +-- 继续别的工作
+  |
+  v
+下一轮 LLM call 前：查看所有 notifications、把摘要注入 messages
+```
+
+- 序列化
+    
+    - `runtime-tasks/tid.json`：运行状态（只有 prview 会被写回 msgs）
+
+        ```py
+        {
+            "id": "a1b2c3d4",
+            "command": "pytest",
+            "status": "running",
+            "started_at": 1710000000.0, # 开始执行时间戳
+            "result_preview": "",       # 给 LLM 看的摘要
+            "output_file": "",          # 完整输出路径
+        }
+        ```
+
+    - `runtime-tasks/tid.log`：完整输出
+
+- Notification：只是告诉主循环有结果了（不是完整的日志）
+
+    ```py
+    {
+        "type": "background_completed",
+        "task_id": "a1b2c3d4",
+        "status": "completed",
+        "preview": "tests passed",
+    }
+    ```
+
+- 接入主循环：提供两个 Tool
+
+    | tool_name | desc |
+    | :-- | :-- |
+    | `background_run` | 在后台执行 runtime task |
+    | `background_check` | 检查特定 runtime task / 罗列所有 runtime task 状态 |
+
+```py
+class BackgroundManager:
+    def __init__(self):
+        self.tasks = {}                # 所有的后台任务
+        self._notification_queue = []  # 已经有返回结果的任务
+        self._lock = threading.Lock()  # 并发控制
+
+    def run(self, command: str) -> str:
+        """启动后台执行线程"""
+        task_id = str(uuid.uuid4())[:8]
+        self.tasks[task_id] = {
+            "id": task_id,
+            "status": "running",
+            "result": None,
+            "command": command,
+            "started_at": time.time(),
+            "finished_at": None,
+            "result_preview": "",
+            "output_file": str(self._output_path(task_id)),
+        }
+        thread = threading.Thread(
+            target=self._execute, args=(task_id, command), daemon=True
+        )
+        thread.start()
+        return task_id
+
+    def _execute(self, task_id: str, command: str):
+        """运行，完成后写 notification（自行负责）"""
+        try:
+            r = subprocess.run(
+                command, shell=True, cwd=WORKDIR,
+                capture_output=True, text=True, timeout=300
+            )
+            output = (r.stdout + r.stderr).strip()[:50000]
+            status = "completed"
+        except subprocess.TimeoutExpired:
+            output = "Error: Timeout (300s)"
+            status = "timeout"
+        
+        # 记录完整输出
+        output_path = self._output_path(task_id)
+        output_path.write_text(output)
+
+        # 更新状态 + 记录 preview
+        self.tasks[task_id]["status"] = status
+        self.tasks[task_id]["result"] = final_output
+        self.tasks[task_id]["finished_at"] = time.time()
+        self.tasks[task_id]["result_preview"] = self._preview(output)
+
+        with self._lock:
+            self._notification_queue.append({
+                "task_id": task_id,
+                "status": status,
+                "command": command[:80],
+                "preview": preview,
+                "output_file": str(output_path.relative_to(WORKDIR)),
+            })
+
+    def drain_notifications(self) -> list:
+        """下一次 LLM Call 前，处理所有 notifications"""
+        with self._lock:
+            notifs = list(self._notification_queue)
+            self._notification_queue.clear()
+        return notifs
+```
+
+### 3.3 定时任务
+
+!!! info "等待开始：在未来的特定时间做某事"
+
+```
+- schedule_create => 把定时调度记录写到列表或文件里
+
+- 后台定时检查器每分钟 check 一次“现在是否匹配”
+    -> 匹配，把 prompt 放进 nofitication
+    -> 下一轮 当成 User Msg 喂给 LLM
+```
+
+- 从创建一条新的调度记录开始：durable 需要 dump，session only 可以不管
+
+    ```py
+    def create(self, cron_expr: str, prompt: str, recurring: bool = True):
+        job = {
+            "id": new_id(),
+            "cron": cron_expr,          # 定时规则
+            "prompt": prompt,           # 到点后需要注入 Main Loop 的 prompt
+            "recurring": recurring,     # 是否需要重复触发
+            "created_at": time.time(),
+            "last_fired_at": None,      # 上次触发时间
+        }
+        self.jobs.append(job)
+        return job
+    ```
+
+- 定时检查 Loop：需要开一条线程持续跑，到点就写 notification
+
+    ```py
+    def check_loop(self):
+        while True:
+            now = datetime.now()
+            self.check_jobs(now)
+            time.sleep(60)
+    
+    def check_jobs(self, now):
+        for job in self.jobs:
+            if cron_matches(job["cron"], now):
+                self.queue.put({
+                    "type": "scheduled_prompt",
+                    "schedule_id": job["id"],
+                    "prompt": job["prompt"],
+                })
+                job["last_fired_at"] = now.timestamp()
+    ```
+
+- 接入主循环：最终还是让 LLM 来判断定时任务怎么执行
+
+    ```py title="处理所有定时任务通知"
+    notifications = scheduler.drain()
+    for item in notifications:
+        messages.append({
+            "role": "user",
+            "content": f"[scheduled:{item['schedule_id']}] {item['prompt']}",
+        })
+    ```
+
+## 4 Multi Agents
+
+### 4.1 Agents Team
+
+### 4.2 团队协议
+
+### 4.3 自主代理
+
+### 4.4 Worktree 隔离
+
+### 4.5 MCP
