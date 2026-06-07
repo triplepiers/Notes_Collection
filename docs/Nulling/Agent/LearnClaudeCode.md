@@ -604,3 +604,354 @@ neo_history
             response = call_model(...)
             ...
     ```
+
+## 2 系统安全性
+
+### 2.1 鉴权
+
+!!! warning "不是所有 '意图' 都应该被执行"
+
+一个最小的权限管理系统遵循以下风格（顺序检查即可）：
+
+1. Deny Rules：命中了就直接拒绝（提前拒绝看起来就不对劲的命令）
+
+2. Mode Check：当前系统风格（决定特定分组下的 tool 是否执行）
+
+    | 模式 | 含义 | 适用场景 |
+    | :---: | :-- | :-- | 
+    | `default` |	未命中规则时问用户	| 日常交互 |
+    | `plan`	  | 只允许读，不允许写	| 计划、审查、分析 |
+    | `auto`	  | 简单安全操作自动过，危险操作再问 | 高流畅度探索 |
+
+3. Allow Rules：命中了就直接通过（跳过 常见/重复 操作的检查）
+
+4. Ask User：剩下不确定的都问 User
+
+- Rule 结构定义
+
+    ```py
+    PermissionRule = {
+        # MVP: 对于指定名称的 tool 做什么决定
+        "tool": str,
+        "behavior": "allow" | "deny" | "ask",
+        # Optional
+        "path": str | None,
+        "content": str | None,
+    }
+    ```
+
+    !!! warning "一定要检查 `bash`，你也不想自动 `sudo rm -rf *` 罢"
+        ```py
+        # Always deny dangerous patterns
+        DEFAULT_RULES = [
+            {"tool": "bash", "content": "rm -rf /", "behavior": "deny"},
+            {"tool": "bash", "content": "sudo *", "behavior": "deny"},
+        ]
+        ```
+
+- MVP 实现
+
+    ```py
+    def check_permission(tool_name: str, tool_input: dict) -> dict:
+        # 1. deny rules
+        for rule in deny_rules:
+            if matches(rule, tool_name, tool_input):
+                return {"behavior": "deny", "reason": "matched deny rule"}
+
+        # 2. mode
+        if mode == "plan" and tool_name in WRITE_TOOLS:
+            return {"behavior": "deny", "reason": "plan mode blocks writes"}
+        if mode == "auto" and tool_name in READ_ONLY_TOOLS:
+            return {"behavior": "allow", "reason": "auto mode allows reads"}
+
+        # 3. allow rules
+        for rule in allow_rules:
+            if matches(rule, tool_name, tool_input):
+                return {"behavior": "allow", "reason": "matched allow rule"}
+
+        # 4. fallback to User
+        return {"behavior": "ask", "reason": "needs confirmation"}
+    ```
+
+- 接入 Tool-using Loop：在真正调用前
+
+    ```py
+    decision = perms.check(tool_name, tool_input)
+
+    if decision["behavior"] == "deny":
+        return f"Permission denied: {decision['reason']}"
+    if decision["behavior"] == "ask":
+        ok = ask_user(...)
+        if not ok:
+            return "Permission denied by user"
+    # "behavior" == "allow" 真正调用
+    return handler(**tool_input)
+    ```
+
+!!! info "最好再实现一下 '连续拒绝' 计数 => 你的 Agent 可能卡住了"
+    你可以：给出 reminder / 切换到 `plan` 模式 / 让用户澄清目标
+
+### 2.2 Hooks
+
+!!! info "在不修改 Main Loop 的前提下，在固定时期插入自定义附加行为"
+
+```
+Main Loop Running ...
+        |
+        +-- 到了某个预留时机
+        |
+        +-- 调用 hook runner
+        |
+        +-- 收到 hook 返回
+        |
+        +-- 决定如何处理：继续、阻止、补充说明
+```
+
+- （简化版）Hook 返回值协议：不要今天返回字符串，明天返回布尔值，后天返回整数
+
+    | retValue | 含义 |
+    | :--: | :-- |
+    | `0` | 正常，继续运行 |
+    | `1` | 阻止当前行为 |
+    | `2` | 注入补充消息后，继续运行 |
+
+- Handler Map：为 event 指定对应的 handler 函数（可以是一组 / 为空）
+
+    ```py
+    HOOKS = {
+        "SessionStart": [on_session_start],
+        "PreToolUse": [pre_tool_guard],
+        "PostToolUse": [post_tool_log],
+    }
+    ```
+
+- 统一运行（一组）hooks：此处 阻止/注入 返回将阻断运行、并直接返回
+
+    ```py
+    def run_hooks(event_name: str, payload: dict) -> dict:
+        for handler in HOOKS.get(event_name, []):
+            result = handler(payload)
+            if result["exit_code"] in (1, 2):
+                return result
+        return {"exit_code": 0, "message": ""}
+    ```
+
+    其中，`payload` 可以设计为如下格式：
+
+    ```py
+    {
+        "tool_name": "bash",
+        "input": {"command": "pytest"},
+    }
+    ```
+
+- 接入 tool-using Loop：
+
+    ```py
+    results = []
+    for block in response.content:
+        # -- PreToolUse --
+        pre  = hooks.run_hooks("PreToolUse", payload)
+        # Inject hook messages into results
+        if pre["exit_code"] == 1:
+            results.append(blocked_tool_result(pre["message"]))
+            continue
+        if pre["exit_code"] == 2:
+            messages.append({"role": "user", "content": pre["message"]})
+            
+        # 真正执行工具
+        handler = TOOL_HANDLERS.get(block.name)
+
+        # -- PostToolUse --
+        post = hooks.run_hooks("PostToolUse", payload)
+        # Inject post-hook messages（这里不可能被 block 了）
+        if post["exit_code"] == 2:
+            messages.append({"role": "user", "content": pre["message"]})
+
+        # 正常塞回 tool_result
+        results.append({
+            "type": "tool_result", "tool_use_id": block.id,
+            "content": str(output),
+        })
+    ```
+
+### 2.3 Memory 管理
+
+!!! info "维护跨对话、无法直接从当前仓库状态推导的信息，在 <u>新会话开启时自动加载</u>"
+
+!!! warning "memory 只用来提供方向，不能替代当前观察"
+    - memory 记录的是“曾经成立过的事实”，不是永久真理
+    - 当 code 与 memo 冲突时，请相信 code
+    - 根据 memo 推荐资源前，再 check 一遍（万一它改了呢）
+
+!!! question "如果用户让我 '忽略之前的记忆' 呢 =>  在 <u>当前轮次</u> 中，按照 memory 为空进行工作"
+
+- 一些值得记录的 Memory
+
+    | type | desc | sample |
+    | :--  | :--  | : -- |
+    | `user` | 用户偏好 | 代码风格 / 回复风格 / 偏好工具链 | 
+    | `feedback` | 用户的人工纠正 / **正反馈** | xxx 之前错过 / 以后遇到这种情况要先 xxx / xxx 判断方式是有效的 |
+    | `project` | 不容易直接从 code 看出来的约定 / 背景 | 特定目录不能改 / 某个决定是因为合规要求 |
+    | `reference` | 外部资源指针 | 资料库对应的 URL / 特定监控面板的访问方式 |
+
+- 存储结构
+
+    - 每条 memory 对应一个单独文件：带 meta + 具体内容
+
+        ```md
+        ---
+        name: prefer_tabs
+        description: User prefers tabs for indentation
+        type: user
+        ---
+        The user explicitly prefers tabs over spaces when editing source files.
+        ```
+
+        对应 dump 工具实现
+
+        ```py
+        def save_memory(name, description, mem_type, content):
+            path = memory_dir / f"{safe_name}.md"
+            path.write_text(frontmatter + content)
+            rebuild_index() # 更新 index
+        ```
+
+    - 索引文件：展示所有可用 memory（ + desc ）
+
+        ```md
+        # Memory Index
+        - prefer_tabs: User prefers tabs for indentation [user]
+        - avoid_mock_heavy_tests: User dislikes mock-heavy tests [feedback]
+        ```
+
+- 接入：在会话开始时，读取所有 memory 拼接为 section、塞进 system prompt
+
+### 2.4 System Prompt
+
+!!! info "你面对的是可是超级拼装口牙"
+
+```
+System Prompt = 
+    # 静态部分
+    core              # 核心身份和行为说明
+    + tools           # 工具列表
+    + skills          # skill 元信息
+    + memory
+    + claude_md
+    # 动态部分
+    + dynamic_context # 动态环境信息（date / pwd / model / mode）
+```
+
+在实现上也不过是顺序拼装（每个 builder 只负责对应模块的加载）：
+
+```py
+class SystemPromptBuilder:
+    def build(self) -> str:
+        parts = []
+        parts.append(self._build_core())
+        ...
+        parts.append(self._build_dynamic())
+        return "\n\n".join(p for p in parts if p)
+```
+
+### 2.5 错误恢复
+
+!!! info "错误不是例外，而是必须预留的正常分支"
+    先对错误进行<u>分类</u>，再选择<u>恢复路径</u>（有限次补救），失败最后才暴露给用户
+
+- 典型错误及其恢复方式
+
+    | stop reason | solution |
+    | :- | :- |
+    | 输出被截断 | 注入续写提示 + retry |
+    | Ctx 过长 | 压缩上下文 + retry |
+    | 临时连接失败 | 等一会儿 + retry |
+
+- 数据结构
+
+    - （Meta）Recovery State：（分别）统计每种恢复路径重试次数，避免死循环
+
+        ```py
+        {
+            "continuation_attempts": 0,
+            "compact_attempts": 0,
+            "transport_attempts": 0,
+        }
+        ```
+    
+    - 恢复决策：
+
+        ```py
+        {
+            "kind": "continue" | "compact" | "backoff" | "fail",
+            "reason": "why this branch was chosen",
+        }
+        ```
+    
+    - 恢复选择器：类似于 Mapper
+
+        ```py
+        def choose_recovery(stop_reason: str | None, error_text: str | None) -> dict:
+            if stop_reason == "max_tokens":
+                return {"kind": "continue", "reason": "output truncated"}
+
+            if error_text and "prompt" in error_text and "long" in error_text:
+                return {"kind": "compact", "reason": "context too large"}
+
+            if error_text and any(word in error_text for word in [
+                "timeout", "rate", "unavailable", "connection"
+            ]):
+                return {"kind": "backoff", "reason": "transient transport failure"}
+
+            return {"kind": "fail", "reason": "unknown or non-recoverable error"}
+        ```
+
+- 接入 Main Loop
+
+    - 在 LLM Call 外层处理：API +  网络错误
+    - 在拿到 Response 后处理：超出 max_token
+
+    ```py
+    while True:
+        response = None
+        for attempt in range(MAX_RECOVERY_ATTEMPTS + 1):
+            try:
+                # LLM 请求
+                break  # success
+            except APIError as e:
+                error_body = str(e).lower()
+                # 压缩 Ctx
+                if "overlong_prompt" in error_body or ("prompt" in error_body and "long" in error_body):
+                    messages[:] = auto_compact(messages)
+                    continue
+                # 请求错误
+                if attempt < MAX_RECOVERY_ATTEMPTS:
+                    delay = backoff_delay(attempt)
+                    time.sleep(delay)
+                    continue
+                return # 超出最大重试
+            except (ConnectionError, TimeoutError, OSError) as e:
+                # 连接错误
+                if attempt < MAX_RECOVERY_ATTEMPTS:
+                    delay = backoff_delay(attempt)
+                    time.sleep(delay)
+                    continue
+                return # 超出最大重试
+
+        if response is None: return
+        messages.append({"role": "assistant", "content": response.content})
+        
+        # 输出被截断
+        if response.stop_reason == "max_tokens":
+            max_output_recovery_count += 1
+            if max_output_recovery_count <= MAX_RECOVERY_ATTEMPTS:
+                messages.append({"role": "user", "content": CONTINUATION_MESSAGE})
+                continue
+            else: return
+        
+        # 重置对应 counter
+        max_output_recovery_count = 0
+        
+        # 正常工具处理
+    ```
