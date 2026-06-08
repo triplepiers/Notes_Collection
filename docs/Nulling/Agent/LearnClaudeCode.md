@@ -1211,10 +1211,357 @@ class BackgroundManager:
 
 ### 4.1 Agents Team
 
+!!! info "SubAgent 用完一次就丢，Team 支持长期在线接活 + 协作"
+
+- 团队名册：队伍里有谁、分别担任什么角色、目前状态（空闲 / 工作中 / 下线）
+
+    ```py title=".team/config.json，系统重启后仍能保留"
+    config = {
+        "team_name": "default",
+        "members": [{
+            "name": "alice",
+            "role": "coder",
+            "status": "working",
+        }, ...],
+    }
+    ```
+    
+
+- `teammate`
+    - 一个拥有独立名字、角色、消息入口和生命周期的持久 agent
+
+    - 新锅收取：邮箱（在下一轮工作前整理信息）
+
+        最简单的实现是一人一个 jsonl 文件（`.team/inbox/NAME.jsonl`）、来锅直接 append
+
+        ```py title="嗨嗨嗨，又有新锅了、快起来干活！"
+        message = {
+            "type": "message",
+            "from": "lead",
+            "content": "Please review auth module.",
+            "timestamp": 1710000000.0,
+        }
+        ```
+
+    - 上下文压缩后，队友有时会忘记自己是谁。最小补法是重新注入一段身份提示：
+
+        ```
+        identity = {
+            "role": "user",
+            "content": "<identity>You are 'alice', role: frontend, team: default. Continue your work.</identity>",
+        }
+        ```
+
+!!! info "目前的实现仍由 leader 手动进行（创建队友、分派任务）"
+    是的，我们还没实现自主找活、自动恢复工作的全自治牛马
+
+```py
+class TeammateManager:
+    # 1 老大说，首先要有一份名册
+    def __init__(self, team_dir: Path):
+        self.dir = team_dir
+        self.config_path = self.dir / "config.json"
+        self.config = self._load_config()
+    def _load_config(self) -> dict:
+        if self.config_path.exists():
+            return json.loads(self.config_path.read_text())
+        return {"team_name": "default", "members": []}
+
+    # 2 捏一个新的牛马来干活吧
+    def spawn(self, name: str, role: str, prompt: str) -> str:
+        member = {"name": name, "role": role, "status": "working"}
+        self.config["members"].append(member)
+        self._save_config()
+
+        thread = threading.Thread(
+            target=self._teammate_loop, # 略（和 main loop 差不多、但需要 check 邮箱）
+            args=(name, role, prompt),
+            daemon=True,
+        )
+        thread.start()
+
+    # 3 谁家牛马天天看邮箱找活干
+    def _teammate_loop(self, name: str, role: str, prompt: str):
+        messages = [{"role": "user", "content": prompt}]
+        while True:
+        inbox = bus.read_inbox(name) # 读全部信息 => 解析为列表 => 清空邮箱
+        for item in inbox:
+            messages.append({"role": "user", "content": json.dumps(item)})
+
+        response = client.messages.create(...)
+        ...
+```
+
 ### 4.2 团队协议
+
+!!! info "Protocol 只负责协作"
+    协议请求不是任务本身，请求状态表也不是任务板，<u>任务系统才负责 “工作推进”</u>
+
+
+- 协议消息
+
+    ```py
+    message = {
+        "from": "lead",
+        "to": "alice",
+        "timestamp": 1710000000.0,
+        # NEW
+        "type": "shutdown_request",
+        "request_id": "req_001",
+        "payload": {},
+    }
+    ```
+
+- 请求追踪：最好还是一个个 dump 为 `.team/requests/req_xxx.json`
+
+    ```py
+    {
+        "request_id": "req_001",
+        "kind": "shutdown",
+        "from": "lead",
+        "to": "alice",
+        "status": "pending" | "approved" | "rejected" | "expiered",
+    }
+    ```
+
+- 运行协议
+
+    ```
+    队友 / lead 发起请求
+    -> 写入 RequestRecord -> 把 ProtocolEnvelope 投递进对方 inbox
+    
+    接收方下一轮 drain inbox
+    -> 按 request_id 更新请求状态 -> 必要时再回一条 response
+    
+    请求方
+    -> 根据 approved / rejected 继续后续动作
+    ```
 
 ### 4.3 自主代理
 
-### 4.4 Worktree 隔离
+!!! info "嗨嗨嗨，两眼一睁就是自己找活干的全自动牛马来辣！！！"
+    当可汗点不动兵成为瓶颈，牛就要学会自己认领磨拉
+
+```txt title="私戳和公屏都要看捏"
+活跃牛马
+  |
+  | 当前轮工作做完，或者主动进入 idle
+  v
+绝赞摸鱼
+  |
+  +-- 看邮箱，有新消息 -> 回到 WORK
+  |
+  +-- 看任务板，有 ready task -> 认领 -> 回到 WORK
+  |
+  +-- 长时间什么都没有 -> shutdown
+```
+
+- 如何判断一个锅能不能被自主认领
+
+    ```py
+    def is_claimable_task(task: dict, role: str | None = None) -> bool:
+        return (
+            task.get("status") == "pending"
+            and not task.get("owner")
+            and not task.get("blockedBy")
+            and _task_allows_role(task, role) # 发布者可以指定接活牛马组别
+        )
+    ```
+
+- 认领后需要修改
+
+    - 任务状态
+
+        ```
+        "status": "in_progress"
+        "claimed_at": 1710000000.0         # 被认领的时间戳
+        "claim_source": "auto" | "manual"  # 被点名 / 自己捡走
+        ```
+
+    - 需要落盘的自主拿锅记录
+
+        ```json title=".tasks/claim_events.jsonl"
+        {
+            "event": "task.claimed",
+            "task_id": 7,
+            "owner": "alice",
+            "role": "frontend",
+            "source": "auto",
+            "ts": 1710000000.0,
+        }
+        ```
+
+- 接入 teammate_loop
+
+    ```py
+    # 支持 work -> idle 状态流转
+    while True:
+        run_work_phase(...)
+        should_resume = run_idle_phase(...)
+        if not should_resume:
+            break
+
+    # idle：从 邮箱 + 告示板 找活干，循环若干轮后关闭自己
+    def idle_phase(name: str, messages: list) -> bool:
+        # 邮箱被点名，有活干了
+        inbox = bus.read_inbox(name)
+        if inbox:
+            messages.append({
+                "role": "user",
+                "content": json.dumps(inbox),
+            })
+            return True
+
+        # 没人找我？看看公告栏
+        unclaimed = scan_unclaimed_tasks(role) # 支持接收角色过滤
+        if unclaimed:
+        task = unclaimed[0]
+        claim_result = claim_task(             # clain_task 通过锁实现原子操作
+            task["id"],
+            name,
+            role=role,
+            source="auto",
+        )
+
+        # 默念自己的角色再开始干活
+        ensure_identity_context(messages, name, role, team_name)
+        messages.append({
+            "role": "user",
+            "content": f"<auto-claimed>Task #{task['id']}: {task['subject']}</auto-claimed>",
+        })
+        messages.append({
+            "role": "assistant",
+            "content": f"{claim_result}. Working on it.",
+        })
+        return True
+    ```
+
+### 4.4 💀 Worktree
+
+!!! info "让两个 teammate 在同一个 code 版本上独立修改、互不干扰（不共享未 commit 的改动）"
+
+```
+任务被创建 -> 队友认领任务
+    -> 系统为任务分配 worktree
+    -> 在对应目录中执行命令（切换 cwd）
+    -> 任务完成时：保留 / 删除 worktree
+```
+
+- worktree 注册表：你这个任务到底在哪条车道上创人啊
+
+    ```json title=".worktrees/index.json"
+    {"worktrees": [
+        {
+            "name": "auth-refactor",
+            "path": ".worktrees/auth-refactor",
+            "branch": "wt/auth-refactor",
+            "task_id": 12,                      # 关联具体 task
+            "status": "active"
+        }
+    ]}
+    ```
+
+- TaskRecord：新增与 worktree 相关字段
+
+    ```py
+    task = {
+        ...
+        "worktree": "auth-refactor",      # 目前绑定的 wktree
+        "worktree_state": "active" | "kept" | "removed" | "unbound",
+        "last_worktree": "auth-refactor", # 最近用过的 wktree
+        "closeout": None,                 # 最近一次收尾操作
+    }
+    ```
+
+- WorkTreeRecord：路径映射 + 最近操作 + 收尾操作
+
+    ```py
+    worktree = {
+        "name": "auth-refactor",
+        "path": ".worktrees/auth-refactor",
+        "branch": "wt/auth-refactor",
+        "task_id": 12,
+        "status": "active",
+        "last_entered_at": 1710000000.0,
+        "last_command_at": 1710000012.0,
+        "last_command_preview": "pytest tests/auth -q",
+        "closeout": None,
+    }
+    ```
+
+- CloseoutRecord：收尾行为 => 保留 / 回收
+
+    ```py
+    closeout = {
+        "action": "keep",
+        "reason": "Need follow-up review",
+        "at": 1710000100.0,
+    }
+    ```
+
+- EventRecord：worktree 具有复杂的生命周期
+
+    > 创建 => 进入 => 执行命令 => 保留 / 删除 => 删除失败 ...
+
+    ```py
+    event = {
+        "event": "worktree.closeout.keep",
+        "task_id": 12,
+        "worktree": "auth-refactor",
+        "reason": "Need follow-up review",
+        "ts": 1710000100.0,
+    }
+    ```
+
+- 接入思路：先开任务、再指定 worktree
+
+    1. 创建任务
+    2. 分配 worktree、写入注册表
+    3. 更新 TaskRecord 关于 worktree 的字段
+    4. <u>显示切换工作目录</u>、在对应目录下执行命令
+    5. 收尾：显式通过 `worktree_closeout` 处理，同意兜住 `keep / remove`
+
+
+!!! warning "删除 worktree 前应该检查 <u>是否有脏改动</u>"
 
 ### 4.5 MCP
+
+!!! info "不是所有活都需要本机干，搞一些可插拔的外包员工进来吧"
+
+```
+启动时
+  -> PluginLoader 找到 server 配置
+  -> MCP client 连接 server
+    -> list_tools 并标准化 tool_name
+    -> 与 native tools 一起合并进同一个工具池
+
+运行时
+  -> LLM 产出 tool_use
+  -> 统一权限处理
+  -> 工具路由：native / mcp
+  -> 标准化 tool_result
+  -> 回到主循环
+```
+
+- MCP：让 agent 和外部工具程序对话的统一协议
+
+    - MCP Server 会首先告诉你 "我能提供什么工具"(还能提供一些 resource)
+
+    - 当你想要借用工具时、把请求转发给它，它会向你返回执行结果
+
+- Plugin 配置：有哪些可用的<u>外部</u>工具、通过什么命令调用
+
+    ```json title=".claud-plugin/plugin.json"
+    {
+        "name": "my-db-tools",
+        "version": "1.0.0",
+        "mcpServers": {
+            "postgres": {
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-postgres"]
+            }
+        }
+    }
+    ```
+
+- MCP Client：支持连接 MCP Server、列出可用工具、调用特定工具
