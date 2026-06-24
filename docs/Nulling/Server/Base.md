@@ -184,3 +184,18 @@ ps aux | grep "^user" | grep xxx # 先匹配特定用户（行开头），再匹
         export TERMINFO=/usr/share/terminfo
         clear
         ```
+
+### 登录时无法自动加载 `~/.bashrc`
+
+实际上登录时自动加载的文件是 `~/.bash_profile`，手动在里面添加加载逻辑
+
+```shell
+# 比较保守的写法
+if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+fi
+
+# Optional: 如果你在 ~/bin 下面放了一些 startup program
+PATH=$PATH:$HOME/bin
+export PATH
+```
