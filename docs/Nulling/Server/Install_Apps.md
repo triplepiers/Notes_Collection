@@ -34,7 +34,7 @@
 
         ```bash
         git clone https://gitee.com/mirrors/nvm.git ~/.nvm
-
+        
         cd ~/.nvm
         git checkout v0.40.0 # checkout 到对应版本
         ```
@@ -207,7 +207,7 @@ mv vscode-server-linux-x64 ${commit_id}
         disable_response_storage = true
         windows_wsl_setup_acknowledged = true
         model_verbosity = "high"
-
+    
         # 需要和 model_provider 对应
         [model_providers.rightcode]
         name = "rightcode"
@@ -534,7 +534,11 @@ tokenizer.add_special_tokens({            # 特殊 token
 
 ## 2 网盘同步
 
-### bypy（百度网盘下载）
+### Kuake CLI（夸克网盘）
+
+
+
+### bypy（百度网盘）
 
 1. 安装
 
@@ -863,7 +867,7 @@ SQLite 依赖于 `gcc` 和 `make`，请确保已经安装
     source ~/.bashrc
     ```
 
-!!!info "OK，这就装好了。不放心的话可以通过如下命令进行验证"
+    !!!info "OK，这就装好了。不放心的话可以通过如下命令进行验证"
     ```bash
     sqlite3 --version
     ```
@@ -951,7 +955,7 @@ SQLite 依赖于 `gcc` 和 `make`，请确保已经安装
 - 最终选择 v2.1.0 版本进行安装
     - 这东西对本地的 GCC 版本有要求，最新版要求 `glibc >= 2.32`
     - `pgloader` 需要的 `DEFINE-ALIEN-CALLABLE` 要求 `sbcl >= 2.1.10`
-  
+
 - 可能的报错：`Unable to load libsybdb.so`
 
     `libsybdb.so` 是 FreeTDS 库的一部分，需要全装上
@@ -971,13 +975,13 @@ SQLite 依赖于 `gcc` 和 `make`，请确保已经安装
     # 添加到环境变量
     LD_LIBRARY_PATH="$INSTALL_PREFIX/freetds/lib:$LD_LIBRARY_PATH"
     ```
-  
+
 - 本体安装
 
     1. 下载 [最新二进制包](http://www.sbcl.org/platform-table.html)，或 [较旧版本](https://sourceforge.net/projects/sbcl/files/sbcl/)
 
     2. 解压 & 指定安装路径（默认在 `/usr/local`）
-      
+    
         ```bash
         INSTALL_ROOT=$INSTALL_PREFIX/sbcl sh install.sh
         ```
@@ -1057,4 +1061,27 @@ SQLite 依赖于 `gcc` 和 `make`，请确保已经安装
 
     ```bash
     pkg-config --exists libpq && echo "OK" || echo "Still missing" # 显示 OK 即可
+    ```
+
+## 4 Jupyter 服务器
+
+- 从服务器下载文件
+
+    先用 Python 打包成 `.zip` 文件，然后点击链接下载
+
+    ```py
+    import shutil, base64
+    from IPython.display import HTML, display
+
+    folder = 'FOLDER_NAME'
+    zip_name = f'{folder}.zip'
+    shutil.make_archive(folder, "zip", folder)
+
+    # 读取，展示下载链接
+    with open(zip_name, "rb") as f:
+        data = base64.b64encode(f.read()).decode()
+        
+    display(HTML(
+        f'<a download="{zip_name}" href="data:application/zip;base64,{data}">下载 {zip_name}</a>'
+    ))
     ```

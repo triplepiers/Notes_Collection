@@ -76,56 +76,50 @@ markdown_extensions:
 #   homepage: https://triplepiers.github.io/Notes_Collection/
 nav:
 - Home: index.md
-- FrontEnd:
+- Web 全栈:
+  - 样式与动画:
+    - 布局: Nulling/Front End/布局.md
+    - Canvas: Nulling/Front End/Canvas.md
+    - Animation:
+        - GSAP: Nulling/Front End/Animations/GSAP.md
+    - TailWindCSS: Nulling/Front End/TailWind.md
+  - 前端框架:
+    - Vue2:
+      - 1 HelloWorld: Nulling/Vue/Vue2/1 Intro.md
+      - 2 组件: Nulling/Vue/Vue2/2 组件.md
+      - 3 使用 Cli: Nulling/Vue/Vue2/3 使用Cli创建项目.md
+      - 4 消息传递: Nulling/Vue/Vue2/4 消息传递.md
+      - 5 网络请求: Nulling/Vue/Vue2/5 Ajax 网络请求.md
+      - 6 第三方组件库: Nulling/Vue/Vue2/6 UI 组件库.md
+    - Vue3: Nulling/Vue/Vue3.md
+    - React:
+      - 1 慢速上手: Nulling/React/慢速上手.md
+      - 2 面向组件: Nulling/React/面向组件编程.md
+      - 3 组件通信: Nulling/React/组件通信.md
+      - 4 网络请求: Nulling/React/网络请求.md
+      - 5 路由: Nulling/React/路由.md
+      - 6 UI 组件库: Nulling/React/UI 组件库.md
+    - 后端相关:
+      - WebSocket: Nulling/Tool/WebSocket.md
+      - Mccha (测试): Nulling/Tool/Mocha.md
+      - 异步请求:
+        - Axios: Nulling/Tool/Axios.md
+        - Promise: Nulling/Front End/Promise.md
+      - NodeJS:
+        - 1 火速上手: Nulling/Tool/NodeJS/1_Intro.md
+        - 2 搓点项目: Nulling/Tool/NodeJS/2_Project.md
+      - NextJS: Nulling/React/NextJS.md
+      - Mongo DB:
+          - 1 快速上手: Nulling/Tool/MongoDB/快速上手.md
+          - 2 慢速上头: Nulling/Tool/MongoDB/慢速上头.md
   - VSCode插件: Nulling/Front End/VSCodePlugin.md
-  - Canvas: Nulling/Front End/Canvas.md
-  - Animation:
-      - GSAP: Nulling/Front End/Animations/GSAP.md
-  - TailWindCSS: Nulling/Front End/TailWind.md
-  - Type Script: Nulling/Front End/TS.md
-  - Java Script:
-    - 1 基础: Nulling/Front End/JS/基础.md
-    - 2 对象与函数: Nulling/Front End/JS/对象与函数.md
-    - 3 内置对象与正则: Nulling/Front End/JS/内置对象与正则.md
-    - 4 DOM: Nulling/Front End/JS/DOM.md
-    - 5 BOM: Nulling/Front End/JS/BOM.md
-  - Vue2:
-    - 1 HelloWorld: Nulling/Vue/Vue2/1 Intro.md
-    - 2 组件: Nulling/Vue/Vue2/2 组件.md
-    - 3 使用 Cli: Nulling/Vue/Vue2/3 使用Cli创建项目.md
-    - 4 消息传递: Nulling/Vue/Vue2/4 消息传递.md
-    - 5 网络请求: Nulling/Vue/Vue2/5 Ajax 网络请求.md
-    - 6 第三方组件库: Nulling/Vue/Vue2/6 UI 组件库.md
-  - Vue3: Nulling/Vue/Vue3.md
-  - React:
-    - 1 慢速上手: Nulling/React/慢速上手.md
-    - 2 面向组件: Nulling/React/面向组件编程.md
-    - 3 组件通信: Nulling/React/组件通信.md
-    - 4 网络请求: Nulling/React/网络请求.md
-    - 5 路由: Nulling/React/路由.md
-    - 6 UI 组件库: Nulling/React/UI 组件库.md
+  - Flutter: Nulling/Flutter/Project.md
   - WeChat:
     - 1 Intro: Nulling/Wechat App/Intro.md
     - 2 Template & Setting: Nulling/Wechat App/Template & Setting.md
     - 3 组件: Nulling/Wechat App/自定义组件 & 全局数据共享.md
-  - Tips:
-    - 布局: Nulling/Front End/布局.md
-  - Tools:
-    - WebSocket: Nulling/Tool/WebSocket.md
-    - 测试:
-      - Mccha: Nulling/Tool/Mocha.md
-    - 异步请求:
-      - Axios: Nulling/Tool/Axios.md
-      - Promise: Nulling/Front End/Promise.md
-    - NodeJS:
-      - 1 火速上手: Nulling/Tool/NodeJS/1_Intro.md
-      - 2 搓点项目: Nulling/Tool/NodeJS/2_Project.md
-    - NextJS: Nulling/React/NextJS.md
-- DataBase:
-  - Mongo DB:
-      - 1 快速上手: Nulling/Tool/MongoDB/快速上手.md
-      - 2 慢速上头: Nulling/Tool/MongoDB/慢速上头.md
 - 编程语言:
+  - Dart: Nulling/Flutter/Dart.md
   - Python:
     - 1 Basic: Nulling/Python/1 Basic.md
     - 2-1 Project: Nulling/Python/2-1 Project.md
@@ -137,6 +131,13 @@ nav:
     - 1 Basic: Nulling/Rust/1_init.md
     - 2 基础语法: Nulling/Rust/2_base.md
     - 3 项目实战: Nulling/Rust/3_project.md
+  - Type Script: Nulling/Front End/TS.md
+  - Java Script:
+    - 1 基础: Nulling/Front End/JS/基础.md
+    - 2 对象与函数: Nulling/Front End/JS/对象与函数.md
+    - 3 内置对象与正则: Nulling/Front End/JS/内置对象与正则.md
+    - 4 DOM: Nulling/Front End/JS/DOM.md
+    - 5 BOM: Nulling/Front End/JS/BOM.md
 - Agent:
   - Overview: Nulling/Agent/Overview.md
   - LearnClaudeCode: Nulling/Agent/LearnClaudeCode.md
@@ -153,7 +154,7 @@ nav:
   - Git: Nulling/Tool/Git.md
   - Igem Uploads: Nulling/Tool/igem-uploads.md
 - 软工课程:
-  - 编译原理(旷工中):
+  - 编译原理 (已咕咕):
     - 5 语法制导翻译: Nulling/编译原理/5 语法制导翻译.md
     - 6 中间代码生成: Nulling/编译原理/6 中间代码生成.md
     - 7 运行存储分配: Nulling/编译原理/7 运行存储分配.md
