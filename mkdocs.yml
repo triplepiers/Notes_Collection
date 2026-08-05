@@ -121,6 +121,7 @@ nav:
 - 编程语言:
   - Dart: Nulling/Flutter/Dart.md
   - Python:
+    - 装饰器: Nulling/Python/Decorator.md
     - 1 Basic: Nulling/Python/1 Basic.md
     - 2-1 Project: Nulling/Python/2-1 Project.md
     - 2-2 Project: Nulling/Python/2-2 Project.md
