@@ -199,3 +199,91 @@ fi
 PATH=$PATH:$HOME/bin
 export PATH
 ```
+
+## 7 Bash
+
+### awk
+
+用于顺序按行遍历（一个或多个）文件，支持进行一些按列处理
+
+- 基本格式
+
+    ```bash
+    awk \
+        # [opt] 指定分隔符（默认是空格）
+        -F ',' \
+        # [opt] 接收一些参数
+        -v arg1="$long_arg_1" \
+        -v arg2="$long_arg_2" \
+        # action（判断，然后 print）
+        '$1 == 1 {print}' \
+        # input file(s)
+        "file1" "file2" ... \
+        # [opt] 
+        > "${opt_file}.txt"
+    ```
+
+- 常用内置变量
+
+    | 写法    | 含义         |
+    | ----- | ---------- |
+    | `$0`  | 当前整行       |
+    | `$1`  | 当前行第 1 列   |
+    | `$2`  | 当前行第 2 列   |
+    | `$NF` | 当前行最后一列    |
+    | `NF`  | 当前行有多少列    |
+    | `NR`  | 当前是读取到的第几行 |
+    | `FNR` | 当前文件的第几行   |
+    | `FS`  | 输入字段分隔符    |
+    | `OFS` | 输出字段分隔符    |
+
+    - 仅单个文件时，恒有 `NR == FNR`
+    - 存在多个文件时，`NR` 为累计值、`FNR` 会在每个文件开始时重置为 1
+
+- 场景题：我们有两个文件，需要找出 id 在区间 [1,1000] 内、且购买 apple 的 username 并输出到文件
+
+    ```txt title="user.txt"
+    #user_id user_name
+    1 alice
+    2 bob
+    3 carol
+    ```
+
+    ```txt title="order.txt"
+    #user_id target
+    1 apple
+    2 sword
+    3 apple
+    500 sword
+    1000 sword
+    ```
+
+    ```bash
+    #!/bin/bash
+
+    l=1
+    r=1000
+    target="apple"
+
+    awk \
+        -v l="$l" \
+        -v r="$r" \
+        -v tar="$target" \
+        'BEGIN {print "#user_id,user_name"}
+        NR==FNR {
+            if ($1 >= l && $1 <= r && $2 == tar)
+                bought[$1]=1
+            next
+        }
+        $1 in bought {print}' \
+        "order.txt" "user.txt" \
+        > "${target}.txt"
+    ```
+
+    - BEGIN 块仅执行一次：用于给 `apple.txt` 写入表头
+
+    - `NR==FNR` 判断处于首个文件（order.txt）内，用于筛选 user_id
+
+        `bought[$1]=1` 相当于将 `$1` 加入 set（也可以赋其他任意值）
+
+    - `$1 in bought`：已经在扫描 user.txt 了，用于查找 username
