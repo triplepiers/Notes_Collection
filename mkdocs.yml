@@ -50,13 +50,15 @@ extra_javascript:
   - javascripts/loading.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 plugins:
+  # - tags
+  - blog
   - statistics:
       ignore_languages:
         - mermaid
         - markdown
+      exclude_path: blog
   - search:
       lang: ['zh', 'en']
-      min_search_length: 3
 markdown_extensions:
   - md_in_html
   - pymdownx.highlight:
@@ -76,7 +78,14 @@ markdown_extensions:
 #   homepage: https://triplepiers.github.io/Notes_Collection/
 nav:
 - Home: index.md
-- Unity: Nulling/Games/Unity.md
+- Blogs: 
+  - blog/index.md
+  # - Test: Blogs/test.md
+- Games:
+  # - Games 104: Nulling/Games/Games104.md
+  # - 着色模型: Nulling/Games/Shading.md
+  # - 地形生成: Nulling/Games/地形生成.md
+  - Unity: Nulling/Games/Unity.md
 - Web 全栈:
   - 样式与动画:
     - 布局: Nulling/Front End/布局.md
