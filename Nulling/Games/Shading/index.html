@@ -1,0 +1,2262 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://triplepiers.github.io/Notes_Collection/Nulling/Games/Shading/">
+      
+      
+        <link rel="prev" href="../../../blog/archive/2026/">
+      
+      
+        <link rel="next" href="../Unity/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../images/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>着色模型 - SeaBee 的笔记合集</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8%201.5c-2.363%200-4%201.69-4%203.75%200%20.984.424%201.625.984%202.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621%201.49a.75.75%200%200%201-1.484.211c-.04-.282-.163-.547-.37-.847a9%209%200%200%200-.542-.68q-.126-.149-.268-.32C3.201%207.75%202.5%206.766%202.5%205.25%202.5%202.31%204.863%200%208%200s5.5%202.31%205.5%205.25c0%201.516-.701%202.5-1.328%203.259q-.142.172-.268.319c-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751%200%200%201-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848q.113-.133.213-.253c.561-.679.985-1.32.985-2.304%200-2.06-1.637-3.75-4-3.75M5.75%2012h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M6%2015.25a.75.75%200%200%201%20.75-.75h2.5a.75.75%200%200%201%200%201.5h-2.5a.75.75%200%200%201-.75-.75%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<div class="loading">
+  <svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="7.33" height="7.33">
+      <animate id="spinner_oJFS" begin="0;spinner_5T1J.end+0.2s" attributeName="x" dur="0.6s" values="1;4;1" />
+      <animate begin="0;spinner_5T1J.end+0.2s" attributeName="y" dur="0.6s" values="1;4;1" />
+      <animate begin="0;spinner_5T1J.end+0.2s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+      <animate begin="0;spinner_5T1J.end+0.2s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+    </rect>
+    <rect x="8.33" y="1" width="7.33" height="7.33">
+      <animate begin="spinner_oJFS.begin+0.1s" attributeName="x" dur="0.6s" values="8.33;11.33;8.33" />
+      <animate begin="spinner_oJFS.begin+0.1s" attributeName="y" dur="0.6s" values="1;4;1" />
+      <animate begin="spinner_oJFS.begin+0.1s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+      <animate begin="spinner_oJFS.begin+0.1s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+    </rect>
+    <rect x="1" y="8.33" width="7.33" height="7.33">
+      <animate begin="spinner_oJFS.begin+0.1s" attributeName="x" dur="0.6s" values="1;4;1" />
+      <animate begin="spinner_oJFS.begin+0.1s" attributeName="y" dur="0.6s" values="8.33;11.33;8.33" />
+      <animate begin="spinner_oJFS.begin+0.1s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+      <animate begin="spinner_oJFS.begin+0.1s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+    </rect>
+    <rect x="15.66" y="1" width="7.33" height="7.33">
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="x" dur="0.6s" values="15.66;18.66;15.66" />
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="y" dur="0.6s" values="1;4;1" />
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+    </rect>
+    <rect x="8.33" y="8.33" width="7.33" height="7.33">
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="x" dur="0.6s" values="8.33;11.33;8.33" />
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="y" dur="0.6s" values="8.33;11.33;8.33" />
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+    </rect>
+    <rect x="1" y="15.66" width="7.33" height="7.33">
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="x" dur="0.6s" values="1;4;1" />
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="y" dur="0.6s" values="15.66;18.66;15.66" />
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+      <animate begin="spinner_oJFS.begin+0.2s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+    </rect>
+    <rect x="15.66" y="8.33" width="7.33" height="7.33">
+      <animate begin="spinner_oJFS.begin+0.3s" attributeName="x" dur="0.6s" values="15.66;18.66;15.66" />
+      <animate begin="spinner_oJFS.begin+0.3s" attributeName="y" dur="0.6s" values="8.33;11.33;8.33" />
+      <animate begin="spinner_oJFS.begin+0.3s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+      <animate begin="spinner_oJFS.begin+0.3s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+    </rect>
+    <rect x="8.33" y="15.66" width="7.33" height="7.33">
+      <animate begin="spinner_oJFS.begin+0.3s" attributeName="x" dur="0.6s" values="8.33;11.33;8.33" />
+      <animate begin="spinner_oJFS.begin+0.3s" attributeName="y" dur="0.6s" values="15.66;18.66;15.66" />
+      <animate begin="spinner_oJFS.begin+0.3s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+      <animate begin="spinner_oJFS.begin+0.3s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+    </rect>
+    <rect x="15.66" y="15.66" width="7.33" height="7.33">
+      <animate id="spinner_5T1J" begin="spinner_oJFS.begin+0.4s" attributeName="x" dur="0.6s"
+        values="15.66;18.66;15.66" />
+      <animate begin="spinner_oJFS.begin+0.4s" attributeName="y" dur="0.6s" values="15.66;18.66;15.66" />
+      <animate begin="spinner_oJFS.begin+0.4s" attributeName="width" dur="0.6s" values="7.33;1.33;7.33" />
+      <animate begin="spinner_oJFS.begin+0.4s" attributeName="height" dur="0.6s" values="7.33;1.33;7.33" />
+    </rect>
+  </svg>
+</div>
+
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="SeaBee 的笔记合集" class="md-header__button md-logo" aria-label="SeaBee 的笔记合集" data-md-component="logo">
+      
+  <img src="../../../images/favicon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SeaBee 的笔记合集
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              着色模型
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label=""  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label=""  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/triplepiers/Notes_Collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Notes_Collection
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../blog/" class="md-tabs__link">
+          
+  
+  
+  Blogs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Games
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Front%20End/%E5%B8%83%E5%B1%80/" class="md-tabs__link">
+          
+  
+  
+  Web 全栈
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Flutter/Dart/" class="md-tabs__link">
+          
+  
+  
+  编程语言
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Agent/Overview/" class="md-tabs__link">
+          
+  
+  
+  Agent
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Server/Base/" class="md-tabs__link">
+          
+  
+  
+  Server
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Tool/%E5%B8%B8%E7%94%A8%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA/" class="md-tabs__link">
+          
+  
+  
+  常用工具
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/" class="md-tabs__link">
+          
+  
+  
+  软工课程
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="SeaBee 的笔记合集" class="md-nav__button md-logo" aria-label="SeaBee 的笔记合集" data-md-component="logo">
+      
+  <img src="../../../images/favicon.svg" alt="logo">
+
+    </a>
+    SeaBee 的笔记合集
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/triplepiers/Notes_Collection" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Notes_Collection
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../blog/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blogs
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Games
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Games
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    着色模型
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    着色模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本光照模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基本光照模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-blinn-phong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Blinn-Phong
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Blinn-Phong">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#l_d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(L_d\) 漫反射
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l_s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(L_s\) 高光
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l_a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(L_a\) 环境光
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pbr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 PBR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 PBR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        菲涅尔系数 x 反照率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        双向反射分布函数 BRDF
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="双向反射分布函数 BRDF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lambertian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lambertian 漫反射
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disney" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disney 漫反射
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        微表面反射理论
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="微表面反射理论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ggx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GGX 分布函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gcdot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何衰减函数 \(G(\cdot)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        镜面反射
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pbr-full" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PBR Full
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-phong-brdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Phong 的 BRDF 描述
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Unity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../Front%20End/%E5%B8%83%E5%B1%80/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web 全栈
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../Flutter/Dart/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    编程语言
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../Agent/Overview/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../Server/Base/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../Tool/%E5%B8%B8%E7%94%A8%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用工具
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/5%20%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    软工课程
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本光照模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基本光照模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-blinn-phong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Blinn-Phong
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Blinn-Phong">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#l_d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(L_d\) 漫反射
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l_s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(L_s\) 高光
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#l_a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(L_a\) 环境光
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pbr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 PBR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 PBR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        菲涅尔系数 x 反照率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        双向反射分布函数 BRDF
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="双向反射分布函数 BRDF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lambertian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lambertian 漫反射
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disney" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disney 漫反射
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        微表面反射理论
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="微表面反射理论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ggx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GGX 分布函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gcdot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何衰减函数 \(G(\cdot)\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        镜面反射
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pbr-full" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PBR Full
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-phong-brdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Phong 的 BRDF 描述
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">着色模型</h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 3758 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 13 分钟</p>
+</div>
+<h2 id="_2">基本光照模型</h2>
+<p>一般认为存在 3 种光照类型、光照即为三者之和（<span class="arithmatex">\(L = L_s + L_d + L_a\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">字符</th>
+<th>含义</th>
+<th>表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(L_s\)</span></td>
+<td>「高光」Specular Light</td>
+<td>物体完全反射光源（且进入人眼）</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(L_d\)</span></td>
+<td>「漫反射」Diffuse Reflection</td>
+<td>物体超任意方向反射相同亮度的光</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(L_a\)</span></td>
+<td>「环境光」Ambient Lighting</td>
+<td>物体完全背对光源、但被其他物体的反射光照亮</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-blinn-phong">1 Blinn-Phong</h3>
+<p>Blinn-Phong 忽略了各种能量损失，通过理想化的经验模型模拟了三种光线在物体表面的反射叠加</p>
+<table>
+<thead>
+<tr>
+<th>字母</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(L\)</span></td>
+<td>光源入射方向</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(N\)</span></td>
+<td>法线方向（垂直于 shading point 平面）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(V\)</span></td>
+<td>视角方向</td>
+</tr>
+</tbody>
+</table>
+<h4 id="l_d"><span class="arithmatex">\(L_d\)</span> 漫反射</h4>
+<ol>
+<li>
+<p>光源发射的能量，有多少到达 shading point ?</p>
+<ul>
+<li>
+<p>假设：<span class="arithmatex">\(R = 1\)</span> 处的光强度为 <span class="arithmatex">\(I\)</span> =&gt; 据光源 <span class="arithmatex">\(R = r\)</span> 处的 shading point 光强 <span class="arithmatex">\(I'\)</span> 为？</p>
+</li>
+<li>
+<p>光源各球面的能量相等（能量守恒），有：</p>
+</li>
+</ul>
+<p>$$
+  4 \pi (1)^2\cdot I = 4 \pi r^2 \cdot I' \Rightarrow I' = \frac{1}{r^2}I
+  $$</p>
+</li>
+<li>
+<p>Shading point 能实际 <strong>接收</strong> 多少到达该点的光能？</p>
+<p>由 Lambert Cosine Law，这个比例为 <span class="arithmatex">\(\cos\theta = \vec{l} \cdot \vec{n}\)</span> （与 “光线——法线” 夹角有关）</p>
+<blockquote>
+<p><span class="arithmatex">\(\vec{l}, \vec{n}\)</span> 均为表示方向的单位向量</p>
+</blockquote>
+</li>
+<li>
+<p>Shading point 又能将多少能量反射出去？</p>
+<p>使用参数 <span class="arithmatex">\(k_d \in [0,1]\)</span> 表示这个反射比例（与表面颜色有关）</p>
+</li>
+</ol>
+<hr />
+<p>综上，Shading Point 最终反射到眼睛中的漫反射能量为:</p>
+<div class="arithmatex">\[
+L_d = \frac{1}{r^2} I \cdot \max(0, \vec{l} \cdot \vec{n}) \cdot k_d
+\]</div>
+<blockquote>
+<p>即，<span class="arithmatex">\(L_d\)</span> = 从光源到达此处的能量 · 接收的能量（比例）· 反射的比例</p>
+</blockquote>
+<h4 id="l_s"><span class="arithmatex">\(L_s\)</span> 高光</h4>
+<ul>
+<li>
+<p>视角方向 <span class="arithmatex">\(\vec{V}\)</span> 与 光线方向 <span class="arithmatex">\(\vec{L}\)</span> 镜面对称时，将看到高光</p>
+<p>定义 <span class="arithmatex">\(\vec{R}\)</span> 为镜面反射方向 =&gt; <span class="arithmatex">\(\vec{V}\)</span> &amp;  <span class="arithmatex">\(\vec{R}\)</span>  越接近时、高光越明显</p>
+</li>
+<li>
+<p>「半程向量」：因为  <span class="arithmatex">\(\vec{R}\)</span>  的计算量很大，所以换一种做法</p>
+<ul>
+<li>
+<p>法线 <span class="arithmatex">\(\vec{n}\)</span> 即为 <span class="arithmatex">\(\vec{L}\)</span> 与  <span class="arithmatex">\(\vec{R}\)</span>  的角平分线，我们也可以计算 <span class="arithmatex">\(\vec{L}, \vec{V}\)</span> 的角平分线 <span class="arithmatex">\(\vec{h}\)</span></p>
+</li>
+<li>
+<p>使用 <span class="arithmatex">\(\vec{n}, \vec{h}\)</span> 的夹角 <span class="arithmatex">\(\alpha\)</span> 评估两者的接近程度，有（两个单位向量）：
+     $$
+     \cos\alpha = \frac{\vec{n} \cdot \vec{h}}{|n|\cdot|h|} = \vec{n} \cdot \vec{h}
+     $$</p>
+</li>
+</ul>
+</li>
+<li>
+<p>同样的，我们可以通过参数 <span class="arithmatex">\(k_s \in [0,1]\)</span> 表示物体对高光的反射比例（与表面颜色有关）</p>
+</li>
+</ul>
+<hr />
+<p>综上所述，高光能量为：
+$$
+L_s = \frac{1}{r^2}I \cdot \max(0, \cos\alpha)^p \cdot k_s = \frac{1}{r^2}I \cdot \max(0, \vec{n} \cdot \vec{h})^p \cdot k_s
+$$</p>
+<blockquote>
+<p>指数 <span class="arithmatex">\(p\)</span> 用于加速高光在 <span class="arithmatex">\(\vec{R}\)</span> 附近的衰减速度（很靠近镜面反射角才能看到）</p>
+</blockquote>
+<h4 id="l_a"><span class="arithmatex">\(L_a\)</span> 环境光</h4>
+<ul>
+<li>
+<p>Blinn-Phong 模型假设：<u>物体表面接收到的各种环境光都是相同强度的</u></p>
+<p>因此，环境光与 光源角度 <span class="arithmatex">\(\vec{L}\)</span>、观察角度 <span class="arithmatex">\(\vec{V}\)</span> 均无关，是一个 <u>常数</u></p>
+<blockquote>
+<p>这显然不合理，但是算起来方便啊</p>
+</blockquote>
+</li>
+<li>
+<p>但我们还是需要一个反射系数 <span class="arithmatex">\(k_a\)</span>、以及环境光在此处的强度 <span class="arithmatex">\(I_a \neq I'\)</span></p>
+</li>
+</ul>
+<hr />
+<p>综上所述，环境光强度为：</p>
+<div class="arithmatex">\[
+L_a = k_a \cdot I_a
+\]</div>
+<details class="question">
+<summary>Blinn-Phong 怎么调都很塑料？</summary>
+<ol>
+<li>
+<p>漫反射与高光被强行解耦：Blinn-Phong 的漫反射和高光 <u>颜色</u> 是两个完全独立的参数</p>
+<blockquote>
+<p>设计师通常采用：彩色底色 + 白色高光 的配置，很像塑料</p>
+</blockquote>
+<p>而实际上：</p>
+<ul>
+<li>塑料（等非金属）= 有颜色的漫反射 + 纯白高光</li>
+<li>金属：❌ 没有漫反射，高光带金属颜色</li>
+</ul>
+</li>
+<li>
+<p>“菲涅尔效应（Fresnel Effect）” 缺失</p>
+<ul>
+<li>
+<p>根据菲涅耳方程，所有材质均符合：视线与物体表面的夹角（掠射角）越小、物体反射率越高（急剧增加）=&gt; 这使得 <u>物体边缘变得更亮</u>、以高光为主</p>
+</li>
+<li>
+<p>Blinn-Phong 的高光项仅有用于改变高光位置和强度的 <span class="arithmatex">\(\vec{n} \cdot \vec{h}\)</span>，<u>缺少在 “掠射角” 下需要的额外反射补正</u></p>
+</li>
+</ul>
+</li>
+<li>
+<p>不遵循能量守恒</p>
+<ul>
+<li>在能量守恒下：高光很强时，漫反射必定会变暗</li>
+<li>Blinn-Phong 支持同时把 漫反射 &amp; 高光 都调得很亮、其总和甚至能超过光源</li>
+</ul>
+</li>
+<li>
+<p>过于简陋的 “粗糙度” 模型</p>
+<ul>
+<li>
+<p>微表面理论：粗糙表面存在若干凹凸，使光线会在微表面之间发生多次散射、遮挡</p>
+</li>
+<li>
+<p>Blinn-Phong 仅通过 “光泽度”（Shininess，即公式中的 <span class="arithmatex">\(p\)</span>）参数控制高光的大小：表面越粗糙，则高光斑点越大、越暗</p>
+<p>只能表现一团 “模糊高光”，无法模拟粗糙表面的颗粒感和材质</p>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h3 id="2-pbr">2 PBR</h3>
+<ul>
+<li>
+<p>PBR 简易光照模型：入射光与物体表面会产生以下两种作用</p>
+<ol>
+<li>镜面反射</li>
+<li>折射 = 漫反射 + 吸收（进入表面、转化为热能）</li>
+</ol>
+</li>
+<li>
+<p>PBR 考虑了以下物理性质：</p>
+<ol>
+<li>
+<p>粗糙度：“绝对光滑” 的理想表面将严格遵循光学、沿单一方向出射，粗糙表面则会使反射光和折射光在小范围内被发散到多个方向</p>
+<p>PBR 通过 <u>“微表面反射模型”</u> 对粗糙度进行量化：</p>
+<ul>
+<li>粗糙表面：模糊反射 + 暗淡、宽泛高光</li>
+<li>光滑表面：清晰、集中的反射 + 明亮高光</li>
+</ul>
+</li>
+<li>
+<p>材质</p>
+<ul>
+<li>
+<p>金属：只有镜面反射分量、<u>没有漫反射</u>（全部吸收）</p>
+</li>
+<li>
+<p>非金属：</p>
+<ul>
+<li>
+<p>透明：穿透 =&gt; 沿折射方向继续前进至穿出</p>
+</li>
+<li>
+<p>不透明：重新从入射发射 =&gt; 漫反射</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>PBR 中的各种物理向量（辐射通量、辐射率）及各类反射系数（菲涅尔系数、反射率）均基于 RGB</p>
+<h4 id="x">菲涅尔系数 x 反照率</h4>
+<ol>
+<li>
+<p>记理想（绝对光滑）表面下入射角为 <span class="arithmatex">\(\theta_i\)</span> 、折射角为 <span class="arithmatex">\(\theta_t\)</span>，由 Snell 定律： </p>
+<div class="arithmatex">\[
+n_1 \sin(\theta_i) = n_2 \sin(\theta_t)
+\]</div>
+</li>
+<li>
+<p>设 "菲涅尔系数" <span class="arithmatex">\(R_F(\theta_i)\)</span> 为 “反射——折射” 的能量比例</p>
+<ul>
+<li>
+<p>由能量守恒定律：反射能量为 <span class="arithmatex">\(R_F(\theta_i)\)</span>、折射能量为 <span class="arithmatex">\(1-R_F(\theta_i)\)</span></p>
+</li>
+<li>
+<p>该系数取决于两侧介质的 折射率 + <span class="arithmatex">\((\vec{L}, \vec{N})\)</span> 的夹角 <span class="arithmatex">\(\theta_i\)</span></p>
+</li>
+</ul>
+</li>
+</ol>
+<details class="note">
+<summary>菲涅尔系数是 '能量——辐射通量' 比值，不是 '辐射率' 比值</summary>
+<ul>
+<li>
+<p>反射辐射率 <span class="arithmatex">\(L_o\)</span> : 入射辐射率 <span class="arithmatex">\(L_i\)</span> = <span class="arithmatex">\(R_F(\theta_i)\)</span>，因为 入射角 == 反射角</p>
+</li>
+<li>
+<p>但折射辐射率 <span class="arithmatex">\(L_t\)</span> : 入射辐射率 <span class="arithmatex">\(L_i\)</span> != <span class="arithmatex">\(R_F(\theta_i)\)</span>，需考虑 '入射——折射' 光线在表面的投影面积：<span class="arithmatex">\(L_t = (1 - R_F(\theta_i)) \frac{n_2^2}{n_1^2} L_i\)</span></p>
+</li>
+</ul>
+</details>
+<ul>
+<li>
+<p>当 <u>材质固定时</u> ，菲涅尔系数仅取决于入射角 <span class="arithmatex">\(\theta_i\)</span>（且为 <u>RGB 向量</u>、使反射光呈现不同颜色）</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(\theta_i = 0\)</span> 时，<span class="arithmatex">\(R_F(0)\)</span> 为定值，表现为材质镜面反射得到的 RGB 色</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\theta_i\)</span> 逐渐增大时、视角逐渐接近掠射角，当 <span class="arithmatex">\(\theta_i = 90 ^\circ\)</span> 时、<span class="arithmatex">\(R_F(90) = 1\)</span> =&gt; 反射白光</p>
+</li>
+</ul>
+</li>
+<li>
+<p>菲涅尔曲线 <span class="arithmatex">\(R_F(\cdot)\)</span> 的特征</p>
+<ul>
+<li>
+<p>高度非线性：在 <span class="arithmatex">\(60 ^\circ\)</span> 前几乎不变，随后快速接近 1。</p>
+</li>
+<li>
+<p>基本单调递增，仅部分特殊材质（如铝）会在中途略有下降。</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>由于精确描述菲涅尔曲线十分复杂，Schlick 给出了一个近似解、可以视为 <span class="arithmatex">\(R_F(0) \rightarrow 1\)</span> 的非线性插值：</p>
+<div class="arithmatex">\[
+R_F(\theta_i) \approx R_F(0) + (1 - R_F(0))(1 - \cos \theta)^5
+\]</div>
+<div class="admonition info">
+<p class="admonition-title">在方程中，<span class="arithmatex">\(R_F(0)\)</span> 唯一决定了其代表的材质</p>
+<ul>
+<li>非金属： <span class="arithmatex">\(R_F(0) \leq 0.05\)</span>，通常基于<u>漫反射</u>表现颜色</li>
+<li>金属：<span class="arithmatex">\(R_F(0) \gt 0.5\)</span>，通常基于<u>菲涅尔效应</u>体现颜色</li>
+</ul>
+</div>
+<hr />
+<p>定义 "反照率"（scattering albedo）<span class="arithmatex">\(\rho \in [0,1]\)</span> 以描述 "漫反射:折射光总能量"，PBR 的简易光照模型即为：</p>
+<ol>
+<li>镜面反射 = 入射光 * <span class="arithmatex">\(R_F(\theta_i)\)</span></li>
+<li>折射<ul>
+<li>漫反射 = 入射光 * <span class="arithmatex">\((1 - R_F(\theta_i))\)</span> * <span class="arithmatex">\(\rho\)</span></li>
+<li>吸收  = 入射光 * <span class="arithmatex">\((1 - R_F(\theta_i))\)</span> * <span class="arithmatex">\((1 - \rho)\)</span></li>
+</ul>
+</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">大多数<u>非金属</u>的 折射 <span class="arithmatex">\(\gt\)</span> 反射、反照率 <span class="arithmatex">\(\rho\)</span> 对视觉效果的影响更大</p>
+</div>
+<h4 id="brdf">双向反射分布函数 BRDF</h4>
+<blockquote>
+<p>Bidirectional Reflectance Distribution Function</p>
+</blockquote>
+<div class="admonition note">
+<p class="admonition-title">概念定义</p>
+<ul>
+<li>辐照度 (Irradiance) <span class="arithmatex">\(E\)</span>：对于给定区域 <span class="arithmatex">\(A\)</span>，穿过该区域的 <u>平均功率</u></li>
+<li>辐射率（Radiance）<span class="arithmatex">\(L\)</span>：光线亮度（与距离无关）</li>
+</ul>
+</div>
+<ul>
+<li>
+<p>对于物体表面一点 <span class="arithmatex">\(p\)</span>：</p>
+<ul>
+<li>
+<p>入射角 <span class="arithmatex">\(\omega_i\)</span>（由 <span class="arithmatex">\(p\)</span> 指向光源）存在 <u>入射</u>辐照度 <span class="arithmatex">\(d E(\omega_i) = L_i (\omega_i) \cdot \cos\theta_i \cdot d\omega_i\)</span></p>
+<details class="question">
+<summary>为什么入射光要 * <span class="arithmatex">\(\cos \theta_i\)</span></summary>
+<p>本质上是需要把光线投影到 ⟂ 于平面的方向，即：<span class="arithmatex">\(d E(\omega_i) = \frac{d \Phi_i(\omega_i)}{dA} = \frac{L_i \cdot d\omega_i \cdot d A_{proj}}{dA}\)</span></p>
+<p>由于 <span class="arithmatex">\(d A_{proj} = \cos\theta_i \cdot d A\)</span> =&gt; 故 <span class="arithmatex">\(d E(\omega_i)  = L_i \cos\theta_i \cdot d\omega_i\)</span></p>
+</details>
+</li>
+<li>
+<p>在其作用下，观察方向 <span class="arithmatex">\(\omega_o\)</span> 出射辐射率为 <span class="arithmatex">\(d L_o(\omega_o)\)</span></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>BRDF 被定义为 <span class="arithmatex">\(d L_o(\omega_o)\)</span> : <span class="arithmatex">\(d E(\omega_i)\)</span>、在 <u>给定材质下恒定</u>，即：</p>
+<div class="arithmatex">\[
+f_r(w_o, w_i) = \frac{d L_o(\omega_o)}{d E(\omega_i)}
+\]</div>
+<p>其单位是球面弧度（steradians，立体角单位），即 <span class="arithmatex">\(sr^{-1}\)</span></p>
+<ul>
+<li>
+<p>BRDF 与 出/入射角 <span class="arithmatex">\((\omega_o, \omega_i)\)</span> 相关，这两个角度可以通过 (仰角 <span class="arithmatex">\(\theta\)</span> + 旋转角 <span class="arithmatex">\(\phi\)</span>) 描述</p>
+<p>=&gt; BRDF 最后变成了一个四元函数 <span class="arithmatex">\((\theta_i, \phi_i, \theta_o, \phi_o)\)</span></p>
+</li>
+<li>
+<p>由公式可知，最终出射的 <span class="arithmatex">\(I_o\)</span> 同时取决于入射辐照度 <span class="arithmatex">\(E\)</span> + 入射/出射方向</p>
+<p>受菲涅尔效应影响：</p>
+<ul>
+<li>入射角 <span class="arithmatex">\(\theta_i\)</span> 增大时、BRDF 增大</li>
+<li>观察角 <span class="arithmatex">\(\omega_o\)</span> 接近镜面反射方向时、观察到的出射光更强</li>
+</ul>
+</li>
+<li>
+<p>各向同/异性</p>
+<ul>
+<li>
+<p>各向同性：<span class="arithmatex">\((\phi_i, \phi_o)\)</span> 同时绕法线旋转（保持相对位置不变）时，BRDF 保持不变</p>
+<p>=&gt; BRDF <u>蜕化为三元函数</u>（<span class="arithmatex">\(\phi_i\)</span>、<span class="arithmatex">\(\phi_o\)</span> 中有一个冗余）</p>
+</li>
+<li>
+<p>各项异性：旋转后 BRDF 变化（头发、拉丝金属）</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">为什么 BRDF 是 辐射<strong>率</strong>：辐照<strong>度</strong>，而不是 <span class="arithmatex">\(L_o / L_i\)</span>？=&gt; 因为比较好测（雷霆理由）</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">为什么需要 BRDF</p>
+<ul>
+<li>
+<p>所谓的 PBR 建模就是找到材质的 BRDF 公式，最终目标是求出观察方向 <span class="arithmatex">\(\omega_o\)</span> 下的辐射率 <span class="arithmatex">\(L_o\)</span></p>
+</li>
+<li>
+<p>只要 "入射强度 + 材质的 BRDF" 已知，就可以用公式求解：</p>
+<div class="arithmatex">\[
+L_o(\omega_o) = \int_\Omega f_r(\omega_i, \omega_o) L_i(\omega_i) \cos \theta_i \cdot d\omega_i
+\]</div>
+<ul>
+<li>
+<p><span class="arithmatex">\(\int_\Omega\)</span> 负责对表面上方的半球面空间进行积分</p>
+</li>
+<li>
+<p><span class="arithmatex">\(f_r(\omega_i, \omega_o)\)</span> 是反射项 (BRDF))、可被进一步拆分为 <span class="arithmatex">\(f_s + f_d\)</span>，以分别描述镜面反射和漫反射</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h5 id="lambertian">Lambertian 漫反射</h5>
+<p>假设漫反射在<u>所有方向的出射强度一致</u>，其出射辐射率 <span class="arithmatex">\(L_o\)</span> 仅与 "入射光强+入射方向" 相关：</p>
+<div class="arithmatex">\[
+L_o = f_d * E_L \cos\theta_i = \frac{c_{\text{diff}}}{\pi} * E_L \cos\theta_i
+\]</div>
+<p>其中 <span class="arithmatex">\(c_{\text{diff}}\)</span> 为 "漫反射颜色"，与材质相关</p>
+<ul>
+<li>
+<p>在之前的简化模型中，我们认为 漫反射 = 入射光 <span class="arithmatex">\(*(1 - R_F(\theta_i)) * \rho\)</span></p>
+<p>因此，可令 <span class="arithmatex">\(c_{\text{diff}} = (1 - R_F(\theta_i)) * \rho\)</span></p>
+</li>
+<li>
+<p>但也有很多引擎直接忽略菲涅尔效应，直接令 <span class="arithmatex">\(c_{\text{diff}} = \rho\)</span>、代表漫反射颜色（RGB 值）</p>
+</li>
+</ul>
+<div class="admonition bug">
+<p class="admonition-title">Lambertian 缺少后向反射、边缘光只会因为入射角增加而变暗</p>
+<p>后向反射 (Retroreflection) 指 <u>粗糙材质</u> 在 半向量x法线夹角 <span class="arithmatex">\(\theta_h \rightarrow 90 ^\circ\)</span> 时出现一个新的 BRDF 峰值，即入射光&amp;观察角度都接近水平方向时、观察到的反射光又会增强</p>
+<p>该现象会让粗糙表面的亮度趋于平均（所以月亮更像一个平面的圆盘、而不是一个标准意义上的球体）</p>
+</div>
+<h5 id="disney">Disney 漫反射</h5>
+<blockquote>
+<p>该模型模拟了后向反射</p>
+</blockquote>
+<div class="arithmatex">\[
+f_d = \frac{\text{baseColor}}{\pi} (1 + (F_{D90}-1)(1 - \cos\theta_l)^5) (1 + (F_{D90}-1)(1 - \cos\theta_v)^5)
+\]</div>
+<p>其中，<span class="arithmatex">\(F_{D90} = 0.5 + 2 \cdot \text{roughness} \cdot \cos^2\theta_d\)</span> 使得：</p>
+<ul>
+<li>较光滑表面：在 gazing angle 考虑菲涅尔效应，适当变暗</li>
+<li>较粗糙表面：因后向反射变亮</li>
+</ul>
+<h4 id="_3">微表面反射理论</h4>
+<p>该理论认为材质表面由一系列微小平坦的菲涅尔表面构成、都有独立的法线方向。此外，表面整体也有一个宏观的法线方向：</p>
+<ul>
+<li>光滑表面：微法线方向变化较小、与宏观法线比较接近</li>
+<li>粗糙表面：微法线更加随机分散</li>
+</ul>
+<p>由于理论描述的尺度更加微观 &lt;&lt; 单个像素，此时无法直接观测到微表面的凹凸结构、改用基于概率统计的 "法线分布函数 (Normal Distribution Function)" <span class="arithmatex">\(D(\cdot)\)</span> 进行描述：</p>
+<ul>
+<li>
+<p>对于面积为 <span class="arithmatex">\(d A\)</span> 的宏观表面，假设所有朝向立体角范围 <span class="arithmatex">\(d \omega_h\)</span> 的所有微表面面积为 <span class="arithmatex">\(d A(h)\)</span>，有：</p>
+<div class="arithmatex">\[
+D(h) = \frac{d A(h)}{dA * d\omega_h}
+\]</div>
+<ul>
+<li>
+<p>该定义可满足约束 <span class="arithmatex">\(\int_Omega D(\omega_h) \cos\theta_h \cdot d \omega_h = 1\)</span>，即所有微表面的投影面积 == 宏观表面面积</p>
+</li>
+<li>
+<p>此外，<span class="arithmatex">\(D\)</span> 的取值可 &gt; 1，本质上更接近概率密度函数、而非概率分布函数</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="ggx">GGX 分布函数</h5>
+<blockquote>
+<p>是 <span class="arithmatex">\(D(\cdot)\)</span> 的一种具体数学形式</p>
+</blockquote>
+<div class="arithmatex">\[
+D_{GGX}(\theta_h, \alpha) = \frac{\alpha^2}{\pi \cos^4\theta_h (\alpha^2 + \tan^2\theta_h)}
+\]</div>
+<p>其中，<span class="arithmatex">\(\alpha \in [0,1]\)</span> 表示粗糙度</p>
+<p>相比于 Beckmann 和 Phong，GGX 具有更窄的峰值 + 更长的两侧尾部，更接近真实材质特性</p>
+<h5 id="gcdot">几何衰减函数 <span class="arithmatex">\(G(\cdot)\)</span></h5>
+<blockquote>
+<p>Geometric Attenuation Factor</p>
+</blockquote>
+<p>法线分布函数 <span class="arithmatex">\(D(\cdot)\)</span> 并没有描述：shadwing (入射光被其他微表面遮挡)、masking (反射光被其他微表面遮挡)</p>
+<p>因此，引入 <span class="arithmatex">\(G(\cdot)\)</span>（通常采用如下的 Smith 函数）：</p>
+<blockquote>
+<p>主要在 gazing angles（观察角接近 90°）时衰减，且在粗糙度 <span class="arithmatex">\(\alpha\)</span> 较大时衰减得更加明显</p>
+</blockquote>
+<div class="arithmatex">\[
+G(i,o,\alpha) = G_1(i,\alpha) \cdot G_1(o,\alpha)
+\]</div>
+<ul>
+<li>
+<p><span class="arithmatex">\(G_1(i,\alpha)\)</span> 描述 shadwing、<span class="arithmatex">\(G_1(o,\alpha)\)</span> 描述 masking（可为同一函数）</p>
+</li>
+<li>
+<p><span class="arithmatex">\(G_1\)</span> 的实际依赖于 <span class="arithmatex">\(D(\cdot)\)</span>，当 <span class="arithmatex">\(D(\cdot)\)</span> 选用 GGX 时：</p>
+<div class="arithmatex">\[
+G_1(o,\alpha) = \frac{2}{1 + \sqrt(1 + \alpha^2\tan^2\theta_o)}
+\]</div>
+</li>
+</ul>
+<h5 id="_4">镜面反射</h5>
+<ul>
+<li>
+<p>与观察角度 <span class="arithmatex">\(o\)</span> 直接相关 =&gt; 在 <span class="arithmatex">\(\theta_o = \theta_i\)</span> 时附近出现峰值</p>
+<p>对于绝对光滑表面，镜面反射仅在 <span class="arithmatex">\(\theta_o == \theta_i\)</span> 时存在且 <span class="arithmatex">\(L_o = F(\theta_i) * L_i\)</span></p>
+</li>
+<li>
+<p>粗糙程度也将影响反射方向的分散程度，从而进一步影响高光的大小和强度</p>
+</li>
+</ul>
+<p>满足菲涅尔现象的绝对光滑微表面 + <span class="arithmatex">\(D(\cdot)\)</span> 描述表面法向分布 + <span class="arithmatex">\(G(\cdot)\)</span> 描述衰减的 Cook-Torrance 模型如下：</p>
+<div class="arithmatex">\[
+f_s = \frac{DFG}{4\cos\theta_i\cos\theta_o}
+\]</div>
+<h4 id="pbr-full">PBR Full</h4>
+<p>整合所有公式（将 BRDF 的 <span class="arithmatex">\(f_r\)</span> 拆分为 <span class="arithmatex">\(f_s + f_d\)</span>），得到出射光线辐射率为：</p>
+<div class="arithmatex">\[
+L_o(\omega_o) = \int_\Omega (\frac{c_{\text{diff}}}{\pi} + \frac{DFG}{4\cos\theta_i\cos\theta_o}) L_i(\omega_i) \cos\theta_i \cdot d \omega_i
+\]</div>
+<ul>
+<li>单光源下，PBR 也就是高光比 Blinn-Phong 更加锐利、没有特别出彩</li>
+<li>全局光照（环境光）下，对所有输入光源的积分将会十分有用</li>
+</ul>
+<h3 id="3-phong-brdf">3 Phong 的 BRDF 描述</h3>
+<blockquote>
+<p>Lambertian 漫反射 + 镜面反射</p>
+</blockquote>
+<div class="arithmatex">\[
+f_{\text{phong}} = \frac{c_{\text{diff}}}{\pi} + \frac{c_{\text{spec}} \cos^m \alpha_r}{\pi}
+\]</div>
+<ul>
+<li>
+<p>Lambertian 漫反射：<span class="arithmatex">\(\frac{c_{\text{diff}}}{\pi}\)</span></p>
+</li>
+<li>
+<p>镜面反射：</p>
+<ul>
+<li><span class="arithmatex">\(\alpha_r\)</span> 是 "观察方向 <span class="arithmatex">\(o\)</span> —— 理想镜面反射角度 <span class="arithmatex">\(r\)</span>" 间的夹角</li>
+<li><span class="arithmatex">\(m\)</span> 为高光指数：越大时表面越光滑</li>
+<li><span class="arithmatex">\(c_{\text{spec}}\)</span> 是镜面反射系数、根据经验人为调节</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>该方程的缺陷在于 <span class="arithmatex">\(\max{\cos^m \alpha_r} = 1\)</span>，这使得 <span class="arithmatex">\(m\)</span> 增大时、镜面反射能量减小</p>
+<ul>
+<li>
+<p>为实现能量守恒，需要添加约束 <span class="arithmatex">\(1 = \int_\Omega k * \cos\alpha_r^{m+1} \cdot d \omega_r\)</span>、使得整个反射半球的积分结果为 1 =&gt; <span class="arithmatex">\(k = \frac{2+m}{2\pi}\)</span></p>
+</li>
+<li>
+<p>得到归一化 Phong：</p>
+<p>$$
+  f_{\text{phong}} = \frac{c_{\text{diff}}}{\pi} + \frac{2+m}{2\pi} \cos^m \alpha_r
+  $$</p>
+<p><span class="arithmatex">\(m\)</span> 增大时，<span class="arithmatex">\(k\)</span> 将超过 1、但整个半球面的积分结果始终为 1。此时高光变窄 + 变亮</p>
+</li>
+</ul>
+<blockquote>
+<p>Blinn-Phong 使用半向量 <span class="arithmatex">\(h\)</span> 与法线的夹角 <span class="arithmatex">\(\theta_h\)</span> 代替 <span class="arithmatex">\(\alpha_r\)</span>，计算效率更高</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../../blog/archive/2026/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 2026">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                2026
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Unity/" class="md-footer__link md-footer__link--next" aria-label="Next: Unity">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Unity
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023-2025 SeaBee
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.top", "navigation.prune", "navigation.tabs", "navigation.footer", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../../../javascripts/loading.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
