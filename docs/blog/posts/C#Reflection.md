@@ -74,11 +74,6 @@ public class Player: MonoBehaviour
 }
 ```
 
-
-    Unity 知道这些特性的含义，并且在编辑器中检查相关元数据，进而生成菜单、关联方法和执行逻辑。
-
-    先用特性给类、字段或方法打上标记，再通过反射读取这些标记，最后根据标记执行特定逻辑。
-
 ## 2 C# 反射原理
 
 1. MetaData 提供了结构信息
@@ -111,7 +106,7 @@ public class Player: MonoBehaviour
 
 ### Unity 特性反射原理
 
-Unity 已经知道并约定好了这些 Tag 的含义，不同子系统将按照自己的步调进行读取、并执行对应逻辑
+Unity 已经知道并约定好了这些 Tag 的含义，不同子系统将按照自己的步调进行读取、进而生成菜单、关联方法和执行逻辑。
 
 - `[SerializeField]`、`[HideInInspector]` 等字段特性会在 Inspector 显示对应组件时被读取，以判断哪些字段会被序列化、显示在 Inspector 上
 

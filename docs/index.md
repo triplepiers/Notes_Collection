@@ -15,13 +15,6 @@ statistics: True
 
 !!! Info "广告位招租 -> 试图成为指针数组"
 
-## 软工劝退指南 (TODO)
-
-> 那确实是一个字都没写
-
-??? question "您有见过期中考 PTSD 患者吗"
-    30 min 极限往返港泉但一场考试都没赶上的噩梦是真实存在的吗？
-
 ## Credit
 
 本站点通过 [TonyCrane](https://github.com/TonyCrane) 老师编写的 [mkdocs-statistics-plugin](https://github.com/TonyCrane/mkdocs-statistics-plugin) 插件实现 **字数统计 & 阅读时间估计**

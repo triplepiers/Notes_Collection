@@ -83,7 +83,7 @@ nav:
   # - Test: Blogs/test.md
 - Games:
   # - Games 104: Nulling/Games/Games104.md
-  # - 着色模型: Nulling/Games/Shading.md
+  - 着色模型: Nulling/Games/Shading.md
   # - 地形生成: Nulling/Games/地形生成.md
   - Unity: Nulling/Games/Unity.md
 - Web 全栈:
